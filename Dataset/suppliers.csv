@@ -1,0 +1,9 @@
+supplier_id,supplier_name,contact_person,phone,address
+SUP001,Pharma Delta Co.,Eng. Hisham Badawi,0123456789,"15 El-Nasr Road, Port Said"
+SUP002,MediSupply Egypt,Mrs. Randa El-Sayed,0101234567,"Suez Canal Free Zone, Port Said"
+SUP003,NovaMed Distributors,Dr. Wael Sorour,0112345678,"12 Industrial Zone, Port Said"
+SUP004,Cairo Pharma Group,Eng. Tarek Mansour,0151234567,"Ramses St, Cairo (PS Branch)"
+SUP005,Al-Shifaa Medical Supplies,Mr. Khaled Osman,0103456789,"Port Fouad District, Port Said"
+SUP006,Nile Valley Pharmaceuticals,Mrs. Nagwa Soliman,0126789012,"El Sharq Zone, Port Said"
+SUP007,Delta Medical Trading,Dr. Ahmed Ramzy,0127890123,"Industrial Zone B, Port Said"
+SUP008,Egyptian Medical Supplies Co.,Eng. Samir Fathallah,0108901234,"Free Zone, Port Said"

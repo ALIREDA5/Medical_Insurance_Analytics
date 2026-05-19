@@ -1,0 +1,139 @@
+department_id,hospital_id,department_name,floor_number,manager_name,manager_email,manager_phone
+DEPT0001,H001,Emergency,1,Bahaa Ahmed,bahaa.ahmed@hospital.eg,1039610151
+DEPT0002,H001,ICU,1,Khaled El-Hamzawy,khaled.el-hamzawy@hospital.eg,1004525370
+DEPT0003,H001,Internal Medicine,2,Sherif Abdel-Monem,sherif.abdel-monem@hospital.eg,1559176320
+DEPT0004,H001,Cardiology,3,Labib Younis,labib.younis@hospital.eg,1060556453
+DEPT0005,H001,Pulmonology,2,Ziad El-Assar,ziad.el-assar@hospital.eg,1502307592
+DEPT0006,H001,Neurology,3,Rania Abdel-Aziz,rania.abdel-aziz@hospital.eg,1108797381
+DEPT0007,H001,Gastroenterology,2,Zaki Khalil,zaki.khalil@hospital.eg,1296395690
+DEPT0008,H001,Nephrology,3,Zaki Rushdy,zaki.rushdy@hospital.eg,1272384396
+DEPT0009,H001,Endocrinology,2,Raafat Mahrous,raafat.mahrous@hospital.eg,1012200261
+DEPT0010,H001,Orthopedics,2,Hazem Hassan,hazem.hassan@hospital.eg,1255819814
+DEPT0011,H001,General Surgery,3,Safaa Hegazy,safaa.hegazy@hospital.eg,1050627416
+DEPT0012,H001,Pediatrics,2,Salma Hatem,salma.hatem@hospital.eg,1584163612
+DEPT0013,H001,Obstetrics & Gynecology,2,Raafat Morsi,raafat.morsi@hospital.eg,1196167726
+DEPT0014,H001,Dermatology,3,Farida El-Malt,farida.el-malt@hospital.eg,1109284846
+DEPT0015,H001,ENT,3,Saad El-Sayed,saad.el-sayed@hospital.eg,1222630718
+DEPT0016,H001,Psychiatry,3,Samah Helal,samah.helal@hospital.eg,1193081706
+DEPT0017,H001,Oncology,3,Aisha Ali,aisha.ali@hospital.eg,1261726296
+DEPT0018,H001,Radiology,1,Nadia Fawzy,nadia.fawzy@hospital.eg,1592713463
+DEPT0019,H001,Laboratory,1,Nasr Sorour,nasr.sorour@hospital.eg,1179795795
+DEPT0020,H001,Pharmacy,1,Lamia Ismail,lamia.ismail@hospital.eg,1064664265
+DEPT0021,H002,Emergency,1,Marwan Ramadan,marwan.ramadan@hospital.eg,1182432262
+DEPT0022,H002,ICU,1,Fares El-Shaer,fares.el-shaer@hospital.eg,1103383025
+DEPT0023,H002,Internal Medicine,2,Samir El-Naggar,samir.el-naggar@hospital.eg,1148927887
+DEPT0024,H002,Cardiology,3,Mahmoud Taha,mahmoud.taha@hospital.eg,1136018895
+DEPT0025,H002,Pulmonology,2,Dalia Zawawi,dalia.zawawi@hospital.eg,1144450049
+DEPT0026,H002,Neurology,3,Gaber Ibrahim,gaber.ibrahim@hospital.eg,1562721101
+DEPT0027,H002,Gastroenterology,2,Karim Hamza,karim.hamza@hospital.eg,1286041481
+DEPT0028,H002,Nephrology,3,Farouk El-Rashidy,farouk.el-rashidy@hospital.eg,1564830227
+DEPT0029,H002,Endocrinology,2,Medhat Kotb,medhat.kotb@hospital.eg,1126683411
+DEPT0030,H002,Orthopedics,2,Sahar Hafez,sahar.hafez@hospital.eg,1511927863
+DEPT0031,H002,General Surgery,3,Rafat El-Deeb,rafat.el-deeb@hospital.eg,1170602335
+DEPT0032,H002,Pediatrics,2,Hoda El-Sayed,hoda.el-sayed@hospital.eg,1293519898
+DEPT0033,H002,Obstetrics & Gynecology,2,Wedad Farghaly,wedad.farghaly@hospital.eg,1014332379
+DEPT0034,H002,Dermatology,3,Ahmed El-Hariry,ahmed.el-hariry@hospital.eg,1083738260
+DEPT0035,H002,ENT,3,Sherif Barakat,sherif.barakat@hospital.eg,1530844822
+DEPT0036,H002,Psychiatry,3,Moneer Ismail,moneer.ismail@hospital.eg,1173247487
+DEPT0037,H002,Oncology,3,Sayed El-Sawi,sayed.el-sawi@hospital.eg,1586856830
+DEPT0038,H002,Radiology,1,Zeinab El-Hennawy,zeinab.el-hennawy@hospital.eg,1287437492
+DEPT0039,H002,Laboratory,1,Basel Ramadan,basel.ramadan@hospital.eg,1056400043
+DEPT0040,H002,Pharmacy,1,Tamer Hafez,tamer.hafez@hospital.eg,1000698964
+DEPT0041,H003,Emergency,1,Safa El-Hariry,safa.el-hariry@hospital.eg,1564826372
+DEPT0042,H003,ICU,1,Reda El-Husseiny,reda.el-husseiny@hospital.eg,1512917565
+DEPT0043,H003,Internal Medicine,2,Rania Radwan,rania.radwan@hospital.eg,1509852294
+DEPT0044,H003,Cardiology,3,Ola Shalaby,ola.shalaby@hospital.eg,1246128227
+DEPT0045,H003,Pulmonology,2,Ali Fawzy,ali.fawzy@hospital.eg,1588562717
+DEPT0046,H003,Neurology,3,Ziad El-Kashef,ziad.el-kashef@hospital.eg,1076767752
+DEPT0047,H003,Gastroenterology,2,Manal Abdel-Wahab,manal.abdel-wahab@hospital.eg,1299677609
+DEPT0048,H003,Nephrology,3,Yehia El-Deeb,yehia.el-deeb@hospital.eg,1515239559
+DEPT0049,H003,Endocrinology,2,Yehia El-Assar,yehia.el-assar@hospital.eg,1048926669
+DEPT0050,H003,Orthopedics,2,Diaa Hafez,diaa.hafez@hospital.eg,1159931531
+DEPT0051,H003,General Surgery,3,Noran Abdallah,noran.abdallah@hospital.eg,1002978659
+DEPT0052,H003,Pediatrics,2,Tamer Salem,tamer.salem@hospital.eg,1077671052
+DEPT0053,H003,Obstetrics & Gynecology,2,Ahmed Nofal,ahmed.nofal@hospital.eg,1552171363
+DEPT0054,H003,Dermatology,3,Noha Shaaban,noha.shaaban@hospital.eg,1279069927
+DEPT0055,H003,ENT,3,Raouf Radwan,raouf.radwan@hospital.eg,1516497456
+DEPT0056,H003,Psychiatry,3,Nermeen El-Husseiny,nermeen.el-husseiny@hospital.eg,1562549891
+DEPT0057,H003,Oncology,3,Salah Hassan,salah.hassan@hospital.eg,1158540708
+DEPT0058,H003,Radiology,1,Ezzat Bayoumi,ezzat.bayoumi@hospital.eg,1199547832
+DEPT0059,H003,Laboratory,1,Hadeer El-Naggar,hadeer.el-naggar@hospital.eg,1007583773
+DEPT0060,H003,Pharmacy,1,Mamdouh El-Hennawy,mamdouh.el-hennawy@hospital.eg,1081992404
+DEPT0061,H004,Emergency,1,Nasser El-Assar,nasser.el-assar@hospital.eg,1573519075
+DEPT0062,H004,ICU,1,Eman Mahrous,eman.mahrous@hospital.eg,1294362898
+DEPT0063,H004,Internal Medicine,2,Ramadan El-Shaer,ramadan.el-shaer@hospital.eg,1275347918
+DEPT0064,H004,Cardiology,3,Adel Farouk,adel.farouk@hospital.eg,1057675534
+DEPT0065,H004,Pulmonology,2,Emad Barakat,emad.barakat@hospital.eg,1036092309
+DEPT0066,H004,Neurology,3,Abdelhamid El-Diwany,abdelhamid.el-diwany@hospital.eg,1146035153
+DEPT0067,H004,Gastroenterology,2,Magid El-Husseiny,magid.el-husseiny@hospital.eg,1212894138
+DEPT0068,H004,Nephrology,3,Haitham El-Sherief,haitham.el-sherief@hospital.eg,1004614036
+DEPT0069,H004,Endocrinology,2,Nasr Mansour,nasr.mansour@hospital.eg,1236606009
+DEPT0070,H004,Orthopedics,2,Samah Abdel-Monem,samah.abdel-monem@hospital.eg,1031957387
+DEPT0071,H004,General Surgery,3,Reda Ali,reda.ali@hospital.eg,1152620511
+DEPT0072,H004,Pediatrics,2,Hamdy Abdel-Ghany,hamdy.abdel-ghany@hospital.eg,1253354514
+DEPT0073,H005,Emergency,1,Alaa Qasem,alaa.qasem@hospital.eg,1244185847
+DEPT0074,H005,ICU,1,Ramy El-Banna,ramy.el-banna@hospital.eg,1213684030
+DEPT0075,H005,Internal Medicine,2,Sohair El-Shaer,sohair.el-shaer@hospital.eg,1084420904
+DEPT0076,H005,Cardiology,3,Wael Rashad,wael.rashad@hospital.eg,1288287122
+DEPT0077,H005,Pulmonology,2,Hamdy Bayoumi,hamdy.bayoumi@hospital.eg,1298502115
+DEPT0078,H005,Neurology,3,Karam Shehata,karam.shehata@hospital.eg,1258765900
+DEPT0079,H005,Gastroenterology,2,Marwan Helal,marwan.helal@hospital.eg,1104206994
+DEPT0080,H005,Nephrology,3,Hamdy El-Khatib,hamdy.el-khatib@hospital.eg,1507072965
+DEPT0081,H005,Endocrinology,2,Marwan El-Hariry,marwan.el-hariry@hospital.eg,1521926041
+DEPT0082,H005,Orthopedics,2,Radwa Zaher,radwa.zaher@hospital.eg,1134388374
+DEPT0083,H005,General Surgery,3,Safa El-Rashidy,safa.el-rashidy@hospital.eg,1067399366
+DEPT0084,H005,Pediatrics,2,Samer Hassan,samer.hassan@hospital.eg,1022877052
+DEPT0085,H005,Obstetrics & Gynecology,2,Nevine Kotb,nevine.kotb@hospital.eg,1036526425
+DEPT0086,H005,Dermatology,3,Diaa El-Rashidy,diaa.el-rashidy@hospital.eg,1287691002
+DEPT0087,H006,Emergency,1,Rizk El-Assar,rizk.el-assar@hospital.eg,1125380004
+DEPT0088,H006,ICU,1,Tarek El-Naggar,tarek.el-naggar@hospital.eg,1237007645
+DEPT0089,H006,Internal Medicine,2,Rozan Bayoumi,rozan.bayoumi@hospital.eg,1567410743
+DEPT0090,H006,Cardiology,3,Nashwa Badawi,nashwa.badawi@hospital.eg,1279530121
+DEPT0091,H006,Pulmonology,2,May El-Sawi,may.el-sawi@hospital.eg,1059948867
+DEPT0092,H006,Neurology,3,Ali El-Malt,ali.el-malt@hospital.eg,1074795103
+DEPT0093,H006,Gastroenterology,2,Amr El-Amir,amr.el-amir@hospital.eg,1598119567
+DEPT0094,H006,Nephrology,3,Marwan Ismail,marwan.ismail@hospital.eg,1262347236
+DEPT0095,H006,Endocrinology,2,Salah Eid,salah.eid@hospital.eg,1576148433
+DEPT0096,H006,Orthopedics,2,Ramzy Kotb,ramzy.kotb@hospital.eg,1090547568
+DEPT0097,H006,General Surgery,3,Nevine Hamouda,nevine.hamouda@hospital.eg,1248959418
+DEPT0098,H006,Pediatrics,2,Emad Farouk,emad.farouk@hospital.eg,1569017289
+DEPT0099,H006,Obstetrics & Gynecology,2,Khaled El-Khatib,khaled.el-khatib@hospital.eg,1098321771
+DEPT0100,H006,Dermatology,3,Magid Zaher,magid.zaher@hospital.eg,1521426287
+DEPT0101,H006,ENT,3,Hatem El-Sherbeny,hatem.el-sherbeny@hospital.eg,1292428860
+DEPT0102,H006,Psychiatry,3,Samah El-Khatib,samah.el-khatib@hospital.eg,1077491704
+DEPT0103,H006,Oncology,3,Magid El-Rashidy,magid.el-rashidy@hospital.eg,1298025299
+DEPT0104,H006,Radiology,1,Lina Hegazy,lina.hegazy@hospital.eg,1033255615
+DEPT0105,H006,Laboratory,1,Dalia Khaled,dalia.khaled@hospital.eg,1071462643
+DEPT0106,H006,Pharmacy,1,Sherief Elwy,sherief.elwy@hospital.eg,1089974174
+DEPT0107,H007,Emergency,1,Lamia El-Kashef,lamia.el-kashef@hospital.eg,1122874833
+DEPT0108,H007,ICU,1,Moustafa Badawi,moustafa.badawi@hospital.eg,1045125391
+DEPT0109,H007,Internal Medicine,2,Yasmine El-Kashef,yasmine.el-kashef@hospital.eg,1077333253
+DEPT0110,H007,Cardiology,3,Salma Mohamed,salma.mohamed@hospital.eg,1209219027
+DEPT0111,H007,Pulmonology,2,Wedad El-Gazar,wedad.el-gazar@hospital.eg,1522131241
+DEPT0112,H007,Neurology,3,Howaida Rashad,howaida.rashad@hospital.eg,1232161440
+DEPT0113,H007,Gastroenterology,2,Nahed Mohamed,nahed.mohamed@hospital.eg,1219167897
+DEPT0114,H007,Nephrology,3,Randa Zawawi,randa.zawawi@hospital.eg,1008581906
+DEPT0115,H007,Endocrinology,2,Wedad Metwally,wedad.metwally@hospital.eg,1279467343
+DEPT0116,H007,Orthopedics,2,Safaa Ramadan,safaa.ramadan@hospital.eg,1281546622
+DEPT0117,H007,General Surgery,3,Wassim Farag,wassim.farag@hospital.eg,1089188978
+DEPT0118,H007,Pediatrics,2,Mahmoud El-Husseiny,mahmoud.el-husseiny@hospital.eg,1061809031
+DEPT0119,H008,Emergency,1,Nour Khalaf,nour.khalaf@hospital.eg,1186926267
+DEPT0120,H008,ICU,1,Ayman Farouk,ayman.farouk@hospital.eg,1146834963
+DEPT0121,H008,Internal Medicine,2,Heba El-Hennawy,heba.el-hennawy@hospital.eg,1528534164
+DEPT0122,H008,Cardiology,3,Farouk Bayoumi,farouk.bayoumi@hospital.eg,1076892688
+DEPT0123,H008,Pulmonology,2,Lina El-Shaer,lina.el-shaer@hospital.eg,1021685169
+DEPT0124,H008,Neurology,3,Tamer Shehata,tamer.shehata@hospital.eg,1543324610
+DEPT0125,H008,Gastroenterology,2,Ibrahim El-Deeb,ibrahim.el-deeb@hospital.eg,1284666344
+DEPT0126,H008,Nephrology,3,Tarek Khalaf,tarek.khalaf@hospital.eg,1544291234
+DEPT0127,H008,Endocrinology,2,Hanaa Saber,hanaa.saber@hospital.eg,1531382915
+DEPT0128,H008,Orthopedics,2,Sobhi El-Gohary,sobhi.el-gohary@hospital.eg,1577182626
+DEPT0129,H008,General Surgery,3,Mostafa Morsi,mostafa.morsi@hospital.eg,1501599766
+DEPT0130,H008,Pediatrics,2,Reda Kotb,reda.kotb@hospital.eg,1013334355
+DEPT0131,H008,Obstetrics & Gynecology,2,Farouk Elwy,farouk.elwy@hospital.eg,1126461854
+DEPT0132,H008,Dermatology,3,Radwa Helal,radwa.helal@hospital.eg,1236009433
+DEPT0133,H008,ENT,3,Samir El-Sherief,samir.el-sherief@hospital.eg,1286522710
+DEPT0134,H008,Psychiatry,3,Esraa Zaher,esraa.zaher@hospital.eg,1579480894
+DEPT0135,H008,Oncology,3,Basel El-Malt,basel.el-malt@hospital.eg,1256109076
+DEPT0136,H008,Radiology,1,Hani Barakat,hani.barakat@hospital.eg,1281054447
+DEPT0137,H008,Laboratory,1,Shimaa Hamza,shimaa.hamza@hospital.eg,1043188813
+DEPT0138,H008,Pharmacy,1,Shady Morsi,shady.morsi@hospital.eg,1292405294

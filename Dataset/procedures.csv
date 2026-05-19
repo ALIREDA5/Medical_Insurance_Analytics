@@ -1,0 +1,202 @@
+procedure_code,procedure_name,procedure_category,expected_cost,complexity_score
+P001,Complete Blood Count (CBC),Laboratory,150,1
+P002,Fasting Blood Glucose,Laboratory,80,1
+P003,"Lipid Panel (Cholesterol, TG, HDL, LDL)",Laboratory,220,1
+P004,"Liver Function Tests (ALT, AST, ALP)",Laboratory,250,1
+P005,"Renal Function Tests (BUN, Creatinine)",Laboratory,200,1
+P006,"Thyroid Function Tests (TSH, T3, T4)",Laboratory,320,1
+P007,Urine Routine Analysis,Laboratory,80,1
+P008,Chest X-Ray (PA View),Radiology,400,1
+P009,ECG - Electrocardiogram 12-Lead,Cardiology,280,1
+P010,Echocardiography (Transthoracic),Radiology,1200,2
+P011,Abdominal Ultrasound,Radiology,600,2
+P012,CT Scan Chest Without Contrast,Radiology,2500,3
+P013,CT Scan Abdomen + Pelvis,Radiology,3000,3
+P014,MRI Brain Without Contrast,Radiology,4500,4
+P015,Consultation - Internal Medicine Specialist,Consultation,500,1
+P016,Consultation - Cardiology Specialist,Consultation,600,1
+P017,Consultation - Neurology Specialist,Consultation,600,1
+P018,Consultation - Orthopedics Specialist,Consultation,500,1
+P019,Consultation - Endocrinology Specialist,Consultation,600,1
+P020,Consultation - Gastroenterology Specialist,Consultation,600,1
+P021,Consultation - Nephrology Specialist,Consultation,600,1
+P022,Consultation - Pulmonology Specialist,Consultation,550,1
+P023,Consultation - Pediatrics Specialist,Consultation,450,1
+P024,Consultation - Psychiatry Specialist,Consultation,550,1
+P025,Consultation - Dermatology Specialist,Consultation,450,1
+P026,Emergency Room Triage & Assessment,Emergency,350,1
+P027,IV Cannulation & Fluid Infusion,Nursing,200,1
+P028,Blood Transfusion (Per Unit),Hematology,1500,2
+P029,Wound Dressing Change,Nursing,150,1
+P030,Suturing - Laceration Repair,Emergency,800,2
+P031,ICU Daily Monitoring & Care,ICU,5000,5
+P032,Mechanical Ventilation (Per Day),ICU,3500,5
+P033,Hemodialysis Session,Nephrology,1200,3
+P034,Nebulization Therapy,Respiratory,250,1
+P035,Oxygen Therapy (Per Day),Respiratory,500,1
+P036,Appendectomy (Laparoscopic),Surgery,14000,4
+P037,Cholecystectomy (Laparoscopic),Surgery,16000,4
+P038,Appendectomy (Open),Surgery,12000,4
+P039,Hernia Repair - Inguinal,Surgery,10000,3
+P040,Coronary Angiography (Diagnostic),Cardiology,8000,3
+P041,Percutaneous Coronary Intervention (PCI),Cardiology,45000,5
+P042,Holter Monitor - 24 Hour ECG,Cardiology,800,2
+P043,Treadmill Stress Test,Cardiology,1500,2
+P044,Spirometry / Lung Function Test,Pulmonology,400,1
+P045,Pleural Tap (Thoracentesis),Pulmonology,3500,3
+P046,Lumbar Puncture (CSF Analysis),Neurology,2500,3
+P047,EEG - Electroencephalogram,Neurology,800,2
+P048,Bone Marrow Aspiration & Biopsy,Hematology,3000,3
+P049,Upper GI Endoscopy (Diagnostic),Endoscopy,2000,2
+P050,Colonoscopy (Diagnostic),Endoscopy,2500,2
+P051,Fracture Reduction & Plaster Cast,Orthopedic,900,2
+P052,Open Reduction Internal Fixation (ORIF),Orthopedic,20000,4
+P053,Total Knee Replacement,Orthopedic Surgery,45000,5
+P054,Total Hip Replacement (Uncemented),Orthopedic Surgery,50000,5
+P055,Skin Biopsy (Punch),Dermatology,800,2
+P056,Insulin Initiation & Patient Education,Endocrine,600,1
+P057,Urinary Catheterization (Foley),Urology,350,1
+P058,DEXA Bone Density Scan,Radiology,700,1
+P059,Thyroid Ultrasound-Guided Fine Needle Aspiration,Radiology,1200,2
+P060,Renal Biopsy (Ultrasound-Guided),Nephrology,4000,4
+P061,Liver Biopsy (Ultrasound-Guided),Gastroenterology,3500,4
+P062,Balloon Dilation Catheter-Pediatric(With general anesthesia),Cardiology Intervention,48135,5
+P063,Gastrointestinal Camera Capsule Endoscopy-(Adult),Endoscopy,1602,3
+P064,Haptoglobin,General Procedure,948,2
+P065,Cementless Tha Head 36,General Procedure,2235,2
+P066,Cesarean Section,Obstetrics,13702,3
+P067,Audiometry Brainstem Response ( ABR ),Radiology,2121,2
+P068,Pulmonary Function Test (PFT),Diagnostic Assessment,234,1
+P069,Catheter ablation for treatment  supraventricular tachycardia SVT (atrial flutter /atrial tachycardia )  without using i,Cardiology Intervention,77296,5
+P070,Hepatitis B virus surface Ab - (HBs Ab),General Procedure,1138,2
+P071,Refractive State ( Visual Acusity ),Diagnostic Assessment,483,1
+P072,Fibrinogen Level,Laboratory,334,1
+P073,Potassium/ Creatinine Ratio in urine,Laboratory,386,1
+P074,Pure tone Audiometry + Speech discrmination,Radiology,1823,2
+P075,Colonoscopy + Sclerotherapy + Aragon ablation -(Adult)-(Includes general anesthesia),Endoscopy,2692,3
+P076,Vaginal Culture For Fungi,Laboratory,396,1
+P077,Replacement Of Dynamic Knee Joint,Orthopedic Surgery,74382,5
+P078,HLA (Human Leucocyte Antigen) Class II-Drb Typing By Pcr,Laboratory,447,1
+P079,Hip Arthroscopy,Endoscopy,3334,3
+P080,Ultraviolet (UV) For Tinea,Physiotherapy,432,1
+P081,Diagnostic Joint Arthroscopy,Endoscopy,4147,3
+P082,Percutaneous Transluminal Pulmounary viens isolation using implantable  loop recorder  ILR  ( Atrial fibrilation)-Pediat,Cardiology Intervention,19120,5
+P083,Arthoscopic Biceps Tenotomy,Minor Procedure,7079,3
+P084,Tendon Transfer In Foot,Surgery,26589,4
+P085,Hepatitis B virus core IgM - (HBc Ab IgM),General Procedure,1266,2
+P086,Serum Creatinine,Laboratory,346,1
+P087,Ankle Joint Ultrasound,Radiology,3066,2
+P088,Computerized Audiogram,Diagnostic Assessment,707,1
+P089,Arthroscopic Stabilization Fo Recurrent Shoulder Dislocation,Surgery,31672,4
+P090,Upper Git Endoscopy + Clip Closure Of Git Av Fistula-(Adult)-(Includes general anesthesia),Endoscopy,3560,3
+P091,Pack For Calcaneal Spur,Physiotherapy,398,1
+P092,"HBC, total",General Procedure,1989,2
+P093,Percutaneous Transluminal Angioplasty Of Artery-Pediatric(With general anesthesia),Cardiology Intervention,35725,5
+P094,Bone biopsy culture& sensitivity,Laboratory,183,1
+P095,Plasma aldosterone,General Procedure,2578,2
+P096,Transvaginal Ultrasound,Radiology,3418,2
+P097,Ice Pack For Postoperative Knee Replacement,Orthopedic Surgery,66141,5
+P098,Anti - RNP,General Procedure,1598,2
+P099,Hemi Cemented Bipolar Hip Joint,Orthopedic Surgery,42907,5
+P100,Surgical Arthroscopy With Synovectomy-Knee Joint,Endoscopy,2246,3
+P101,Direct Laryngoscopy And Biopsy Using Microscope,Radiology,2200,2
+P102,Endoscopic Retrograde Cholangiopancreatography-(Adult)-(Includes general anesthesia),General Procedure,2411,2
+P103,Sacroiliac Joints Radifrequency Ablation Under Image Guided C-Arm Fluroscopy,Minor Procedure,4173,3
+P104,AMA (M2),General Procedure,527,2
+P105,Ceramic Uncemented Hip Joint,Orthopedic Surgery,39247,5
+P106,Glycosylated Hb,Laboratory,208,1
+P107,Dilatation Of Aorta Artery With Insertion Of Balloon-Pediatric(With general anesthesia),Cardiology Intervention,70454,5
+P108,Normal Delivery With Forceps,Obstetrics,5808,3
+P109,Dilation Of Coronary Artery With Insertion Of 2 Des Stents with Thrombus Aspiration,Laboratory,294,1
+P110,Subtalar Joint Arthroscopy,Endoscopy,4598,3
+P111,Colonoscopy + Clip Application For Git Av Fistula-(Adult)-(Includes general anesthesia),Endoscopy,4194,3
+P112,Albumin/ Creatinine Ratio in urine,Laboratory,191,1
+P113,Catecholamines,Radiology,3302,2
+P114,Incision Of Vestibulocochlear Nerve,Minor Procedure,2172,3
+P115,Examination By Consultant,Diagnostic Assessment,691,1
+P116,Ultrasound (US) For Sinusitis,Radiology,2294,2
+P117,Gastroscopy With Biopsy Of Stomach-(Adult),Endoscopy,2361,3
+P118,Cortisol-Am In Serum,Laboratory,419,1
+P119,Uncemented Bipolar Hip Joint,Orthopedic Surgery,62919,5
+P120,Acth Am In Plasma,Laboratory,269,1
+P121,Dual Mobility (Tripolr) Cementless Tha,General Procedure,1783,2
+P122,Bronchial Fluid Culture And Sensitivity,Laboratory,412,1
+P123,Aspergillus Culture,Laboratory,304,1
+P124,Tympanometry,Diagnostic Assessment,699,1
+P125,Laser For Post Fixation Stiffness With Metal Implant,Surgery,27224,4
+P126,Ice Pack For Postoperative Repair Of Cruciate Ligament,Surgery,11661,4
+P127,Glomerular filtration rate (GFR),Laboratory,258,1
+P128,Hybrid Total Hip Joint Head 36,Orthopedic Surgery,74106,5
+P129,Cemented Total Hip Joint Head 36,Orthopedic Surgery,77669,5
+P130,Diagnostic Laparoscopy,General Procedure,2710,2
+P131,Aquaporin 4 Abs.(Nmo)(CSF),General Procedure,2441,2
+P132,Hemoglobin (HB),Laboratory,275,1
+P133,Soft tissue biopsy culture& sensitivity,Laboratory,308,1
+P134,Dual Mobility (Tripolr) Hybrid Tha,General Procedure,1785,2
+P135,E.R.C.P + Sphincterotomy-(Adult)-(Includes general anesthesia),General Procedure,1526,2
+P136,Amino Acid Analysis In Serum,Laboratory,318,1
+P137,Pleural fluid culture& sensitivity,Laboratory,170,1
+P138,Bronchial Lavage Culture And Sensitivity,Laboratory,221,1
+P139,Biotinidase activity,General Procedure,2694,2
+P140,Shoulder Joint Ultrasound,Radiology,2609,2
+P141,Audiometry + Tymanometry,Radiology,1469,2
+P142,Bone marrow culture& sensitivity,Laboratory,327,1
+P143,Diagnostic Laryngoscopy - General Anesthesia,Endoscopy,2914,3
+P144,Gingivectomy ( Upper Jaw ),General Procedure,1118,2
+P145,Endoscopic Ultrasound -(Adult),Radiology,617,2
+P146,Revision Of Ventriculo Peritoneal Shunt,General Procedure,1931,2
+P147,Catheter Atrial Septostomy-Pediatric(With general anesthesia),General Procedure,562,2
+P148,Thyroxine (T4),General Procedure,1794,2
+P149,Replacement Of Fixed/Cemented Knee Joint,Orthopedic Surgery,79193,5
+P150,Feeding Gastrostomy Tube Insertion + Tube-(Adult)-(Includes general anesthesia),General Procedure,1790,2
+P151,Pus swab culture& sensitivity,Laboratory,250,1
+P152,Thorathic Aorta Dilation And Stent Placement-Pediatric(With general anesthesia),Cardiology Intervention,39552,5
+P153,Doppler Renal Arteries,Radiology,1561,2
+P154,Ultra Sound On Knee Both Joints,General Procedure,2359,2
+P155,CSF culture& sensitivity,Laboratory,421,1
+P156,Pack For Preoperative Of Cruciate Ligament,Physiotherapy,175,1
+P157,Cortisol/ Creatinine Ratio in urine,Laboratory,231,1
+P158,Facet Joints Radiofrequency Ablation Under Image Guided   C-Arm Fluroscopy,Minor Procedure,2316,3
+P159,Upper Git Endoscopy + Clip Haemostatis-(Adult)-(Includes general anesthesia),Endoscopy,4719,3
+P160,Bronchoscopy With Argon Laser ( Argon Plasma Coagulation ),Endoscopy,3479,3
+P161,Serum Renin level,Laboratory,284,1
+P162,Reconstruction With Free Flap,Surgery,33776,4
+P163,Colonoscopy+ Balloon dilatation -(Pediatrics)-(Includes general anesthesia),Endoscopy,1720,3
+P164,Colonoscopy+ Balloon dilatation - ( Adult)-(Includes general anesthesia),Endoscopy,3189,3
+P165,Percutaneous Balloon Dilation Of Mitral Valve-Pediatric(With general anesthesia),Cardiology Intervention,41219,5
+P166,Upper Git Endoscopy+ Polypectomy ± Diathermy-(Adult)-(Includes general anesthesia),Endoscopy,4287,3
+P167,Philadelphia Chromosome by PCR,General Procedure,1045,2
+P168,Visual Field Examination -( Both Eyes),Radiology,950,2
+P169,Use Of Local Adjuvants In Bony Cavity As Liquid Nitrogen Or Phenol,General Procedure,1988,2
+P170,Doppler Neck Arteries (Carotid) Two Sides,Radiology,454,2
+P171,Muscle Transfer,Surgery,37643,4
+P172,Cryotherapy For Glaucoma,General Procedure,1975,2
+P173,Magnesium-(MG),Laboratory,362,1
+P174,Pretonial Fluid Culture & Sensitivity,Laboratory,276,1
+P175,Partial Ceramic Uncemented Hip Joint,Orthopedic Surgery,38182,5
+P176,Hbe Ag,General Procedure,1903,2
+P177,Peripheral Nerve Radiofrequency Ablation For Pain Managemnt,Minor Procedure,6500,3
+P178,Endoscopic Examination Of The Pancreas Or Pancreatic Duct-(Pediatrics)-(Includes general anesthesia),Diagnostic Assessment,661,1
+P179,Knee Joint Ultrasound,Radiology,1741,2
+P180,Total Cholesterol,Laboratory,153,1
+P181,Fiber optic bronchoscopy,Endoscopy,4513,3
+P182,Interventional Radiology - Intravascular Pressure Measurement Of Intracranial Vein,General Procedure,2939,2
+P183,Thrombectomy of lower priephral arteries with Thrombectomy system,General Procedure,2634,2
+P184,Vp Shunt Revision With Insertion Of New Vp Shunt,General Procedure,2194,2
+P185,Balloon Dilatation Of Lower Oesphogeal Stricture-(Adult)-(Includes general anesthesia),Cardiology Intervention,72931,5
+P186,Laser For Post Operative Ulcer,Physiotherapy,253,1
+P187,Endovascular Abdominal Aorta Dilation And Drug Lutent Stent Placement-Pediatric(With general anesthesia),Cardiology Intervention,31693,5
+P188,Surgical Arthroscopy With Adhesolysis,Endoscopy,4922,3
+P189,Hot Pack For Cervical Spondylosis,Physiotherapy,209,1
+P190,Stool culture& sensitivity,Laboratory,410,1
+P191,Open Reduction Of Vertebra Uncomplicated Fracture,General Procedure,2174,2
+P192,Laser For Sciatica,Physiotherapy,403,1
+P193,MYOGLOBIN IN SERUM,Laboratory,352,1
+P194,Mammaglobin Ag,General Procedure,2534,2
+P195,Pure Tone Audiometry ( PTA ),Radiology,2254,2
+P196,Arthroscopic Anterior Cruciate Ligamnet Reconstruction With Graft,Surgery,22484,4
+P197,Hot Pack For Cervical Disc Prolapse,Physiotherapy,172,1
+P198,Incision Of Facial Nerves,Minor Procedure,7225,3
+P199,Tempromadibular Joint ( TMJ ) Ultrasound,Radiology,2238,2
+P200,Ceramic uncemented hip joint for congenital dislocation,Orthopedic Surgery,73255,5
+P201,Direct Laryngoscopy And Excision Of Polyp Or Cyst Or Reinks Edema Using Microscope,Radiology,3021,2

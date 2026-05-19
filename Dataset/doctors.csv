@@ -1,0 +1,524 @@
+doctor_id,hospital_id,department_id,first_name,last_name,specialty,years_experience,phone,employment_status
+DOC0001,H001,DEPT0001,Basel,Ali,Emergency Medicine,25,1165206259,On Leave
+DOC0002,H001,DEPT0001,Samira,Lotfy,Emergency Medicine,16,1224075665,Active
+DOC0003,H001,DEPT0001,Hassan,El-Malt,Emergency Medicine,4,1183938729,On Leave
+DOC0004,H001,DEPT0001,Rozan,El-Sayed,Emergency Medicine,7,1017094469,Active
+DOC0005,H001,DEPT0001,Bahaa,Ahmed,Emergency Medicine,35,1039610151,Active
+DOC0006,H001,DEPT0001,Sobhi,Osman,Emergency Medicine,7,1589077716,Active
+DOC0007,H001,DEPT0002,Nabil,Soliman,Critical Care Medicine,32,1133048460,On Leave
+DOC0008,H001,DEPT0002,Khaled,El-Hamzawy,Critical Care Medicine,32,1004525370,Active
+DOC0009,H001,DEPT0002,Khadija,Fawzy,Critical Care Medicine,26,1237337001,Active
+DOC0010,H001,DEPT0002,Nada,Hassan,Critical Care Medicine,28,1124697640,On Leave
+DOC0011,H001,DEPT0003,Sherif,Abdel-Monem,Internal Medicine,37,1559176320,On Leave
+DOC0012,H001,DEPT0003,Basma,Shaaban,Internal Medicine,5,1285646914,On Leave
+DOC0013,H001,DEPT0003,Abdelhamid,Hanafy,Internal Medicine,28,1514756010,On Leave
+DOC0014,H001,DEPT0003,Iman,Selim,Internal Medicine,14,1011105583,Active
+DOC0015,H001,DEPT0003,Asmaa,El-Shaer,Internal Medicine,5,1050903944,Active
+DOC0016,H001,DEPT0003,Samer,Metwally,Internal Medicine,35,1575537617,Active
+DOC0017,H001,DEPT0003,Soha,Gaber,Internal Medicine,29,1022223150,Active
+DOC0018,H001,DEPT0004,Labib,Younis,Cardiology,29,1060556453,Active
+DOC0019,H001,DEPT0004,Ayman,Mohamed,Cardiology,9,1284578698,Active
+DOC0020,H001,DEPT0004,Karam,Morsi,Cardiology,6,1504861147,On Leave
+DOC0021,H001,DEPT0004,Howaida,El-Arabi,Cardiology,25,1221413705,Active
+DOC0022,H001,DEPT0004,Nagy,Eid,Cardiology,22,1562569667,Active
+DOC0023,H001,DEPT0004,Samir,Shoman,Cardiology,28,1153355329,Active
+DOC0024,H001,DEPT0005,Hind,Shalaby,Pulmonology,24,1107305336,Active
+DOC0025,H001,DEPT0005,Ziad,El-Assar,Pulmonology,30,1502307592,Active
+DOC0026,H001,DEPT0005,Mahmoud,Abdel-Aziz,Pulmonology,18,1125532790,Active
+DOC0027,H001,DEPT0005,Samer,El-Wakeel,Pulmonology,22,1571542669,On Leave
+DOC0028,H001,DEPT0006,Saad,Abdel-Monem,Neurology,6,1285032112,Active
+DOC0029,H001,DEPT0006,Wassim,Amin,Neurology,4,1041354101,Active
+DOC0030,H001,DEPT0006,Rania,Abdel-Aziz,Neurology,6,1108797381,On Leave
+DOC0031,H001,DEPT0007,Ayman,Amin,Gastroenterology,5,1044699418,Active
+DOC0032,H001,DEPT0007,Nevine,Nofal,Gastroenterology,5,1281718742,Active
+DOC0033,H001,DEPT0007,Zaki,Khalil,Gastroenterology,30,1296395690,On Leave
+DOC0034,H001,DEPT0008,Sobhi,Eid,Nephrology,2,1526977887,Active
+DOC0035,H001,DEPT0008,Abdelaziz,El-Rashidy,Nephrology,3,1181365860,Active
+DOC0036,H001,DEPT0008,Zaki,Rushdy,Nephrology,18,1272384396,Active
+DOC0037,H001,DEPT0008,Fathy,El-Arabi,Nephrology,7,1108236241,Active
+DOC0038,H001,DEPT0008,Youssef,Hamouda,Nephrology,14,1176933885,On Leave
+DOC0039,H001,DEPT0009,May,Salem,Endocrinology,5,1099716984,Active
+DOC0040,H001,DEPT0009,Amr,Bayoumi,Endocrinology,7,1136435515,Active
+DOC0041,H001,DEPT0009,Marwan,Shehata,Endocrinology,9,1505344074,Active
+DOC0042,H001,DEPT0009,Raafat,Mahrous,Endocrinology,14,1012200261,Active
+DOC0043,H001,DEPT0010,Hazem,Hassan,Orthopedics,36,1255819814,Active
+DOC0044,H001,DEPT0010,Diaa,Gaber,Orthopedics,27,1217288777,Active
+DOC0045,H001,DEPT0010,Fatima,El-Diwany,Orthopedics,7,1123800712,Active
+DOC0046,H001,DEPT0010,Ghada,Farghaly,Orthopedics,24,1098722928,On Leave
+DOC0047,H001,DEPT0010,Omar,El-Hariry,Orthopedics,1,1574641698,Active
+DOC0048,H001,DEPT0010,Randa,Abdallah,Orthopedics,15,1226919489,Active
+DOC0049,H001,DEPT0011,Ali,Mahrous,General Surgery,8,1091830832,On Leave
+DOC0050,H001,DEPT0011,Fathy,El-Gohary,General Surgery,23,1190116298,Active
+DOC0051,H001,DEPT0011,Magid,Ghanem,General Surgery,14,1110612749,Active
+DOC0052,H001,DEPT0011,Safaa,Hegazy,General Surgery,34,1050627416,Active
+DOC0053,H001,DEPT0011,Nagwa,Gaber,General Surgery,14,1572945176,Active
+DOC0054,H001,DEPT0011,Shaimaa,Mansour,General Surgery,15,1569120256,On Leave
+DOC0055,H001,DEPT0011,Walid,El-Desouky,General Surgery,31,1094313708,On Leave
+DOC0056,H001,DEPT0012,Safaa,El-Banna,Pediatrics,6,1233829119,Active
+DOC0057,H001,DEPT0012,Hesham,Radwan,Pediatrics,11,1543056116,Active
+DOC0058,H001,DEPT0012,Salma,Hatem,Pediatrics,19,1584163612,On Leave
+DOC0059,H001,DEPT0012,Ehab,El-Gazar,Pediatrics,17,1141298898,Active
+DOC0060,H001,DEPT0012,Niveen,Tobar,Pediatrics,15,1147627015,Active
+DOC0061,H001,DEPT0013,Wassim,Fawzy,Obstetrics & Gynecology,24,1103907602,On Leave
+DOC0062,H001,DEPT0013,Hani,Amin,Obstetrics & Gynecology,34,1551973370,Active
+DOC0063,H001,DEPT0013,Raafat,Morsi,Obstetrics & Gynecology,35,1196167726,On Leave
+DOC0064,H001,DEPT0013,Ola,El-Hariry,Obstetrics & Gynecology,21,1185560514,On Leave
+DOC0065,H001,DEPT0014,Farida,El-Malt,Dermatology,30,1109284846,Active
+DOC0066,H001,DEPT0014,Nour,El-Zanaty,Dermatology,4,1208468276,Active
+DOC0067,H001,DEPT0014,Yara,Mansour,Dermatology,5,1009049531,Active
+DOC0068,H001,DEPT0015,Moneer,El-Sherbeny,ENT,26,1074231785,Active
+DOC0069,H001,DEPT0015,Lotfy,Attia,ENT,25,1014175782,Active
+DOC0070,H001,DEPT0015,Saad,El-Sayed,ENT,38,1222630718,Active
+DOC0071,H001,DEPT0015,Shereen,Shaaban,ENT,17,1213170861,Active
+DOC0072,H001,DEPT0016,Dalia,El-Banna,Psychiatry,28,1548092269,Active
+DOC0073,H001,DEPT0016,Samah,Helal,Psychiatry,32,1193081706,On Leave
+DOC0074,H001,DEPT0016,Riham,Rashad,Psychiatry,29,1178815271,Active
+DOC0075,H001,DEPT0017,Basma,Abdel-Monem,Oncology,16,1217115166,Active
+DOC0076,H001,DEPT0017,Aisha,Ali,Oncology,36,1261726296,Active
+DOC0077,H001,DEPT0018,Lamia,Ali,Radiology,13,1528259590,Active
+DOC0078,H001,DEPT0018,Hatem,Radwan,Radiology,4,1597696999,Active
+DOC0079,H001,DEPT0018,Nadia,Fawzy,Radiology,34,1592713463,Active
+DOC0080,H001,DEPT0018,Ramzy,Ibrahim,Radiology,10,1044570561,Active
+DOC0081,H001,DEPT0018,Mohsen,Radwan,Radiology,14,1179691591,Active
+DOC0082,H001,DEPT0019,Nasr,Sorour,Clinical Pathology,32,1179795795,Active
+DOC0083,H001,DEPT0019,Amal,Lotfy,Clinical Pathology,7,1544868359,Active
+DOC0084,H001,DEPT0019,Tharwat,El-Banna,Clinical Pathology,12,1097289704,Active
+DOC0085,H001,DEPT0019,Medhat,El-Sawi,Clinical Pathology,16,1550451209,Active
+DOC0086,H001,DEPT0019,Salma,Hamouda,Clinical Pathology,29,1233765035,Active
+DOC0087,H001,DEPT0020,Akram,Bayoumi,Clinical Pharmacy,22,1178133773,Active
+DOC0088,H001,DEPT0020,Ramy,Hamza,Clinical Pharmacy,30,1152176317,Active
+DOC0089,H001,DEPT0020,Lamia,Ismail,Clinical Pharmacy,34,1064664265,Active
+DOC0090,H002,DEPT0021,Nashaat,El-Diwany,Emergency Medicine,26,1587230283,Active
+DOC0091,H002,DEPT0021,Maged,Farag,Emergency Medicine,17,1119351363,On Leave
+DOC0092,H002,DEPT0021,Marwan,Ramadan,Emergency Medicine,32,1182432262,Active
+DOC0093,H002,DEPT0021,Farida,El-Gohary,Emergency Medicine,7,1217230039,Active
+DOC0094,H002,DEPT0021,Basel,Barakat,Emergency Medicine,12,1028035353,Active
+DOC0095,H002,DEPT0021,Mamdouh,El-Gohary,Emergency Medicine,25,1268666170,Active
+DOC0096,H002,DEPT0022,Fares,El-Shaer,Critical Care Medicine,33,1103383025,Active
+DOC0097,H002,DEPT0022,Amr,El-Banna,Critical Care Medicine,24,1198935808,Active
+DOC0098,H002,DEPT0022,Yara,El-Tayeb,Critical Care Medicine,2,1210856614,On Leave
+DOC0099,H002,DEPT0022,Ramzy,Rushdy,Critical Care Medicine,8,1153126286,Active
+DOC0100,H002,DEPT0023,Samir,El-Naggar,Internal Medicine,35,1148927887,Active
+DOC0101,H002,DEPT0023,Maha,Helal,Internal Medicine,6,1169047725,On Leave
+DOC0102,H002,DEPT0023,Nadia,Ahmed,Internal Medicine,10,1131159638,Active
+DOC0103,H002,DEPT0023,Mohamed,Tobar,Internal Medicine,15,1101847529,Active
+DOC0104,H002,DEPT0023,Basel,El-Sayed,Internal Medicine,7,1262681510,Active
+DOC0105,H002,DEPT0023,Tahany,El-Sayed,Internal Medicine,7,1228644581,Active
+DOC0106,H002,DEPT0023,Mamdouh,Hanafy,Internal Medicine,28,1241938843,On Leave
+DOC0107,H002,DEPT0024,Reham,Attia,Cardiology,15,1131330231,Active
+DOC0108,H002,DEPT0024,Nashaat,Lotfy,Cardiology,19,1096677462,Active
+DOC0109,H002,DEPT0024,Mahmoud,Taha,Cardiology,20,1136018895,Active
+DOC0110,H002,DEPT0024,Mohsen,Farag,Cardiology,20,1218522872,On Leave
+DOC0111,H002,DEPT0025,Dalia,Zawawi,Pulmonology,38,1144450049,On Leave
+DOC0112,H002,DEPT0025,Akram,Khalil,Pulmonology,2,1155538326,Active
+DOC0113,H002,DEPT0025,Rana,Salem,Pulmonology,5,1178431231,Active
+DOC0114,H002,DEPT0025,Sahar,Abdel-Wahab,Pulmonology,12,1120511317,Active
+DOC0115,H002,DEPT0025,Shahira,El-Shaer,Pulmonology,34,1099013548,Active
+DOC0116,H002,DEPT0026,Karam,Hegazy,Neurology,21,1080880772,Active
+DOC0117,H002,DEPT0026,Farida,Gaber,Neurology,21,1291976399,Active
+DOC0118,H002,DEPT0026,Gaber,Ibrahim,Neurology,23,1562721101,Active
+DOC0119,H002,DEPT0026,Adel,El-Rashidy,Neurology,23,1215156325,Active
+DOC0120,H002,DEPT0026,Emad,Sorour,Neurology,15,1123801847,On Leave
+DOC0121,H002,DEPT0027,Karim,Hamza,Gastroenterology,22,1286041481,Active
+DOC0122,H002,DEPT0027,Esraa,Khalifa,Gastroenterology,13,1527117042,On Leave
+DOC0123,H002,DEPT0027,Magdy,Hamouda,Gastroenterology,21,1086025959,Active
+DOC0124,H002,DEPT0028,Reda,Khalil,Nephrology,11,1184303512,Active
+DOC0125,H002,DEPT0028,Farouk,El-Rashidy,Nephrology,11,1564830227,Active
+DOC0126,H002,DEPT0028,Tharwat,Hamouda,Nephrology,1,1188425835,Active
+DOC0127,H002,DEPT0029,Faten,El-Tayeb,Endocrinology,28,1554478376,On Leave
+DOC0128,H002,DEPT0029,Sherief,Qasem,Endocrinology,2,1108628567,On Leave
+DOC0129,H002,DEPT0029,Medhat,Kotb,Endocrinology,37,1126683411,Active
+DOC0130,H002,DEPT0029,Fouad,Shalaby,Endocrinology,7,1086147259,Active
+DOC0131,H002,DEPT0029,Hanaa,Attia,Endocrinology,10,1037343346,On Leave
+DOC0132,H002,DEPT0030,Wahid,Selim,Orthopedics,8,1157547145,Active
+DOC0133,H002,DEPT0030,Moneer,Barakat,Orthopedics,6,1047039449,Active
+DOC0134,H002,DEPT0030,Zaki,El-Diwany,Orthopedics,4,1555988689,Active
+DOC0135,H002,DEPT0030,Sahar,Hafez,Orthopedics,25,1511927863,Active
+DOC0136,H002,DEPT0030,Nader,Nofal,Orthopedics,21,1232340467,Active
+DOC0137,H002,DEPT0031,Ziad,Ibrahim,General Surgery,13,1198713516,On Leave
+DOC0138,H002,DEPT0031,Rafat,El-Deeb,General Surgery,33,1170602335,Active
+DOC0139,H002,DEPT0031,Nawal,Abdel-Ghany,General Surgery,11,1108304616,Active
+DOC0140,H002,DEPT0031,Nader,Qasem,General Surgery,9,1089782853,Active
+DOC0141,H002,DEPT0031,Dina,Khaled,General Surgery,11,1023268118,Active
+DOC0142,H002,DEPT0031,Zaki,Abdallah,General Surgery,21,1237317116,Active
+DOC0143,H002,DEPT0032,Hoda,El-Sayed,Pediatrics,29,1293519898,Active
+DOC0144,H002,DEPT0032,Emad,El-Khatib,Pediatrics,21,1237439913,Active
+DOC0145,H002,DEPT0032,Amgad,Khalil,Pediatrics,24,1290920039,On Leave
+DOC0146,H002,DEPT0032,Doaa,Qasem,Pediatrics,16,1512663372,Active
+DOC0147,H002,DEPT0033,Mahmoud,Salem,Obstetrics & Gynecology,14,1506015559,Active
+DOC0148,H002,DEPT0033,Shereen,Mostafa,Obstetrics & Gynecology,13,1227352887,Active
+DOC0149,H002,DEPT0033,Wedad,Farghaly,Obstetrics & Gynecology,34,1014332379,Active
+DOC0150,H002,DEPT0033,Ibrahim,Abdallah,Obstetrics & Gynecology,29,1590381067,Active
+DOC0151,H002,DEPT0033,Asmaa,Hanafy,Obstetrics & Gynecology,20,1233151478,Active
+DOC0152,H002,DEPT0034,Ahmed,El-Hariry,Dermatology,31,1083738260,Active
+DOC0153,H002,DEPT0034,Soha,El-Deeb,Dermatology,10,1060525877,Active
+DOC0154,H002,DEPT0035,Wedad,El-Hariry,ENT,25,1066948980,Active
+DOC0155,H002,DEPT0035,Sherif,Barakat,ENT,28,1530844822,Active
+DOC0156,H002,DEPT0036,Moneer,Ismail,Psychiatry,19,1173247487,On Leave
+DOC0157,H002,DEPT0036,Nashaat,El-Husseiny,Psychiatry,13,1280192426,Active
+DOC0158,H002,DEPT0036,Abeer,El-Hennawy,Psychiatry,18,1581898581,Active
+DOC0159,H002,DEPT0036,Bahaa,El-Gazar,Psychiatry,1,1024268427,Active
+DOC0160,H002,DEPT0037,Nagy,Ramadan,Oncology,31,1038388428,Active
+DOC0161,H002,DEPT0037,Sayed,El-Sawi,Oncology,31,1586856830,Active
+DOC0162,H002,DEPT0038,Dalia,Zaki,Radiology,7,1162724577,Active
+DOC0163,H002,DEPT0038,Fares,Nofal,Radiology,18,1175962030,Active
+DOC0164,H002,DEPT0038,Zeinab,El-Hennawy,Radiology,37,1287437492,Active
+DOC0165,H002,DEPT0038,Heba,Hassan,Radiology,11,1586672186,Active
+DOC0166,H002,DEPT0038,Hamdy,El-Hariry,Radiology,7,1574391812,Active
+DOC0167,H002,DEPT0039,Soha,Ali,Clinical Pathology,26,1510972679,Active
+DOC0168,H002,DEPT0039,Mervat,Shaaban,Clinical Pathology,21,1273151120,Active
+DOC0169,H002,DEPT0039,Basel,Ramadan,Clinical Pathology,27,1056400043,Active
+DOC0170,H002,DEPT0040,Fares,Khalaf,Clinical Pharmacy,1,1214200581,Active
+DOC0171,H002,DEPT0040,Fathy,Bayoumi,Clinical Pharmacy,1,1244480973,Active
+DOC0172,H002,DEPT0040,Sabry,Rushdy,Clinical Pharmacy,21,1283149172,On Leave
+DOC0173,H002,DEPT0040,Tamer,Hafez,Clinical Pharmacy,32,1000698964,Active
+DOC0174,H002,DEPT0040,Fatima,El-Banna,Clinical Pharmacy,2,1225936688,Active
+DOC0175,H003,DEPT0041,Shady,Gaber,Emergency Medicine,8,1248377039,Active
+DOC0176,H003,DEPT0041,Ziad,Bayoumi,Emergency Medicine,7,1162748272,On Leave
+DOC0177,H003,DEPT0041,Ziad,Hamza,Emergency Medicine,31,1548931306,Active
+DOC0178,H003,DEPT0041,Karam,Saad,Emergency Medicine,15,1262636848,Active
+DOC0179,H003,DEPT0041,Omneya,Attia,Emergency Medicine,26,1043547726,Active
+DOC0180,H003,DEPT0041,Alyaa,Fawzy,Emergency Medicine,21,1063819007,Active
+DOC0181,H003,DEPT0041,Safa,El-Hariry,Emergency Medicine,34,1564826372,Active
+DOC0182,H003,DEPT0042,Abdelaziz,Mostafa,Critical Care Medicine,24,1129628974,Active
+DOC0183,H003,DEPT0042,Rehab,Soliman,Critical Care Medicine,3,1034313271,Active
+DOC0184,H003,DEPT0042,Ayman,Zaki,Critical Care Medicine,9,1243414553,Active
+DOC0185,H003,DEPT0042,Tarek,Morsi,Critical Care Medicine,21,1280699461,Active
+DOC0186,H003,DEPT0042,Reda,El-Husseiny,Critical Care Medicine,38,1512917565,Active
+DOC0187,H003,DEPT0043,Samer,El-Desouky,Internal Medicine,10,1161636463,Active
+DOC0188,H003,DEPT0043,Samira,Abdel-Ghany,Internal Medicine,12,1537131678,Active
+DOC0189,H003,DEPT0043,Labib,Abdallah,Internal Medicine,9,1072719946,Active
+DOC0190,H003,DEPT0043,Rania,Radwan,Internal Medicine,30,1509852294,Active
+DOC0191,H003,DEPT0043,Rozan,Khalifa,Internal Medicine,1,1152191958,Active
+DOC0192,H003,DEPT0043,Menna,El-Husseiny,Internal Medicine,6,1532199265,Active
+DOC0193,H003,DEPT0043,Gamal,Nasser,Internal Medicine,5,1543061342,On Leave
+DOC0194,H003,DEPT0043,Bahaa,Helal,Internal Medicine,14,1070104404,Active
+DOC0195,H003,DEPT0044,Ola,Shalaby,Cardiology,10,1246128227,Active
+DOC0196,H003,DEPT0045,Ali,Fawzy,Pulmonology,25,1588562717,Active
+DOC0197,H003,DEPT0045,Samir,Amin,Pulmonology,11,1287498533,Active
+DOC0198,H003,DEPT0045,Ibrahim,El-Assar,Pulmonology,22,1292112105,Active
+DOC0199,H003,DEPT0045,Nadia,Selim,Pulmonology,2,1029251376,Active
+DOC0200,H003,DEPT0046,Ziad,El-Kashef,Neurology,3,1076767752,On Leave
+DOC0201,H003,DEPT0047,Hani,Abdallah,Gastroenterology,4,1144513979,Active
+DOC0202,H003,DEPT0047,Yara,Soliman,Gastroenterology,27,1122874735,Active
+DOC0203,H003,DEPT0047,Yara,El-Desouky,Gastroenterology,11,1179818200,Active
+DOC0204,H003,DEPT0047,Omar,El-Amir,Gastroenterology,3,1515612067,Active
+DOC0205,H003,DEPT0047,Manal,Abdel-Wahab,Gastroenterology,33,1299677609,On Leave
+DOC0206,H003,DEPT0048,Yehia,El-Deeb,Nephrology,5,1515239559,On Leave
+DOC0207,H003,DEPT0049,Wahid,El-Shafei,Endocrinology,10,1274135836,Active
+DOC0208,H003,DEPT0049,Yehia,El-Assar,Endocrinology,37,1048926669,Active
+DOC0209,H003,DEPT0049,Adham,Radwan,Endocrinology,32,1537894387,Active
+DOC0210,H003,DEPT0049,Mohsen,El-Sayed,Endocrinology,29,1505511341,Active
+DOC0211,H003,DEPT0050,Nadia,Saber,Orthopedics,2,1525653505,Active
+DOC0212,H003,DEPT0050,Gaber,Shaaban,Orthopedics,1,1577124921,Active
+DOC0213,H003,DEPT0050,Diaa,Hafez,Orthopedics,28,1159931531,Active
+DOC0214,H003,DEPT0050,Aya,Hafez,Orthopedics,4,1517030714,Active
+DOC0215,H003,DEPT0051,Bahaa,Hassan,General Surgery,1,1245444063,Active
+DOC0216,H003,DEPT0051,Rehab,Sorour,General Surgery,2,1566797128,Active
+DOC0217,H003,DEPT0051,Noran,Abdallah,General Surgery,38,1002978659,On Leave
+DOC0218,H003,DEPT0051,Khadija,Khaled,General Surgery,28,1110171298,Active
+DOC0219,H003,DEPT0051,Adel,El-Khatib,General Surgery,4,1065210266,On Leave
+DOC0220,H003,DEPT0051,Essam,El-Gohary,General Surgery,21,1125088457,Active
+DOC0221,H003,DEPT0051,Adham,Salem,General Surgery,29,1035913209,Active
+DOC0222,H003,DEPT0052,Tamer,Salem,Pediatrics,21,1077671052,Active
+DOC0223,H003,DEPT0052,Menna,El-Hennawy,Pediatrics,10,1154420834,Active
+DOC0224,H003,DEPT0052,Amgad,Rizk,Pediatrics,17,1215190493,On Leave
+DOC0225,H003,DEPT0052,Samer,Rushdy,Pediatrics,17,1547201441,Active
+DOC0226,H003,DEPT0053,Yasmine,Mahrous,Obstetrics & Gynecology,5,1075943366,Active
+DOC0227,H003,DEPT0053,Shady,El-Khatib,Obstetrics & Gynecology,24,1083689861,Active
+DOC0228,H003,DEPT0053,Azza,Mostafa,Obstetrics & Gynecology,8,1544645186,Active
+DOC0229,H003,DEPT0053,Ahmed,Nofal,Obstetrics & Gynecology,33,1552171363,Active
+DOC0230,H003,DEPT0053,Moneer,Shalaby,Obstetrics & Gynecology,19,1009404116,Active
+DOC0231,H003,DEPT0054,Maged,Hegazy,Dermatology,5,1240041033,Active
+DOC0232,H003,DEPT0054,Noha,Shaaban,Dermatology,37,1279069927,Active
+DOC0233,H003,DEPT0054,Moneer,Tobar,Dermatology,25,1041825999,Active
+DOC0234,H003,DEPT0055,Abdelaziz,Ahmed,ENT,27,1211630174,On Leave
+DOC0235,H003,DEPT0055,Dalia,El-Masry,ENT,21,1095940350,Active
+DOC0236,H003,DEPT0055,Raouf,Radwan,ENT,28,1516497456,Active
+DOC0237,H003,DEPT0056,Nermeen,El-Husseiny,Psychiatry,15,1562549891,Active
+DOC0238,H003,DEPT0057,Salah,Hassan,Oncology,6,1158540708,Active
+DOC0239,H003,DEPT0058,Mahmoud,Gaber,Radiology,3,1179039072,Active
+DOC0240,H003,DEPT0058,Mamdouh,Radwan,Radiology,8,1277640532,Active
+DOC0241,H003,DEPT0058,Amany,Ibrahim,Radiology,18,1200806551,Active
+DOC0242,H003,DEPT0058,Ezzat,Bayoumi,Radiology,24,1199547832,Active
+DOC0243,H003,DEPT0058,Sherief,Hassan,Radiology,10,1025913256,Active
+DOC0244,H003,DEPT0059,Hadeer,El-Naggar,Clinical Pathology,27,1007583773,On Leave
+DOC0245,H003,DEPT0059,Hamdy,Hanafy,Clinical Pathology,15,1146928544,Active
+DOC0246,H003,DEPT0059,Asmaa,El-Zanaty,Clinical Pathology,24,1061424480,On Leave
+DOC0247,H003,DEPT0059,Suzan,Taha,Clinical Pathology,24,1056891730,Active
+DOC0248,H003,DEPT0059,Karam,Ramadan,Clinical Pathology,10,1215273683,Active
+DOC0249,H003,DEPT0060,Mamdouh,El-Hennawy,Clinical Pharmacy,37,1081992404,On Leave
+DOC0250,H003,DEPT0060,Wafaa,El-Hamzawy,Clinical Pharmacy,12,1103355953,Active
+DOC0251,H003,DEPT0060,Reda,El-Kashef,Clinical Pharmacy,32,1114967681,Active
+DOC0252,H003,DEPT0060,Rania,Sorour,Clinical Pharmacy,32,1533018795,Active
+DOC0253,H003,DEPT0060,Osama,Zawawi,Clinical Pharmacy,13,1281184453,On Leave
+DOC0254,H004,DEPT0061,Nashaat,Qasem,Emergency Medicine,2,1204054115,Active
+DOC0255,H004,DEPT0061,Nasser,El-Assar,Emergency Medicine,5,1573519075,On Leave
+DOC0256,H004,DEPT0062,Samah,Metwally,Critical Care Medicine,7,1275157322,Active
+DOC0257,H004,DEPT0062,Eman,Mahrous,Critical Care Medicine,38,1294362898,Active
+DOC0258,H004,DEPT0062,Ehab,Badawi,Critical Care Medicine,27,1168113599,Active
+DOC0259,H004,DEPT0063,Osama,El-Malt,Internal Medicine,6,1515616693,On Leave
+DOC0260,H004,DEPT0063,Amal,Farghaly,Internal Medicine,7,1281269982,Active
+DOC0261,H004,DEPT0063,Ramadan,El-Shaer,Internal Medicine,21,1275347918,Active
+DOC0262,H004,DEPT0063,Ramzy,El-Banna,Internal Medicine,7,1585858269,Active
+DOC0263,H004,DEPT0064,Salah,Farghaly,Cardiology,26,1296416722,Active
+DOC0264,H004,DEPT0064,Adel,Farouk,Cardiology,35,1057675534,Active
+DOC0265,H004,DEPT0065,Emad,Barakat,Pulmonology,12,1036092309,On Leave
+DOC0266,H004,DEPT0066,Abdelhamid,El-Diwany,Neurology,17,1146035153,Active
+DOC0267,H004,DEPT0066,Abdelrahman,El-Deeb,Neurology,11,1103892478,Active
+DOC0268,H004,DEPT0067,Magid,El-Husseiny,Gastroenterology,5,1212894138,Active
+DOC0269,H004,DEPT0068,Marwan,Mansour,Nephrology,1,1522876575,Active
+DOC0270,H004,DEPT0068,Haitham,El-Sherief,Nephrology,30,1004614036,Active
+DOC0271,H004,DEPT0069,Nasr,Mansour,Endocrinology,2,1236606009,Active
+DOC0272,H004,DEPT0070,Samah,Abdel-Monem,Orthopedics,33,1031957387,Active
+DOC0273,H004,DEPT0070,Esraa,El-Deeb,Orthopedics,2,1589980019,Active
+DOC0274,H004,DEPT0071,Ramy,Lotfy,General Surgery,7,1081364384,Active
+DOC0275,H004,DEPT0071,Reda,Ali,General Surgery,20,1152620511,Active
+DOC0276,H004,DEPT0071,Howaida,Gaber,General Surgery,7,1087882651,Active
+DOC0277,H004,DEPT0072,Hamdy,Abdel-Ghany,Pediatrics,15,1253354514,Active
+DOC0278,H005,DEPT0073,Heba,Gaber,Emergency Medicine,16,1264024086,Active
+DOC0279,H005,DEPT0073,Alaa,Qasem,Emergency Medicine,32,1244185847,On Leave
+DOC0280,H005,DEPT0074,Ramy,El-Banna,Critical Care Medicine,35,1213684030,Active
+DOC0281,H005,DEPT0074,Nasser,Shaaban,Critical Care Medicine,6,1068653710,On Leave
+DOC0282,H005,DEPT0074,Labib,Ali,Critical Care Medicine,5,1573353250,Active
+DOC0283,H005,DEPT0074,Sabry,Abdel-Wahab,Critical Care Medicine,31,1501477738,Active
+DOC0284,H005,DEPT0075,Sohair,El-Shaer,Internal Medicine,12,1084420904,Active
+DOC0285,H005,DEPT0076,Radwa,El-Hariry,Cardiology,2,1191140509,Active
+DOC0286,H005,DEPT0076,Iman,El-Hariry,Cardiology,7,1591668688,Active
+DOC0287,H005,DEPT0076,Nabil,Hanafy,Cardiology,8,1537278111,On Leave
+DOC0288,H005,DEPT0076,Wael,Rashad,Cardiology,23,1288287122,On Leave
+DOC0289,H005,DEPT0076,Nermeen,Abdel-Ghany,Cardiology,5,1235545144,Active
+DOC0290,H005,DEPT0076,Hani,Nasser,Cardiology,8,1062071536,On Leave
+DOC0291,H005,DEPT0076,Sherif,Taha,Cardiology,1,1243977367,Active
+DOC0292,H005,DEPT0076,Fatima,Fawzy,Cardiology,19,1034415811,Active
+DOC0293,H005,DEPT0076,Sabry,Hatem,Cardiology,23,1555853624,Active
+DOC0294,H005,DEPT0077,Gamal,Mansour,Pulmonology,18,1540121871,Active
+DOC0295,H005,DEPT0077,Osama,Fawzy,Pulmonology,7,1102789669,Active
+DOC0296,H005,DEPT0077,Hamdy,Bayoumi,Pulmonology,33,1298502115,Active
+DOC0297,H005,DEPT0077,Nawal,El-Arabi,Pulmonology,12,1526520544,Active
+DOC0298,H005,DEPT0078,Lina,Helal,Neurology,3,1210451350,Active
+DOC0299,H005,DEPT0078,Karam,Shehata,Neurology,27,1258765900,Active
+DOC0300,H005,DEPT0078,Mamdouh,Badawi,Neurology,14,1246174480,On Leave
+DOC0301,H005,DEPT0079,Marwan,Helal,Gastroenterology,9,1104206994,Active
+DOC0302,H005,DEPT0080,Hamdy,El-Khatib,Nephrology,23,1507072965,Active
+DOC0303,H005,DEPT0080,Rehab,Badawi,Nephrology,19,1154397044,Active
+DOC0304,H005,DEPT0081,Mostafa,Amin,Endocrinology,3,1599296078,On Leave
+DOC0305,H005,DEPT0081,Marwan,El-Hariry,Endocrinology,38,1521926041,On Leave
+DOC0306,H005,DEPT0082,Wessam,Badawi,Orthopedics,22,1525144266,Active
+DOC0307,H005,DEPT0082,Radwa,Zaher,Orthopedics,33,1134388374,Active
+DOC0308,H005,DEPT0083,Khadija,Helal,General Surgery,7,1562589880,Active
+DOC0309,H005,DEPT0083,Safa,El-Rashidy,General Surgery,8,1067399366,Active
+DOC0310,H005,DEPT0084,Samer,Hassan,Pediatrics,3,1022877052,Active
+DOC0311,H005,DEPT0084,Moustafa,Mohamed,Pediatrics,1,1599735746,On Leave
+DOC0312,H005,DEPT0085,Nevine,Kotb,Obstetrics & Gynecology,32,1036526425,On Leave
+DOC0313,H005,DEPT0086,Diaa,El-Rashidy,Dermatology,17,1287691002,On Leave
+DOC0314,H006,DEPT0087,Hassan,Soliman,Emergency Medicine,16,1121730434,On Leave
+DOC0315,H006,DEPT0087,Hesham,Abdel-Wahab,Emergency Medicine,8,1533014383,On Leave
+DOC0316,H006,DEPT0087,Magid,Soliman,Emergency Medicine,17,1099345563,On Leave
+DOC0317,H006,DEPT0087,Nashaat,Helal,Emergency Medicine,3,1525769744,Active
+DOC0318,H006,DEPT0087,Samer,Barakat,Emergency Medicine,23,1521791984,Active
+DOC0319,H006,DEPT0087,Rizk,El-Assar,Emergency Medicine,30,1125380004,Active
+DOC0320,H006,DEPT0087,Samer,El-Hennawy,Emergency Medicine,28,1266606220,Active
+DOC0321,H006,DEPT0088,Samer,El-Amir,Critical Care Medicine,14,1154513036,Active
+DOC0322,H006,DEPT0088,Tamer,El-Amir,Critical Care Medicine,4,1021477501,On Leave
+DOC0323,H006,DEPT0088,Tarek,El-Naggar,Critical Care Medicine,38,1237007645,Active
+DOC0324,H006,DEPT0088,Yehia,Nasser,Critical Care Medicine,11,1058877220,On Leave
+DOC0325,H006,DEPT0088,Nagy,Abdel-Aziz,Critical Care Medicine,26,1219247603,Active
+DOC0326,H006,DEPT0088,Fatima,El-Sawi,Critical Care Medicine,17,1125564253,Active
+DOC0327,H006,DEPT0089,Abla,Sorour,Internal Medicine,15,1207129780,Active
+DOC0328,H006,DEPT0089,Menna,Khalil,Internal Medicine,11,1203639922,Active
+DOC0329,H006,DEPT0089,Ehab,Hafez,Internal Medicine,27,1028735953,On Leave
+DOC0330,H006,DEPT0089,Salah,Saber,Internal Medicine,29,1109449046,Active
+DOC0331,H006,DEPT0089,Hesham,Qasem,Internal Medicine,21,1005909684,Active
+DOC0332,H006,DEPT0089,Rozan,Bayoumi,Internal Medicine,37,1567410743,Active
+DOC0333,H006,DEPT0089,Sherief,El-Naggar,Internal Medicine,24,1521140147,Active
+DOC0334,H006,DEPT0089,Adel,Zaher,Internal Medicine,28,1137833499,On Leave
+DOC0335,H006,DEPT0089,Ola,Mahrous,Internal Medicine,21,1532513716,Active
+DOC0336,H006,DEPT0090,Ramy,El-Masry,Cardiology,14,1063394124,Active
+DOC0337,H006,DEPT0090,Riham,El-Masry,Cardiology,21,1528251490,Active
+DOC0338,H006,DEPT0090,Nashwa,Badawi,Cardiology,32,1279530121,On Leave
+DOC0339,H006,DEPT0090,Ramadan,Ghoneim,Cardiology,17,1287302228,On Leave
+DOC0340,H006,DEPT0090,Saad,El-Naggar,Cardiology,7,1088166412,Active
+DOC0341,H006,DEPT0090,Madeha,El-Amir,Cardiology,20,1193903174,Active
+DOC0342,H006,DEPT0091,Saad,Mohamed,Pulmonology,27,1564071980,Active
+DOC0343,H006,DEPT0091,May,El-Sawi,Pulmonology,30,1059948867,On Leave
+DOC0344,H006,DEPT0091,Fathy,Elwy,Pulmonology,20,1022394485,Active
+DOC0345,H006,DEPT0091,Wessam,Fawzy,Pulmonology,14,1085794161,On Leave
+DOC0346,H006,DEPT0092,Ali,El-Malt,Neurology,35,1074795103,On Leave
+DOC0347,H006,DEPT0092,Nashaat,Radwan,Neurology,20,1083758899,Active
+DOC0348,H006,DEPT0092,Bahaa,El-Sayed,Neurology,27,1074595238,Active
+DOC0349,H006,DEPT0092,Rafat,Zaher,Neurology,21,1590098866,Active
+DOC0350,H006,DEPT0093,Amr,El-Amir,Gastroenterology,33,1598119567,Active
+DOC0351,H006,DEPT0093,Wahid,Fawzy,Gastroenterology,11,1273745446,Active
+DOC0352,H006,DEPT0093,Sabry,Morsi,Gastroenterology,3,1180866003,Active
+DOC0353,H006,DEPT0093,Rania,Morsi,Gastroenterology,10,1583439990,On Leave
+DOC0354,H006,DEPT0093,Abdelhamid,Elwy,Gastroenterology,29,1137847379,Active
+DOC0355,H006,DEPT0094,Esraa,Lotfy,Nephrology,15,1158900156,Active
+DOC0356,H006,DEPT0094,Lotfy,El-Zanaty,Nephrology,8,1114924243,Active
+DOC0357,H006,DEPT0094,Marwan,Ismail,Nephrology,16,1262347236,Active
+DOC0358,H006,DEPT0094,Wael,El-Banna,Nephrology,8,1109442834,Active
+DOC0359,H006,DEPT0094,Niveen,El-Desouky,Nephrology,1,1197148670,On Leave
+DOC0360,H006,DEPT0094,Abla,Rashad,Nephrology,3,1041592446,On Leave
+DOC0361,H006,DEPT0095,Salah,Eid,Endocrinology,38,1576148433,Active
+DOC0362,H006,DEPT0095,Menna,Ibrahim,Endocrinology,35,1244903216,On Leave
+DOC0363,H006,DEPT0095,Zeina,Hamouda,Endocrinology,36,1254646683,On Leave
+DOC0364,H006,DEPT0095,Hana,Ali,Endocrinology,19,1566092302,Active
+DOC0365,H006,DEPT0095,Shady,Hegazy,Endocrinology,33,1590838220,Active
+DOC0366,H006,DEPT0096,Mona,Khaled,Orthopedics,25,1209324798,Active
+DOC0367,H006,DEPT0096,Ramzy,Kotb,Orthopedics,38,1090547568,On Leave
+DOC0368,H006,DEPT0096,Adham,Elwy,Orthopedics,23,1014085107,Active
+DOC0369,H006,DEPT0096,Layla,El-Sherief,Orthopedics,4,1292083524,Active
+DOC0370,H006,DEPT0096,Samer,Hafez,Orthopedics,36,1155246570,Active
+DOC0371,H006,DEPT0097,Shimaa,Salem,General Surgery,30,1185192551,Active
+DOC0372,H006,DEPT0097,Alaa,Morsi,General Surgery,24,1286238577,Active
+DOC0373,H006,DEPT0097,Nevine,Hamouda,General Surgery,34,1248959418,On Leave
+DOC0374,H006,DEPT0097,Ibrahim,Radwan,General Surgery,27,1521904136,Active
+DOC0375,H006,DEPT0097,Shahira,Amin,General Surgery,34,1026148570,On Leave
+DOC0376,H006,DEPT0097,Khadija,El-Assar,General Surgery,27,1267723120,On Leave
+DOC0377,H006,DEPT0097,Abdelhamid,Zaher,General Surgery,31,1568396627,Active
+DOC0378,H006,DEPT0097,Rofaida,Rashad,General Surgery,19,1536305559,Active
+DOC0379,H006,DEPT0098,Zeinab,Radwan,Pediatrics,18,1011150303,Active
+DOC0380,H006,DEPT0098,Walid,Soliman,Pediatrics,15,1123578786,Active
+DOC0381,H006,DEPT0098,Rania,El-Shennawy,Pediatrics,17,1053717996,Active
+DOC0382,H006,DEPT0098,Emad,Farouk,Pediatrics,38,1569017289,Active
+DOC0383,H006,DEPT0098,Yehia,Abdel-Wahab,Pediatrics,9,1101432043,On Leave
+DOC0384,H006,DEPT0098,Rizk,Ghanem,Pediatrics,31,1586316173,On Leave
+DOC0385,H006,DEPT0099,Khaled,El-Khatib,Obstetrics & Gynecology,30,1098321771,Active
+DOC0386,H006,DEPT0099,Noran,Abdel-Aziz,Obstetrics & Gynecology,25,1075457354,Active
+DOC0387,H006,DEPT0099,Sabry,Farag,Obstetrics & Gynecology,9,1052830799,Active
+DOC0388,H006,DEPT0099,Nabil,El-Sherbeny,Obstetrics & Gynecology,29,1047051344,Active
+DOC0389,H006,DEPT0099,Galal,El-Tayeb,Obstetrics & Gynecology,7,1269492496,Active
+DOC0390,H006,DEPT0100,Magid,Zaher,Dermatology,38,1521426287,On Leave
+DOC0391,H006,DEPT0100,Ziad,Mohamed,Dermatology,18,1121384668,Active
+DOC0392,H006,DEPT0100,Basel,El-Shaer,Dermatology,18,1101611450,On Leave
+DOC0393,H006,DEPT0100,Raafat,Badawi,Dermatology,34,1504650777,Active
+DOC0394,H006,DEPT0101,Hatem,El-Sherbeny,ENT,24,1292428860,Active
+DOC0395,H006,DEPT0101,Adham,Khalaf,ENT,5,1204409285,Active
+DOC0396,H006,DEPT0101,Yara,El-Husseiny,ENT,11,1274764617,Active
+DOC0397,H006,DEPT0101,Mariam,Abdel-Wahab,ENT,16,1297586787,Active
+DOC0398,H006,DEPT0102,Samah,El-Khatib,Psychiatry,32,1077491704,Active
+DOC0399,H006,DEPT0102,Riham,Osman,Psychiatry,13,1515042108,Active
+DOC0400,H006,DEPT0102,Rasha,Hegazy,Psychiatry,13,1289671961,Active
+DOC0401,H006,DEPT0103,Ibrahim,Abdel-Ghany,Oncology,6,1293556987,Active
+DOC0402,H006,DEPT0103,Magid,El-Rashidy,Oncology,23,1298025299,Active
+DOC0403,H006,DEPT0103,Farida,Hanafy,Oncology,7,1113550456,Active
+DOC0404,H006,DEPT0103,Magid,Zaki,Oncology,2,1108705597,Active
+DOC0405,H006,DEPT0103,Ramadan,Khalil,Oncology,1,1244826171,Active
+DOC0406,H006,DEPT0104,Abla,Khalaf,Radiology,33,1505882183,Active
+DOC0407,H006,DEPT0104,Lina,Hegazy,Radiology,34,1033255615,On Leave
+DOC0408,H006,DEPT0104,Faten,Saber,Radiology,6,1221935662,Active
+DOC0409,H006,DEPT0104,Marwan,Rushdy,Radiology,31,1219125803,Active
+DOC0410,H006,DEPT0104,Tarek,Ismail,Radiology,9,1506253930,On Leave
+DOC0411,H006,DEPT0105,Abla,Elwy,Clinical Pathology,24,1208847172,On Leave
+DOC0412,H006,DEPT0105,Shady,El-Kashef,Clinical Pathology,11,1030086334,Active
+DOC0413,H006,DEPT0105,Rafat,El-Shafei,Clinical Pathology,18,1067399529,Active
+DOC0414,H006,DEPT0105,Dalia,Khaled,Clinical Pathology,34,1071462643,Active
+DOC0415,H006,DEPT0106,Maged,El-Assar,Clinical Pharmacy,8,1229929074,Active
+DOC0416,H006,DEPT0106,Emad,El-Sherief,Clinical Pharmacy,24,1257785242,On Leave
+DOC0417,H006,DEPT0106,Sherief,Elwy,Clinical Pharmacy,31,1089974174,Active
+DOC0418,H006,DEPT0106,Adham,El-Hennawy,Clinical Pharmacy,18,1037353848,Active
+DOC0419,H006,DEPT0106,Lina,El-Deeb,Clinical Pharmacy,28,1052114297,Active
+DOC0420,H007,DEPT0107,Yehia,El-Sherbeny,Emergency Medicine,15,1139523982,Active
+DOC0421,H007,DEPT0107,Lamia,El-Kashef,Emergency Medicine,18,1122874833,Active
+DOC0422,H007,DEPT0108,Moustafa,Badawi,Critical Care Medicine,22,1045125391,Active
+DOC0423,H007,DEPT0109,Alaa,Selim,Internal Medicine,13,1093943708,On Leave
+DOC0424,H007,DEPT0109,Yasmine,El-Kashef,Internal Medicine,32,1077333253,Active
+DOC0425,H007,DEPT0110,Hana,Farag,Cardiology,26,1596305045,Active
+DOC0426,H007,DEPT0110,Samer,Abdel-Aziz,Cardiology,28,1566583704,Active
+DOC0427,H007,DEPT0110,Salma,Mohamed,Cardiology,35,1209219027,On Leave
+DOC0428,H007,DEPT0111,Wedad,El-Gazar,Pulmonology,25,1522131241,Active
+DOC0429,H007,DEPT0111,Rehab,Mostafa,Pulmonology,14,1061205132,Active
+DOC0430,H007,DEPT0111,Abdelrahman,El-Masry,Pulmonology,16,1264041743,Active
+DOC0431,H007,DEPT0112,Howaida,Rashad,Neurology,7,1232161440,Active
+DOC0432,H007,DEPT0113,Nahed,Mohamed,Gastroenterology,34,1219167897,Active
+DOC0433,H007,DEPT0114,Randa,Zawawi,Nephrology,28,1008581906,Active
+DOC0434,H007,DEPT0114,Bahaa,Nasser,Nephrology,13,1599908718,Active
+DOC0435,H007,DEPT0114,Aya,Hamza,Nephrology,26,1173538561,Active
+DOC0436,H007,DEPT0115,Sayed,Mahrous,Endocrinology,4,1013204207,Active
+DOC0437,H007,DEPT0115,Wedad,Metwally,Endocrinology,5,1279467343,Active
+DOC0438,H007,DEPT0116,Essam,Khalil,Orthopedics,8,1037324892,Active
+DOC0439,H007,DEPT0116,Safaa,Ramadan,Orthopedics,34,1281546622,Active
+DOC0440,H007,DEPT0116,Iman,El-Sherief,Orthopedics,16,1504252875,Active
+DOC0441,H007,DEPT0116,Yasmine,Taha,Orthopedics,17,1154817434,Active
+DOC0442,H007,DEPT0117,Wassim,Farag,General Surgery,16,1089188978,Active
+DOC0443,H007,DEPT0117,Sherief,Diab,General Surgery,9,1573380557,On Leave
+DOC0444,H007,DEPT0117,Hind,Abdel-Wahab,General Surgery,13,1277615635,Active
+DOC0445,H007,DEPT0118,Mahmoud,El-Husseiny,Pediatrics,25,1061809031,Active
+DOC0446,H008,DEPT0119,May,Mansour,Emergency Medicine,17,1540116597,Active
+DOC0447,H008,DEPT0119,Nour,Khalaf,Emergency Medicine,37,1186926267,Active
+DOC0448,H008,DEPT0119,Ibrahim,Elwy,Emergency Medicine,19,1158585413,Active
+DOC0449,H008,DEPT0119,Shereen,Abdel-Ghany,Emergency Medicine,33,1118358290,Active
+DOC0450,H008,DEPT0119,Nahed,El-Banna,Emergency Medicine,18,1045648082,Active
+DOC0451,H008,DEPT0119,Waheed,Salem,Emergency Medicine,5,1511684193,Active
+DOC0452,H008,DEPT0120,Samer,Taha,Critical Care Medicine,19,1156925656,On Leave
+DOC0453,H008,DEPT0120,Ayman,Farouk,Critical Care Medicine,34,1146834963,Active
+DOC0454,H008,DEPT0120,Sabry,Helal,Critical Care Medicine,24,1148323685,Active
+DOC0455,H008,DEPT0120,Lotfy,Morsi,Critical Care Medicine,4,1154023884,On Leave
+DOC0456,H008,DEPT0120,Magdy,Abdel-Wahab,Critical Care Medicine,27,1131981968,Active
+DOC0457,H008,DEPT0121,Raouf,Zaki,Internal Medicine,27,1175211432,Active
+DOC0458,H008,DEPT0121,Sherif,Fawzy,Internal Medicine,2,1227271854,On Leave
+DOC0459,H008,DEPT0121,Saad,El-Diwany,Internal Medicine,26,1148760450,Active
+DOC0460,H008,DEPT0121,Alaa,Farag,Internal Medicine,30,1296660075,Active
+DOC0461,H008,DEPT0121,Heba,El-Hennawy,Internal Medicine,35,1528534164,Active
+DOC0462,H008,DEPT0121,Khaled,El-Rashidy,Internal Medicine,27,1099449822,Active
+DOC0463,H008,DEPT0121,Omneya,El-Shafei,Internal Medicine,1,1583829247,On Leave
+DOC0464,H008,DEPT0122,Farouk,Bayoumi,Cardiology,6,1076892688,On Leave
+DOC0465,H008,DEPT0123,Safaa,El-Tayeb,Pulmonology,15,1123812661,Active
+DOC0466,H008,DEPT0123,Lina,El-Shaer,Pulmonology,21,1021685169,On Leave
+DOC0467,H008,DEPT0123,Dalia,El-Sherief,Pulmonology,14,1218497617,Active
+DOC0468,H008,DEPT0123,Waheed,Rushdy,Pulmonology,10,1298210918,Active
+DOC0469,H008,DEPT0124,Tamer,Shehata,Neurology,11,1543324610,On Leave
+DOC0470,H008,DEPT0125,Ibrahim,El-Deeb,Gastroenterology,30,1284666344,Active
+DOC0471,H008,DEPT0125,Rizk,Rashad,Gastroenterology,4,1229267265,Active
+DOC0472,H008,DEPT0125,Marwan,Lotfy,Gastroenterology,7,1118000992,Active
+DOC0473,H008,DEPT0125,Sawsan,Abdel-Wahab,Gastroenterology,21,1105987571,Active
+DOC0474,H008,DEPT0126,Moataz,Eid,Nephrology,9,1172755287,Active
+DOC0475,H008,DEPT0126,Tarek,Khalaf,Nephrology,20,1544291234,On Leave
+DOC0476,H008,DEPT0127,Lamia,Taha,Endocrinology,8,1284095941,On Leave
+DOC0477,H008,DEPT0127,Rafat,Mahrous,Endocrinology,10,1194904224,On Leave
+DOC0478,H008,DEPT0127,Hanaa,Saber,Endocrinology,24,1531382915,On Leave
+DOC0479,H008,DEPT0128,Gamal,Barakat,Orthopedics,14,1112370374,Active
+DOC0480,H008,DEPT0128,Rania,Badawi,Orthopedics,23,1277807789,Active
+DOC0481,H008,DEPT0128,Sobhi,El-Gohary,Orthopedics,32,1577182626,Active
+DOC0482,H008,DEPT0128,Khadija,Khalil,Orthopedics,8,1500763207,Active
+DOC0483,H008,DEPT0129,Walid,Badawi,General Surgery,2,1062669248,Active
+DOC0484,H008,DEPT0129,Mamdouh,Ramadan,General Surgery,21,1579735254,Active
+DOC0485,H008,DEPT0129,Hesham,El-Khatib,General Surgery,9,1210262821,Active
+DOC0486,H008,DEPT0129,Abdelaziz,Tobar,General Surgery,17,1142549905,Active
+DOC0487,H008,DEPT0129,Hossam,El-Sherief,General Surgery,10,1071073142,Active
+DOC0488,H008,DEPT0129,Mostafa,Morsi,General Surgery,27,1501599766,Active
+DOC0489,H008,DEPT0129,Samir,El-Kashef,General Surgery,10,1205153196,On Leave
+DOC0490,H008,DEPT0130,Ibrahim,Rashad,Pediatrics,15,1204854297,Active
+DOC0491,H008,DEPT0130,Galal,Saber,Pediatrics,21,1086122880,On Leave
+DOC0492,H008,DEPT0130,Gamal,Abdel-Monem,Pediatrics,26,1593560952,Active
+DOC0493,H008,DEPT0130,Reda,Kotb,Pediatrics,35,1013334355,Active
+DOC0494,H008,DEPT0130,Sherief,Rizk,Pediatrics,11,1197368532,On Leave
+DOC0495,H008,DEPT0130,Lobna,Mostafa,Pediatrics,28,1013385573,Active
+DOC0496,H008,DEPT0131,Wafaa,Ali,Obstetrics & Gynecology,23,1599114128,Active
+DOC0497,H008,DEPT0131,Farouk,Elwy,Obstetrics & Gynecology,32,1126461854,Active
+DOC0498,H008,DEPT0131,Nawal,Hafez,Obstetrics & Gynecology,5,1230345754,Active
+DOC0499,H008,DEPT0131,Sara,Barakat,Obstetrics & Gynecology,15,1596952627,Active
+DOC0500,H008,DEPT0132,Mahmoud,Khalil,Dermatology,10,1506776048,Active
+DOC0501,H008,DEPT0132,Radwa,Helal,Dermatology,38,1236009433,Active
+DOC0502,H008,DEPT0132,Ezzat,Lotfy,Dermatology,19,1192574199,Active
+DOC0503,H008,DEPT0132,Fatima,El-Deeb,Dermatology,7,1178881191,Active
+DOC0504,H008,DEPT0133,Fouad,Shehata,ENT,10,1572768239,On Leave
+DOC0505,H008,DEPT0133,Rania,Farag,ENT,2,1007625657,Active
+DOC0506,H008,DEPT0133,Samir,El-Sherief,ENT,23,1286522710,Active
+DOC0507,H008,DEPT0134,Sayed,Ali,Psychiatry,16,1273319960,Active
+DOC0508,H008,DEPT0134,Esraa,Zaher,Psychiatry,22,1579480894,Active
+DOC0509,H008,DEPT0135,Samer,Abdel-Monem,Oncology,6,1151239148,Active
+DOC0510,H008,DEPT0135,Basel,El-Malt,Oncology,32,1256109076,Active
+DOC0511,H008,DEPT0136,Soha,Fawzy,Radiology,28,1568476318,On Leave
+DOC0512,H008,DEPT0136,Rana,Mahrous,Radiology,29,1015094925,Active
+DOC0513,H008,DEPT0136,Hani,Barakat,Radiology,30,1281054447,On Leave
+DOC0514,H008,DEPT0136,Wael,Qasem,Radiology,9,1537945879,Active
+DOC0515,H008,DEPT0136,Hani,El-Masry,Radiology,5,1512440154,Active
+DOC0516,H008,DEPT0137,Menna,Osman,Clinical Pathology,11,1126129681,On Leave
+DOC0517,H008,DEPT0137,Nabil,Shalaby,Clinical Pathology,20,1235842044,Active
+DOC0518,H008,DEPT0137,Shimaa,Hamza,Clinical Pathology,38,1043188813,On Leave
+DOC0519,H008,DEPT0137,Alaa,Attia,Clinical Pathology,17,1068249604,Active
+DOC0520,H008,DEPT0138,Zeinab,Zawawi,Clinical Pharmacy,26,1584385741,Active
+DOC0521,H008,DEPT0138,Wahid,Hamouda,Clinical Pharmacy,21,1571264527,Active
+DOC0522,H008,DEPT0138,Shady,Morsi,Clinical Pharmacy,36,1292405294,Active
+DOC0523,H008,DEPT0138,Gamal,Qasem,Clinical Pharmacy,24,1160233970,Active

@@ -1,0 +1,9 @@
+hospital_id,hospital_name,hospital_type,governorate,district,phone,total_beds,icu_capacity,latitude,longitude,manager_name,manager_email,manager_phone
+H001,Port Said General Hospital,Government,Port Said,El Sharq,663241100,600,60,31.2652,32.3018,Saad El-Sayed,saad.el-sayed@hospital.eg,1222630718
+H002,Port Fouad Central Hospital,Government,Port Said,Port Fouad,663551200,350,30,31.2571,32.2844,Dalia Zawawi,dalia.zawawi@hospital.eg,1144450049
+H003,El Arab District Hospital,Government,Port Said,El Arab,663441300,280,20,31.248,32.296,Reda El-Husseiny,reda.el-husseiny@hospital.eg,1512917565
+H004,El Manakh Private Hospital,Private,Port Said,El Manakh,663331400,120,10,31.2558,32.2952,Eman Mahrous,eman.mahrous@hospital.eg,1294362898
+H005,Port Said Heart Center,Specialized,Port Said,El Zohour,663221500,80,12,31.2618,32.2905,Marwan El-Hariry,marwan.el-hariry@hospital.eg,1521926041
+H006,Suez Canal University Hospital,Teaching,Port Said,El Dawahy,663771600,500,50,31.27,32.31,Tarek El-Naggar,tarek.el-naggar@hospital.eg,1237007645
+H007,El Zohour Private Hospital,Private,Port Said,El Zohour,663661700,150,15,31.259,32.289,Salma Mohamed,salma.mohamed@hospital.eg,1209219027
+H008,Mubarak District Hospital,Government,Port Said,Mubarak District,663881800,200,18,31.245,32.287,Shimaa Hamza,shimaa.hamza@hospital.eg,1043188813

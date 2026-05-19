@@ -1,0 +1,176 @@
+drug_id,drug_name,generic_name,manufacturer,drug_category,unit_price
+DR001,Zytiga 500 mg 60 tab.,Abiraterone,Pfizer Egypt,Oncology,1145.93
+DR002,Zyrtec 5 mg/5ml 100 ml syrup,Cetirizine,Eva Pharma,Respiratory,287.96
+DR003,Zyrovazet10/20 mg 30 tab,Ezetimibe + Rosuvastatin,Novo Nordisk Egypt,Lipid-Lowering,117.79
+DR004,Zylofen 1 mg/5ml 100 ml syrup,Ketotifen,Pharco Pharmaceuticals,General,66.54
+DR005,Zofatrone 8 mg oral film,Ondansetron,Pfizer Egypt,GI/PPI,69.18
+DR006,Zithromax 500 mg 3 cap,Azithromycin,Eva Pharma,Antibiotic,75.54
+DR007,Zinol 500 mg vial,Cefazolin,Egyptian Int Pharma (EIPICO),Antibiotic,253.41
+DR008,ZINCORHEA 20 mg/ 5 ml 80 ml Syrup,Zinc Sulphate,Kahira Pharmaceuticals,Supplement/Vitamin,31.15
+DR009,Ziextenzo 6 mg/0.6 ml PFS,Filgrastim,Eva Pharma,Biologic/Immunology,4008.64
+DR010,Zetakardoval 5/160 mg 30 tab,Amlodipine + Valsartan,Amoun Pharmaceutical,Antihypertensive,110.63
+DR011,ZEELORAS 245 mg 30 tab,Tenofovir disoproxil,Boehringer Ingelheim Egypt,Antifungal/Antiviral,174.72
+DR012,Zavesca 100 mg 84 cap,Miglustat,Abbott Egypt,General,55.06
+DR013,Zatorva 40 mg 7 tab,Atorvastatin,EIPICO,Lipid-Lowering,136.74
+DR014,Zapimert 30 mg 30 tab,Mirtazapine,Minapharm,Psychotropic/CNS,61.22
+DR015,Zanoglide 4/30 mg 30 tab,Pioglitazone + Glimepiride,Global Napi Pharmaceuticals,Antidiabetic,271.19
+DR016,Zandros 1200 mg. 20 cap.,Omega 3,Merck Egypt,Lipid-Lowering,110.93
+DR017,ZADMICIN 0.1%  20 gm ointment,Gentamicin,AstraZeneca Egypt,Antibiotic,45.3
+DR018,ZADEMA -N 1% 40 gm gel,Escin,Eva Pharma,General,27
+DR019,Zacaglone 75 mg/3ml 3 amp,Diclofenac Sodium,Novartis Egypt,Analgesic/NSAID,10.01
+DR020,Xyrkux  90 MG 30 tab,Etoricoxib,Bayer Egypt,Analgesic/NSAID,13.03
+DR021,X-TENSION PLUS 300/12.5mg 7 tab,Irbesartan + Hydrochlorothiazide,Roche Egypt,Antihypertensive,117.32
+DR022,Xtandi 40 mg 112 cap.,Enzalutamide,Abbott Egypt,Oncology,1810.33
+DR023,XOLAMOL 5/20 mg/ml  5 ML EYE DROPS,Timolol + Dorzolamide,AstraZeneca Egypt,General,80.15
+DR024,XOLAIR 150 mg 1 vial,Omalizumab,Novartis Egypt,Biologic/Immunology,12093.19
+DR025,Xola 2%  5 ml eye drop,Dorzolamide,Novo Nordisk Egypt,General,32.53
+DR026,Xilone Forte 15mg/5ml 100 ml syrup,Prednisolone,Novo Nordisk Egypt,Corticosteroid,17.47
+DR027,Xigduo 5/1000 mg 56 tab,Dapagliflozin + Metformin,Sanofi Egypt,Antidiabetic,172.02
+DR028,xgeva 120 mg/1.7 ml vial,Denosumab,Eva Pharma,Biologic/Immunology,4982.33
+DR029,Xeloda® 500 mg 120 tab,Capecitabine,Eva Pharma,Oncology,223.07
+DR030,Xeljanz 5 mg 60 tab.,Tofacitinib,Memphis Pharmaceutical,Biologic/Immunology,3095.3
+DR031,XARELTO 20 mg 28 tab,Rivaroxaban,CID Pharma,Anticoagulant/Antiplatelet,341.67
+DR032,Xanthibux 80 mg 30 tab,Febuxostat,Roche Egypt,Gout,51.58
+DR033,XAMIOL 0.5/0.05 mg/gm 30 gm scalp gel,Betamethasone (topical) + Calcipotriol,Sigma Pharmaceutical,Corticosteroid,80.41
+DR034,Xalkori 250 mg 60 cap,Crizotinib,Memphis Pharmaceutical,Oncology,1588.68
+DR035,XALATREX PLUS 5 mg/50mcg  2.5 ML EYE DROPS,Timolol + Latanoprost,Abbott Egypt,General,88.07
+DR036,XALATREX 0.5% 2.5 ML EYE DROPS,Latanoprost,CID Pharma,General,59.2
+DR037,X –Tension 300 mg 7 tab,Irbesartan,Roche Egypt,Antihypertensive,109.88
+DR038,WOUNCURE 20GM TOPICAL POWDER,Neomycin + Bacitracin,Novartis Egypt,General,43.01
+DR039,Wincef 1 gm vial,Cefepime,Servier Egypt,Antibiotic,91.44
+DR040,Wideprex 400 mg 5 cap,Cefixime,Memphis Pharmaceutical,Antibiotic,27.55
+DR041,Wellinta 150 mg SR 30 tab,Bupropion,Pfizer Egypt,Psychotropic/CNS,37.62
+DR042,WADYBABY 60GM CREAM,Olive oil + Zinc,Pfizer Egypt,Supplement/Vitamin,119.07
+DR043,Wadiloxetin 30 mg 7 cap,Duloxetine,Memphis Pharmaceutical,Psychotropic/CNS,57.41
+DR044,Wadigabalin 75 mg 10 cap,Pregabalin,Bayer Egypt,Analgesic/NSAID,11.02
+DR045,Wadibradine 7.5 mg 20 tab,Ivabradine,GlaxoSmithKline Egypt,Cardiac,240.54
+DR046,VOXAZOLDIN 600 mg 10 tab,Linezolid,GlaxoSmithKline Egypt,Antibiotic,177.83
+DR047,VOTRIENT 400 mg 30 tab.,Pazopanib,Merck Egypt,General,30.81
+DR048,Vosevi 400/100/100 mg 28 tab bottle,Sofosbuvir + velpatasvir + Voxilaprevir,Egyptian Int Pharma (EIPICO),Antifungal/Antiviral,381.11
+DR049,Vitifect 120 ml syrup,Multivitamin,Amoun Pharmaceutical,Supplement/Vitamin,18.21
+DR050,Vitamin E forte 400 mg. 20 cap,Vitamin E,Minapharm,Supplement/Vitamin,27.97
+DR051,Visine A.C 15 ml eye drops,Tetrahydrozoline + Zinc sulfate,Minapharm,Supplement/Vitamin,46.38
+DR052,Visceralgine 50 mg 20 tab,Tiemonium,Amoun Pharmaceutical,General,33.96
+DR053,Virustat 5% cream 10 gm,Aciclovir,AstraZeneca Egypt,General,74.34
+DR054,Viliglap 50 mg 30 tab,Vildagliptin,Kahira Pharmaceuticals,Antidiabetic,80.32
+DR055,Vildabetes 50/780mg 30 tab,Vildagliptin + Metformin,VACSERA,Antidiabetic,66.81
+DR056,VIDROP 2800 IU/ml 15 ml oral drops,Vitamin D3 (Cholecalciferol),Kahira Pharmaceuticals,Supplement/Vitamin,6.09
+DR057,Viasalmol PLUS 0.1mg/mg/Metered Dose inhal. 200 Doses,Salbutamol + Beclomethasone,Merck Egypt,Respiratory,56.06
+DR058,Viasalmol 0.1mg/mg/Metered Dose inhal. 200 Doses,Salbutamol,Roche Egypt,Respiratory,210.24
+DR059,Viagra 50 mg 4 tab,Sildenafil,Boehringer Ingelheim Egypt,Urology,142.91
+DR060,VFEND 50 mg 10 tab,Voriconazole,Bayer Egypt,Antifungal/Antiviral,335.12
+DR061,VETOBACTISONE 0.5/0.122 % 15GM CREAM,Neomycin + Betamethasone,CID Pharma,Corticosteroid,44.7
+DR062,Vesicare 5 mg 30 tab.,Solifenacin,Amoun Pharmaceutical,General,93.5
+DR063,VESANOID 10mg 100 caps.,Tretinoin,Abbott Egypt,General,20.63
+DR064,Verzenio 50 mg 14 tab,Abemaciclib,Delta Pharma,General,58.87
+DR065,Versapenia 50 mg 30 tab,Eltrombopag,Sanofi Egypt,General,23.23
+DR066,Verm One 500 mg tab,Mebendazole,Novo Nordisk Egypt,General,66.79
+DR067,VERATENS 240 mg SR 10 tab,Verapamil,VACSERA,General,17.32
+DR068,Vepesid 50 mg 20 cap,Etoposide,GlaxoSmithKline Egypt,General,21.04
+DR069,Venoxor XR 75 mg 7 cap,Venlafaxine,AstraZeneca Egypt,Psychotropic/CNS,38.23
+DR070,VENLATROPE 100 mg XR 30 tab,Desvenlafaxine,Sanofi Egypt,Psychotropic/CNS,164.34
+DR071,Venclexta Start Pack 42 tablet (14 Tablets of 10mg + 7 Tablets of 50mg + 21 Tabl,Venetoclax,Boehringer Ingelheim Egypt,General,64.65
+DR072,Vecovartec Plus 40/12.5 mg 7 tab,Olmesartan medoxomil + Hydrochlorothiazide,Memphis Pharmaceutical,Antihypertensive,60.09
+DR073,vastatinal 10/10 mg 7 tab,Ezetimibe + Simvastatin,Merck Egypt,Lipid-Lowering,91.18
+DR074,Vastarel MR 35 mg 30 tab,Trimetazidine,VACSERA,General,76.16
+DR075,Vastaflam 50 mg 20 tab,Diclofenac Potassium,Egyptian Int Pharma (EIPICO),Analgesic/NSAID,29.19
+DR076,VASOTEC 80 mg 7 tab,Valsartan,Delta Pharma,Antihypertensive,43.82
+DR077,Vasosolve 5/80 mg 7 tab,Valsartan + Nebivolol,Bayer Egypt,Antihypertensive,162.94
+DR078,VASOPINE 5 mg 30 tab,Amlodipine,Delta Pharma,Antihypertensive,117.33
+DR079,Vascurest 500 mg 30 tab,Diosmin + Hesperidin,Merck Egypt,General,81.15
+DR080,Vascon5 mg 10 tab,Etilefrine Hydrochloride,CID Pharma,General,12.44
+DR081,Vascomedra 600 mg 30 tab,Diosmin,Novo Nordisk Egypt,General,76.91
+DR082,Valudal 50000 iu 60 tab.,Vitamin D2 (Ergocalciferol),Kahira Pharmaceuticals,Supplement/Vitamin,7.44
+DR083,Valgestril 21 Tab,Estradiol+ Norgestrel,Global Napi Pharmaceuticals,General,98.25
+DR084,Valcyte 450 mg  10 caplet,Valganciclovir,Egyptian Int Pharma (EIPICO),Antifungal/Antiviral,366.99
+DR085,Vakter 10%  120ml solution,Povidone iodine,Roche Egypt,General,34.64
+DR086,VAGICLIND 2% 40 gm vaginal cream,Clindamycin,Sigma Pharmaceutical,Antibiotic,120.14
+DR087,URSOPLUS 250/140 mg 20 cap,Ursodeoxycholic acid + Silymarin,Amoun Pharmaceutical,General,61.89
+DR088,Ursofalk 250 mg 20 cap,Ursodeoxycholic acid,Eva Pharma,General,95.05
+DR089,Urosolvine N 12 effervescent sachets,Piperazine + Colchicine,Minapharm,Gout,39.59
+DR090,URIPAN 5 mg 30 tab,Oxybutynin,Pfizer Egypt,General,91.7
+DR091,URINEX 24 cap,Anethole trithione + Borneol + Pinene,Minapharm,General,51.36
+DR092,Uric Pure 300 mg 30 tab,Allopurinol,Servier Egypt,Gout,71.11
+DR093,Uribladon 50 mg 30 tab,Mirabegron,Delta Pharma,General,94.53
+DR094,URECARE 0.1 % 30 gm cream,Urea (topical),VACSERA,General,28.09
+DR095,Unitrexate 50mg/2ml vial,Methotrexate,Amoun Pharmaceutical,Oncology,4815.62
+DR096,UNITOPFIN  1% 15GM CREAM,Terbinafine,Merck Egypt,General,35.41
+DR097,Unitarqin 400 mg 5 tab,Ofloxacin,Pfizer Egypt,General,56.25
+DR098,UNISTAFUSIN 2% 15 gm OINTMENT,Fusidic acid,Amoun Pharmaceutical,General,23.11
+DR099,UNIPHYLLINE CONTINUS 400 mg 20 tab,Theophylline,MSD Egypt,Respiratory,176.47
+DR100,Uniloxam 750 mg 5 tab,Levofloxacin,Kahira Pharmaceuticals,Antibiotic,64.95
+DR101,UNIFUNGI 150 mg 2 cap,Fluconazole,Pfizer Egypt,Antifungal/Antiviral,149.91
+DR102,Unicyclomide 1% (SDU) 0.5 ML 10 EYE DROPD,Tropicamide,Pfizer Egypt,General,23.8
+DR103,UNICTAM 375 mg 6 tab,Ampicillin + Sulbactam,Amoun Pharmaceutical,Antibiotic,280.33
+DR104,Unicetamol 100 mg /ml 15 ml oral drops,Paracetamol,Egyptian Int Pharma (EIPICO),Analgesic/NSAID,46.26
+DR105,ULTRAMOX 625 mg 6 tab,Amoxicillin + Clavulanic acid,Sigma Pharmaceutical,Antibiotic,141.26
+DR106,ULTRA-MEDANINE 10 mg 20 cap,Methoxsalen,Eva Pharma,General,29.66
+DR107,Tussinor 120 ml syrup,Guava leaves extract + Tilia,Bayer Egypt,General,67.95
+DR108,Tryptizol 25 mg 30 tab,Amitriptyline,Abbott Egypt,Psychotropic/CNS,43.99
+DR109,Trolovol 300mg 30 tab,Penicillamine,Memphis Pharmaceutical,General,45.88
+DR110,Trittico 50 mg 20 tab,Trazodone,MSD Egypt,General,58.17
+DR111,TRITACE PROTECT 10 mg 20 tab,Ramipril,Kahira Pharmaceuticals,Antihypertensive,95.56
+DR112,TRITACE MAX 10/25 mg 10 tab,Ramipril + Hydrochlorothiazide,Global Napi Pharmaceuticals,Antihypertensive,44.64
+DR113,Triplixam 5/1.25/5mg 15 tab,Indapamide + Amlodipine + Perindopril,Bayer Egypt,Antihypertensive,46.25
+DR114,TRILLERG 10 ml eye drops,Tetryzoline + Antazoline,Memphis Pharmaceutical,General,49.66
+DR115,Trigenda 200 mg  10 tab,Trimebutine,Pfizer Egypt,General,44.99
+DR116,Triflutect 14 mg 28 tab,Teriflunomide,Memphis Pharmaceutical,General,56.31
+DR117,Tribatens 40/5/25mg 30 tab,Olmesartan medoxomil + Amlodipine + Hydrochlorothiazide,Merck Egypt,Antihypertensive,12.86
+DR118,Triacor 5/5 mg 10 tab,Felodipine + Ramipril,Sigma Pharmaceutical,Antihypertensive,39.92
+DR119,Triacetocort 40 mg/ml vial,Triamcinolone,Novartis Egypt,General,62.9
+DR120,TRI BETAPRONATE 30 GM CREAM,Gentamicin + Betamethasone + Clotrimicine,Sanofi Egypt,Antibiotic,168.85
+DR121,TRI B  3 amp,Vitamin B complex,Amoun Pharmaceutical,Supplement/Vitamin,91.77
+DR122,Trexozola 2.5 mg 10 tab.,Letrozole,Pfizer Egypt,Oncology,572.9
+DR123,trexotaz 2 gm vial,Cefoperazone + Sulbactam,Bayer Egypt,General,206.64
+DR124,Trevicta  525mg/2.625 ml 1 PFS,Paliperidone,Sanofi Egypt,General,86.77
+DR125,Tresiba 100I.u/ ml 3 ml 5 PFP,insulin degludec,Kahira Pharmaceuticals,Antidiabetic,108.11
+DR126,Tremfya 100 mg/ml 1 PFS,Guselkumab,Roche Egypt,General,19.23
+DR127,Treczimus 0.1 % 30 GM OINT,Tacrolimus,Delta Pharma,DMARD/Immunosuppressant,692.12
+DR128,Treato-ulc 40/1100 mg 14 cap,Omeprazole +  Sodium Bicarbonate,CID Pharma,GI/PPI,51.79
+DR129,Travoswix 4% 2.5 ML EYE DROPS,Travoprost,GlaxoSmithKline Egypt,General,27.31
+DR130,Travonorm Plus  5/0.04 mg/ml 5 ml eye drops,Timolol + Travoprost,Kahira Pharmaceuticals,General,11.05
+DR131,TRAVODERMAL 1/0.1 gm  15gm cream,Isoconazole + Diflucortolone,Novo Nordisk Egypt,General,89.34
+DR132,Tranexamic Acid-Sunny 500 mg amp,Tranexamic acid,Abbott Egypt,General,106.04
+DR133,TRAMADOL 50 mg 20 cap,Tramadol,Eva Pharma,Analgesic/NSAID,7.15
+DR134,Trajenta 5 mg 30 tab,Linagliptin,Global Napi Pharmaceuticals,General,76.94
+DR135,Toujeo 300unit/ml 1.5 ml 3 PFP,insulin glargine,Novo Nordisk Egypt,Antidiabetic,228.8
+DR136,Torseretic 5mg 30 tab,Torsemide,Pharco Pharmaceuticals,General,38.58
+DR137,TOPMODE FORTE 200 mg 10 tab,Sulpiride,CID Pharma,General,28.01
+DR138,TOPIRAMATE 25 mg 30 tab,Topiramate,MSD Egypt,General,23.41
+DR139,Tonadogest 10 mg 30 tab,Dydrogesterone,Sigma Pharmaceutical,General,77.03
+DR140,Tobrin 0.3% 5 gm eye ointment,Tobramycin,Bayer Egypt,General,21.24
+DR141,Timolol 0.5% BP 2022 5ml eye drops,Timolol,Eva Pharma,General,70.6
+DR142,Ticanase Plus 15 ml Nasal spray,Azelastine + Fluticasone,Novo Nordisk Egypt,Respiratory,82.74
+DR143,Ticaloguard 90 mg 30 tab,Ticagrelor,Minapharm,Anticoagulant/Antiplatelet,232.68
+DR144,THYROXINE 50 mcg 100 tab,Levothyroxine sodium,Boehringer Ingelheim Egypt,Thyroid,69.97
+DR145,Thyrorase 50mg 100 tab,Propylthiouracil,Novo Nordisk Egypt,Thyroid,21.72
+DR146,THROMBONORM 0.5 mg 100 cap,Anagrelide,AstraZeneca Egypt,General,77.81
+DR147,THROMBEXX 1120 I.U/100gm 40 gm gel,Hirudin,Global Napi Pharmaceuticals,General,44.68
+DR148,Thiotex 300 mg 30 cap,Thioctic acid (Alpha-lipoic acid),Roche Egypt,General,16.61
+DR149,T-GRAND PLUS 10 ml eye drops,Tobramycin + DEXAMETHASONE,EIPICO,Corticosteroid,85.49
+DR150,TETRAZONE 30/10 mg/gm 5 gm ointment,Oxytetracycline + Hydrocortisone,Sanofi Egypt,Corticosteroid,36.99
+DR151,Testeriol 750 mg/3ml amp,Testosterone,Sigma Pharmaceutical,General,178.87
+DR152,Tenofenamide 25 mg 30 tab,Tenofovir alafenamide,VACSERA,Antifungal/Antiviral,248.97
+DR153,Temodal 250 mg 5 cap,Temozolomide,Sigma Pharmaceutical,General,40.63
+DR154,Telfast 30 mg/5ml 100 ml syrup,Fexofenadine,GlaxoSmithKline Egypt,Respiratory,137.99
+DR155,Tegral 200 mg 50 tab,Carbamazepine,Amoun Pharmaceutical,General,14.47
+DR156,TECAVIR 1 mg 10 tab,Entecavir,GlaxoSmithKline Egypt,Antifungal/Antiviral,42.68
+DR157,TEARSGUARD 0.5% 15 ml eye drop,Hydroxy Propyl methyl celllulose,CID Pharma,General,77.28
+DR158,TASIGNA 200 mg 28 cap.,Nilotinib,GlaxoSmithKline Egypt,General,65.72
+DR159,Targomash Comb 80/12.5mg 30 tab,Valsartan + Hydrochlorothiazide,EIPICO,Antihypertensive,78.27
+DR160,TANTUM VERDE 0.15 % 125 ml mouth wash,Benzydamine,Pfizer Egypt,General,61.69
+DR161,Tamsulin plus 20 tab.,Tamsulosin + Solifenacin,VACSERA,Urology,116.19
+DR162,TAMSULIN 0.4 mg 28 cap,Tamsulosin,VACSERA,Urology,65.66
+DR163,Tamoxifen 10mg 30 tab,Tamoxifen,Bayer Egypt,Oncology,1129.43
+DR164,Taminorig 2 mcg/ml 10 ml oral drops,Alfacalcidol,Novo Nordisk Egypt,General,66.97
+DR165,TAMINIL-N  12 mg/ml 30 ml syrup,Oseltamivir,Eva Pharma,Antifungal/Antiviral,82.93
+DR166,Talopram 40 mg 30 tab,Citalopram,Amoun Pharmaceutical,Psychotropic/CNS,21.94
+DR167,Tagrisso 80mg 30 tab.,Osimertinib,Merck Egypt,General,46.96
+DR168,Tadinomerz 200mg/500ml bottle,Amantadine,Pfizer Egypt,General,45.43
+DR169,Tadaraxia 5 mg 10 TAB,Tadalafil,Eva Pharma,Urology,51.05
+DR170,T.B.ZIDE 100 mg 50 tab,Isoniazid,Global Napi Pharmaceuticals,General,83.72
+DR171,Synjardy 12.5/1000mg 60 tab,Empagliflozin + Metformin,Memphis Pharmaceutical,Antidiabetic,173.31
+DR172,Sympaprost 8 mg 30 Capsules,Silodosin,AstraZeneca Egypt,General,89.39
+DR173,Symmebact Vit 100 ml syrup,Digestive enzymes,Memphis Pharmaceutical,General,207.52
+DR174,Symmebact ors sachet,Oral rehydration salts,Sanofi Egypt,General,64.66
+DR175,Symbicort 80/4.5 mcg/dose 60 doses Turbuhaler,Budesonide + Formoterol,Sigma Pharmaceutical,Respiratory,176.26

@@ -1,0 +1,121 @@
+diagnosis_code,diagnosis_name,diagnosis_category,severity_level
+D001,Essential Hypertension,Cardiovascular,Chronic
+D002,Hypertensive Crisis,Cardiovascular,Critical
+D003,Acute Myocardial Infarction,Cardiovascular,Critical
+D004,Unstable Angina Pectoris,Cardiovascular,Severe
+D005,Stable Coronary Artery Disease,Cardiovascular,Moderate
+D006,Heart Failure - Reduced Ejection Fraction,Cardiovascular,Severe
+D007,Heart Failure - Preserved Ejection Fraction,Cardiovascular,Moderate
+D008,Atrial Fibrillation,Cardiovascular,Moderate
+D009,Atrial Flutter,Cardiovascular,Moderate
+D010,Ventricular Tachycardia,Cardiovascular,Critical
+D011,Deep Vein Thrombosis,Cardiovascular,Moderate
+D012,Pulmonary Embolism,Cardiovascular,Critical
+D013,Peripheral Arterial Disease,Cardiovascular,Moderate
+D014,Aortic Stenosis,Cardiovascular,Severe
+D015,Mitral Valve Regurgitation,Cardiovascular,Moderate
+D016,Community-Acquired Pneumonia,Respiratory,Severe
+D017,Hospital-Acquired Pneumonia,Respiratory,Severe
+D018,Bronchial Asthma - Acute Exacerbation,Respiratory,Moderate
+D019,Chronic Obstructive Pulmonary Disease,Respiratory,Chronic
+D020,COPD Acute Exacerbation,Respiratory,Severe
+D021,Acute Nasopharyngitis (Common Cold),Respiratory,Mild
+D022,Influenza,Respiratory,Moderate
+D023,Upper Respiratory Tract Infection,Respiratory,Mild
+D024,COVID-19 Mild,Respiratory,Mild
+D025,COVID-19 Severe,Respiratory,Severe
+D026,Pulmonary Tuberculosis,Respiratory,Severe
+D027,Pleural Effusion,Respiratory,Moderate
+D028,Type 2 Diabetes Mellitus - Uncontrolled,Endocrine,Chronic
+D029,Type 2 Diabetes Mellitus - Controlled,Endocrine,Chronic
+D030,Type 1 Diabetes Mellitus,Endocrine,Chronic
+D031,Diabetic Ketoacidosis,Endocrine,Critical
+D032,Hyperosmolar Hyperglycemic State,Endocrine,Critical
+D033,Hypothyroidism,Endocrine,Chronic
+D034,Hyperthyroidism,Endocrine,Moderate
+D035,Thyroid Nodule,Endocrine,Mild
+D036,Cushing Syndrome,Endocrine,Moderate
+D037,Adrenal Insufficiency,Endocrine,Severe
+D038,Acute Gastroenteritis,Gastrointestinal,Mild
+D039,Peptic Ulcer Disease,Gastrointestinal,Moderate
+D040,Gastroesophageal Reflux Disease (GERD),Gastrointestinal,Mild
+D041,Acute Appendicitis,Gastrointestinal,Severe
+D042,Liver Cirrhosis,Gastrointestinal,Severe
+D043,Viral Hepatitis B,Gastrointestinal,Moderate
+D044,Viral Hepatitis C,Gastrointestinal,Moderate
+D045,Acute Pancreatitis,Gastrointestinal,Severe
+D046,Inflammatory Bowel Disease - Crohn,Gastrointestinal,Chronic
+D047,Ulcerative Colitis,Gastrointestinal,Moderate
+D048,Irritable Bowel Syndrome,Gastrointestinal,Mild
+D049,Colorectal Cancer,Gastrointestinal,Severe
+D050,Ischemic Stroke,Neurological,Critical
+D051,Hemorrhagic Stroke,Neurological,Critical
+D052,Transient Ischemic Attack,Neurological,Moderate
+D053,Epilepsy - Grand Mal,Neurological,Moderate
+D054,Migraine,Neurological,Mild
+D055,Parkinson Disease,Neurological,Chronic
+D056,Multiple Sclerosis,Neurological,Chronic
+D057,Guillain-Barre Syndrome,Neurological,Severe
+D058,Peripheral Neuropathy,Neurological,Chronic
+D059,Meningitis - Bacterial,Neurological,Critical
+D060,Urinary Tract Infection,Urological,Mild
+D061,Pyelonephritis,Urological,Moderate
+D062,Nephrolithiasis (Kidney Stones),Urological,Moderate
+D063,Acute Kidney Injury,Urological,Severe
+D064,Chronic Kidney Disease Stage 3,Urological,Chronic
+D065,Chronic Kidney Disease Stage 4-5,Urological,Severe
+D066,Benign Prostatic Hyperplasia,Urological,Moderate
+D067,Nephrotic Syndrome,Urological,Moderate
+D068,Osteoarthritis - Knee,Musculoskeletal,Chronic
+D069,Osteoarthritis - Hip,Musculoskeletal,Chronic
+D070,Rheumatoid Arthritis,Musculoskeletal,Chronic
+D071,Gout - Acute Attack,Musculoskeletal,Moderate
+D072,Osteoporosis,Musculoskeletal,Chronic
+D073,Low Back Pain - Lumbar Disc Prolapse,Musculoskeletal,Moderate
+D074,Cervical Spondylosis,Musculoskeletal,Moderate
+D075,Femur Fracture,Musculoskeletal,Severe
+D076,Tibial Fracture,Musculoskeletal,Severe
+D077,Rotator Cuff Tear,Musculoskeletal,Moderate
+D078,Road Traffic Accident - Polytrauma,Trauma,Critical
+D079,Traumatic Brain Injury,Trauma,Critical
+D080,Burns - Second Degree,Trauma,Moderate
+D081,Burns - Third Degree,Trauma,Severe
+D082,Fracture - Closed,Trauma,Moderate
+D083,Laceration Requiring Suturing,Trauma,Mild
+D084,Soft Tissue Injury / Contusion,Trauma,Mild
+D085,Dislocated Shoulder,Trauma,Moderate
+D086,Septicemia / Sepsis,Infectious,Critical
+D087,Typhoid Fever,Infectious,Moderate
+D088,Malaria,Infectious,Moderate
+D089,Cellulitis,Infectious,Moderate
+D090,Abscess requiring drainage,Infectious,Moderate
+D091,COVID-19 Critical,Infectious,Critical
+D092,Dengue Fever,Infectious,Moderate
+D093,Herpes Zoster,Infectious,Moderate
+D094,Iron Deficiency Anemia,Hematological,Mild
+D095,Thalassemia Major,Hematological,Chronic
+D096,Sickle Cell Anemia,Hematological,Chronic
+D097,Leukemia - Acute,Hematological,Critical
+D098,Lymphoma,Hematological,Severe
+D099,Deep Vein Thrombosis + Anticoagulation,Hematological,Moderate
+D100,Major Depressive Disorder,Mental Health,Moderate
+D101,Generalized Anxiety Disorder,Mental Health,Mild
+D102,Bipolar Disorder,Mental Health,Moderate
+D103,Schizophrenia,Mental Health,Severe
+D104,Substance Use Disorder,Mental Health,Moderate
+D105,Post-Traumatic Stress Disorder,Mental Health,Moderate
+D106,Psoriasis,Skin,Moderate
+D107,Eczema / Atopic Dermatitis,Skin,Mild
+D108,Acne Vulgaris,Skin,Mild
+D109,Vitiligo,Skin,Mild
+D110,Fungal Skin Infection,Skin,Mild
+D111,Otitis Media - Acute,ENT,Mild
+D112,Sinusitis - Chronic,ENT,Moderate
+D113,Tonsillitis - Recurrent,ENT,Mild
+D114,Allergic Rhinitis,ENT,Mild
+D115,Hearing Loss - Sensorineural,ENT,Chronic
+D116,Febrile Seizure,Pediatric,Moderate
+D117,Childhood Fever NOS,Pediatric,Mild
+D118,Neonatal Jaundice,Pediatric,Moderate
+D119,Failure To Thrive,Pediatric,Moderate
+D120,Acute Otitis Media - Pediatric,Pediatric,Mild
