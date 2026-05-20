@@ -36,7 +36,7 @@
 --         claim_approvals.csv        (large)
 --         patient_feedback.csv       (22,000 rows)
 --
---    2. Place all CSV files under the path below (default C:\UHIP_Data\)
+--    2. Place all CSV files under the path below (default D:\UHIP_Data\)
 --    3. Ensure the SQL Server service account has READ access to that folder
 --
 --  CSV files must:
@@ -61,7 +61,7 @@ PRINT 'Bulk loading ref.diagnosis (120 rows)...';
 GO
 
 BULK INSERT ref.diagnosis
-FROM 'C:\UHIP_Data\diagnoses.csv'
+FROM 'D:\UHIP_Data\diagnoses.csv'
 WITH (
     FIRSTROW        = 2,
     FIELDTERMINATOR = ',',
@@ -83,7 +83,7 @@ PRINT 'Bulk loading ref.medical_procedure (201 rows)...';
 GO
 
 BULK INSERT ref.medical_procedure
-FROM 'C:\UHIP_Data\procedures.csv'
+FROM 'D:\UHIP_Data\procedures.csv'
 WITH (
     FIRSTROW        = 2,
     FIELDTERMINATOR = ',',
@@ -105,7 +105,7 @@ PRINT 'Bulk loading ref.drug (175 rows)...';
 GO
 
 BULK INSERT ref.drug
-FROM 'C:\UHIP_Data\drugs.csv'
+FROM 'D:\UHIP_Data\drugs.csv'
 WITH (
     FIRSTROW        = 2,
     FIELDTERMINATOR = ',',
@@ -127,7 +127,7 @@ PRINT 'Bulk loading hosp.hospital (8 rows)...';
 GO
 
 BULK INSERT hosp.hospital
-FROM 'C:\UHIP_Data\hospitals.csv'
+FROM 'D:\UHIP_Data\hospitals.csv'
 WITH (
     FIRSTROW        = 2,
     FIELDTERMINATOR = ',',
@@ -149,7 +149,7 @@ PRINT 'Bulk loading hosp.department (138 rows)...';
 GO
 
 BULK INSERT hosp.department
-FROM 'C:\UHIP_Data\departments.csv'
+FROM 'D:\UHIP_Data\departments.csv'
 WITH (
     FIRSTROW        = 2,
     FIELDTERMINATOR = ',',
@@ -171,7 +171,7 @@ PRINT 'Bulk loading hosp.doctor (523 rows)...';
 GO
 
 BULK INSERT hosp.doctor
-FROM 'C:\UHIP_Data\doctors.csv'
+FROM 'D:\UHIP_Data\doctors.csv'
 WITH (
     FIRSTROW        = 2,
     FIELDTERMINATOR = ',',
@@ -193,7 +193,7 @@ PRINT 'Bulk loading hosp.bed (~3,500 rows)...';
 GO
 
 BULK INSERT hosp.bed
-FROM 'C:\UHIP_Data\beds.csv'
+FROM 'D:\UHIP_Data\beds.csv'
 WITH (
     FIRSTROW        = 2,
     FIELDTERMINATOR = ',',
@@ -215,7 +215,7 @@ PRINT 'Bulk loading hosp.icu_status (976 rows)...';
 GO
 
 BULK INSERT hosp.icu_status
-FROM 'C:\UHIP_Data\icu_status.csv'
+FROM 'D:\UHIP_Data\icu_status.csv'
 WITH (
     FIRSTROW        = 2,
     FIELDTERMINATOR = ',',
@@ -237,7 +237,7 @@ PRINT 'Bulk loading inv.drug_inventory (1,400 rows)...';
 GO
 
 BULK INSERT inv.drug_inventory
-FROM 'C:\UHIP_Data\drug_inventory.csv'
+FROM 'D:\UHIP_Data\drug_inventory.csv'
 WITH (
     FIRSTROW        = 2,
     FIELDTERMINATOR = ',',
@@ -259,7 +259,7 @@ PRINT 'Bulk loading inv.drug_transaction (2,800 rows)...';
 GO
 
 BULK INSERT inv.drug_transaction
-FROM 'C:\UHIP_Data\drug_transactions.csv'
+FROM 'D:\UHIP_Data\drug_transactions.csv'
 WITH (
     FIRSTROW        = 2,
     FIELDTERMINATOR = ',',
@@ -281,7 +281,7 @@ PRINT 'Bulk loading hosp.doctor_schedule (large rows)...';
 GO
 
 BULK INSERT hosp.doctor_schedule
-FROM 'C:\UHIP_Data\doctor_schedules.csv'
+FROM 'D:\UHIP_Data\doctor_schedules.csv'
 WITH (
     FIRSTROW        = 2,
     FIELDTERMINATOR = ',',
@@ -303,7 +303,7 @@ PRINT 'Bulk loading pat.patient (large rows)...';
 GO
 
 BULK INSERT pat.patient
-FROM 'C:\UHIP_Data\patients.txt'
+FROM 'D:\UHIP_Data\patients.txt'
 WITH (
     FIRSTROW        = 2,
     FIELDTERMINATOR = '\t',
@@ -323,7 +323,7 @@ PRINT 'Bulk loading clin.visit (large rows)...';
 GO
 
 BULK INSERT clin.visit
-FROM 'C:\UHIP_Data\visits.csv'
+FROM 'D:\UHIP_Data\visits.csv'
 WITH (
     FIRSTROW        = 2,
     FIELDTERMINATOR = ',',
@@ -345,7 +345,7 @@ PRINT 'Bulk loading clin.medical_record (large rows)...';
 GO
 
 BULK INSERT clin.medical_record
-FROM 'C:\UHIP_Data\medical_records.csv'
+FROM 'D:\UHIP_Data\medical_records.csv'
 WITH (
     FIRSTROW        = 2,
     FIELDTERMINATOR = ',',
@@ -367,7 +367,7 @@ PRINT 'Bulk loading clin.visit_procedure (large rows)...';
 GO
 
 BULK INSERT clin.visit_procedure
-FROM 'C:\UHIP_Data\visit_procedures.csv'
+FROM 'D:\UHIP_Data\visit_procedures.csv'
 WITH (
     FIRSTROW        = 2,
     FIELDTERMINATOR = ',',
@@ -389,7 +389,7 @@ PRINT 'Bulk loading clin.prescription (large rows)...';
 GO
 
 BULK INSERT clin.prescription
-FROM 'C:\UHIP_Data\prescriptions.csv'
+FROM 'D:\UHIP_Data\prescriptions.csv'
 WITH (
     FIRSTROW        = 2,
     FIELDTERMINATOR = ',',
@@ -411,7 +411,7 @@ PRINT 'Bulk loading clin.prescription_item (647,752 rows)...';
 GO
 
 BULK INSERT clin.prescription_item
-FROM 'C:\UHIP_Data\prescription_items.csv'
+FROM 'D:\UHIP_Data\prescription_items.csv'
 WITH (
     FIRSTROW        = 2,
     FIELDTERMINATOR = ',',
@@ -433,7 +433,7 @@ PRINT 'Bulk loading hosp.referral (9,000 rows)...';
 GO
 
 BULK INSERT hosp.referral
-FROM 'C:\UHIP_Data\referrals.csv'
+FROM 'D:\UHIP_Data\referrals.csv'
 WITH (
     FIRSTROW        = 2,
     FIELDTERMINATOR = ',',
@@ -455,7 +455,7 @@ PRINT 'Bulk loading fin.claim (273,254 rows)...';
 GO
 
 BULK INSERT fin.claim
-FROM 'C:\UHIP_Data\claims.csv'
+FROM 'D:\UHIP_Data\claims.csv'
 WITH (
     FIRSTROW        = 2,
     FIELDTERMINATOR = ',',
@@ -477,7 +477,7 @@ PRINT 'Bulk loading fin.claim_item (974,322 rows)...';
 GO
 
 BULK INSERT fin.claim_item
-FROM 'C:\UHIP_Data\claim_items.csv'
+FROM 'D:\UHIP_Data\claim_items.csv'
 WITH (
     FIRSTROW        = 2,
     FIELDTERMINATOR = ',',
@@ -499,7 +499,7 @@ PRINT 'Bulk loading fin.claim_approval (273,254 rows)...';
 GO
 
 BULK INSERT fin.claim_approval
-FROM 'C:\UHIP_Data\claim_approvals.csv'
+FROM 'D:\UHIP_Data\claim_approvals.csv'
 WITH (
     FIRSTROW        = 2,
     FIELDTERMINATOR = ',',
@@ -521,7 +521,7 @@ PRINT 'Bulk loading svc.patient_feedback (22,000 rows)...';
 GO
 
 BULK INSERT svc.patient_feedback
-FROM 'C:\UHIP_Data\patient_feedback.csv'
+FROM 'D:\UHIP_Data\patient_feedback.csv'
 WITH (
     FIRSTROW        = 2,
     FIELDTERMINATOR = ',',

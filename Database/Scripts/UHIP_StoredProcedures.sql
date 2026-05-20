@@ -282,7 +282,6 @@ go
 -- ------------------------------------------------------------
 -- 2.3  GetDoctorWorkload
 --      عدد زيارات + نسبة double shifts لكل دكتور
--- ------------------------------------------------------------
 CREATE OR ALTER PROCEDURE dbo.GetDoctorWorkload
     @HospitalID VARCHAR(4) = NULL,
     @StartDate  DATE       = NULL,
@@ -292,43 +291,91 @@ BEGIN
     SET NOCOUNT ON;
 
     SET @StartDate = ISNULL(@StartDate, DATEADD(MONTH,-1,GETDATE()));
-    SET @EndDate   = ISNULL(@EndDate,   GETDATE());
+    SET @EndDate   = ISNULL(@EndDate, GETDATE());
+
+    ;WITH DoubleShiftCTE AS
+    (
+        SELECT
+            s.doctor_id,
+            s.shift_date,
+            CASE
+                WHEN EXISTS (
+                    SELECT 1
+                    FROM hosp.doctor_schedule s2
+                    WHERE s2.doctor_id = s.doctor_id
+                      AND s2.shift_date = s.shift_date
+                      AND s2.shift_start = '20:00'
+                )
+                THEN 1
+                ELSE 0
+            END AS is_double_shift
+        FROM hosp.doctor_schedule s
+        WHERE s.shift_start = '08:00'
+          AND s.shift_date BETWEEN @StartDate AND @EndDate
+    ),
+    DoctorStats AS
+    (
+        SELECT
+            doctor_id,
+            SUM(is_double_shift) AS double_shift_days,
+            COUNT(DISTINCT shift_date) AS total_shift_days
+        FROM DoubleShiftCTE
+        GROUP BY doctor_id
+    )
 
     SELECT
         doc.doctor_id,
+
         doc.first_name + ' ' + doc.last_name AS doctor_name,
+
+        doc.specialty,
+
+        h.hospital_name,
+
+        COUNT(DISTINCT v.visit_id) AS total_visits,
+
+        COUNT(DISTINCT s.schedule_id) AS total_shifts,
+
+        ISNULL(ds.double_shift_days,0) AS double_shift_days,
+
+        CAST(
+            ISNULL(ds.double_shift_days,0) * 100.0
+            / NULLIF(ds.total_shift_days,0)
+        AS DECIMAL(5,1)) AS double_shift_pct
+
+    FROM hosp.doctor doc
+
+    JOIN hosp.department dep
+        ON doc.department_id = dep.department_id
+
+    JOIN hosp.hospital h
+        ON dep.hospital_id = h.hospital_id
+
+    LEFT JOIN clin.visit v
+        ON doc.doctor_id = v.doctor_id
+       AND v.visit_date BETWEEN @StartDate AND @EndDate
+
+    LEFT JOIN hosp.doctor_schedule s
+        ON doc.doctor_id = s.doctor_id
+       AND s.shift_date BETWEEN @StartDate AND @EndDate
+
+    LEFT JOIN DoctorStats ds
+        ON doc.doctor_id = ds.doctor_id
+
+    WHERE (@HospitalID IS NULL OR h.hospital_id = @HospitalID)
+
+    GROUP BY
+        doc.doctor_id,
+        doc.first_name,
+        doc.last_name,
         doc.specialty,
         h.hospital_name,
-        COUNT(DISTINCT v.visit_id)           AS total_visits,
-        COUNT(DISTINCT s.schedule_id)        AS total_shifts,
-        SUM(CASE WHEN s.shift_start = '08:00' AND
-                      EXISTS (SELECT 1 FROM hosp.doctor_schedule s2
-                              WHERE s2.doctor_id  = s.doctor_id
-                                AND s2.shift_date = s.shift_date
-                                AND s2.shift_start = '20:00')
-             THEN 1 ELSE 0 END)              AS double_shift_days,
-        CAST(
-            SUM(CASE WHEN s.shift_start = '08:00' AND
-                          EXISTS (SELECT 1 FROM hosp.doctor_schedule s2
-                                  WHERE s2.doctor_id  = s.doctor_id
-                                    AND s2.shift_date = s.shift_date
-                                    AND s2.shift_start = '20:00')
-                 THEN 1 ELSE 0 END) * 100.0
-            / NULLIF(COUNT(DISTINCT s.shift_date),0)
-        AS DECIMAL(5,1))                     AS double_shift_pct
-    FROM hosp.doctor doc
-    JOIN hosp.department  dep ON doc.department_id = dep.department_id
-    JOIN hosp.hospital    h   ON dep.hospital_id   = h.hospital_id
-    LEFT JOIN clin.visit  v   ON doc.doctor_id     = v.doctor_id
-                          AND v.visit_date BETWEEN @StartDate AND @EndDate
-    LEFT JOIN hosp.doctor_schedule s ON doc.doctor_id = s.doctor_id
-                                 AND s.shift_date BETWEEN @StartDate AND @EndDate
-    WHERE (@HospitalID IS NULL OR h.hospital_id = @HospitalID)
-    GROUP BY doc.doctor_id, doc.first_name, doc.last_name, doc.specialty, h.hospital_name
+        ds.double_shift_days,
+        ds.total_shift_days
+
     ORDER BY total_visits DESC;
 END;
 GO
-
 -- ------------------------------------------------------------
 -- 2.4  GetReferralSummary
 --      ملخص الإحالات بين المستشفيات
@@ -454,8 +501,7 @@ BEGIN
 
         -- خصم من الـ inventory
         UPDATE inv.drug_inventory
-        SET quantity_available = quantity_available - @Quantity,
-            last_updated       = GETDATE()
+        SET quantity_available = quantity_available - @Quantity
         WHERE hospital_id = @HospitalID AND drug_id = @DrugID;
 
         -- تسجيل الحركة
@@ -743,7 +789,7 @@ BEGIN
         pr.expected_amount,
         vp.procedure_amount                     AS actual_cost,
         CAST((vp.procedure_amount - pr.expected_amount) * 100.0
-             / NULLIF(pr.expected_cost,0) AS DECIMAL(5,1)) AS inflation_pct,
+             / NULLIF(pr.expected_amount,0) AS DECIMAL(5,1)) AS inflation_pct,
         p.first_name + ' ' + p.last_name      AS patient_name,
         'Inflated Procedure Cost'             AS fraud_signal
     FROM clin.visit_procedure vp
@@ -753,7 +799,7 @@ BEGIN
     JOIN hosp.doctor    doc ON v.doctor_id       = doc.doctor_id
     JOIN pat.patient   p   ON v.patient_id      = p.patient_id
     WHERE (vp.procedure_amount - pr.expected_amount) * 100.0
-          / NULLIF(pr.expected_cost,0) >= @InflationThresholdPct
+          / NULLIF(pr.expected_amount,0) >= @InflationThresholdPct
     ORDER BY inflation_pct DESC;
 END;
 GO
@@ -903,7 +949,7 @@ BEGIN
         JOIN clin.visit v     ON vp.visit_id       = v.visit_id
         JOIN ref.medical_procedure p ON vp.procedure_code = p.procedure_code
         WHERE (vp.procedure_amount - p.expected_amount) * 100.0
-              / NULLIF(p.expected_cost,0) >= 20
+              / NULLIF(p.expected_amount,0) >= 20
         GROUP BY v.doctor_id
     ),
     AbnormalRx AS (
