@@ -1,0 +1,253 @@
+{
+  "name": "UHIP SQL Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n    s.name                          AS schema_name,\n    t.name                          AS table_name,\n    c.name                          AS column_name,\n    tp.name                         AS data_type,\n    c.max_length,\n    c.is_nullable,\n    CASE WHEN pk.column_id IS NOT NULL THEN 'PK' ELSE '' END AS is_pk,\n    CASE WHEN fk.parent_column_id IS NOT NULL THEN 'FK' ELSE '' END AS is_fk,\n    cc.definition                   AS check_constraint\nFROM sys.tables t\nJOIN sys.schemas s       ON s.schema_id  = t.schema_id\nJOIN sys.columns c       ON c.object_id  = t.object_id\nJOIN sys.types tp        ON tp.user_type_id = c.user_type_id\nLEFT JOIN (\n    SELECT ic.object_id, ic.column_id\n    FROM sys.index_columns ic\n    JOIN sys.indexes i ON i.object_id = ic.object_id AND i.index_id = ic.index_id\n    WHERE i.is_primary_key = 1\n) pk ON pk.object_id = c.object_id AND pk.column_id = c.column_id\nLEFT JOIN (\n    SELECT fkc.parent_object_id, fkc.parent_column_id\n    FROM sys.foreign_key_columns fkc\n) fk ON fk.parent_object_id = c.object_id AND fk.parent_column_id = c.column_id\nLEFT JOIN sys.check_constraints cc \n    ON cc.parent_object_id = c.object_id \n    AND cc.parent_column_id = c.column_id\nWHERE s.name IN ('ref','hosp','pat','inv','clin','fin','svc')\nORDER BY s.name, t.name, c.column_id;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        16,
+        0
+      ],
+      "id": "f2275983-1dd5-42e7-a362-01ea1c0f0e33",
+      "name": "Get table schemas",
+      "credentials": {
+        "microsoftSql": {
+          "id": "TiAjFp3I6TzuQdud",
+          "name": "Microsoft SQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Telegram Trigger').item.json.message.message_id }}",
+        "contextWindowLength": 30
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        512,
+        192
+      ],
+      "id": "5c580ccd-187e-4057-a563-965c1fccfa80",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "{{ $fromAI('query', 'The SQL SELECT query to execute') }}",
+        "options": {
+          "queryReplacement": ""
+        }
+      },
+      "type": "n8n-nodes-base.microsoftSqlTool",
+      "typeVersion": 1.1,
+      "position": [
+        672,
+        176
+      ],
+      "id": "526e249e-1bda-41be-bcd3-2741c7abeff2",
+      "name": "execute_sql_query",
+      "credentials": {
+        "microsoftSql": {
+          "id": "TiAjFp3I6TzuQdud",
+          "name": "Microsoft SQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const rows = $input.all().map(i => i.json);\n\n// Group by schema → table → columns\nconst schemas = {};\nfor (const row of rows) {\n  const key = `${row.schema_name}.${row.table_name}`;\n  if (!schemas[key]) schemas[key] = [];\n  \n  let col = `  - ${row.column_name} (${row.data_type}`;\n  if (row.is_pk === 'PK') col += ', PRIMARY KEY';\n  if (row.is_fk === 'FK') col += ', FK';\n  if (row.is_nullable === false || row.is_nullable === 0) col += ', NOT NULL';\n  if (row.check_constraint) col += `, CHECK: ${row.check_constraint}`;\n  col += ')';\n  \n  schemas[key].push(col);\n}\n\n// Build readable markdown\nlet schemaText = '# UHIP Database Schema\\n\\n';\nfor (const [table, cols] of Object.entries(schemas)) {\n  schemaText += `## ${table}\\n${cols.join('\\n')}\\n\\n`;\n}\n\nreturn [{ json: { schemaText } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "109bb835-55c5-42d6-8895-a5b16d19e73b",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -256,
+        0
+      ],
+      "id": "8079c802-d555-4fb4-b327-a07dab16b710",
+      "name": "Telegram Trigger",
+      "webhookId": "c3b869ed-3d80-4cc1-b936-eba5601a41b8",
+      "credentials": {
+        "telegramApi": {
+          "id": "lqrHelIaLg0LYmKF",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        784,
+        0
+      ],
+      "id": "3080da1b-6176-4597-a121-e6d848e5ffc4",
+      "name": "Send a text message",
+      "webhookId": "35585c0a-112b-49a8-afd2-902a9a24b629",
+      "notesInFlow": false,
+      "credentials": {
+        "telegramApi": {
+          "id": "lqrHelIaLg0LYmKF",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Telegram Trigger').item.json.message.text }}",
+        "options": {
+          "systemMessage": "=You are an expert SQL Agent for the UHIP (Unified Healthcare Intelligence Platform) hospital database running on Azure SQL Server.\n\nYou have access to a SQL execution tool. Use it to answer the user's question by writing and running SQL queries.\n\nDATABASE SCHEMA:\n{{ $json.schemaText }}\n\nIMPORTANT RULES:\n- Always write valid Azure SQL (T-SQL) syntax\n- Never use DROP, DELETE, TRUNCATE, UPDATE, INSERT or any write operations\n- Read-only SELECT queries only\n- When showing doctors, always filter employment_status = 'Active'\n- When showing schedules, always filter shift_date >= CAST(GETDATE() AS DATE)\n- If a query returns no results, tell the user clearly and suggest alternatives\n- Present results in a clean, readable format for a Telegram message\n- Keep responses under 300 words\n- If the user asks to book an appointment, tell them to use the scheduling assistant instead"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        432,
+        0
+      ],
+      "id": "ac89dcd5-63ed-4e3d-82b7-df52449e5b53",
+      "name": "UHIP Assistant"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        352,
+        192
+      ],
+      "id": "274f8365-19f5-48cb-9a7a-695e821b6cf0",
+      "name": "Mistral Cloud Chat Model",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "Z5Sd8nAwbYCI3Kwu",
+          "name": "Mistral Cloud account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Get table schemas": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "UHIP Assistant",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "execute_sql_query": {
+      "ai_tool": [
+        [
+          {
+            "node": "UHIP Assistant",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "UHIP Assistant",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get table schemas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "UHIP Assistant": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mistral Cloud Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "UHIP Assistant",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "b9967590-a063-4ddd-9fac-dc9353f5bb1a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d0ffb64d0d862e751323db963e58f4cadf6978ccf94ff3473caddb38fb9424e1"
+  },
+  "id": "h6pu7RAueSqzloc4",
+  "tags": []
+}

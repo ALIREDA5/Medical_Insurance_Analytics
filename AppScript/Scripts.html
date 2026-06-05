@@ -1,0 +1,907 @@
+<script>
+// ============================================================
+// MODULES & TABLE CONFIG
+// ============================================================
+const MODULES = [
+  { label:'Patient Management',  icon:'fa-user-injured',        tables:['patients','visits','prescriptions'] },
+  { label:'Hospital Resources',  icon:'fa-hospital',            tables:['hospitals','departments','doctors','schedules','icu','referrals'] },
+  { label:'Pharmacy',            icon:'fa-pills',               tables:['transactions'] },
+  { label:'Insurance Claims',    icon:'fa-file-invoice-dollar', tables:['claims','approvals'] },
+  { label:'Citizen Services',    icon:'fa-star',                tables:['feedback'] }
+];
+
+const TABLES = {
+
+  // ── PATIENTS ──────────────────────────────────────────────
+  patients: {
+    label:'Patients', pkField:'patient_id',
+    insertFn:'insertPatient', searchFn:'searchPatients', updateFn:'updatePatient',
+    fields:[
+      { name:'patient_id',        label:'Patient ID',        type:'text',   autoGen:true },
+      { name:'national_id',       label:'National ID',       type:'text',   required:true, maxLength:14, pattern:'[0-9]{14}', hint:'14 digits' },
+      { name:'first_name',        label:'First Name',        type:'text',   required:true },
+      { name:'last_name',         label:'Last Name',         type:'text',   required:true },
+      { name:'gender',            label:'Gender',            type:'select', required:true, options:['Male','Female'] },
+      { name:'birth_date',        label:'Birth Date',        type:'date',   required:true },
+      { name:'phone',             label:'Phone',             type:'text',   pattern:'0(10|11|12|15)[0-9]{8}', hint:'010/011/012/015 + 8 digits' },
+      { name:'street',            label:'Street',            type:'text' },
+      { name:'city',              label:'City / District',   type:'select', options:['El Sharq','Port Fouad','El Arab','El Manakh','El Zohour','El Dawahy','Mubarak District'] },
+      { name:'governorate',       label:'Governorate',       type:'text',   defaultValue:'Port Said', readonly:true },
+      { name:'blood_type',        label:'Blood Type',        type:'select', options:['A+','A-','B+','B-','AB+','AB-','O+','O-'] },
+      { name:'emergency_contact', label:'Emergency Contact', type:'text',   pattern:'0(10|11|12|15)[0-9]{8}' },
+      { name:'created_at',        label:'Created At',        type:'text',   autoGen:true },
+    ],
+    searchFields:[
+      { name:'patient_id',  label:'Patient ID',  type:'text' },
+      { name:'national_id', label:'National ID', type:'text' },
+      { name:'first_name',  label:'First Name',  type:'text' },
+      { name:'last_name',   label:'Last Name',   type:'text' },
+      { name:'gender',      label:'Gender',      type:'select', options:['','Male','Female'] },
+      { name:'blood_type',  label:'Blood Type',  type:'select', options:['','A+','A-','B+','B-','AB+','AB-','O+','O-'] },
+      { name:'city',        label:'City',        type:'text' },
+      { name:'phone',       label:'Phone',       type:'text' },
+    ],
+    displayCols:['patient_id','first_name','last_name','gender','birth_date','phone','city','blood_type'],
+  },
+
+  // ── VISITS (merged: visit + medical record + procedures) ──
+  visits: {
+    label:'Visits', pkField:'visit_id',
+    insertFn:'insertVisitFull', searchFn:'searchVisits', updateFn:'updateVisit',
+    isMerged:true,
+    fields:[
+      { name:'visit_id',       label:'Visit ID',           type:'text',   autoGen:true },
+      { name:'patient_id',     label:'Patient',            type:'fk',     fkFn:'getPatientOptions',    required:true },
+      { name:'hospital_id',    label:'Hospital',           type:'fk',     fkFn:'getHospitalOptions',   required:true },
+      { name:'doctor_id',      label:'Doctor',             type:'fk',     fkFn:'getDoctorOptions',     required:true },
+      { name:'department_id',  label:'Department',         type:'fk',     fkFn:'getDepartmentOptions', required:true },
+      { name:'visit_date',     label:'Visit Date',         type:'date',   required:true },
+      { name:'visit_type',     label:'Visit Type',         type:'select', required:true, options:['Emergency','Outpatient','Inpatient','Follow-up','Routine Check'] },
+      { name:'diagnosis_code', label:'Diagnosis',          type:'fk',     fkFn:'getDiagnosisOptions',  required:true },
+      { name:'symptoms',       label:'Symptoms',           type:'textarea' },
+      { name:'visit_status',   label:'Status',             type:'select', required:true, options:['Completed','No Show','Cancelled'] },
+      { name:'waiting_time',   label:'Waiting Time (min)', type:'number', min:0 },
+      { name:'total_cost',     label:'Total Cost (EGP)',   type:'number', min:0, step:'0.01' },
+    ],
+    subSections:[
+      {
+        id:'medical_record', title:'Medical Record', icon:'fa-file-medical', type:'static',
+        fields:[
+          { name:'mr_procedure_code',     label:'Primary Procedure',  type:'fk',       fkFn:'getProcedureOptions' },
+          { name:'mr_diagnosis_notes',    label:'Diagnosis Notes',    type:'textarea', maxLength:300 },
+          { name:'mr_treatment_notes',    label:'Treatment Notes',    type:'textarea', maxLength:200 },
+          { name:'mr_follow_up_required', label:'Follow-up Required', type:'select',   required:true, options:['Yes','No'] },
+        ]
+      },
+      {
+        id:'procedures', title:'Procedures Performed', icon:'fa-stethoscope', type:'repeatable',
+        itemKey:'procedures',
+        itemFields:[
+          { name:'procedure_code', label:'Procedure',  type:'fk',     fkFn:'getProcedureOptions', required:true },
+          { name:'procedure_cost', label:'Cost (EGP)', type:'number', required:true, min:0, step:'0.01' },
+        ]
+      }
+    ],
+    searchFields:[
+      { name:'visit_id',        label:'Visit ID',    type:'text' },
+      { name:'patient_id',      label:'Patient ID',  type:'text' },
+      { name:'hospital_id',     label:'Hospital ID', type:'text' },
+      { name:'doctor_id',       label:'Doctor ID',   type:'text' },
+      { name:'visit_date_from', label:'Date From',   type:'date', filterKey:'visit_date_from' },
+      { name:'visit_date_to',   label:'Date To',     type:'date', filterKey:'visit_date_to' },
+      { name:'visit_type',      label:'Visit Type',  type:'select', options:['','Emergency','Outpatient','Inpatient','Follow-up','Routine Check'] },
+      { name:'visit_status',    label:'Status',      type:'select', options:['','Completed','No Show','Cancelled'] },
+    ],
+    displayCols:['visit_id','patient_id','hospital_id','doctor_id','visit_date','visit_type','visit_status','total_cost'],
+  },
+
+  // ── PRESCRIPTIONS (merged: prescription + items) ──────────
+  prescriptions: {
+    label:'Prescriptions', pkField:'prescription_id',
+    insertFn:'insertPrescriptionFull', searchFn:'searchPrescriptions', updateFn:'updatePrescription',
+    isMerged:true,
+    fields:[
+      { name:'prescription_id',   label:'Prescription ID', type:'text', autoGen:true },
+      { name:'visit_id',          label:'Visit',           type:'fk',   fkFn:'getVisitOptions',  required:true },
+      { name:'doctor_id',         label:'Doctor',          type:'fk',   fkFn:'getDoctorOptions', required:true },
+      { name:'prescription_date', label:'Date',            type:'date', required:true },
+      { name:'notes',             label:'Notes',           type:'textarea', maxLength:100 },
+    ],
+    subSections:[
+      {
+        id:'drug_items', title:'Drug Items', icon:'fa-pills', type:'repeatable',
+        itemKey:'items',
+        itemFields:[
+          { name:'drug_id',       label:'Drug',      type:'fk',     fkFn:'getDrugOptions', required:true },
+          { name:'dosage',        label:'Dosage',    type:'text',   required:true },
+          { name:'frequency',     label:'Frequency', type:'select', required:true, options:['Once daily','Twice daily','Every 12 hours','Three times daily','Every 8 hours','Every 6 hours','As needed'] },
+          { name:'duration_days', label:'Days',      type:'number', required:true, min:1, max:90 },
+          { name:'quantity',      label:'Qty',       type:'number', required:true, min:1 },
+        ]
+      }
+    ],
+    searchFields:[
+      { name:'prescription_id',        label:'Prescription ID', type:'text' },
+      { name:'visit_id',               label:'Visit ID',        type:'text' },
+      { name:'doctor_id',              label:'Doctor ID',       type:'text' },
+      { name:'prescription_date_from', label:'Date From',       type:'date', filterKey:'prescription_date_from' },
+      { name:'prescription_date_to',   label:'Date To',         type:'date', filterKey:'prescription_date_to' },
+    ],
+    displayCols:['prescription_id','visit_id','doctor_id','prescription_date','notes'],
+  },
+
+  // ── HOSPITALS ─────────────────────────────────────────────
+  hospitals: {
+    label:'Hospitals', pkField:'hospital_id',
+    insertFn:'insertHospital', searchFn:'searchHospitals', updateFn:'updateHospital',
+    fields:[
+      { name:'hospital_id',   label:'Hospital ID',   type:'text',   autoGen:true },
+      { name:'hospital_name', label:'Hospital Name', type:'text',   required:true },
+      { name:'hospital_type', label:'Type',          type:'select', required:true, options:['Government','Private','Specialized','Teaching'] },
+      { name:'governorate',   label:'Governorate',   type:'text',   defaultValue:'Port Said', readonly:true },
+      { name:'district',      label:'District',      type:'select', options:['El Sharq','Port Fouad','El Arab','El Manakh','El Zohour','El Dawahy','Mubarak District'] },
+      { name:'address',       label:'Address',       type:'text' },
+      { name:'phone',         label:'Phone',         type:'text' },
+      { name:'total_beds',    label:'Total Beds',    type:'number', min:0 },
+      { name:'icu_capacity',  label:'ICU Capacity',  type:'number', min:0 },
+      { name:'Longitude',     label:'Longitude',     type:'number', step:'0.000001' },
+      { name:'latitude',      label:'Latitude',      type:'number', step:'0.000001' },
+      { name:'manager_name',  label:'Manager Name',  type:'text' },
+      { name:'manager_email', label:'Manager Email', type:'text' },
+      { name:'manager_phone', label:'Manager Phone', type:'text' },
+    ],
+    searchFields:[
+      { name:'hospital_id',   label:'Hospital ID', type:'text' },
+      { name:'hospital_name', label:'Name',        type:'text' },
+      { name:'hospital_type', label:'Type',        type:'select', options:['','Government','Private','Specialized','Teaching'] },
+      { name:'district',      label:'District',    type:'select', options:['','El Sharq','Port Fouad','El Arab','El Manakh','El Zohour','El Dawahy','Mubarak District'] },
+    ],
+    displayCols:['hospital_id','hospital_name','hospital_type','district','total_beds','icu_capacity'],
+  },
+
+  // ── DEPARTMENTS ───────────────────────────────────────────
+  departments: {
+    label:'Departments', pkField:'department_id',
+    insertFn:'insertDepartment', searchFn:'searchDepartments', updateFn:'updateDepartment',
+    fields:[
+      { name:'department_id',   label:'Department ID',   type:'text',   autoGen:true },
+      { name:'hospital_id',     label:'Hospital',        type:'fk',     fkFn:'getHospitalOptions', required:true },
+      { name:'department_name', label:'Department Name', type:'select', required:true, options:['Emergency','ICU','Internal Medicine','Cardiology','Pulmonology','Neurology','Gastroenterology','Nephrology','Endocrinology','Orthopedics','General Surgery','Pediatrics','Obstetrics & Gynecology','Dermatology','ENT','Psychiatry','Oncology','Radiology','Laboratory','Pharmacy'] },
+      { name:'floor_number',    label:'Floor',           type:'select', options:['1','2','3'] },
+    ],
+    searchFields:[
+      { name:'department_id',   label:'Department ID', type:'text' },
+      { name:'hospital_id',     label:'Hospital ID',   type:'text' },
+      { name:'department_name', label:'Name',          type:'text' },
+    ],
+    displayCols:['department_id','hospital_id','department_name','floor_number'],
+  },
+
+  // ── DOCTORS ───────────────────────────────────────────────
+  doctors: {
+    label:'Doctors', pkField:'doctor_id',
+    insertFn:'insertDoctor', searchFn:'searchDoctors', updateFn:'updateDoctor',
+    fields:[
+      { name:'doctor_id',         label:'Doctor ID',        type:'text',   autoGen:true },
+      { name:'department_id',     label:'Department',       type:'fk',     fkFn:'getDepartmentOptions', required:true },
+      { name:'first_name',        label:'First Name',       type:'text',   required:true },
+      { name:'last_name',         label:'Last Name',        type:'text',   required:true },
+      { name:'specialty',         label:'Specialty',        type:'select', required:true, options:['Emergency Medicine','Intensive Care','Internal Medicine','Cardiology','Pulmonology','Neurology','Gastroenterology','Nephrology','Endocrinology','Orthopedics','General Surgery','Pediatrics','Obstetrics & Gynecology','Dermatology','ENT','Psychiatry','Oncology','Radiology','Laboratory Medicine','Pharmacy'] },
+      { name:'years_experience',  label:'Years Experience', type:'number', min:0, max:50 },
+      { name:'phone',             label:'Phone',            type:'text',   pattern:'0(10|11|12|15)[0-9]{8}' },
+      { name:'employment_status', label:'Status',           type:'select', options:['Active','On Leave'] },
+    ],
+    searchFields:[
+      { name:'doctor_id',         label:'Doctor ID',  type:'text' },
+      { name:'first_name',        label:'First Name', type:'text' },
+      { name:'last_name',         label:'Last Name',  type:'text' },
+      { name:'specialty',         label:'Specialty',  type:'text' },
+      { name:'employment_status', label:'Status',     type:'select', options:['','Active','On Leave'] },
+    ],
+    displayCols:['doctor_id','department_id','first_name','last_name','specialty','years_experience','employment_status'],
+  },
+
+  // ── SCHEDULES ─────────────────────────────────────────────
+  schedules: {
+    label:'Schedules', pkField:'schedule_id',
+    insertFn:'insertDoctorSchedule', searchFn:'searchDoctorSchedules', updateFn:'updateDoctorSchedule',
+    fields:[
+      { name:'schedule_id', label:'Schedule ID', type:'text',   autoGen:true },
+      { name:'doctor_id',   label:'Doctor',      type:'fk',     fkFn:'getDoctorOptions', required:true },
+      { name:'shift_date',  label:'Shift Date',  type:'date',   required:true },
+      { name:'shift_start', label:'Shift Start', type:'select', required:true, options:['08:00','14:00','20:00'] },
+      { name:'shift_end',   label:'Shift End',   type:'select', required:true, options:['14:00','20:00','08:00'] },
+    ],
+    searchFields:[
+      { name:'schedule_id',    label:'Schedule ID', type:'text' },
+      { name:'doctor_id',      label:'Doctor ID',   type:'text' },
+      { name:'shift_date_from',label:'Date From',   type:'date', filterKey:'shift_date_from' },
+      { name:'shift_date_to',  label:'Date To',     type:'date', filterKey:'shift_date_to' },
+      { name:'shift_start',    label:'Shift Start', type:'select', options:['','08:00','14:00','20:00'] },
+    ],
+    displayCols:['schedule_id','doctor_id','shift_date','shift_start','shift_end'],
+  },
+
+  // ── ICU STATUS ────────────────────────────────────────────
+  icu: {
+    label:'ICU Status', pkField:'icu_status_id',
+    insertFn:'insertIcuStatus', searchFn:'searchIcuStatus', updateFn:'updateIcuStatus',
+    fields:[
+      { name:'icu_status_id',  label:'Snapshot ID',    type:'text',   autoGen:true },
+      { name:'hospital_id',    label:'Hospital',       type:'fk',     fkFn:'getHospitalOptions', required:true },
+      { name:'occupied_beds',  label:'Occupied Beds',  type:'number', required:true, min:0 },
+      { name:'available_beds', label:'Available Beds', type:'number', required:true, min:0 },
+      { name:'update_time',    label:'Update Time',    type:'text',   autoGen:true },
+    ],
+    searchFields:[
+      { name:'icu_status_id',   label:'Snapshot ID', type:'text' },
+      { name:'hospital_id',     label:'Hospital ID', type:'text' },
+      { name:'update_time_from',label:'Date From',   type:'date', filterKey:'update_time_from' },
+      { name:'update_time_to',  label:'Date To',     type:'date', filterKey:'update_time_to' },
+    ],
+    displayCols:['icu_status_id','hospital_id','occupied_beds','available_beds','update_time'],
+  },
+
+  // ── REFERRALS ─────────────────────────────────────────────
+  referrals: {
+    label:'Referrals', pkField:'referral_id',
+    insertFn:'insertReferral', searchFn:'searchReferrals', updateFn:'updateReferral',
+    fields:[
+      { name:'referral_id',      label:'Referral ID',   type:'text',   autoGen:true },
+      { name:'patient_id',       label:'Patient',       type:'fk',     fkFn:'getPatientOptions',  required:true },
+      { name:'from_hospital_id', label:'From Hospital', type:'fk',     fkFn:'getHospitalOptions', required:true },
+      { name:'to_hospital_id',   label:'To Hospital',   type:'fk',     fkFn:'getHospitalOptions', required:true },
+      { name:'referral_reason',  label:'Reason',        type:'select', required:true, options:['Capacity exceeded','ICU bed unavailable - critical patient','Specialty not available','Surgical intervention required','Equipment not available','Post-operative transfer','Burn unit required','Dialysis not available','Pediatric ICU required','Neonatal ICU required','Psychiatric admission required','Oncology treatment required'] },
+      { name:'referral_date',    label:'Referral Date', type:'date',   required:true },
+      { name:'referral_status',  label:'Status',        type:'select', required:true, options:['Completed','Pending','Cancelled'] },
+    ],
+    searchFields:[
+      { name:'referral_id',       label:'Referral ID',   type:'text' },
+      { name:'patient_id',        label:'Patient ID',    type:'text' },
+      { name:'from_hospital_id',  label:'From Hospital', type:'text' },
+      { name:'to_hospital_id',    label:'To Hospital',   type:'text' },
+      { name:'referral_status',   label:'Status',        type:'select', options:['','Completed','Pending','Cancelled'] },
+      { name:'referral_date_from',label:'Date From',     type:'date',   filterKey:'referral_date_from' },
+      { name:'referral_date_to',  label:'Date To',       type:'date',   filterKey:'referral_date_to' },
+    ],
+    displayCols:['referral_id','patient_id','from_hospital_id','to_hospital_id','referral_reason','referral_date','referral_status'],
+  },
+
+  // ── DRUG TRANSACTIONS ─────────────────────────────────────
+  transactions: {
+    label:'Drug Transactions', pkField:'transaction_id',
+    insertFn:'insertDrugTransaction', searchFn:'searchDrugTransactions', updateFn:'updateDrugTransaction',
+    fields:[
+      { name:'transaction_id',   label:'Transaction ID', type:'text',   autoGen:true },
+      { name:'drug_id',          label:'Drug',           type:'fk',     fkFn:'getDrugOptions',     required:true },
+      { name:'hospital_id',      label:'Hospital',       type:'fk',     fkFn:'getHospitalOptions', required:true },
+      { name:'transaction_type', label:'Type',           type:'select', required:true, options:['Purchase','Dispensing','Wastage','Return','Adjustment'] },
+      { name:'quantity',         label:'Quantity',       type:'number', required:true, min:1 },
+      { name:'transaction_date', label:'Date',           type:'date',   required:true },
+      { name:'performed_by',     label:'Performed By',   type:'text',   required:true },
+    ],
+    searchFields:[
+      { name:'transaction_id',       label:'Transaction ID', type:'text' },
+      { name:'drug_id',              label:'Drug ID',        type:'text' },
+      { name:'hospital_id',          label:'Hospital ID',    type:'text' },
+      { name:'transaction_type',     label:'Type',           type:'select', options:['','Purchase','Dispensing','Wastage','Return','Adjustment'] },
+      { name:'performed_by',         label:'Performed By',   type:'text' },
+      { name:'transaction_date_from',label:'Date From',      type:'date',   filterKey:'transaction_date_from' },
+      { name:'transaction_date_to',  label:'Date To',        type:'date',   filterKey:'transaction_date_to' },
+    ],
+    displayCols:['transaction_id','drug_id','hospital_id','transaction_type','quantity','transaction_date','performed_by'],
+  },
+
+  // ── CLAIMS (merged: claim + items) ────────────────────────
+  claims: {
+    label:'Claims', pkField:'claim_id',
+    insertFn:'insertClaimFull', searchFn:'searchClaims', updateFn:'updateClaim',
+    isMerged:true,
+    fields:[
+      { name:'claim_id',        label:'Claim ID',               type:'text',   autoGen:true },
+      { name:'patient_id',      label:'Patient',                type:'fk',     fkFn:'getPatientOptions',  required:true },
+      { name:'visit_id',        label:'Visit',                  type:'fk',     fkFn:'getVisitOptions',    required:true },
+      { name:'hospital_id',     label:'Hospital',               type:'fk',     fkFn:'getHospitalOptions', required:true },
+      { name:'claim_date',      label:'Claim Date',             type:'date',   required:true },
+      { name:'claim_amount',    label:'Claim Amount (EGP)',     type:'number', required:true, min:0, step:'0.01' },
+      { name:'approved_amount', label:'Approved Amount (EGP)', type:'number', min:0, step:'0.01' },
+      { name:'claim_status',    label:'Status',                 type:'select', required:true, options:['Approved','Partially Approved','Rejected','Pending Review'] },
+    ],
+    subSections:[
+      {
+        id:'claim_items', title:'Claim Items', icon:'fa-receipt', type:'repeatable',
+        itemKey:'items',
+        itemFields:[
+          { name:'procedure_code', label:'Procedure',  type:'fk',     fkFn:'getProcedureOptions', hint:'Empty for drug' },
+          { name:'drug_id',        label:'Drug',       type:'fk',     fkFn:'getDrugOptions',      hint:'Empty for procedure' },
+          { name:'item_cost',      label:'Cost (EGP)', type:'number', required:true, min:0, step:'0.01' },
+          { name:'quantity',       label:'Qty',        type:'number', required:true, min:1 },
+        ]
+      }
+    ],
+    searchFields:[
+      { name:'claim_id',        label:'Claim ID',   type:'text' },
+      { name:'patient_id',      label:'Patient ID', type:'text' },
+      { name:'hospital_id',     label:'Hospital',   type:'text' },
+      { name:'visit_id',        label:'Visit ID',   type:'text' },
+      { name:'claim_status',    label:'Status',     type:'select', options:['','Approved','Partially Approved','Rejected','Pending Review'] },
+      { name:'claim_date_from', label:'Date From',  type:'date',   filterKey:'claim_date_from' },
+      { name:'claim_date_to',   label:'Date To',    type:'date',   filterKey:'claim_date_to' },
+    ],
+    displayCols:['claim_id','patient_id','visit_id','hospital_id','claim_date','claim_amount','approved_amount','claim_status'],
+  },
+
+  // ── CLAIM APPROVALS ───────────────────────────────────────
+  approvals: {
+    label:'Approvals', pkField:'approval_id',
+    insertFn:'insertClaimApproval', searchFn:'searchClaimApprovals', updateFn:'updateClaimApproval',
+    fields:[
+      { name:'approval_id',      label:'Approval ID',      type:'text',   autoGen:true },
+      { name:'claim_id',         label:'Claim',            type:'fk',     fkFn:'getClaimOptions', required:true },
+      { name:'reviewed_by',      label:'Reviewed By',      type:'text',   required:true },
+      { name:'approval_status',  label:'Decision',         type:'select', required:true, options:['Approved','Partially Approved','Rejected','Pending Review'] },
+      { name:'approval_date',    label:'Approval Date',    type:'date' },
+      { name:'rejection_reason', label:'Rejection Reason', type:'select', options:['','Insufficient documentation','Duplicate claim detected','Pre-authorization not obtained','Service not covered','Patient not eligible','Claim exceeded coverage limit','Missing medical records','Invalid diagnosis code','Procedure not medically necessary','Policy expired'] },
+    ],
+    searchFields:[
+      { name:'approval_id',       label:'Approval ID', type:'text' },
+      { name:'claim_id',          label:'Claim ID',    type:'text' },
+      { name:'reviewed_by',       label:'Reviewed By', type:'text' },
+      { name:'approval_status',   label:'Status',      type:'select', options:['','Approved','Partially Approved','Rejected','Pending Review'] },
+      { name:'approval_date_from',label:'Date From',   type:'date',   filterKey:'approval_date_from' },
+      { name:'approval_date_to',  label:'Date To',     type:'date',   filterKey:'approval_date_to' },
+    ],
+    displayCols:['approval_id','claim_id','reviewed_by','approval_status','approval_date','rejection_reason'],
+  },
+
+  // ── PATIENT FEEDBACK ──────────────────────────────────────
+  feedback: {
+    label:'Feedback', pkField:'feedback_id',
+    insertFn:'insertPatientFeedback', searchFn:'searchPatientFeedback', updateFn:'updatePatientFeedback',
+    fields:[
+      { name:'feedback_id',   label:'Feedback ID',  type:'text',   autoGen:true },
+      { name:'patient_id',    label:'Patient',      type:'fk',     fkFn:'getPatientOptions',  required:true },
+      { name:'hospital_id',   label:'Hospital',     type:'fk',     fkFn:'getHospitalOptions', required:true },
+      { name:'doctor_id',     label:'Doctor',       type:'fk',     fkFn:'getDoctorOptions',   required:true },
+      { name:'rating',        label:'Rating (1-5)', type:'select', required:true, options:['1','2','3','4','5'] },
+      { name:'comments',      label:'Comments',     type:'textarea', maxLength:200 },
+      { name:'feedback_date', label:'Date',         type:'date',   required:true },
+    ],
+    searchFields:[
+      { name:'feedback_id',       label:'Feedback ID', type:'text' },
+      { name:'patient_id',        label:'Patient ID',  type:'text' },
+      { name:'hospital_id',       label:'Hospital ID', type:'text' },
+      { name:'doctor_id',         label:'Doctor ID',   type:'text' },
+      { name:'rating',            label:'Rating',      type:'select', options:['','1','2','3','4','5'] },
+      { name:'feedback_date_from',label:'Date From',   type:'date',   filterKey:'feedback_date_from' },
+      { name:'feedback_date_to',  label:'Date To',     type:'date',   filterKey:'feedback_date_to' },
+    ],
+    displayCols:['feedback_id','patient_id','hospital_id','doctor_id','rating','feedback_date'],
+  },
+
+};
+
+// ============================================================
+// STATE
+// ============================================================
+let currentTable = null;
+let editMode     = false;
+let editId       = null;
+let searchCache  = [];
+const fkCache    = {};
+
+// ============================================================
+// INIT  — event delegation fixes sidebar click in Apps Script
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+
+  document.getElementById('sidebarNav').addEventListener('click', e => {
+    const link = e.target.closest('[data-table]');
+    if (!link) return;
+    e.preventDefault();
+    showTable(link.dataset.table);
+  });
+
+  google.script.run
+    .withSuccessHandler(user => {
+      if (!user) {
+        document.body.innerHTML =
+          '<div style="padding:2rem;text-align:center"><h3>Access Denied</h3></div>';
+        return;
+      }
+      document.getElementById('userEmail').textContent = user.email;
+      const allowed = user.tables === '*'
+        ? null
+        : user.tables.split(',').map(t => t.trim());
+      renderSidebar(allowed);
+    })
+    .withFailureHandler(() => renderSidebar(null))
+    .getCurrentUser();
+});
+
+// ============================================================
+// SIDEBAR
+// ============================================================
+function renderSidebar(allowed) {
+  document.getElementById('sidebarNav').innerHTML = MODULES.map(mod => {
+    const visible = mod.tables.filter(t => TABLES[t] && (!allowed || allowed.includes(t)));
+    if (!visible.length) return '';
+    return `
+      <div class="sidebar-module">
+        <i class="fas ${mod.icon} me-1"></i>${mod.label}
+      </div>
+      ${visible.map(t => `
+        <a href="#" class="sidebar-link" id="nav-${t}" data-table="${t}">
+          ${TABLES[t].label}
+        </a>`).join('')}`;
+  }).join('');
+}
+
+// ============================================================
+// SHOW TABLE
+// ============================================================
+function showTable(name) {
+  if (!TABLES[name]) return;
+  currentTable = name; editMode = false; editId = null; searchCache = [];
+
+  document.querySelectorAll('.sidebar-link').forEach(el => el.classList.remove('active'));
+  const navEl = document.getElementById('nav-' + name);
+  if (navEl) navEl.classList.add('active');
+
+  const cfg = TABLES[name];
+  document.getElementById('mainContent').innerHTML = `
+    <div class="d-flex align-items-center mb-3">
+      <h5 class="mb-0 fw-bold text-navy">
+        <i class="fas fa-table me-2"></i>${cfg.label}
+      </h5>
+    </div>
+    <ul class="nav nav-tabs mb-3">
+      <li class="nav-item">
+        <a class="nav-link active" id="tab-form" href="#"
+          onclick="switchTab('form');return false;">
+          <i class="fas fa-plus-circle me-1"></i>Add New
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="tab-search" href="#"
+          onclick="switchTab('search');return false;">
+          <i class="fas fa-search me-1"></i>Search & Edit
+        </a>
+      </li>
+    </ul>
+    <div id="panel-form">${buildFormHTML(cfg)}</div>
+    <div id="panel-search" style="display:none">${buildSearchHTML(cfg)}</div>
+  `;
+  loadFkDropdowns(cfg.fields);
+}
+
+function switchTab(tab) {
+  document.getElementById('panel-form').style.display   = tab === 'form'   ? '' : 'none';
+  document.getElementById('panel-search').style.display = tab === 'search' ? '' : 'none';
+  document.getElementById('tab-form').classList.toggle('active',   tab === 'form');
+  document.getElementById('tab-search').classList.toggle('active', tab === 'search');
+}
+
+// ============================================================
+// FORM BUILDER
+// ============================================================
+function buildFormHTML(cfg) {
+  const pairs = [];
+  for (let i = 0; i < cfg.fields.length; i += 2) {
+    const a = buildFieldHTML(cfg.fields[i]);
+    const b = cfg.fields[i+1] ? buildFieldHTML(cfg.fields[i+1]) : '';
+    pairs.push(`<div class="row g-3">
+      <div class="col-md-6">${a}</div>
+      <div class="col-md-6">${b}</div>
+    </div>`);
+  }
+  const subHTML = (cfg.isMerged && cfg.subSections)
+    ? cfg.subSections.map(s => buildSubSectionHTML(s)).join('') : '';
+
+  return `
+    <div class="card">
+      <div class="card-header">
+        <span id="formTitle">
+          <i class="fas fa-plus-circle me-2"></i>New ${cfg.label} Record
+        </span>
+      </div>
+      <div class="card-body">
+        <form id="dataForm" onsubmit="submitForm(event)" novalidate>
+          <div class="section-title mb-2">
+            <i class="fas fa-info-circle me-2"></i>Main Information
+          </div>
+          ${pairs.join('<hr class="my-2">')}
+          ${subHTML}
+          <div class="mt-4 d-flex gap-2">
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+              <i class="fas fa-save me-2"></i>Save Record
+            </button>
+            <button type="button" class="btn btn-outline-secondary" onclick="resetForm()">
+              <i class="fas fa-undo me-2"></i>Reset
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>`;
+}
+
+function buildSubSectionHTML(section) {
+  if (section.type === 'static') {
+    const pairs = [];
+    for (let i = 0; i < section.fields.length; i += 2) {
+      const a = buildFieldHTML(section.fields[i]);
+      const b = section.fields[i+1] ? buildFieldHTML(section.fields[i+1]) : '';
+      pairs.push(`<div class="row g-3">
+        <div class="col-md-6">${a}</div>
+        <div class="col-md-6">${b}</div>
+      </div>`);
+    }
+    return `<hr class="my-3">
+      <div class="subsection-header">
+        <span class="section-title">
+          <i class="fas ${section.icon||'fa-layer-group'} me-2"></i>${section.title}
+        </span>
+      </div>
+      ${pairs.join('<hr class="my-2">')}`;
+  }
+  if (section.type === 'repeatable') {
+    const ths = section.itemFields.map(f => `<th>${f.label}</th>`).join('') + '<th></th>';
+    return `<hr class="my-3">
+      <div class="subsection-header d-flex justify-content-between align-items-center">
+        <span class="section-title">
+          <i class="fas ${section.icon||'fa-list'} me-2"></i>${section.title}
+        </span>
+        <button type="button" class="btn btn-sm btn-outline-primary"
+          onclick="addItemRow('${section.id}')">
+          <i class="fas fa-plus me-1"></i>Add Row
+        </button>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-sm table-bordered mb-1">
+          <thead><tr>${ths}</tr></thead>
+          <tbody id="${section.id}-tbody"></tbody>
+        </table>
+      </div>
+      <div class="form-text">Click "Add Row" to add items.</div>`;
+  }
+  return '';
+}
+
+function buildFieldHTML(f) {
+  const req  = f.required ? '<span class="required-star">*</span>' : '';
+  const hint = f.hint ? `<div class="form-text">${f.hint}</div>` : '';
+  let ctrl   = '';
+
+  if (f.autoGen) {
+    ctrl = `<input type="text" class="form-control" id="f-${f.name}" placeholder="Auto-generated" disabled>`;
+  } else if (f.readonly) {
+    ctrl = `<input type="text" class="form-control" id="f-${f.name}" value="${f.defaultValue||''}" readonly>`;
+  } else if (f.type === 'select') {
+    ctrl = `<select class="form-select" id="f-${f.name}" ${f.required?'required':''}>
+      <option value="">-- Select --</option>
+      ${f.options.map(o => `<option>${o}</option>`).join('')}
+    </select>`;
+  } else if (f.type === 'fk') {
+    ctrl = `<select class="form-select" id="f-${f.name}" ${f.required?'required':''}>
+      <option value="">-- Loading... --</option>
+    </select>`;
+  } else if (f.type === 'textarea') {
+    ctrl = `<textarea class="form-control" id="f-${f.name}" rows="3"
+      ${f.maxLength ? `maxlength="${f.maxLength}"` : ''}
+      ${f.required  ? 'required' : ''}></textarea>`;
+  } else {
+    const attrs = [
+      f.required   ? 'required'              : '',
+      f.pattern    ? `pattern="${f.pattern}"` : '',
+      f.min !== undefined ? `min="${f.min}"` : '',
+      f.max !== undefined ? `max="${f.max}"` : '',
+      f.maxLength  ? `maxlength="${f.maxLength}"` : '',
+      f.step       ? `step="${f.step}"`       : '',
+    ].filter(Boolean).join(' ');
+    ctrl = `<input type="${f.type}" class="form-control" id="f-${f.name}" ${attrs}>`;
+  }
+  return `<div class="mb-1">
+    <label class="form-label">${f.label}${req}</label>
+    ${ctrl}${hint}
+  </div>`;
+}
+
+// ============================================================
+// SEARCH BUILDER
+// ============================================================
+function buildSearchHTML(cfg) {
+  const inputs = cfg.searchFields.map(f => {
+    const key  = f.filterKey || f.name;
+    const ctrl = f.type === 'select'
+      ? `<select class="form-select form-select-sm" id="sf-${key}">
+          ${f.options.map(o => `<option value="${o}">${o||'-- All --'}</option>`).join('')}
+         </select>`
+      : `<input type="${f.type}" class="form-control form-control-sm"
+          id="sf-${key}" placeholder="Search...">`;
+    return `<div class="col-md-3">
+      <label class="form-label">${f.label}</label>${ctrl}
+    </div>`;
+  }).join('');
+
+  return `
+    <div class="card mb-3">
+      <div class="card-header"><i class="fas fa-filter me-2"></i>Search Filters</div>
+      <div class="card-body">
+        <form onsubmit="runSearch(event)">
+          <div class="row g-3">${inputs}</div>
+          <div class="mt-3 d-flex gap-2">
+            <button type="submit" class="btn btn-primary btn-sm">
+              <i class="fas fa-search me-1"></i>Search
+            </button>
+            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="clearSearch()">
+              <i class="fas fa-times me-1"></i>Clear
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="searchResults"></div>`;
+}
+
+// ============================================================
+// FK DROPDOWNS
+// ============================================================
+function loadFkDropdowns(fields, rowData) {
+  const cfg = TABLES[currentTable];
+  const allFk = [...fields.filter(f => f.type === 'fk')];
+  if (cfg && cfg.isMerged && cfg.subSections) {
+    cfg.subSections.forEach(s =>
+      (s.fields || s.itemFields || []).filter(f => f.type === 'fk').forEach(f => allFk.push(f))
+    );
+  }
+  [...new Set(allFk.map(f => f.fkFn))].forEach(fn => {
+    const apply = opts => {
+      fkCache[fn] = opts;
+      const optHTML = `<option value="">-- Select --</option>` +
+        opts.map(o => `<option value="${o.value}">${o.label}</option>`).join('');
+      fields.filter(f => f.fkFn === fn).forEach(f => {
+        const sel = document.getElementById('f-' + f.name);
+        if (!sel) return;
+        sel.innerHTML = optHTML;
+        if (rowData && rowData[f.name]) sel.value = rowData[f.name];
+      });
+      if (cfg && cfg.isMerged && cfg.subSections) {
+        cfg.subSections.filter(s => s.type === 'static').forEach(s => {
+          s.fields.filter(f => f.fkFn === fn).forEach(f => {
+            const sel = document.getElementById('f-' + f.name);
+            if (!sel) return;
+            sel.innerHTML = optHTML;
+            if (rowData && rowData[f.name]) sel.value = rowData[f.name];
+          });
+        });
+      }
+    };
+    if (fkCache[fn]) { apply(fkCache[fn]); return; }
+    google.script.run.withSuccessHandler(apply).withFailureHandler(console.error)[fn]();
+  });
+}
+
+// ============================================================
+// REPEATABLE ROW HELPERS
+// ============================================================
+function addItemRow(sectionId) {
+  const cfg     = TABLES[currentTable];
+  const section = cfg.subSections.find(s => s.id === sectionId);
+  if (!section) return;
+  const tbody = document.getElementById(sectionId + '-tbody');
+  const cells = section.itemFields.map(f => {
+    const attrs = [
+      f.required ? 'required' : '',
+      f.min !== undefined ? `min="${f.min}"` : '',
+      f.step ? `step="${f.step}"` : '',
+    ].filter(Boolean).join(' ');
+    let ctrl = '';
+    if (f.type === 'fk') {
+      const opts = fkCache[f.fkFn] || [];
+      ctrl = `<select class="form-select form-select-sm" data-field="${f.name}" ${f.required?'required':''}>
+        <option value="">-- Select --</option>
+        ${opts.map(o => `<option value="${o.value}">${o.label}</option>`).join('')}
+      </select>`;
+    } else if (f.type === 'select') {
+      ctrl = `<select class="form-select form-select-sm" data-field="${f.name}" ${f.required?'required':''}>
+        <option value="">-- Select --</option>
+        ${f.options.map(o => `<option>${o}</option>`).join('')}
+      </select>`;
+    } else {
+      ctrl = `<input type="${f.type}" class="form-control form-control-sm"
+        data-field="${f.name}" placeholder="${f.label}" ${attrs}>`;
+    }
+    return `<td style="min-width:110px">${ctrl}</td>`;
+  }).join('');
+  const tr = document.createElement('tr');
+  tr.innerHTML = cells +
+    `<td><button type="button" class="btn btn-sm btn-outline-danger py-0"
+      onclick="this.closest('tr').remove()">x</button></td>`;
+  tbody.appendChild(tr);
+}
+
+function collectRepeatableItems(sectionId, itemFields) {
+  const tbody = document.getElementById(sectionId + '-tbody');
+  if (!tbody) return [];
+  return Array.from(tbody.querySelectorAll('tr')).map(row => {
+    const item = {};
+    itemFields.forEach(f => {
+      const el = row.querySelector(`[data-field="${f.name}"]`);
+      if (el) item[f.name] = el.value;
+    });
+    return item;
+  }).filter(item => itemFields.some(f => item[f.name]));
+}
+
+// ============================================================
+// FORM SUBMIT
+// ============================================================
+function submitForm(e) {
+  e.preventDefault();
+  const cfg  = TABLES[currentTable];
+  const data = {};
+
+  cfg.fields.forEach(f => {
+    if (f.autoGen) return;
+    const el = document.getElementById('f-' + f.name);
+    if (el) data[f.name] = el.value;
+  });
+
+  if (cfg.isMerged && cfg.subSections) {
+    cfg.subSections.forEach(s => {
+      if (s.type === 'static') {
+        s.fields.forEach(f => {
+          const el = document.getElementById('f-' + f.name);
+          if (el) data[f.name] = el.value;
+        });
+      } else if (s.type === 'repeatable') {
+        data[s.itemKey] = collectRepeatableItems(s.id, s.itemFields);
+      }
+    });
+  }
+
+  showSpinner();
+  const onSuccess = r => {
+    hideSpinner();
+    if (r && r.success) {
+      showToast('success', editMode ? 'Record updated.' : 'Saved! ID: ' + r.id);
+      if (editMode) { editMode = false; editId = null; switchTab('search'); }
+      else resetForm();
+    } else {
+      showToast('danger', (r && r.error) || 'An error occurred.');
+    }
+  };
+  const onFailure = err => { hideSpinner(); showToast('danger', err.message || 'Server error'); };
+
+  if (editMode) {
+    google.script.run.withSuccessHandler(onSuccess).withFailureHandler(onFailure)
+      [cfg.updateFn](editId, data);
+  } else {
+    google.script.run.withSuccessHandler(onSuccess).withFailureHandler(onFailure)
+      [cfg.insertFn](data);
+  }
+}
+
+function resetForm() {
+  editMode = false; editId = null;
+  document.getElementById('dataForm').reset();
+  document.getElementById('formTitle').innerHTML =
+    '<i class="fas fa-plus-circle me-2"></i>New ' + TABLES[currentTable].label + ' Record';
+  document.getElementById('submitBtn').innerHTML =
+    '<i class="fas fa-save me-2"></i>Save Record';
+
+  TABLES[currentTable].fields.forEach(f => {
+    if (f.defaultValue) {
+      const el = document.getElementById('f-' + f.name);
+      if (el) el.value = f.defaultValue;
+    }
+  });
+
+  const cfg = TABLES[currentTable];
+  if (cfg.isMerged && cfg.subSections) {
+    cfg.subSections.filter(s => s.type === 'repeatable').forEach(s => {
+      const tbody = document.getElementById(s.id + '-tbody');
+      if (tbody) tbody.innerHTML = '';
+    });
+  }
+}
+
+// ============================================================
+// SEARCH & EDIT
+// ============================================================
+function runSearch(e) {
+  e.preventDefault();
+  const cfg     = TABLES[currentTable];
+  const filters = {};
+  cfg.searchFields.forEach(f => {
+    const key = f.filterKey || f.name;
+    const el  = document.getElementById('sf-' + key);
+    if (el && el.value) filters[key] = el.value;
+  });
+  showSpinner();
+  google.script.run
+    .withSuccessHandler(rows => { hideSpinner(); searchCache = rows; renderResults(rows, cfg); })
+    .withFailureHandler(err  => { hideSpinner(); showToast('danger', err.message); })
+    [cfg.searchFn](filters);
+}
+
+function clearSearch() {
+  document.querySelectorAll('[id^="sf-"]').forEach(el => el.value = '');
+  document.getElementById('searchResults').innerHTML = '';
+}
+
+function renderResults(rows, cfg) {
+  const el = document.getElementById('searchResults');
+  if (!rows || !rows.length) {
+    el.innerHTML = '<div class="alert alert-info"><i class="fas fa-info-circle me-2"></i>No records found.</div>';
+    return;
+  }
+  const cols  = cfg.displayCols;
+  const thead = cols.map(c => '<th>' + c.replace(/_/g,' ') + '</th>').join('') + '<th></th>';
+  const tbody = rows.map((row, idx) => {
+    const cells = cols.map(c => '<td>' + (row[c] != null ? row[c] : '') + '</td>').join('');
+    return '<tr>' + cells + '<td><button class="btn btn-sm btn-outline-primary py-0" onclick="editRow(' + idx + ')"><i class="fas fa-edit"></i></button></td></tr>';
+  }).join('');
+
+  el.innerHTML = `
+    <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        <span><i class="fas fa-list me-2"></i>Results</span>
+        <span class="badge bg-secondary">${rows.length} record${rows.length!==1?'s':''}</span>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead><tr>${thead}</tr></thead>
+            <tbody>${tbody}</tbody>
+          </table>
+        </div>
+      </div>
+    </div>`;
+}
+
+function editRow(idx) {
+  const cfg = TABLES[currentTable];
+  const row = searchCache[idx];
+  editMode  = true;
+  editId    = row[cfg.pkField];
+  switchTab('form');
+
+  document.getElementById('formTitle').innerHTML =
+    '<i class="fas fa-edit me-2"></i>Edit ' + cfg.label +
+    ' &mdash; <span class="badge-id">' + editId + '</span>';
+  document.getElementById('submitBtn').innerHTML =
+    '<i class="fas fa-sync-alt me-2"></i>Update Record';
+
+  cfg.fields.forEach(f => {
+    if (f.autoGen || f.type === 'fk') return;
+    const el = document.getElementById('f-' + f.name);
+    if (el && row[f.name] !== undefined) el.value = row[f.name];
+  });
+  loadFkDropdowns(cfg.fields, row);
+}
+
+// ============================================================
+// UTILITIES
+// ============================================================
+function showSpinner() {
+  if (document.getElementById('spinnerOverlay')) return;
+  const d = document.createElement('div');
+  d.id = 'spinnerOverlay'; d.className = 'spinner-overlay';
+  d.innerHTML = '<div class="spinner-border text-primary" style="width:3rem;height:3rem"></div>';
+  document.body.appendChild(d);
+}
+
+function hideSpinner() {
+  const el = document.getElementById('spinnerOverlay');
+  if (el) el.remove();
+}
+
+function showToast(type, msg) {
+  const colors = { success:'#1a3a5c', danger:'#dc3545', info:'#0d6efd' };
+  const t = document.getElementById('appToast');
+  t.style.background = colors[type] || colors.info;
+  document.getElementById('toastBody').textContent = msg;
+  bootstrap.Toast.getOrCreateInstance(t, { delay:4000 }).show();
+}
+</script>

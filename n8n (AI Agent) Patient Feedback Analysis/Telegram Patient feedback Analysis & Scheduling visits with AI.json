@@ -1,0 +1,742 @@
+{
+  "name": "Telegram Patient feedback Analysis & Scheduling visits with AI",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Telegram Trigger').item.json.message.text }}",
+        "options": {
+          "systemMessage": "You are a helpful hospital assistant. When a patient shares their review or feedback:\n\n1. Respond empathetically and professionally to their message\n2. Analyze the sentiment as \"positive\", \"negative\", or \"neutral\"\n3. Categorize the feedback (e.g., service, wait_time, staff, facilities, treatment)\n4. Provide a brief summary of their feedback\n\nAlways be compassionate and thank them for their feedback."
+        }
+      },
+      "id": "d53489f2-bfb7-4f06-9651-eded7a5da664",
+      "name": "Review Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        768,
+        528
+      ]
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Telegram Trigger').item.json.message.chat.id }}"
+      },
+      "id": "919edb5c-41ce-4d10-8e14-ad89f6b0f8e9",
+      "name": "Conversation Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        880,
+        704
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "=Thank you for your feedback. We appreciate you taking the time to share your experience with us.",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "28aeb0b8-46d9-44c7-99f9-eed4cf932009",
+      "name": "Send Response to Patient",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1424,
+        688
+      ],
+      "webhookId": "04c5a31c-8994-4be2-827c-245bcbd204d0",
+      "credentials": {
+        "telegramApi": {
+          "id": "lqrHelIaLg0LYmKF",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.output.sentiment }}",
+              "rightValue": "negative",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              },
+              "id": "50bdd13d-e193-454b-82f7-d92f5b092eae"
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "927b428d-fa76-4501-b4b9-6a09c04e1854",
+      "name": "Is Negative Review?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1136,
+        528
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "ar7998846@gmail.com",
+        "subject": "=Negative Patient Review - {{ $json.output.category }}",
+        "message": "=<h2>Negative Patient Review Alert</h2>\n<p><strong>Category:</strong> {{ $json.output.category }}</p>\n<p><strong>Summary:</strong> {{ $json.output.summary }}</p>\n<p><strong>Patient Chat ID:</strong> {{ $(\"Telegram Trigger\").item.json.message.chat.id }}</p>\n<p><strong>Original Message:</strong> {{ $(\"Telegram Trigger\").item.json.message.text }}</p>\n<p><strong>Time:</strong> {{ $now.toFormat(\"MMMM d, yyyy HH:mm\") }}</p>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "25d1f8d0-b845-470e-afe9-4d4c9b2d6ebe",
+      "name": "Alert Hospital Manager",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1424,
+        496
+      ],
+      "webhookId": "183d89ad-eabe-4b24-b648-52f5afa7056d",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "i8Hpl1HcUNKE1mSa",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -80,
+        736
+      ],
+      "id": "4424e7db-d87e-4a24-91a1-4a544bd25c15",
+      "name": "Telegram Trigger",
+      "webhookId": "042e300f-a18d-490b-87e5-1963d86d8926",
+      "credentials": {
+        "telegramApi": {
+          "id": "lqrHelIaLg0LYmKF",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "table": "[clin].[visit_schedule]",
+        "columns": "patient_name, telegram_id, hospital_name, department_name, doctor_name, visit_date, visit_time"
+      },
+      "id": "9f35fa73-41e7-4a1c-ab79-acb5a4d153e6",
+      "name": "Save Appointment",
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        2432,
+        976
+      ],
+      "credentials": {
+        "microsoftSql": {
+          "id": "TiAjFp3I6TzuQdud",
+          "name": "Microsoft SQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n    s.name                          AS schema_name,\n    t.name                          AS table_name,\n    c.name                          AS column_name,\n    tp.name                         AS data_type,\n    c.max_length,\n    c.is_nullable,\n    CASE WHEN pk.column_id IS NOT NULL THEN 'PK' ELSE '' END AS is_pk,\n    CASE WHEN fk.parent_column_id IS NOT NULL THEN 'FK' ELSE '' END AS is_fk,\n    cc.definition                   AS check_constraint\nFROM sys.tables t\nJOIN sys.schemas s       ON s.schema_id  = t.schema_id\nJOIN sys.columns c       ON c.object_id  = t.object_id\nJOIN sys.types tp        ON tp.user_type_id = c.user_type_id\nLEFT JOIN (\n    SELECT ic.object_id, ic.column_id\n    FROM sys.index_columns ic\n    JOIN sys.indexes i ON i.object_id = ic.object_id AND i.index_id = ic.index_id\n    WHERE i.is_primary_key = 1\n) pk ON pk.object_id = c.object_id AND pk.column_id = c.column_id\nLEFT JOIN (\n    SELECT fkc.parent_object_id, fkc.parent_column_id\n    FROM sys.foreign_key_columns fkc\n) fk ON fk.parent_object_id = c.object_id AND fk.parent_column_id = c.column_id\nLEFT JOIN sys.check_constraints cc \n    ON cc.parent_object_id = c.object_id \n    AND cc.parent_column_id = c.column_id\nWHERE s.name IN ('ref','hosp','pat','inv','clin','fin','svc')\nORDER BY s.name, t.name, c.column_id;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        848,
+        976
+      ],
+      "id": "60ddc6b5-0fba-4745-990e-55516fe0a098",
+      "name": "Get table schemas",
+      "credentials": {
+        "microsoftSql": {
+          "id": "TiAjFp3I6TzuQdud",
+          "name": "Microsoft SQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "contextWindowLength": 30
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        1440,
+        1200
+      ],
+      "id": "510e05a9-659a-40d9-846d-ca068c39e57b",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "jsCode": "const rows = $input.all().map(i => i.json);\n\n// Group by schema → table → columns\nconst schemas = {};\nfor (const row of rows) {\n  const key = `${row.schema_name}.${row.table_name}`;\n  if (!schemas[key]) schemas[key] = [];\n  \n  let col = `  - ${row.column_name} (${row.data_type}`;\n  if (row.is_pk === 'PK') col += ', PRIMARY KEY';\n  if (row.is_fk === 'FK') col += ', FK';\n  if (row.is_nullable === false || row.is_nullable === 0) col += ', NOT NULL';\n  if (row.check_constraint) col += `, CHECK: ${row.check_constraint}`;\n  col += ')';\n  \n  schemas[key].push(col);\n}\n\n// Build readable markdown\nlet schemaText = '# UHIP Database Schema\\n\\n';\nfor (const [table, cols] of Object.entries(schemas)) {\n  schemaText += `## ${table}\\n${cols.join('\\n')}\\n\\n`;\n}\n\nreturn [{ json: { schemaText } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1072,
+        976
+      ],
+      "id": "daf6beed-83e9-4701-95b0-d4e1182f0476",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1760,
+        976
+      ],
+      "id": "98a69f28-c345-4c9d-8193-e0f526025ecb",
+      "name": "Send a text message",
+      "webhookId": "35585c0a-112b-49a8-afd2-902a9a24b629",
+      "notesInFlow": false,
+      "credentials": {
+        "telegramApi": {
+          "id": "lqrHelIaLg0LYmKF",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Telegram Trigger').item.json.message.text }}",
+        "options": {
+          "systemMessage": "=You are a friendly and knowledgeable hospital assistant for UHIP (Unified Healthcare Intelligence Platform) in Port Said, Egypt.\n\nYou have access to a execute_sql_query tool. Use it to answer questions and guide patients through booking appointments using REAL data only.\n\nDATABASE SCHEMA:\n{{ $json.schemaText }}\n\n═══════════════════════════════════\nSQL RULES (always follow these)\n═══════════════════════════════════\n- Always write valid Azure SQL (T-SQL) syntax\n- NEVER use DROP, DELETE, TRUNCATE, UPDATE, INSERT or any write operations\n- Read-only SELECT queries only\n- When showing doctors, always filter employment_status = 'Active'\n- When showing schedules, always filter shift_date >= CAST(GETDATE() AS DATE)\n- If a query returns no results, tell the user clearly and suggest alternatives\n- NEVER invent hospital, department, doctor, or schedule data — only use what the database returns\n\n═══════════════════════════════════\nYOUR TWO MODES\n═══════════════════════════════════\n\n── MODE 1: GENERAL QUESTIONS ──\nIf the user asks a general question (e.g. about doctors, departments, hospitals, schedules):\n- Write and run the appropriate SELECT query\n- Present results in a clean, readable format suitable for Telegram\n- Keep responses under 300 words\n\n── MODE 2: APPOINTMENT BOOKING ──\nIf the user wants to book an appointment, guide them step by step.\nCollect these fields IN ORDER, one question at a time:\n\n1. patient_name     → Ask: \"What is your full name?\"\n2. national_id      → Ask: \"What is your national ID number?\"\n3. hospital_name    → Query available hospitals → show as numbered list → ask patient to choose\n4. department_name  → Query departments in chosen hospital → show as numbered list → ask patient to choose\n5. doctor_name      → Query active doctors in chosen department → show as numbered list with specialty → ask patient to choose\n6. appointment_date → Query available shift_date for chosen doctor → show as numbered list → ask patient to choose\n7. appointment_time → Query shift_start options for chosen date → show as numbered list → ask patient to choose\n\nALSO CAPTURE SILENTLY (do not ask the patient):\n- chat_id:       {{ $(\"Telegram Trigger\").item.json.message.chat.id }}\n- doctor_id:     resolve from chosen doctor\n- hospital_id:   resolve from chosen hospital\n- department_id: resolve from chosen department\n- status:        set to \"pending\"\n- created_at:    current timestamp\n\nBOOKING RULES:\n- Show options as a numbered list so the patient replies with a number\n- Ask ONE question at a time, never skip ahead\n- Never show options from a different hospital or department than what the patient chose\n- Once ALL fields are collected, show a full summary:\n\n  📋 Appointment Summary:\n  - Name: ...\n  - National ID: ...\n  - Hospital: ...\n  - Department: ...\n  - Doctor: ...\n  - Date: ...\n  - Time: ...\n\n  Then ask: \"Shall I confirm this appointment? (yes/no)\"\n\n- If the patient says YES:\n  Output a clean Telegram confirmation message with all booking details and status \"Pending\" and only this confiramtion message should start with ✅ Appointment Confirmed!\n\n- If the patient says NO:\n  Restart the booking from step 1"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1360,
+        976
+      ],
+      "id": "14e64dd2-9fc9-46ce-a7bf-9cca6bf9dc53",
+      "name": "UHIP Assistant"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        1296,
+        1200
+      ],
+      "id": "eae8e046-afe8-4615-8b85-0c9e3fb9c6a3",
+      "name": "Mistral Cloud Chat Model",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "Z5Sd8nAwbYCI3Kwu",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        144,
+        896
+      ],
+      "id": "2241d852-80a1-426b-97f3-b17c2b324b73",
+      "name": "Mistral Cloud Chat Model1",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "Z5Sd8nAwbYCI3Kwu",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.message.text }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "You are a message classifier for a hospital communication system.\n\nYour ONLY job is to classify incoming messages into exactly one of two categories:\n\n1. REVIEW — The message is a patient review, feedback, rating, or opinion about their experience (e.g. quality of care, staff behavior, wait time satisfaction, recommendations).\n\n2. BOOKING_STEP — The message is part of a hospital visit booking flow (e.g. requesting an appointment, confirming a date, providing personal details, asking about availability, canceling or rescheduling).\n\nRules:\n- Respond with ONLY a JSON object. No explanation. No extra text. No markdown. No code fences.\n- Format: {\"label\": \"REVIEW\" | \"BOOKING_STEP\", \"confidence\": 0.0-1.0, \"reason\": \"one short sentence\"}\n- If the message could fit both, pick the most likely intent.\n- Base classification on intent, not keywords alone.\n\nExamples:\n\nInput: \"The doctor was very kind and professional, I would definitely come back.\"\nOutput: {\"label\": \"REVIEW\", \"confidence\": 0.98, \"reason\": \"User is expressing satisfaction about a past experience.\"}\n\nInput: \"I'd like to book an appointment for next Monday.\"\nOutput: {\"label\": \"BOOKING_STEP\", \"confidence\": 0.97, \"reason\": \"User is requesting a new appointment.\"}\n\nInput: \"My name is Ahmed, I'm 34 years old.\"\nOutput: {\"label\": \"BOOKING_STEP\", \"confidence\": 0.91, \"reason\": \"User is providing personal details, likely as part of a booking flow.\"}\n\nInput: \"The waiting room was too crowded and I waited 2 hours.\"\nOutput: {\"label\": \"REVIEW\", \"confidence\": 0.95, \"reason\": \"User is giving negative feedback about their visit experience.\"}"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        144,
+        736
+      ],
+      "id": "07e34800-c1b3-4e5d-b285-8117e492b470",
+      "name": "Message Classifier"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        752,
+        704
+      ],
+      "id": "5f36c56e-c3aa-4edb-9bfd-88c8f710bf15",
+      "name": "Mistral Cloud Chat Model2",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "Z5Sd8nAwbYCI3Kwu",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "3acac601-301e-44cc-81fb-b7a964c56789",
+                    "leftValue": "={{ JSON.parse($json.text.replace(/```json|```/g, '').trim()).label }}",
+                    "rightValue": "REVIEW",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ JSON.parse($json.text.replace(/```json|```/g, '').trim()).label }}",
+                    "rightValue": "BOOKING_STEP",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "173e0708-2379-4202-ae75-4071b7e60b68"
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        448,
+        736
+      ],
+      "id": "d02a8408-684c-47bc-8774-83180f511070",
+      "name": "Switch1"
+    },
+    {
+      "parameters": {
+        "instructions": "Extract the following fields from the Telegram message text and return ONLY a structured JSON object.\nFields in same seq:\n- patient_name: the value after \"Patient Name:\"\n- telegram_id: taken from message.chat.id (not from the text)\n- hospital_name: the value after \"Hospital:\"\n- department_name: the value after \"Department:\"\n- doctor_name: the value after \"Doctor:\"\n- visit_date: the value after \"Date:\", converted to YYYY-MM-DD format\n  (example: \"22nd July 2024\" → \"2024-07-22\")\n- visit_time \n",
+        "codeGeneratedForPrompt": "Extract the following fields from the Telegram message text and return ONLY a structured JSON object.\nFields in same seq:\n- patient_name: the value after \"Patient Name:\"\n- telegram_id: taken from message.chat.id (not from the text)\n- hospital_name: the value after \"Hospital:\"\n- department_name: the value after \"Department:\"\n- doctor_name: the value after \"Doctor:\"\n- visit_date: the value after \"Date:\", converted to YYYY-MM-DD format\n  (example: \"22nd July 2024\" → \"2024-07-22\")\n- visit_time \n",
+        "jsCode": "const messages = $input.all();\nconst result = messages.map((msg) => {\n  const text = msg.json.result.text;\n  const telegram_id = msg.json.result.chat.id;\n  const patient_name = text.split(\"Patient Name:\")[1]?.split(\"\\n\")[0]?.trim();\n  const hospital_name = text.split(\"Hospital:\")[1]?.split(\"\\n\")[0]?.trim();\n  const department_name = text.split(\"Department:\")[1]?.split(\"\\n\")[0]?.trim();\n  const doctor_name = text.split(\"Doctor:\")[1]?.split(\"\\n\")[0]?.trim();\n  const visit_date_raw = text.split(\"Date:\")[1]?.split(\"\\n\")[0]?.trim();\n  const visit_time = text.split(\"Time:\")[1]?.split(\"\\n\")[0]?.trim();\n  const visit_date = new Date(\n    visit_date_raw.replace(/(\\d+)(st|nd|rd|th)/, \"$1\"),\n  )\n    .toISOString()\n    .split(\"T\")[0];\n  return {\n    patient_name,\n    telegram_id,\n    hospital_name,\n    department_name,\n    doctor_name,\n    visit_date,\n    visit_time,\n  };\n});\n\nreturn result;\n"
+      },
+      "type": "n8n-nodes-base.aiTransform",
+      "typeVersion": 1,
+      "position": [
+        2208,
+        976
+      ],
+      "id": "117b7337-e8c6-4809-8ed9-f658ea1c4e5f",
+      "name": "AI Transform"
+    },
+    {
+      "parameters": {
+        "content": "## Message Classifier\n**Double click** to edit me. [Guide](https://docs.n8n.io/workflows/components/sticky-notes/)",
+        "height": 448,
+        "width": 816,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -176,
+        592
+      ],
+      "typeVersion": 1,
+      "id": "7cc1a51d-144e-4442-917c-29e450a0f1db",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Patient Feedback Agent\n**Double click** to edit me. [Guide](https://docs.n8n.io/workflows/components/sticky-notes/)",
+        "height": 400,
+        "width": 960
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        704,
+        448
+      ],
+      "typeVersion": 1,
+      "id": "d3443a84-6f16-4cbf-92cc-e739c6d5df9d",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Scheduling Visits Agent\n**Double click** to edit me. [Guide](https://docs.n8n.io/workflows/components/sticky-notes/)",
+        "height": 464,
+        "width": 1904,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        768,
+        880
+      ],
+      "typeVersion": 1,
+      "id": "8f3d836e-587b-4e48-a66f-17ba8d9b0aa4",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "13be2c31-1ed6-4ddb-81e4-612d57f593a4",
+              "leftValue": "={{ $json.result.text }}",
+              "rightValue": "✅ Appointment Confirmed!",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1984,
+        976
+      ],
+      "id": "9ea44051-e4f7-46dd-9bae-98b07a1b592b",
+      "name": "Visit confirmed ?"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "{{ $fromAI('query', 'The SQL SELECT query to execute') }}",
+        "options": {
+          "queryReplacement": ""
+        }
+      },
+      "type": "n8n-nodes-base.microsoftSqlTool",
+      "typeVersion": 1.1,
+      "position": [
+        1600,
+        1184
+      ],
+      "id": "0c2d5c68-fd3f-4488-9c42-ba50027b8758",
+      "name": "execute_sql_query",
+      "credentials": {
+        "microsoftSql": {
+          "id": "TiAjFp3I6TzuQdud",
+          "name": "Microsoft SQL account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Review Agent": {
+      "main": [
+        [
+          {
+            "node": "Is Negative Review?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Conversation Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Review Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Negative Review?": {
+      "main": [
+        [
+          {
+            "node": "Alert Hospital Manager",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send Response to Patient",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Response to Patient",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Message Classifier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Response to Patient": {
+      "main": [
+        []
+      ]
+    },
+    "Save Appointment": {
+      "main": [
+        []
+      ]
+    },
+    "Get table schemas": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "UHIP Assistant",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "UHIP Assistant",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "UHIP Assistant": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message": {
+      "main": [
+        [
+          {
+            "node": "Visit confirmed ?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mistral Cloud Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "UHIP Assistant",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mistral Cloud Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Message Classifier",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message Classifier": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mistral Cloud Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Review Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "Review Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get table schemas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Transform": {
+      "main": [
+        [
+          {
+            "node": "Save Appointment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Visit confirmed ?": {
+      "main": [
+        [
+          {
+            "node": "AI Transform",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "execute_sql_query": {
+      "ai_tool": [
+        [
+          {
+            "node": "UHIP Assistant",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "b7768468-e4d3-4026-aa79-b1f3d57acd3a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d0ffb64d0d862e751323db963e58f4cadf6978ccf94ff3473caddb38fb9424e1"
+  },
+  "id": "YFL55cAjzQrTnfGg",
+  "tags": []
+}
