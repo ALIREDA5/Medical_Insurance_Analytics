@@ -102,11 +102,16 @@ go
 --      مرضى بأكتر من N زيارة بتشخيصات Severe أو Critical
 -- ------------------------------------------------------------
 CREATE OR ALTER PROCEDURE dbo.GetHighRiskPatients
-    @MinVisits      INT  = 3,
-    @SeverityFilter VARCHAR(10) = 'Severe'   -- 'Severe' أو 'Critical'
+    @MinVisits      INT          = 3,
+    @SeverityFilter VARCHAR(10)  = 'Severe',
+    @StartDate      DATE         = NULL,
+    @EndDate        DATE         = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
+
+    SET @StartDate = ISNULL(@StartDate, (SELECT MIN(visit_date) FROM clin.visit));
+    SET @EndDate   = ISNULL(@EndDate,  (SELECT MAX(visit_date) FROM clin.visit));
 
     SELECT
         p.patient_id,
@@ -121,6 +126,7 @@ BEGIN
     JOIN ref.diagnosis d ON v.diagnosis_code = d.diagnosis_code
     WHERE d.severity_level = @SeverityFilter
       AND v.visit_status   = 'Completed'
+      AND v.visit_date BETWEEN @StartDate AND @EndDate
     GROUP BY
         p.patient_id, p.first_name, p.last_name,
         p.gender, p.birth_date, p.phone
@@ -209,7 +215,7 @@ GO
 -- 2.1  GetHospitalCapacityReport
 --      نسبة إشغال الأسرة والـ ICU لكل مستشفى
 -- ------------------------------------------------------------
-CREATE OR ALTER PROCEDURE dbo.GetHospitalCapacityReport
+CREATE OR ALTER PROCEDURE dbo.GetHospitalCapacityReport @hospID Varchar(8) 
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -239,6 +245,7 @@ BEGIN
                ROW_NUMBER() OVER (PARTITION BY hospital_id ORDER BY update_time DESC) AS rn
         FROM hosp.icu_status
     ) i ON h.hospital_id = i.hospital_id AND i.rn = 1
+    where h.hospital_id in (@hospID)
     GROUP BY
         h.hospital_id, h.hospital_name, h.hospital_type,
         h.total_beds, h.icu_capacity,
@@ -246,8 +253,7 @@ BEGIN
     ORDER BY occupancy_pct DESC;
 END;
 GO
-EXEC dbo.GetHospitalCapacityReport;
-go
+
 -- ------------------------------------------------------------
 -- 2.2  GetICUAlertHospitals
 --      مستشفيات الـ ICU occupancy فيها فوق threshold
@@ -282,6 +288,7 @@ go
 -- ------------------------------------------------------------
 -- 2.3  GetDoctorWorkload
 --      عدد زيارات + نسبة double shifts لكل دكتور
+-- ------------------------------------------------------------
 CREATE OR ALTER PROCEDURE dbo.GetDoctorWorkload
     @HospitalID VARCHAR(4) = NULL,
     @StartDate  DATE       = NULL,
@@ -289,90 +296,34 @@ CREATE OR ALTER PROCEDURE dbo.GetDoctorWorkload
 AS
 BEGIN
     SET NOCOUNT ON;
-
     SET @StartDate = ISNULL(@StartDate, DATEADD(MONTH,-1,GETDATE()));
-    SET @EndDate   = ISNULL(@EndDate, GETDATE());
+    SET @EndDate   = ISNULL(@EndDate,   GETDATE());
 
-    ;WITH DoubleShiftCTE AS
-    (
-        SELECT
-            s.doctor_id,
-            s.shift_date,
-            CASE
-                WHEN EXISTS (
-                    SELECT 1
-                    FROM hosp.doctor_schedule s2
-                    WHERE s2.doctor_id = s.doctor_id
-                      AND s2.shift_date = s.shift_date
-                      AND s2.shift_start = '20:00'
-                )
-                THEN 1
-                ELSE 0
-            END AS is_double_shift
-        FROM hosp.doctor_schedule s
-        WHERE s.shift_start = '08:00'
-          AND s.shift_date BETWEEN @StartDate AND @EndDate
+    WITH Visits AS (
+        SELECT doctor_id, COUNT(visit_id) AS total_visits
+        FROM clin.visit
+        WHERE visit_date BETWEEN @StartDate AND @EndDate
+        GROUP BY doctor_id
     ),
-    DoctorStats AS
-    (
-        SELECT
-            doctor_id,
-            SUM(is_double_shift) AS double_shift_days,
-            COUNT(DISTINCT shift_date) AS total_shift_days
-        FROM DoubleShiftCTE
+    Shifts AS (
+        SELECT doctor_id, COUNT(DISTINCT shift_date) AS total_shifts
+        FROM hosp.doctor_schedule
+        WHERE shift_date BETWEEN @StartDate AND @EndDate
         GROUP BY doctor_id
     )
-
     SELECT
         doc.doctor_id,
-
         doc.first_name + ' ' + doc.last_name AS doctor_name,
-
         doc.specialty,
-
         h.hospital_name,
-
-        COUNT(DISTINCT v.visit_id) AS total_visits,
-
-        COUNT(DISTINCT s.schedule_id) AS total_shifts,
-
-        ISNULL(ds.double_shift_days,0) AS double_shift_days,
-
-        CAST(
-            ISNULL(ds.double_shift_days,0) * 100.0
-            / NULLIF(ds.total_shift_days,0)
-        AS DECIMAL(5,1)) AS double_shift_pct
-
+        ISNULL(v.total_visits, 0)  AS total_visits,
+        ISNULL(s.total_shifts, 0)  AS total_shifts
     FROM hosp.doctor doc
-
-    JOIN hosp.department dep
-        ON doc.department_id = dep.department_id
-
-    JOIN hosp.hospital h
-        ON dep.hospital_id = h.hospital_id
-
-    LEFT JOIN clin.visit v
-        ON doc.doctor_id = v.doctor_id
-       AND v.visit_date BETWEEN @StartDate AND @EndDate
-
-    LEFT JOIN hosp.doctor_schedule s
-        ON doc.doctor_id = s.doctor_id
-       AND s.shift_date BETWEEN @StartDate AND @EndDate
-
-    LEFT JOIN DoctorStats ds
-        ON doc.doctor_id = ds.doctor_id
-
+    JOIN hosp.department dep ON doc.department_id = dep.department_id
+    JOIN hosp.hospital   h   ON dep.hospital_id   = h.hospital_id
+    LEFT JOIN Visits v ON doc.doctor_id = v.doctor_id
+    LEFT JOIN Shifts s ON doc.doctor_id = s.doctor_id
     WHERE (@HospitalID IS NULL OR h.hospital_id = @HospitalID)
-
-    GROUP BY
-        doc.doctor_id,
-        doc.first_name,
-        doc.last_name,
-        doc.specialty,
-        h.hospital_name,
-        ds.double_shift_days,
-        ds.total_shift_days
-
     ORDER BY total_visits DESC;
 END;
 GO
@@ -502,6 +453,7 @@ BEGIN
         -- خصم من الـ inventory
         UPDATE inv.drug_inventory
         SET quantity_available = quantity_available - @Quantity
+            
         WHERE hospital_id = @HospitalID AND drug_id = @DrugID;
 
         -- تسجيل الحركة
@@ -751,10 +703,15 @@ BEGIN
 
     SELECT
         ca.rejection_reason,
-        COUNT(*)                        AS total_rejections,
+        COUNT(*) AS total_rejections,
         CAST(COUNT(*) * 100.0 /
             NULLIF(SUM(COUNT(*)) OVER(),0)
-        AS DECIMAL(5,1))                AS pct_of_all_rejections
+        AS DECIMAL(5,1)) AS pct_of_all_rejections,
+        CAST(SUM(COUNT(*)) OVER (
+            ORDER BY COUNT(*) DESC
+            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+        ) * 100.0 / NULLIF(SUM(COUNT(*)) OVER(),0)
+        AS DECIMAL(5,1)) AS cumulative_pct
     FROM fin.claim_approval ca
     WHERE ca.approval_status = 'Rejected'
       AND ca.approval_date BETWEEN @StartDate AND @EndDate
@@ -764,7 +721,32 @@ BEGIN
 END;
 GO
 
+--GetRejectionByHospital
 
+CREATE OR ALTER PROCEDURE dbo.GetRejectionByHospital
+    @StartDate DATE = NULL,
+    @EndDate   DATE = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SET @StartDate = ISNULL(@StartDate, DATEADD(MONTH,-6,GETDATE()));
+    SET @EndDate   = ISNULL(@EndDate,   GETDATE());
+
+    SELECT
+        h.hospital_name,
+        ca.rejection_reason,
+        COUNT(*) AS total_rejections
+    FROM fin.claim_approval ca
+    JOIN fin.claim c ON ca.claim_id = c.claim_id
+    JOIN hosp.hospital h ON c.hospital_id = h.hospital_id
+    WHERE ca.approval_status = 'Rejected'
+      AND ca.approval_date BETWEEN @StartDate AND @EndDate
+      AND ca.rejection_reason IS NOT NULL
+    GROUP BY h.hospital_name, ca.rejection_reason
+    ORDER BY h.hospital_name, total_rejections DESC;
+END;
+go
 -- ============================================================
 --  CATEGORY 5 — FRAUD DETECTION  ⚠️
 -- ============================================================
@@ -778,7 +760,6 @@ CREATE OR ALTER PROCEDURE dbo.DetectInflatedProcedureCosts
 AS
 BEGIN
     SET NOCOUNT ON;
-
     SELECT
         vp.visit_procedure_id,
         vp.visit_id,
@@ -787,19 +768,26 @@ BEGIN
         doc.first_name + ' ' + doc.last_name  AS doctor_name,
         pr.procedure_name,
         pr.expected_amount,
-        vp.procedure_amount                     AS actual_cost,
+        vp.procedure_amount                    AS actual_cost,
+
+        -- ✅ expected_cost --> expected_amount
         CAST((vp.procedure_amount - pr.expected_amount) * 100.0
-             / NULLIF(pr.expected_amount,0) AS DECIMAL(5,1)) AS inflation_pct,
+             / NULLIF(pr.expected_amount, 0) AS DECIMAL(5,1)) AS inflation_pct,
+
         p.first_name + ' ' + p.last_name      AS patient_name,
-        'Inflated Procedure Cost'             AS fraud_signal
+        'Inflated Procedure Cost'              AS fraud_signal
+
     FROM clin.visit_procedure vp
-    JOIN clin.visit     v   ON vp.visit_id       = v.visit_id
+    JOIN clin.visit            v   ON vp.visit_id      = v.visit_id
     JOIN ref.medical_procedure pr  ON vp.procedure_code = pr.procedure_code
-    JOIN hosp.hospital  h   ON v.hospital_id     = h.hospital_id
-    JOIN hosp.doctor    doc ON v.doctor_id       = doc.doctor_id
-    JOIN pat.patient   p   ON v.patient_id      = p.patient_id
+    JOIN hosp.hospital         h   ON v.hospital_id    = h.hospital_id
+    JOIN hosp.doctor           doc ON v.doctor_id      = doc.doctor_id
+    JOIN pat.patient           p   ON v.patient_id     = p.patient_id
+
+    -- ✅ expected_cost --> expected_amount
     WHERE (vp.procedure_amount - pr.expected_amount) * 100.0
-          / NULLIF(pr.expected_amount,0) >= @InflationThresholdPct
+          / NULLIF(pr.expected_amount, 0) >= @InflationThresholdPct
+
     ORDER BY inflation_pct DESC;
 END;
 GO
@@ -939,6 +927,7 @@ GO
 --      تقرير بأكتر الدكاترة اللي ليهم fraud signals
 -- ------------------------------------------------------------
 CREATE OR ALTER PROCEDURE dbo.GetFraudSummaryByDoctor
+    @TopN INT = 20
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -946,7 +935,7 @@ BEGIN
     WITH InflatedCosts AS (
         SELECT v.doctor_id, COUNT(*) AS inflated_count
         FROM clin.visit_procedure vp
-        JOIN clin.visit v     ON vp.visit_id       = v.visit_id
+        JOIN clin.visit v ON vp.visit_id = v.visit_id
         JOIN ref.medical_procedure p ON vp.procedure_code = p.procedure_code
         WHERE (vp.procedure_amount - p.expected_amount) * 100.0
               / NULLIF(p.expected_amount,0) >= 20
@@ -955,15 +944,15 @@ BEGIN
     AbnormalRx AS (
         SELECT px.doctor_id, COUNT(*) AS abnormal_rx_count
         FROM clin.prescription_item pi
-        JOIN clin.prescription  px ON pi.prescription_id = px.prescription_id
+        JOIN clin.prescription px ON pi.prescription_id = px.prescription_id
         WHERE pi.quantity * 1.0 / NULLIF(
             CASE pi.frequency
-                WHEN 'Once daily'        THEN pi.duration_days * 1
-                WHEN 'Twice daily'       THEN pi.duration_days * 2
-                WHEN 'Three times daily' THEN pi.duration_days * 3
-                WHEN 'Every 12 hours'    THEN pi.duration_days * 2
-                WHEN 'Every 8 hours'     THEN pi.duration_days * 3
-                WHEN 'Every 6 hours'     THEN pi.duration_days * 4
+                WHEN 'Once daily'          THEN pi.duration_days * 1
+                WHEN 'Twice daily'         THEN pi.duration_days * 2
+                WHEN 'Three times daily'   THEN pi.duration_days * 3
+                WHEN 'Every 12 hours'      THEN pi.duration_days * 2
+                WHEN 'Every 8 hours'       THEN pi.duration_days * 3
+                WHEN 'Every 6 hours'       THEN pi.duration_days * 4
                 ELSE pi.duration_days
             END, 0) >= 1.8
         GROUP BY px.doctor_id
@@ -971,35 +960,46 @@ BEGIN
     RejectedClaims AS (
         SELECT v.doctor_id, COUNT(*) AS rejected_claims
         FROM fin.claim c
-        JOIN fin.claim_approval ca ON c.claim_id  = ca.claim_id
-        JOIN clin.visit          v  ON c.visit_id  = v.visit_id
+        JOIN fin.claim_approval ca ON c.claim_id = ca.claim_id
+        JOIN clin.visit v ON c.visit_id = v.visit_id
         WHERE ca.approval_status = 'Rejected'
         GROUP BY v.doctor_id
+    ),
+    FraudSummary AS (
+        SELECT
+            doc.doctor_id,
+            doc.first_name + ' ' + doc.last_name  AS doctor_name,
+            doc.specialty,
+            h.hospital_name,
+            ISNULL(ic.inflated_count,    0)        AS inflated_procedure_count,
+            ISNULL(ar.abnormal_rx_count, 0)        AS abnormal_prescription_count,
+            ISNULL(rc.rejected_claims,   0)        AS rejected_claims_count,
+            ISNULL(ic.inflated_count,    0)
+                + ISNULL(ar.abnormal_rx_count, 0)
+                + ISNULL(rc.rejected_claims,   0)  AS total_fraud_signals
+        FROM hosp.doctor doc
+        JOIN hosp.department dep ON doc.department_id = dep.department_id
+        JOIN hosp.hospital   h   ON dep.hospital_id   = h.hospital_id
+        LEFT JOIN InflatedCosts  ic ON doc.doctor_id = ic.doctor_id
+        LEFT JOIN AbnormalRx     ar ON doc.doctor_id = ar.doctor_id
+        LEFT JOIN RejectedClaims rc ON doc.doctor_id = rc.doctor_id
+        WHERE ISNULL(ic.inflated_count,    0)
+            + ISNULL(ar.abnormal_rx_count, 0)
+            + ISNULL(rc.rejected_claims,   0) > 0
     )
-    SELECT
-        doc.doctor_id,
-        doc.first_name + ' ' + doc.last_name  AS doctor_name,
-        doc.specialty,
-        h.hospital_name,
-        ISNULL(ic.inflated_count,    0)        AS inflated_procedure_count,
-        ISNULL(ar.abnormal_rx_count, 0)        AS abnormal_prescription_count,
-        ISNULL(rc.rejected_claims,   0)        AS rejected_claims_count,
-        ISNULL(ic.inflated_count,0)
-            + ISNULL(ar.abnormal_rx_count,0)
-            + ISNULL(rc.rejected_claims,0)     AS total_fraud_signals
-    FROM hosp.doctor doc
-    JOIN hosp.department dep ON doc.department_id = dep.department_id
-    JOIN hosp.hospital   h   ON dep.hospital_id   = h.hospital_id
-    LEFT JOIN InflatedCosts  ic ON doc.doctor_id = ic.doctor_id
-    LEFT JOIN AbnormalRx     ar ON doc.doctor_id = ar.doctor_id
-    LEFT JOIN RejectedClaims rc ON doc.doctor_id = rc.doctor_id
-    WHERE ISNULL(ic.inflated_count,0)
-        + ISNULL(ar.abnormal_rx_count,0)
-        + ISNULL(rc.rejected_claims,0) > 0
+    SELECT TOP (@TopN)
+        doctor_id,
+        doctor_name,
+        specialty,
+        hospital_name,
+        inflated_procedure_count,
+        abnormal_prescription_count,
+        rejected_claims_count,
+        total_fraud_signals
+    FROM FraudSummary
     ORDER BY total_fraud_signals DESC;
 END;
 GO
-
 
 -- ============================================================
 --  CATEGORY 6 — ANALYTICS & REPORTING
@@ -1052,40 +1052,62 @@ GO
 --      تجميع rating + waiting_time + rejection rate لكل مستشفى
 -- ------------------------------------------------------------
 CREATE OR ALTER PROCEDURE dbo.GetHospitalPerformanceScore
+    @HospitalID VARCHAR(4) = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
 
+    WITH Ratings AS (
+        SELECT hospital_id,
+               CAST(AVG(CAST(rating AS FLOAT)) AS DECIMAL(3,1)) AS avg_rating,
+               COUNT(feedback_id) AS total_feedback
+        FROM svc.patient_feedback
+        GROUP BY hospital_id
+    ),
+    Waiting AS (
+        SELECT hospital_id,
+               CAST(AVG(CAST(waiting_time AS FLOAT)) AS DECIMAL(6,1)) AS avg_waiting_min
+        FROM clin.visit
+        WHERE visit_status = 'Completed'
+        GROUP BY hospital_id
+    ),
+    Claims AS (
+        SELECT c.hospital_id,
+               COUNT(DISTINCT c.claim_id) AS total_claims,
+               COUNT(DISTINCT CASE WHEN ca.approval_status = 'Rejected' 
+                              THEN c.claim_id END) AS rejected_claims
+        FROM fin.claim c
+        LEFT JOIN fin.claim_approval ca ON c.claim_id = ca.claim_id
+        GROUP BY c.hospital_id
+    ),
+    Referrals AS (
+        SELECT from_hospital_id AS hospital_id,
+               COUNT(DISTINCT referral_id) AS total_referrals_out
+        FROM hosp.referral
+        GROUP BY from_hospital_id
+    )
     SELECT
         h.hospital_id,
         h.hospital_name,
         h.hospital_type,
         h.district,
-        -- Patient satisfaction
-        CAST(AVG(CAST(pf.rating AS FLOAT)) AS DECIMAL(3,1))    AS avg_rating,
-        COUNT(DISTINCT pf.feedback_id)                          AS total_feedback,
-        -- Waiting time
-        CAST(AVG(CAST(v.waiting_time AS FLOAT)) AS DECIMAL(6,1)) AS avg_waiting_min,
-        -- Claim rejection rate
-        COUNT(DISTINCT CASE WHEN ca.approval_status = 'Rejected' THEN c.claim_id END) AS rejected_claims,
-        COUNT(DISTINCT c.claim_id)                              AS total_claims,
-        CAST(
-            COUNT(DISTINCT CASE WHEN ca.approval_status = 'Rejected' THEN c.claim_id END) * 100.0
-            / NULLIF(COUNT(DISTINCT c.claim_id),0)
-        AS DECIMAL(5,1))                                        AS rejection_rate_pct,
-        -- Referral overflow rate
-        COUNT(DISTINCT r.referral_id)                           AS total_referrals_out
+        ISNULL(r.avg_rating, 0)        AS avg_rating,
+        ISNULL(r.total_feedback, 0)    AS total_feedback,
+        ISNULL(w.avg_waiting_min, 0)   AS avg_waiting_min,
+        ISNULL(c.rejected_claims, 0)   AS rejected_claims,
+        ISNULL(c.total_claims, 0)      AS total_claims,
+        CAST(ISNULL(c.rejected_claims,0) * 100.0 
+             / NULLIF(c.total_claims,0) AS DECIMAL(5,1)) AS rejection_rate_pct,
+        ISNULL(rf.total_referrals_out, 0) AS total_referrals_out
     FROM hosp.hospital h
-    LEFT JOIN svc.patient_feedback pf ON h.hospital_id = pf.hospital_id
-    LEFT JOIN clin.visit           v  ON h.hospital_id = v.hospital_id  AND v.visit_status = 'Completed'
-    LEFT JOIN fin.claim           c  ON h.hospital_id = c.hospital_id
-    LEFT JOIN fin.claim_approval  ca ON c.claim_id    = ca.claim_id
-    LEFT JOIN hosp.referral        r  ON h.hospital_id = r.from_hospital_id
-    GROUP BY h.hospital_id, h.hospital_name, h.hospital_type, h.district
+    LEFT JOIN Ratings   r  ON h.hospital_id = r.hospital_id
+    LEFT JOIN Waiting   w  ON h.hospital_id = w.hospital_id
+    LEFT JOIN Claims    c  ON h.hospital_id = c.hospital_id
+    LEFT JOIN Referrals rf ON h.hospital_id = rf.hospital_id
+    WHERE (@HospitalID IS NULL OR h.hospital_id = @HospitalID)
     ORDER BY avg_rating DESC;
 END;
 GO
-
 -- ------------------------------------------------------------
 -- 6.3  GetTopDiagnosesByHospital
 --      أكتر N تشخيصات في كل مستشفى
@@ -1124,7 +1146,82 @@ BEGIN
 END;
 GO
 
+    
+--PatientPrescriptions
+CREATE OR ALTER PROCEDURE dbo.GetPatientPrescriptions
+    @PatientID VARCHAR(12),
+    @VisitID   VARCHAR(12) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT
+        v.visit_id,
+        p.prescription_id,
+        p.prescription_date,
+        dr.drug_name,
+        dr.generic_name,
+        pi.dosage,
+        pi.frequency,
+        pi.duration_days,
+        pi.quantity
+    FROM clin.prescription p
+    JOIN clin.prescription_item pi ON p.prescription_id = pi.prescription_id
+    JOIN ref.drug              dr  ON pi.drug_id        = dr.drug_id
+    JOIN clin.visit            v   ON p.visit_id        = v.visit_id
+    WHERE v.patient_id = @PatientID
+      AND (@VisitID IS NULL OR v.visit_id = @VisitID)
+    ORDER BY p.prescription_date DESC;
+END;
+go
+    
+--TopDrugConsumption
+CREATE OR ALTER PROCEDURE dbo.GetTopDrugConsumption
+    @HospitalID VARCHAR(4) = NULL,
+    @StartDate  DATE       = NULL,
+    @EndDate    DATE       = NULL,
+    @TopN       INT        = 10
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SET @StartDate = ISNULL(@StartDate, DATEADD(MONTH,-6,GETDATE()));
+    SET @EndDate   = ISNULL(@EndDate,   GETDATE());
+
+    WITH TopDrugs AS (
+        SELECT TOP (@TopN)
+            dr.drug_name,
+            SUM(dt.quantity) AS total_consumed
+        FROM inv.drug_transaction dt
+        JOIN ref.drug dr ON dt.drug_id = dr.drug_id
+        WHERE dt.transaction_type = 'Dispensing'
+          AND dt.transaction_date BETWEEN @StartDate AND @EndDate
+          AND (@HospitalID IS NULL OR dt.hospital_id = @HospitalID)
+        GROUP BY dr.drug_name
+        ORDER BY total_consumed DESC
+    ),
+    Months AS (
+        SELECT DISTINCT FORMAT(transaction_date,'yyyy-MM') AS month
+        FROM inv.drug_transaction
+        WHERE transaction_date BETWEEN @StartDate AND @EndDate
+    )
+    SELECT
+        td.drug_name,
+        m.month,
+        ISNULL(SUM(dt.quantity), 0) AS total_dispensed
+    FROM TopDrugs td
+    CROSS JOIN Months m
+    LEFT JOIN inv.drug_transaction dt 
+        ON dt.drug_id IN (SELECT drug_id FROM ref.drug WHERE drug_name = td.drug_name)
+        AND FORMAT(dt.transaction_date,'yyyy-MM') = m.month
+        AND dt.transaction_type = 'Dispensing'
+        AND (@HospitalID IS NULL OR dt.hospital_id = @HospitalID)
+    GROUP BY td.drug_name, m.month
+    ORDER BY td.drug_name, m.month;
+END;
+GO
 -- ============================================================
 --  END OF SCRIPT
---  Total: 18 Stored Procedures across 6 categories
 -- ============================================================
+
+
