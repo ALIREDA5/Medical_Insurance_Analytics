@@ -1,0 +1,270 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:1:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\InventoryHealthReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:1:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:InventoryHealthReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74D6DABF-A330-01C2-A4D7-1712824A3C30}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\ClaimsPerformanceReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{74D6DABF-A330-01C2-A4D7-1712824A3C30}|UHIP Reports.rptproj|solutionrelative:ClaimsPerformanceReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74D6DABF-A330-01C2-A4D7-1712824A3C30}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\PatientPrescriptions.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{74D6DABF-A330-01C2-A4D7-1712824A3C30}|UHIP Reports.rptproj|solutionrelative:PatientPrescriptions.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74D6DABF-A330-01C2-A4D7-1712824A3C30}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\ExecutiveDashboard.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{74D6DABF-A330-01C2-A4D7-1712824A3C30}|UHIP Reports.rptproj|solutionrelative:ExecutiveDashboard.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74D6DABF-A330-01C2-A4D7-1712824A3C30}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\FraudSignalsReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{74D6DABF-A330-01C2-A4D7-1712824A3C30}|UHIP Reports.rptproj|solutionrelative:FraudSignalsReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\DoctorWorkload.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:DoctorWorkload.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\ExecutiveDashboard.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:ExecutiveDashboard.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\FraudSignalsReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:FraudSignalsReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\ClaimsPerformanceReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:ClaimsPerformanceReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    },
+    {
+      "AbsoluteMoniker": "D:2:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\InventoryHealthReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:2:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:InventoryHealthReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\ReferralFlowSummaryReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:ReferralFlowSummaryReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\PatientPrescriptions.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:PatientPrescriptions.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\PatientFullHistory.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:PatientFullHistory.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\High-Risk Patient Report.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:High-Risk Patient Report.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\ICUAlertHospitalsReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:ICUAlertHospitalsReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\AllHospitalCapacityReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:AllHospitalCapacityReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "FraudSignalsReport.rdl [Design]",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\FraudSignalsReport.rdl",
+              "RelativeDocumentMoniker": "FraudSignalsReport.rdl",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\FraudSignalsReport.rdl [Design]",
+              "RelativeToolTip": "FraudSignalsReport.rdl [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-06-05T12:44:39.656Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ExecutiveDashboard.rdl [Design]",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\ExecutiveDashboard.rdl",
+              "RelativeDocumentMoniker": "ExecutiveDashboard.rdl",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\ExecutiveDashboard.rdl [Design]",
+              "RelativeToolTip": "ExecutiveDashboard.rdl [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-06-05T12:44:34.286Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PatientPrescriptions.rdl [Design]",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\PatientPrescriptions.rdl",
+              "RelativeDocumentMoniker": "PatientPrescriptions.rdl",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\PatientPrescriptions.rdl [Design]",
+              "RelativeToolTip": "PatientPrescriptions.rdl [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-06-05T12:44:32.376Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ClaimsPerformanceReport.rdl [Design]",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\ClaimsPerformanceReport.rdl",
+              "RelativeDocumentMoniker": "ClaimsPerformanceReport.rdl",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\ClaimsPerformanceReport.rdl [Design]",
+              "RelativeToolTip": "ClaimsPerformanceReport.rdl [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-06-05T12:44:30.542Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "InventoryHealthReport.rdl [Design]",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\InventoryHealthReport.rdl",
+              "RelativeDocumentMoniker": "InventoryHealthReport.rdl",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\InventoryHealthReport.rdl [Design]",
+              "RelativeToolTip": "InventoryHealthReport.rdl [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-28T09:44:15.979Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "InventoryHealthReport.rdl [Design]",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\InventoryHealthReport.rdl",
+              "RelativeDocumentMoniker": "InventoryHealthReport.rdl",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\InventoryHealthReport.rdl [Design]",
+              "RelativeToolTip": "InventoryHealthReport.rdl [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-06-05T12:43:40.778Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DoctorWorkload.rdl [Design]",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\DoctorWorkload.rdl",
+              "RelativeDocumentMoniker": "DoctorWorkload.rdl",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\DoctorWorkload.rdl [Design]",
+              "RelativeToolTip": "DoctorWorkload.rdl [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-06-05T10:23:24.177Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ExecutiveDashboard.rdl [Design]",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\ExecutiveDashboard.rdl",
+              "RelativeDocumentMoniker": "ExecutiveDashboard.rdl",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\ExecutiveDashboard.rdl [Design]",
+              "RelativeToolTip": "ExecutiveDashboard.rdl [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-06-02T11:40:09.953Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "FraudSignalsReport.rdl [Design]",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\FraudSignalsReport.rdl",
+              "RelativeDocumentMoniker": "FraudSignalsReport.rdl",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\FraudSignalsReport.rdl [Design]",
+              "RelativeToolTip": "FraudSignalsReport.rdl [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-06-01T17:59:20.194Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ClaimsPerformanceReport.rdl [Design]",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\ClaimsPerformanceReport.rdl",
+              "RelativeDocumentMoniker": "ClaimsPerformanceReport.rdl",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\ClaimsPerformanceReport.rdl [Design]",
+              "RelativeToolTip": "ClaimsPerformanceReport.rdl [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-31T09:46:12.242Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ReferralFlowSummaryReport.rdl [Design]",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\ReferralFlowSummaryReport.rdl",
+              "RelativeDocumentMoniker": "ReferralFlowSummaryReport.rdl",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\ReferralFlowSummaryReport.rdl [Design]",
+              "RelativeToolTip": "ReferralFlowSummaryReport.rdl [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-28T08:35:10.687Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "PatientPrescriptions.rdl [Design]",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\PatientPrescriptions.rdl",
+              "RelativeDocumentMoniker": "PatientPrescriptions.rdl",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\PatientPrescriptions.rdl [Design]",
+              "RelativeToolTip": "PatientPrescriptions.rdl [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-25T10:07:26.523Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "PatientFullHistory.rdl [Design]",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\PatientFullHistory.rdl",
+              "RelativeDocumentMoniker": "PatientFullHistory.rdl",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\PatientFullHistory.rdl [Design]",
+              "RelativeToolTip": "PatientFullHistory.rdl [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-24T22:54:22.248Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "High-Risk Patient Report.rdl [Design]",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\High-Risk Patient Report.rdl",
+              "RelativeDocumentMoniker": "High-Risk Patient Report.rdl",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\High-Risk Patient Report.rdl [Design]",
+              "RelativeToolTip": "High-Risk Patient Report.rdl [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-24T22:32:24.091Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ICUAlertHospitalsReport.rdl [Design]",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\ICUAlertHospitalsReport.rdl",
+              "RelativeDocumentMoniker": "ICUAlertHospitalsReport.rdl",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\ICUAlertHospitalsReport.rdl [Design]",
+              "RelativeToolTip": "ICUAlertHospitalsReport.rdl [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-22T11:10:11.069Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "AllHospitalCapacityReport.rdl [Design]",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\AllHospitalCapacityReport.rdl",
+              "RelativeDocumentMoniker": "AllHospitalCapacityReport.rdl",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Report Project1\\AllHospitalCapacityReport.rdl [Design]",
+              "RelativeToolTip": "AllHospitalCapacityReport.rdl [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-20T13:01:57.002Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
