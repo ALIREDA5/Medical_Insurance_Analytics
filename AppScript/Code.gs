@@ -334,11 +334,13 @@ function insertDrugTransaction(d) {
 function searchDrugTransactions(f)    { checkTableAccess('transactions'); return searchRows('drug_transactions', f); }
 function updateDrugTransaction(id, d) { checkTableAccess('transactions'); return updateRow('drug_transactions', 'transaction_id', id, d); }
 
-// ── CLAIMS (merged: claim + items) ────────────────────────────
+// ── CLAIMS (merged: claim + items + approval) ─────────────────
 
 function insertClaimFull(data) {
   checkTableAccess('claims');
   const claimId = getNextId('claims', 'CLM', 8);
+
+  // 1. Insert Claim
   appendRow('claims', {
     claim_id:        claimId,
     patient_id:      data.patient_id,
@@ -349,6 +351,8 @@ function insertClaimFull(data) {
     approved_amount: data.approved_amount,
     claim_status:    data.claim_status
   });
+
+  // 2. Insert Claim Items (multiple rows)
   (data.items || []).forEach(item => {
     if (!item.procedure_code && !item.drug_id) return;
     appendRow('claim_items', {
@@ -360,6 +364,19 @@ function insertClaimFull(data) {
       quantity:       item.quantity       || 1
     });
   });
+
+  // 3. Insert Claim Approval (single record, optional)
+  if (data.apr_approval_status) {
+    appendRow('claim_approvals', {
+      approval_id:      getNextId('claim_approvals', 'APR', 8),
+      claim_id:         claimId,
+      reviewed_by:      data.apr_reviewed_by      || '',
+      approval_status:  data.apr_approval_status,
+      approval_date:    data.apr_approval_date     || '',
+      rejection_reason: data.apr_rejection_reason  || ''
+    });
+  }
+
   return { success: true, id: claimId };
 }
 function searchClaims(f)    { checkTableAccess('claims'); return searchRows('claims', f); }

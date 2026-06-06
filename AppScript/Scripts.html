@@ -6,7 +6,7 @@ const MODULES = [
   { label:'Patient Management',  icon:'fa-user-injured',        tables:['patients','visits','prescriptions'] },
   { label:'Hospital Resources',  icon:'fa-hospital',            tables:['hospitals','departments','doctors','schedules','icu','referrals'] },
   { label:'Pharmacy',            icon:'fa-pills',               tables:['transactions'] },
-  { label:'Insurance Claims',    icon:'fa-file-invoice-dollar', tables:['claims','approvals'] },
+  { label:'Insurance Claims',    icon:'fa-file-invoice-dollar', tables:['claims'] },
   { label:'Citizen Services',    icon:'fa-star',                tables:['feedback'] }
 ];
 
@@ -317,6 +317,15 @@ const TABLES = {
           { name:'item_cost',      label:'Cost (EGP)', type:'number', required:true, min:0, step:'0.01' },
           { name:'quantity',       label:'Qty',        type:'number', required:true, min:1 },
         ]
+      },
+      {
+        id:'claim_approval', title:'Claim Approval', icon:'fa-stamp', type:'static',
+        fields:[
+          { name:'apr_reviewed_by',      label:'Reviewed By',      type:'text' },
+          { name:'apr_approval_status',  label:'Decision',         type:'select', options:['','Approved','Partially Approved','Rejected','Pending Review'] },
+          { name:'apr_approval_date',    label:'Approval Date',    type:'date' },
+          { name:'apr_rejection_reason', label:'Rejection Reason', type:'select', options:['','Insufficient documentation','Duplicate claim detected','Pre-authorization not obtained','Service not covered','Patient not eligible','Claim exceeded coverage limit','Missing medical records','Invalid diagnosis code','Procedure not medically necessary','Policy expired'] },
+        ]
       }
     ],
     searchFields:[
@@ -379,6 +388,22 @@ const TABLES = {
     displayCols:['feedback_id','patient_id','hospital_id','doctor_id','rating','feedback_date'],
   },
 
+};
+
+// ── MOBILE SIDEBAR TOGGLE ─────────────────────────────────────
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('open');
+}
+
+// Auto-close sidebar after selecting a table on mobile
+const _origShowTable = showTable;
+showTable = function(name) {
+  _origShowTable(name);
+  if (window.innerWidth < 768) {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebarOverlay').classList.remove('open');
+  }
 };
 
 // ============================================================

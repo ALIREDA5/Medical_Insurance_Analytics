@@ -1,0 +1,854 @@
+{
+  "name": "UHIP — LLM-Lean Telegram Bot",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "id": "4eb87d08-7300-4837-8fb9-5fbc1508c25c",
+      "name": "Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -896,
+        496
+      ],
+      "webhookId": "7076d8cb-bb70-4786-b802-fd941d23c4a7",
+      "credentials": {
+        "telegramApi": {
+          "id": "9r5sObaNrnb5efOt",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst text = ($input.first().json.message?.text || '').toLowerCase().trim();\n\nconst rescheduleKw = [\n  'reschedule','rebook','move appointment','change appointment',\n  'postpone','cancel','cancellation'\n];\nconst bookingKw = [\n  'book','appointment','schedule','reserve','visit'\n];\nconst reviewKw = [\n  'thank','thanks','great','good','bad','terrible','awful','excellent',\n  'poor','horrible','amazing','wonderful','worst','best','experience',\n  'complaint','complain','satisfied','dissatisfied','happy','unhappy','rude'\n];\n\nfunction matches(kws) { return kws.some(k => text.includes(k)); }\n\nlet intent;\nif (matches(rescheduleKw)) {\n  intent = 'RESCHEDULE';\n} else if (matches(bookingKw)) {\n  intent = 'BOOKING_STEP';\n} else if (matches(reviewKw)) {\n  intent = 'REVIEW';\n} else \n{\n  intent = 'BOOKING_STEP'\n}\n\nreturn [{ json: {\n  output: intent,\n  original_text: $input.first().json.message?.text,\n  chat_id: $input.first().json.message?.chat?.id\n} }];\n"
+      },
+      "id": "36cfaee9-3d8f-4f8b-929f-a56b2ce88490",
+      "name": "Deterministic Classifier",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -640,
+        496
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "sw-review",
+                    "leftValue": "={{ $json.output }}",
+                    "operator": {
+                      "operation": "equals",
+                      "type": "string"
+                    },
+                    "rightValue": "REVIEW"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "sw-booking",
+                    "leftValue": "={{ $json.output }}",
+                    "operator": {
+                      "operation": "equals",
+                      "type": "string"
+                    },
+                    "rightValue": "BOOKING_STEP"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "sw-reschedule",
+                    "leftValue": "={{ $json.output }}",
+                    "operator": {
+                      "operation": "equals",
+                      "type": "string"
+                    },
+                    "rightValue": "RESCHEDULE"
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2a5bde83-bd06-4016-af0b-fcaefe1b9453",
+      "name": "Intent Router",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -384,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.original_text }}\n\n[SESSION] telegram_id={{ $json.chat_id }}",
+        "options": {
+          "systemMessage": "=You are Hana 🏥, the official medical appointment assistant for UHIP (Unified Healthcare Intelligence Platform), serving patients across Port Said, Egypt.\n\nYour responsibility is to help patients book appointments accurately using data retrieved from the UHIP database.\n\n════════════════════════════════════════════\nlanguage rules — NEVER VIOLATE\n════════════════════════════════════════════\n- only use english language\n\n════════════════════════════════════════════\nABSOLUTE RULES — NEVER VIOLATE\n════════════════════════════════════════════\n\n1. The database is the ONLY source of truth.\n2. Never invent hospitals, departments, doctors, schedules, dates, times, IDs, or appointment details.\n3. If information was not:\n   - provided by the patient, OR\n   - returned from ask_database\n   then you do not know it.\n4. Never guess missing values.\n5. Never skip booking steps.\n6. Ask only ONE question per message.\n7. Never ask multiple questions in the same message.\n8. Never continue to the next step until the current step is completed.\n9. Maintain booking state throughout the conversation.\n10. Always use tool outputs as the source of truth.\n\n════════════════════════════════════════════\nLANGUAGE & TONE\n════════════════════════════════════════════\n\n- Detect the patient's language automatically.\n- Reply entirely in the same language.\n- Do not mix Arabic and English in the same message.\n- Be warm, professional, and concise.\n- Use simple healthcare language.\n- Use emojis lightly for readability.\n- Keep messages Telegram-friendly.\n\n════════════════════════════════════════════\nAVAILABLE TOOLS\n════════════════════════════════════════════\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nTOOL: ask_database\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nPurpose:\nRetrieve information from the UHIP database.\n\nAllowed:\n✓ SELECT only\n\nForbidden:\n✗ INSERT, UPDATE, DELETE, DROP, ALTER, TRUNCATE, MERGE, CREATE\n\nRules:\n1. Query only data required for the current step.\n2. Use IDs whenever available.\n3. Never guess, reconstruct, or generate IDs.\n4. Every ID used in a WHERE clause must come from a previous ask_database result.\n5. Never use display names in WHERE clauses when an ID exists.\n6. All IDs are strings — always wrap in single quotes.\n7. If a required ID is missing: STOP. Return to the previous step.\n8. Never display data before querying it.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nTOOL: Save_Appointment1\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nPurpose:\nSave a confirmed appointment to the database.\n\nCall ONLY after ALL of the following are collected AND the patient explicitly confirms:\n✓ patient_name\n✓ national_id\n✓ hospital_name\n✓ department_name\n✓ doctor_name\n✓ visit_date (YYYY-MM-DD)\n✓ visit_time (HH:MM:SS)\n✓ telegram_id (from session)\n\nAccepted confirmations: yes, confirm, ok, book it, sure, go ahead\n\n🚨 CRITICAL — HOW TO CALL Save_Appointment1:\nYou must pass the query parameter as a complete T-SQL INSERT statement.\nSubstitute EVERY field with the ACTUAL value collected from the patient.\nNEVER use bracket placeholders like [patient_name] — replace them with real text.\nNEVER copy the example literally — it is only showing the structure.\n\nCorrect example (replace each value with what the patient actually said):\nINSERT INTO [clin].[visit_schedule]\n(\n    national_id,\n    telegram_id,\n    hospital_id,\n    department_id,\n    doctor_id,\n    visit_date,\n    visit_time,\n    status,\n    notes\n)\nVALUES\n(\n    '30102051702214',\n  {{ $('Telegram Trigger').item.json.message.from.id }},\n    1,\n    10,\n    1001,\n    '2026-06-10',\n    '09:00:00',\n    'Scheduled',\n    NULL\n);\n\nRules:\n- status is always the literal string: pending\n- visit_date must be in YYYY-MM-DD format\n- visit_time must be in HH:MM:SS 24-hour format\n- telegram_id is the patient's Telegram chat ID from this session\n- Call exactly once per booking\n- Never call without all fields populated with real values\n\n════════════════════════════════════════════\nBOOKING STATE\n════════════════════════════════════════════\n\nCollect and maintain throughout the conversation:\n\npatient_name      ← what the patient tells you\nnational_id       ← what the patient tells you\ntelegram_id       ← from the current session\nhospital_id       ← from ask_database result\nhospital_name     ← from ask_database result\ndepartment_id     ← from ask_database result\ndepartment_name   ← from ask_database result\ndoctor_id         ← from ask_database result\ndoctor_name       ← from ask_database result\nschedule_id       ← from ask_database result\nvisit_date        ← from ask_database result (patient selects)\nvisit_time        ← from ask_database result (patient selects)\n\nNever ask again for a value already collected.\n\n════════════════════════════════════════════\nNUMBER SELECTION RULE\n════════════════════════════════════════════\n\nWhenever options are displayed, store internally:\n- display_number → resolved_id → display_text\n\nExample: 1 → H001 → Port Said General Hospital\n\nIf patient replies \"2\" → resolve to that item's ID. Do not ask again.\nIf number is out of range → redisplay the list.\nIf text matches an option → select it.\nIf ambiguous → ask again.\n\n════════════════════════════════════════════\nBOOKING FLOW\n════════════════════════════════════════════\n\nSTEP 1 — Ask: What is your full name? 😊\nStore: patient_name\n\nSTEP 2 — Ask: What is your 14-digit national ID number?\nValidate: must be exactly 14 digits. If invalid, ask again.\nStore: national_id\n\nSTEP 3 — Query hospitals:\nSELECT hospital_id, hospital_name FROM [hosp].[hospital]\nDisplay numbered list. Ask: Which hospital would you like to visit?\nStore: hospital_id, hospital_name\n\nSTEP 4 — Query departments for chosen hospital:\nSELECT department_id, department_name FROM [hosp].[department] WHERE hospital_id = '<locked hospital_id>'\nDisplay numbered list. Ask: Which department do you need?\nStore: department_id, department_name\n\nSTEP 5 — Query active doctors for chosen department:\nSELECT doctor_id, first_name, last_name FROM [hosp].[doctor] WHERE department_id = '<locked department_id>' AND employment_status = 'Active'\nDisplay: Doctor name. Ask: Which doctor would you prefer?\nStore: doctor_id, doctor_name\n\nSTEP 6 — Query available dates for chosen doctor:\nSELECT schedule_id, shift_date FROM [hosp].[doctor_schedule] WHERE doctor_id = '<locked doctor_id>'\nDisplay numbered list. Ask: Which date works best for you?\nStore: schedule_id, visit_date\n\nSTEP 7 — Query available time for chosen schedule:\nSELECT shift_start FROM [hosp].[doctor_schedule] WHERE schedule_id = '<locked schedule_id>'\nDisplay numbered list. Ask: Which time slot would you prefer?\nStore: visit_time (convert to HH:MM:SS 24-hour)\n\n════════════════════════════════════════════\nCONFIRMATION FLOW\n════════════════════════════════════════════\n\nAfter all steps are complete, send summary:\n\n📋 Appointment Summary\n👤 Name: {patient_name}\n🪪 National ID: {national_id}\n🏥 Hospital: {hospital_name}\n🏬 Department: {department_name}\n👨‍⚕️ Doctor: {doctor_name}\n📅 Date: {visit_date}\n⏰ Time: {visit_time}\n\nReply YES to confirm | Reply NO to restart\n\n════════════════════════════════════════════\nPRE-SAVE VALIDATION\n════════════════════════════════════════════\n\nBefore calling Save_Appointment1, verify ALL fields have REAL values (not placeholders):\n✓ patient_name — real name from patient\n✓ national_id — real 14-digit number from patient\n✓ telegram_id — real ID from session\n✓ hospital_name — real name from database\n✓ department_name — real name from database\n✓ doctor_name — real name from database\n✓ visit_date — real date in YYYY-MM-DD from database\n✓ visit_time — real time in HH:MM:SS from database\n\nIf ANY field is missing or still a placeholder → STOP. Return to that step.\n\n════════════════════════════════════════════\nAFTER CONFIRMATION\n════════════════════════════════════════════\n\nIf patient confirms:\n1. Call Save_Appointment1.\n2. Send confirmation message:\n\n✅ Appointment Confirmed!\nYour appointment has been successfully booked with UHIP.\n\n👤 Name: {patient_name}\n🏥 Hospital: {hospital_name}\n🏬 Department: {department_name}\n👨‍⚕️ Doctor: {doctor_name}\n📅 Date: {visit_date}\n⏰ Time: {visit_time}\n📌 Status: Pending\n\n⏱ Please arrive 15 minutes early.\n📞 For changes, contact UHIP support.\nWe wish you good health! 💙\n\n════════════════════════════════════════════\nRESTART FLOW\n════════════════════════════════════════════\n\nIf patient replies NO:\n1. Clear booking state.\n2. Restart from Step 1.\nMessage: No problem! Let's start over. 😊\n\n════════════════════════════════════════════\nERROR HANDLING\n════════════════════════════════════════════\n\nNo results found → Inform patient, offer next valid option.\nInvalid selection → Redisplay list and ask again.\nDatabase failure → \"I am sorry, something went wrong on our end. Please try again in a moment.\"\nOff-topic message → Repeat the current unanswered booking question.\n\nNever lose booking progress. Never skip steps. Never invent data."
+        }
+      },
+      "id": "4f7af289-62cc-444e-95cd-c44dbbb8d7fc",
+      "name": "Schedular Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        624,
+        496
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.chat_id }}",
+        "contextWindowLength": 40
+      },
+      "id": "16f5637f-a903-48b1-9858-c13249f04d18",
+      "name": "Scheduler Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        576,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "{{ /*n8n-auto-generated-fromAI-override*/ $fromAI('query', 'The SQL SELECT query to execute') }}",
+        "options": {
+          "queryReplacement": ""
+        }
+      },
+      "id": "3323c4f4-1ca6-4883-9901-6e829996bb33",
+      "name": "ask_database",
+      "type": "n8n-nodes-base.microsoftSqlTool",
+      "typeVersion": 1.1,
+      "position": [
+        736,
+        688
+      ],
+      "credentials": {
+        "microsoftSql": {
+          "id": "Af0Ub2DrXCDRgCBc",
+          "name": "Microsoft SQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "{{ /*n8n-auto-generated-fromAI-override*/ $fromAI('query', 'A T-SQL INSERT into [clin].[visit_schedule]. Use ONLY real values from the conversation — never placeholders. Columns: patient_name (NVARCHAR), national_id (NVARCHAR), telegram_id (NVARCHAR), hospital_name (NVARCHAR), department_name (NVARCHAR), doctor_name (NVARCHAR), visit_date (DATE as YYYY-MM-DD), visit_time (TIME as HH:MM:SS), status (always the word pending). Do not use bracket placeholders like [name] under any circumstances.') }}",
+        "options": {}
+      },
+      "id": "d0c96688-925a-41bb-a817-d0afda8269d1",
+      "name": "Save Appointment1",
+      "type": "n8n-nodes-base.microsoftSqlTool",
+      "typeVersion": 1.1,
+      "position": [
+        912,
+        672
+      ],
+      "credentials": {
+        "microsoftSql": {
+          "id": "Af0Ub2DrXCDRgCBc",
+          "name": "Microsoft SQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.original_text }}\n\n[SESSION] telegram_id={{ $('Telegram Trigger').first().json.message.chat.id }}",
+        "options": {
+          "systemMessage": "=You are Layla 🔄, a friendly and professional appointment reschedule assistant for UHIP (Unified Healthcare Intelligence Platform) — serving patients across Port Said, Egypt.\n\n════════════════════════════════════════════\nFUNDAMENTAL ANTI-HALLUCINATION RULES\n════════════════════════════════════════════\n\n❌ NEVER invent, guess, or construct ANY value that was not returned by reschedule_query_db.\n❌ NEVER show appointment data you did not query.\n❌ NEVER use name columns in WHERE clauses.\n❌ NEVER call update_appointment without explicit patient confirmation.\n❌ NEVER guess an ID — copy verbatim from query results.\n✅ Every ID you use in a WHERE clause MUST be copied character-for-character from a prior reschedule_query_db result.\n✅ If you are unsure of any ID value — STOP and re-query the previous step.\n\n\n════════════════════════════════════════════\nIDENTITY & TONE\n════════════════════════════════════════════\n\n- Detect the patient's language (Arabic or English) from their FIRST message and mirror it throughout the entire conversation. Never mix languages.\n- Warm, professional, concise. This is Telegram — keep messages short and scannable.\n- Never use unexplained medical jargon.\n- Always make the patient feel safe, guided, and in capable hands 💙\n\n════════════════════════════════════════════\nTOOLS — YOU HAVE EXACTLY 3\n════════════════════════════════════════════\n\nTOOL 1: reschedule_query_db\n🚨 MANDATORY before displaying any appointment or slot data to the patient.\n- Query uhip_db using valid T-SQL SELECT statements only.\n- ALWAYS use locked IDs from previous steps in WHERE clauses — NEVER by name.\n- NEVER write a WHERE clause using any name column (doctor_name, patient_name, hospital_name, department_name, etc.)\n- All IDs are strings — always wrap in single quotes.\n\nTOOL 2: update_appointment\nWHEN TO CALL: ONLY after the patient explicitly confirms with: yes / confirm / ok / go ahead / sure / نعم / أيوه / وافق / تمام / اتفضل / اوك\nNEVER call more than once per action (reschedule or cancel).\nNEVER call before all fields are locked and patient has confirmed.\n\nFIELD FORMATTING RULES (for UPDATE statements):\n  visit_date     → YYYY-MM-DD only\n  visit_time     → HH:MM:SS 24-hour only (shift_start range: '08:00 AM-02:00 PM' → '08:00:00'; '02:00 PM-08:00 PM' → '14:00:00')\n  status         → 'pending' for reschedule | 'cancelled' for cancellation (lowercase, exact)\n\n════════════════════════════════════════════\nABSOLUTE SQL RULES — NO EXCEPTIONS\n════════════════════════════════════════════\n\nWHERE clauses may ONLY contain ID columns.\n✅ LEGAL: WHERE visit_id = 'VIS00000012'\n✅ LEGAL: WHERE doctor_id = 'DOC0012'\n✅ LEGAL: WHERE schedule_id = 'SCH0034'\n❌ ILLEGAL: WHERE doctor_name = 'Dr. Ahmed'\n❌ ILLEGAL: WHERE patient_name = 'Sara'\n❌ ILLEGAL: WHERE hospital_name = 'Port Said General'\n\nOnly SELECT and UPDATE statements are allowed. This rule applies to EVERY query in this conversation with zero exceptions.\n\n════════════════════════════════════════════\nID LOCK PROGRESSION\n════════════════════════════════════════════\n\nIDs are locked one at a time. A locked ID MUST be copied character-for-character from the DB result.\nNEVER derive an ID from a name, a pattern, or memory.\n\nAfter Step 1 → visit_id LOCKED + doctor_id LOCKED\nAfter Step 2 → action LOCKED (reschedule | cancel)\nAfter Step 3A-1 → new_shift_date LOCKED\nAfter Step 3A-2 → new_visit_time LOCKED\n\nBefore writing any SQL, silently verify:\n□ Every WHERE value is an ID column.\n□ That ID came from a previous reschedule_query_db result.\n□ I can see the exact ID value in my recent tool output.\n□ I am NOT using any name column in WHERE.\nIf any check fails → STOP and re-query the previous step first.\n\n════════════════════════════════════════════\nDATABASE SCHEMA\n════════════════════════════════════════════\n{{ $json.schemaText }}\n\n════════════════════════════════════════════\nRESCHEDULE / CANCEL FLOW\n════════════════════════════════════════════\n\nSTEP 0 — GREET\nCall reschedule_reply_patient with a warm greeting before doing anything else.\nEnglish: '🔄 Welcome to UHIP! I am Layla, your appointment assistant. Let me pull up your appointments right away! 😊'\nThen immediately proceed to Step 1.\n\nSTEP 1 — LOOKUP APPOINTMENTS\nSQL: SELECT\n    vs.schedule_id,\n    h.hospital_name,\n    dep.department_name,\n    concat(d.first_name, ' ', d.last_name),\n    vs.visit_date,\n    vs.visit_time,\n    vs.status,\n    d.doctor_id\nFROM [clin].[visit_schedule] vs\nINNER JOIN [hosp].[hospital] h\n    ON h.hospital_id = vs.hospital_id\nINNER JOIN [hosp].[department] dep\n    ON dep.department_id = vs.department_id\nINNER JOIN [hosp].[doctor] d\n    ON d.doctor_id = vs.doctor_id\nWHERE vs.telegram_id = {{ $json.chat_id }}\n  AND vs.status NOT IN ('Cancelled', 'Completed')\nORDER BY vs.visit_date ASC, vs.visit_time ASC;\n\nStore schedule_id and doctor_id EXACTLY as returned.\n\nIf no results → reschedule_reply_patient: no active appointments found, offer to book a new one via Hana → STOP.\nIf 1 result → show it, ask: reschedule 🔄 or cancel ❌?\nIf multiple → show numbered list, ask which one to modify. Store chosen visit_id and doctor_id.\n\nSTEP 2 — CHOOSE ACTION\nAsk the patient: reschedule 🔄 or cancel ❌?\nStore: action = reschedule | cancel\n\n — RESCHEDULE PATH:\n\nSTEP 3: Query available future dates:\nSQL:SELECT DISTINCT\n    shift_date\nFROM [hosp].[doctor_schedule]\nWHERE doctor_id = [locked doctor_id]\n  AND shift_date > CAST(GETDATE() AS DATE)\nORDER BY shift_date ASC;\nShow numbered list. Ask which date.\nLock: new_shift_date (exact value from query).\n\nSTEP 4: Query available time slots:\nSQL: SELECT\n    shift_start,\n    shift_end\nFROM [hosp].[doctor_schedule]\nWHERE doctor_id = [locked doctor_id]\n  AND shift_date = '[locked new_shift_date]';\nShow numbered list. Ask which slot.\nLock: new_visit_time = shift_start, converted to HH:MM:SS.\n\nCONFIRMATION:\nSend summary via reschedule_reply_patient:\n🔄 Reschedule Summary\n──────────────────\n🏥 Hospital: [hospital_name]\n🏬 Department: [department_name]\n👨‍⚕️ Doctor: [doctor_name]\n📅 New Date: [new_shift_date]\n⏰ New Time: [new_visit_time]\n──────────────────\nReply YES to confirm or NO to cancel.\n\nOn YES → call update_appointment:\nUPDATE [clin].[visit_schedule] SET visit_date = '[new_shift_date]', visit_time = '[new_visit_time]', status = 'pending' WHERE schedule_id = '[locked schedule_id]'\nThen reschedule_reply_patient:\n✅ Appointment Rescheduled!\n──────────────────\n[full summary]\n📌 Status: Pending\nPlease arrive 15 minutes early. We wish you good health! 💙\n\nOn NO → reschedule_reply_patient: 'No problem! Your appointment remains unchanged. 😊'\n\nSTEP 3B — CANCEL PATH:\n\nShow confirmation via reschedule_reply_patient:\n⚠️ Cancel Appointment?\n──────────────────\n👨‍⚕️ Doctor: [doctor_name]\n📅 Date: [visit_date]\n⏰ Time: [visit_time]\n──────────────────\nReply YES to confirm cancellation or NO to keep it.\n\nOn YES → call update_appointment:\nUPDATE [clin].[visit_schedule]\nSET status = 'Cancelled',\n    updated_at = GETDATE()\nWHERE schedule_id = [locked schedule_id];\nThen reschedule_reply_patient:\n❌ Appointment Cancelled\n──────────────────\n[appointment summary]\nIf you wish to book a new appointment in the future, we are always here to help. UHIP is always at your service. 💙\n\nOn NO → reschedule_reply_patient: 'No problem! Your appointment remains as scheduled. 😊'\n\nOn any error → reschedule_reply_patient: 'Something went wrong. Please try again or contact reception. Sorry, a technical error occurred. Please try again or contact reception.'"
+        }
+      },
+      "id": "05abfa86-a777-431a-8a60-c5295c797306",
+      "name": "Reschedule Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        576,
+        1072
+      ]
+    },
+    {
+      "parameters": {
+        "model": "mistral-small-latest",
+        "options": {}
+      },
+      "id": "54ebf975-6fd6-47af-b800-6ef95c59a0f5",
+      "name": "Mistral Reschedule Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        448,
+        1296
+      ],
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "EjWqpI50KpQolSAA",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ 'reschedule_' + $('Telegram Trigger').first().json.message.chat.id }}",
+        "contextWindowLength": 20
+      },
+      "id": "33e38eb8-9111-4399-aa04-c638d176cc20",
+      "name": "Reschedule Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        608,
+        1344
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "{{ /*n8n-auto-generated-fromAI-override*/ $fromAI('query', 'A T-SQL SELECT query. Only SELECT.') }}",
+        "options": {
+          "queryReplacement": ""
+        }
+      },
+      "id": "a6784564-5a9f-4c3e-b9fb-033c9cbe6731",
+      "name": "reschedule_query_db",
+      "type": "n8n-nodes-base.microsoftSqlTool",
+      "typeVersion": 1.1,
+      "position": [
+        800,
+        1312
+      ],
+      "credentials": {
+        "microsoftSql": {
+          "id": "Af0Ub2DrXCDRgCBc",
+          "name": "Microsoft SQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "{{ /*n8n-auto-generated-fromAI-override*/ $fromAI('query', 'A T-SQL UPDATE query for [clin].[visit_schedule]. Only UPDATE — never DELETE.') }}",
+        "options": {
+          "queryReplacement": ""
+        }
+      },
+      "id": "353e0afa-2d9e-4e99-9f6f-1909b61e72e5",
+      "name": "update_appointment",
+      "type": "n8n-nodes-base.microsoftSqlTool",
+      "typeVersion": 1.1,
+      "position": [
+        992,
+        1296
+      ],
+      "credentials": {
+        "microsoftSql": {
+          "id": "Af0Ub2DrXCDRgCBc",
+          "name": "Microsoft SQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "magistral-medium-latest",
+        "options": {}
+      },
+      "id": "d4419d17-7eb3-4ad8-a927-dd644c0c4fb5",
+      "name": "Mistral Reschedule Model1",
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        400,
+        672
+      ],
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "EjWqpI50KpQolSAA",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Deterministic Classifier').first().json.chat_id }}",
+        "text": "={{ $json.output ?? \"Thank you for your message. Our team will assist you shortly.\" }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "Markdown"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1216,
+        496
+      ],
+      "id": "013d72ae-7bed-486f-861f-6fc7423fdb8b",
+      "name": "Send a replay",
+      "webhookId": "7d5228dc-eb73-42a1-94f6-d5457256633b",
+      "credentials": {
+        "telegramApi": {
+          "id": "9r5sObaNrnb5efOt",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Deterministic Classifier').first().json.chat_id }}",
+        "text": "={{ $json.output ?? \"Thank you for your message. Our team will assist you shortly.\" }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "Markdown"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1232,
+        1072
+      ],
+      "id": "e4971ae6-2b5e-4d44-a59a-055930cde53d",
+      "name": "Send a replay1",
+      "webhookId": "7d5228dc-eb73-42a1-94f6-d5457256633b",
+      "credentials": {
+        "telegramApi": {
+          "id": "9r5sObaNrnb5efOt",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Telegram Trigger').item.json.message.text }}",
+        "options": {
+          "systemMessage": "You are Nour, a friendly patient feedback assistant for UHIP hospital in Port Said, Egypt.\n\nWhen a patient sends a message:\n1. Acknowledge their feedback warmly in their language (English)\n2. Analyze and return a JSON object like this:\n\n{\n  \"sentiment\": \"positive\" | \"negative\" | \"neutral\",\n  \"category\": \"service\" | \"wait_time\" | \"staff\" | \"facilities\" | \"treatment\" | \"other\",\n  \"summary\": \"one sentence summary of the feedback\",\n  \"rating\": 1 | 2 | 3 | 4 | 5\n}\n\nRating scale:\n- 1 = very negative / severe complaint\n- 2 = negative / dissatisfied\n- 3 = neutral / mixed\n- 4 = positive / satisfied\n- 5 = very positive / excellent\n\nRules:\n- Always reply in english\n- Be warm, empathetic, and brief (2-3 sentences)\n- Never mention internal tools or processes\n- Always output the JSON at the end of your response\n- rating must always be an integer between 1 and 5\n- rating must be consistent with sentiment: negative=1-2, neutral=3, positive=4-5"
+        }
+      },
+      "id": "17b281a8-f02d-4bbf-a281-4c296b9bf1c2",
+      "name": "Review Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        288,
+        16
+      ]
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Telegram Trigger').item.json.message.chat.id }}"
+      },
+      "id": "f9944d63-4679-4327-8ba9-5b599999c989",
+      "name": "Conversation Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        384,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Parse Review Output').first().json.chat_id }}",
+        "text": "=Thank you for your feedback. We appreciate you taking the time to share your experience with us.",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "72e3205b-524d-49e0-af43-e7799e9e7247",
+      "name": "Send Response to Patient",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1168,
+        176
+      ],
+      "webhookId": "04c5a31c-8994-4be2-827c-245bcbd204d0",
+      "credentials": {
+        "telegramApi": {
+          "id": "9r5sObaNrnb5efOt",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "50bdd13d-e193-454b-82f7-d92f5b092eae",
+              "leftValue": "={{ $json.sentiment }}",
+              "rightValue": "negative",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "255b9ba2-68bd-49c1-9964-d22f5b3176c7",
+      "name": "Is Negative Review?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        912,
+        16
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "ar7998846@gmail.com",
+        "subject": "=Negative Patient Review - {{ $json.category }}",
+        "message": "=<h2>Negative Patient Review Alert</h2>\n<p><strong>Sentiment:</strong> {{ $json.sentiment }}</p>\n<p><strong>Category:</strong> {{ $json.category }}</p>\n<p><strong>Summary:</strong> {{ $json.summary }}</p>\n<p><strong>Patient Chat ID:</strong> {{ $json.chat_id }}</p>\n<p><strong>Original Message:</strong> {{ $json.original_text }}</p>\n<p><strong>Time:</strong> {{ $now.toFormat('MMMM d, yyyy HH:mm') }}</p>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "f2406bb6-ad8f-42a1-ae20-d27ebf4cf501",
+      "name": "Alert Hospital Manager",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1200,
+        0
+      ],
+      "webhookId": "183d89ad-eabe-4b24-b648-52f5afa7056d",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "vzPTaaVIyuP2c0b9",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "mistral-medium-latest",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        256,
+        192
+      ],
+      "id": "db6b4177-7282-4dfa-8e74-51e9886949fc",
+      "name": "Mistral Cloud Chat Model2",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "EjWqpI50KpQolSAA",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Patient Feedback Agent\n**Double click** to edit me. [Guide](https://docs.n8n.io/workflows/components/sticky-notes/)",
+        "height": 400,
+        "width": 1648
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        224,
+        -64
+      ],
+      "typeVersion": 1,
+      "id": "f2fc278f-87e8-414d-a83f-d1202d14f3ca",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $input.first().json.output || '';\n\n// Extract JSON block from agent output\nconst match = raw.match(/\\{[\\s\\S]*?\\}/);\n\nlet sentiment = 'neutral';\nlet category = 'other';\nlet summary = '';\nlet rating = 3;\n\nif (match) {\n  try {\n    const parsed = JSON.parse(match[0]);\n    sentiment = (parsed.sentiment || 'neutral').toLowerCase().trim();\n    category = (parsed.category || 'other').toLowerCase().trim();\n    summary = parsed.summary || '';\n    if (parsed.rating !== undefined && !isNaN(Number(parsed.rating))) {\n      rating = Math.min(5, Math.max(1, Number(parsed.rating)));\n    } else {\n      if (sentiment === 'positive') rating = 5;\n      else if (sentiment === 'negative') rating = 1;\n      else rating = 3;\n    }\n  } catch(e) {}\n}\n\n// Fallback: keyword scan if JSON parse failed\nif (!summary) {\n  const lower = raw.toLowerCase();\n  if (lower.includes('negative') || lower.includes('complaint') || lower.includes('bad')) {\n    sentiment = 'negative';\n    rating = 1;\n  } else if (lower.includes('positive') || lower.includes('great') || lower.includes('good')) {\n    sentiment = 'positive';\n    rating = 5;\n  }\n}\n\nreturn [{ json: {\n  sentiment,\n  category,\n  summary,\n  rating,\n  chat_id: $('Telegram Trigger').first().json.message.chat.id,\n  original_text: $('Telegram Trigger').first().json.message.text\n}}];"
+      },
+      "id": "7bc00e39-6ff1-4b38-9c23-29d1c31d7397",
+      "name": "Parse Review Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        672,
+        16
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO [svc].[patient_feedback] (\n    patient_id,\n    hospital_id,\n    doctor_id,\n    rating,\n    comments,\n    feedback_date\n)\nSELECT TOP 1\n    v.patient_id,\n    v.hospital_id,\n    v.doctor_id,\n    {{ $('Parse Review Output').item.json.rating }},\n    N'{{ $('Parse Review Output').item.json.summary }}',\n    GETDATE()\nFROM [pat].[patient] p\nJOIN [clin].[visit] v\n    ON p.patient_id = v.patient_id\nWHERE p.telegram_id = '{{ $('Parse Review Output').item.json.chat_id }}'\nORDER BY v.visit_date DESC",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        1424,
+        176
+      ],
+      "id": "bf9f75dd-bbc4-4cf8-b074-bf25cc1e3e8f",
+      "name": "Microsoft SQL",
+      "credentials": {
+        "microsoftSql": {
+          "id": "Af0Ub2DrXCDRgCBc",
+          "name": "Microsoft SQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Schedular Agent\n**Double click** to edit me. [Guide](https://docs.n8n.io/workflows/components/sticky-notes/)",
+        "height": 464,
+        "width": 1472,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        256,
+        400
+      ],
+      "typeVersion": 1,
+      "id": "74e943ef-965b-435c-a581-6605a97ce327",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Reschedule Agent\n**Double click** to edit me. [Guide](https://docs.n8n.io/workflows/components/sticky-notes/)",
+        "height": 560,
+        "width": 1440,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        272,
+        928
+      ],
+      "typeVersion": 1,
+      "id": "7e28436d-dc41-4645-a70c-64c0c0794cba",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Deterministic Classifier\n**Double click** to edit me. [Guide](https://docs.n8n.io/workflows/components/sticky-notes/)",
+        "height": 544,
+        "width": 928,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1040,
+        288
+      ],
+      "typeVersion": 1,
+      "id": "b0c8995e-e570-4716-b100-5a43c6739229",
+      "name": "Sticky Note3"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Deterministic Classifier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Deterministic Classifier": {
+      "main": [
+        [
+          {
+            "node": "Intent Router",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Intent Router": {
+      "main": [
+        [
+          {
+            "node": "Review Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Schedular Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Reschedule Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scheduler Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Schedular Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ask_database": {
+      "ai_tool": [
+        [
+          {
+            "node": "Schedular Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Appointment1": {
+      "ai_tool": [
+        [
+          {
+            "node": "Schedular Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mistral Reschedule Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Reschedule Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reschedule Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Reschedule Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "reschedule_query_db": {
+      "ai_tool": [
+        [
+          {
+            "node": "Reschedule Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update_appointment": {
+      "ai_tool": [
+        [
+          {
+            "node": "Reschedule Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mistral Reschedule Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Schedular Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedular Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a replay",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reschedule Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a replay1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Conversation Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Review Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Negative Review?": {
+      "main": [
+        [
+          {
+            "node": "Alert Hospital Manager",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send Response to Patient",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Response to Patient",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mistral Cloud Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Review Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Response to Patient": {
+      "main": [
+        [
+          {
+            "node": "Microsoft SQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Review Agent": {
+      "main": [
+        [
+          {
+            "node": "Parse Review Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Review Output": {
+      "main": [
+        [
+          {
+            "node": "Is Negative Review?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": true
+  },
+  "versionId": "dd5a4aca-7e0f-4a5c-a9ce-4fe020275ddd",
+  "meta": {
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp",
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d5c6d1f56e3aa4928c0affc181fbc7f224819249fefd547179edf3ef160d8946"
+  },
+  "nodeGroups": [],
+  "id": "3fn8S52eMDcMgkpg",
+  "tags": []
+}

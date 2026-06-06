@@ -16,6 +16,30 @@ body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; }
   border-right: 1px solid #dee2e6;
   overflow-y: auto;
   height: calc(100vh - 56px);
+  transition: left .25s ease;
+}
+
+/* ── Sidebar overlay (mobile tap-to-close) ── */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 999;
+}
+.sidebar-overlay.open { display: block; }
+
+/* ── Mobile sidebar ── */
+@media (max-width: 767px) {
+  .sidebar {
+    position: fixed;
+    top: 56px;
+    left: calc(-1 * var(--sidebar-w));
+    height: calc(100vh - 56px);
+    z-index: 1000;
+    box-shadow: 3px 0 12px rgba(0,0,0,.2);
+  }
+  .sidebar.open { left: 0; }
 }
 .sidebar-header {
   background: var(--navy);
@@ -125,4 +149,13 @@ body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; }
   z-index: 9998;
 }
 .text-navy { color: var(--navy) !important; }
+
+/* ── Mobile form tweaks ── */
+@media (max-width: 575px) {
+  .card-body  { padding: .75rem; }
+  .btn        { font-size: .85rem; }
+  h5.fw-bold  { font-size: 1rem; }
+  .table td,
+  .table th   { font-size: .78rem; padding: .3rem .4rem; }
+}
 </style>
