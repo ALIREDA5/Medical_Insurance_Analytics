@@ -40,8 +40,6 @@ BEGIN
 END;
 GO
 
-EXEC dbo.GetPatientByNationalID @NationalID = '283072011376328';
-go
 -- ------------------------------------------------------------
 -- 1.2  GetPatientFullHistory
 --      كل زيارات + تشخيصات + وصفات لمريض معين
@@ -95,8 +93,7 @@ BEGIN
     ORDER BY p.prescription_date DESC;
 END;
 GO
-EXEC dbo.GetPatientFullHistory @PatientID = 'PAT000001';
-go
+
 -- ------------------------------------------------------------
 -- 1.3  GetHighRiskPatients
 --      مرضى بأكتر من N زيارة بتشخيصات Severe أو Critical
@@ -134,10 +131,7 @@ BEGIN
     ORDER BY total_visits DESC;
 END;
 GO
-EXEC dbo.GetHighRiskPatients @MinVisits = 5, @SeverityFilter = 'Critical';
--- بالـ default values
-EXEC dbo.GetHighRiskPatients;
-go
+
 -- ------------------------------------------------------------
 -- 1.4  RegisterNewVisit
 --      تسجيل زيارة جديدة مع validation

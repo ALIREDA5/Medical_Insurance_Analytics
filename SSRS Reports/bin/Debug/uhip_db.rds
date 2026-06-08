@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="uhip_db">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=LAPTOP-HB8EKSCV;Initial Catalog=uhip_db</ConnectString>
+    <Prompt>Specify a user name and password for data source uhip_db:</Prompt>
+  </ConnectionProperties>
+  <DataSourceID>30a183b9-508a-4a26-ae2e-4ea335287ced</DataSourceID>
+</RptDataSource>
