@@ -1,0 +1,87 @@
+table dim_procedure
+	lineageTag: 9d0759c3-90ff-4dd6-a38e-fab97906caf0
+	sourceLineageTag: f36d28a9-6ac0-407d-b8df-c093f7fcd36d
+
+	column procedure_key
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		lineageTag: 55e6b74b-59b0-49d4-afe7-44317e25042d
+		sourceLineageTag: c0631b3c-0e3f-4f11-bf5b-f6c09a8b791a
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: procedure_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column procedure_code
+		dataType: string
+		lineageTag: ede6ffaa-ae50-496a-b400-2de7a5e4de53
+		sourceLineageTag: 05b858ac-0021-47e7-bc36-8098445305ae
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: procedure_code
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column procedure_name
+		dataType: string
+		lineageTag: fc9e2e50-ab25-4282-afb2-d96ba2c77cb0
+		sourceLineageTag: 50fd49d2-1a3a-450c-8eac-882a77000932
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: procedure_name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column procedure_category
+		dataType: string
+		lineageTag: 926706a1-3349-46e5-b75a-1d72a7b6d175
+		sourceLineageTag: d19d009a-24f8-46b3-8694-932d8ffe1117
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: procedure_category
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column expected_amount
+		dataType: double
+		lineageTag: 8894af19-48ca-4a49-b71d-2c15b3fed113
+		sourceLineageTag: 35bc1316-939f-4a79-9875-994288054438
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: expected_amount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column complexity_score
+		dataType: int64
+		formatString: 0
+		lineageTag: 18cb39a1-4f72-475a-884e-bb9980898e0f
+		sourceLineageTag: 20f11d28-7515-4caa-a84b-1c25679cafea
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: complexity_score
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition dim_procedure = entity
+		mode: directQuery
+		source
+			entityName: dim_procedure
+			expressionSource: 'DirectQuery to AS - FinPro'
+

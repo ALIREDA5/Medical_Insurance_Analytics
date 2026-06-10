@@ -7,9 +7,9 @@
     </am:CreatedBy>
     <am:UpdatedBy>
       <am:Name>SSDTRS</am:Name>
-      <am:Version>18.6.11822.322</am:Version>
+      <am:Version>18.2.11415.280</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-06-03T10:29:45.9642927Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-06-07T08:20:28.3780339Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -1162,7 +1162,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>hospital name</Value>
+                                      <Value>Hospital Name</Value>
                                       <Style>
                                         <FontSize>12pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
@@ -1200,7 +1200,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>drug name</Value>
+                                      <Value>Drug Name</Value>
                                       <Style>
                                         <FontSize>12pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
@@ -1238,7 +1238,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>drug category</Value>
+                                      <Value>Drug Category</Value>
                                       <Style>
                                         <FontFamily>Arial</FontFamily>
                                         <FontSize>12pt</FontSize>
@@ -1277,7 +1277,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>quantity available</Value>
+                                      <Value>Quantity Available</Value>
                                       <Style>
                                         <FontFamily>Arial</FontFamily>
                                         <FontSize>12pt</FontSize>
@@ -1316,7 +1316,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>reorder level</Value>
+                                      <Value>Reorder level</Value>
                                       <Style>
                                         <FontSize>12pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
@@ -1354,7 +1354,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>shortage units</Value>
+                                      <Value>Shortage Units</Value>
                                       <Style>
                                         <FontFamily>Arial</FontFamily>
                                         <FontSize>12pt</FontSize>
@@ -1393,7 +1393,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>expiration date</Value>
+                                      <Value>Expiration Date</Value>
                                       <Style>
                                         <FontFamily>Arial</FontFamily>
                                         <FontSize>12pt</FontSize>
@@ -1432,7 +1432,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>alert type</Value>
+                                      <Value>Alert Type</Value>
                                       <Style>
                                         <FontFamily>Arial</FontFamily>
                                         <FontSize>12pt</FontSize>
@@ -1842,7 +1842,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>hospital name</Value>
+                                      <Value>Hospital Name</Value>
                                       <Style>
                                         <FontSize>12pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
@@ -1879,7 +1879,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>drug name</Value>
+                                      <Value>Drug Name</Value>
                                       <Style>
                                         <FontSize>12pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
@@ -1916,7 +1916,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>drug category</Value>
+                                      <Value>Drug Category</Value>
                                       <Style>
                                         <FontSize>12pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
@@ -1953,7 +1953,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>quantity available</Value>
+                                      <Value>Quantity Available</Value>
                                       <Style>
                                         <FontFamily>Arial</FontFamily>
                                         <FontSize>12pt</FontSize>
@@ -1991,7 +1991,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>expiration date</Value>
+                                      <Value>Expiration Date</Value>
                                       <Style>
                                         <FontFamily>Arial</FontFamily>
                                         <FontSize>12pt</FontSize>
@@ -2029,7 +2029,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>days to expiry</Value>
+                                      <Value>Days to Expiry</Value>
                                       <Style>
                                         <FontFamily>Arial</FontFamily>
                                         <FontSize>12pt</FontSize>
@@ -2328,101 +2328,6 @@
       </Body>
       <Width>15.62258in</Width>
       <Page>
-        <PageHeader>
-          <Height>1in</Height>
-          <PrintOnFirstPage>true</PrintOnFirstPage>
-          <PrintOnLastPage>true</PrintOnLastPage>
-          <ReportItems>
-            <Textbox Name="Textbox16">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>Inventory Health</Value>
-                      <Style>
-                        <FontStyle>Normal</FontStyle>
-                        <FontFamily>Arial</FontFamily>
-                        <FontSize>16pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                        <TextDecoration>None</TextDecoration>
-                        <Color>MidnightBlue</Color>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox15</rd:DefaultName>
-              <Top>0.35453in</Top>
-              <Left>6.04175in</Left>
-              <Height>0.45395in</Height>
-              <Width>2.53509in</Width>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <VerticalAlign>Middle</VerticalAlign>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Line Name="Line2">
-              <Top>0.8326in</Top>
-              <Left>6.04175in</Left>
-              <Height>0in</Height>
-              <Width>2.53509in</Width>
-              <ZIndex>1</ZIndex>
-              <Style>
-                <Border>
-                  <Color>MidnightBlue</Color>
-                  <Style>Solid</Style>
-                  <Width>3pt</Width>
-                </Border>
-              </Style>
-            </Line>
-            <Image Name="Image2">
-              <Source>Embedded</Source>
-              <Value>Picture1</Value>
-              <Sizing>FitProportional</Sizing>
-              <Top>0.22in</Top>
-              <Left>9.3376in</Left>
-              <Height>0.78in</Height>
-              <Width>0.8in</Width>
-              <ZIndex>2</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-              </Style>
-            </Image>
-            <Image Name="Image1">
-              <Source>Embedded</Source>
-              <Value>WhatsAppImage20260520at100716PM</Value>
-              <Sizing>FitProportional</Sizing>
-              <Top>0.22in</Top>
-              <Left>4.52344in</Left>
-              <Height>0.78in</Height>
-              <Width>0.8in</Width>
-              <ZIndex>3</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-              </Style>
-            </Image>
-          </ReportItems>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-          </Style>
-        </PageHeader>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>
         <TopMargin>1in</TopMargin>

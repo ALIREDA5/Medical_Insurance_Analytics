@@ -1,0 +1,347 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 340.03776234632682,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1690.0490005360507,
+            "y": 664.170866808309
+          },
+          "nodeIndex": "Claims Deep Dive  Measures",
+          "nodeLineageTag": "9e8ceff9-8995-4fe4-bd74-b759a574cb6c",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1974.0490005360507,
+            "y": 628.170866808309
+          },
+          "nodeIndex": "Claims Overview Measures",
+          "nodeLineageTag": "7965d624-52d5-43dd-8446-6786691587cd",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2258.0490005360507,
+            "y": 664.170866808309
+          },
+          "nodeIndex": "Doctor & Department Performance Measures",
+          "nodeLineageTag": "647f7c99-6027-4470-863c-ddda2c15e449",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2542.0490005360507,
+            "y": 640.170866808309
+          },
+          "nodeIndex": "Operations Overview Measures",
+          "nodeLineageTag": "a1559c5f-bad2-4698-8408-83e377998a50",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2826.0490005360507,
+            "y": 652.170866808309
+          },
+          "nodeIndex": "Patient Analytics Measures",
+          "nodeLineageTag": "60c22ea0-5624-4f94-91a9-8d789c6c03e4",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3110.0490005360507,
+            "y": 652.170866808309
+          },
+          "nodeIndex": "Revenue & Cost Analysis Measures",
+          "nodeLineageTag": "fb6f48c9-40a8-4fa8-b5d0-291d52a80879",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3394.0490005360507,
+            "y": 652.170866808309
+          },
+          "nodeIndex": "dim_claim_status",
+          "nodeLineageTag": "ed1bee86-4518-40ce-82a5-e870d737f921",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 675.05476748675983,
+            "y": 777.14669222325529
+          },
+          "nodeIndex": "dim_date",
+          "nodeLineageTag": "4fbc4202-3b35-48ad-a5bb-56d649893afb",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1338.1077893277304,
+            "y": 533.57896690147243
+          },
+          "nodeIndex": "dim_department",
+          "nodeLineageTag": "190f21d0-9f4f-45cb-8ba1-e281c0811992",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1456.0490005360507,
+            "y": -50
+          },
+          "nodeIndex": "dim_diagnosis",
+          "nodeLineageTag": "195b537a-21a5-4969-9dc4-0201a0a88c3e",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1429.3253355913994,
+            "y": 205.66863464337746
+          },
+          "nodeIndex": "dim_doctor",
+          "nodeLineageTag": "4ce0e162-232d-4486-abea-7834541cf34b",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 100.56991553684315,
+            "y": 816.86657099349941
+          },
+          "nodeIndex": "dim_drug",
+          "nodeLineageTag": "24a566a9-72b5-403f-925d-aaf9732e75d8",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 842.65193231369449,
+            "y": 422.5493334751518
+          },
+          "nodeIndex": "dim_hospital",
+          "nodeLineageTag": "15c44ad7-1a08-4bbe-a749-4a2d7ec98413",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1051.3416205354445,
+            "y": 777.21945298665628
+          },
+          "nodeIndex": "dim_patient",
+          "nodeLineageTag": "6dc2d356-ea87-45b6-9be9-1b8c276f7dc8",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 179.68121589392331
+          },
+          "nodeIndex": "dim_procedure",
+          "nodeLineageTag": "f36d28a9-6ac0-407d-b8df-c093f7fcd36d",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 599.925840068657,
+            "y": 65.326642712994726
+          },
+          "nodeIndex": "fact_claims",
+          "nodeLineageTag": "30369bc6-1084-4c9d-88b3-b1f588f1e01d",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 386.59546145233242,
+            "y": 931.0147772231586
+          },
+          "nodeIndex": "fact_pharmacy",
+          "nodeLineageTag": "612e2c23-eee7-4d98-903d-963052fde6fe",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1132.488876417334,
+            "y": 183.51580064507561
+          },
+          "nodeIndex": "fact_visits",
+          "nodeLineageTag": "81db7e0e-4643-4de0-8a21-7685161d5849",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3678.0490005360507,
+            "y": 590.170866808309
+          },
+          "nodeIndex": "Pharmacy Measures",
+          "nodeLineageTag": "74cc2fbc-be82-459f-8fd8-1401aea6ddf9",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3962.0490005360507,
+            "y": 590.170866808309
+          },
+          "nodeIndex": "Fraud Proxy Measures",
+          "nodeLineageTag": "b70dcd1f-dd0a-4b05-848f-939941cf54a5",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 303.97334876391733,
+            "y": 460.16965470882496
+          },
+          "nodeIndex": "fact_claim_items",
+          "nodeLineageTag": "42129789-1391-47e4-b104-201b044397e4",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 801.45765698507512,
+            "y": 1134.3417336166181
+          },
+          "nodeIndex": "fact_referrals",
+          "nodeLineageTag": "71583545-6b28-4479-9b23-500bbefde26a",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 4246.0490005360507,
+            "y": 688.170866808309
+          },
+          "nodeIndex": "Table",
+          "nodeLineageTag": "15c5c1da-4367-4684-bfb7-9c0e9f57eecc",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 4530.0490005360507,
+            "y": 590.170866808309
+          },
+          "nodeIndex": "Hospitals & Referrals",
+          "nodeLineageTag": "33fbcca4-f7dd-4a9a-8af1-1f25c5749f1d",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 4814.0490005360507,
+            "y": 664.170866808309
+          },
+          "nodeIndex": "Disease Burden & Diagnosis Measures",
+          "nodeLineageTag": "71141815-77ae-41e4-a13c-843a61f3b125",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 63.287087723234116,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

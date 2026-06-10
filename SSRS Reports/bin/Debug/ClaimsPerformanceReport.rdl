@@ -7,23 +7,23 @@
     </am:CreatedBy>
     <am:UpdatedBy>
       <am:Name>SSDTRS</am:Name>
-      <am:Version>18.6.11822.322</am:Version>
+      <am:Version>18.2.11415.280</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-06-01T15:40:19.9499536Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-06-07T08:41:13.1076304Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="ClaimsPerformance">
-      <DataSourceReference>DataSource1</DataSourceReference>
+    <DataSource Name="uhip_db">
+      <DataSourceReference>uhip_db</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
-      <rd:DataSourceID>6714e8f5-137a-4fbe-80f0-52b2ff0e8787</rd:DataSourceID>
+      <rd:DataSourceID>beb84671-de41-4ab0-9a82-c4935d71cf11</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="dsClaimsByStatus">
       <Query>
-        <DataSourceName>ClaimsPerformance</DataSourceName>
+        <DataSourceName>uhip_db</DataSourceName>
         <QueryParameters>
           <QueryParameter Name="@Status">
             <Value>=Parameters!Status.Value</Value>
@@ -86,7 +86,7 @@
     </DataSet>
     <DataSet Name="dsRejectionReasonsAnalysis">
       <Query>
-        <DataSourceName>ClaimsPerformance</DataSourceName>
+        <DataSourceName>uhip_db</DataSourceName>
         <QueryParameters>
           <QueryParameter Name="@StartDate">
             <Value>=Parameters!StartDate.Value</Value>
@@ -119,7 +119,7 @@
     </DataSet>
     <DataSet Name="dsRejectionByHospital">
       <Query>
-        <DataSourceName>ClaimsPerformance</DataSourceName>
+        <DataSourceName>uhip_db</DataSourceName>
         <QueryParameters>
           <QueryParameter Name="@StartDate">
             <Value>=Parameters!StartDate.Value</Value>
@@ -1079,7 +1079,6 @@
                       </Paragraph>
                     </Paragraphs>
                     <rd:DefaultName>Textbox2</rd:DefaultName>
-                    <Top>0in</Top>
                     <Height>0.25in</Height>
                     <Width>1.97496in</Width>
                     <Style>
@@ -1247,7 +1246,7 @@
         <Height>8.60396in</Height>
         <Style />
       </Body>
-      <Width>8.1554in</Width>
+      <Width>8.15541in</Width>
       <Page>
         <PageHeader>
           <Height>1in</Height>

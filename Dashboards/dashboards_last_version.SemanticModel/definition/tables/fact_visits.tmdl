@@ -1,0 +1,222 @@
+table fact_visits
+	lineageTag: 50b7c2e3-d976-4536-b7ab-7d8d2d7ebf22
+	sourceLineageTag: 81db7e0e-4643-4de0-8a21-7685161d5849
+
+	column visit_id
+		dataType: string
+		isNullable: false
+		lineageTag: fdc2a37a-99e0-4551-bc15-d8055042438a
+		sourceLineageTag: 10dbe37e-3109-4789-978a-5eacc16b1685
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: visit_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 54ad27af-c8f1-47bc-8736-cd07e30abc36
+		sourceLineageTag: 18a13b81-3e5c-4c7d-b8e8-7e3c888cebea
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: date_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column patient_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 02b56ca7-9d34-4a9c-b140-db8462dab6ff
+		sourceLineageTag: 40f52f16-51dd-4661-9859-ede2ee70c0fa
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: patient_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column hospital_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 5250bfb4-678f-4269-b81b-51a909b879dc
+		sourceLineageTag: 230f9ccd-cfde-40f1-98f6-9ba80d5310fe
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: hospital_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column doctor_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 264b211b-5eb8-41c6-bcc9-c8a086155cc0
+		sourceLineageTag: 84ba0a82-3cf1-4b28-9a50-9ee173292165
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: doctor_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column department_key
+		dataType: int64
+		formatString: 0
+		lineageTag: bd301d77-5278-4c44-8343-8249d1f4edbd
+		sourceLineageTag: 14d38045-d7ae-4f5f-914a-53b5e34b86d1
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: department_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column diagnosis_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 574e6fc5-529f-4fdb-9f27-348f0aec7bef
+		sourceLineageTag: a560490d-d24c-4c43-aeb5-0e39a8c115b7
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: diagnosis_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column visit_type
+		dataType: string
+		lineageTag: edbc65ae-e8b6-4c64-817e-a8427e2b7e64
+		sourceLineageTag: f328356c-4c4b-41df-aaf4-636d6fc1297a
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: visit_type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column total_cost
+		dataType: double
+		lineageTag: 79ab5829-f68e-4836-bbe3-ad07cbf4d51b
+		sourceLineageTag: d33fe5c3-2e54-48fa-95a7-94dc894e7875
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: total_cost
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column waiting_time
+		dataType: int64
+		formatString: 0
+		lineageTag: ac4fbca0-fd2b-444e-b3b6-d615edbb33cc
+		sourceLineageTag: 164eb2a5-0afe-46ca-bec8-7d6d944aed7f
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: waiting_time
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column procedure_count
+		dataType: int64
+		formatString: 0
+		lineageTag: b191d249-a626-4e18-852b-24bb1ccdf856
+		sourceLineageTag: 6eee1461-4d3b-4ef8-b6d5-cc1bf160eb83
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: procedure_count
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column prescription_flag
+		dataType: int64
+		formatString: 0
+		lineageTag: e3184919-e45a-4554-b2de-c0c0f2cb31fa
+		sourceLineageTag: e93bede8-f950-4f26-a83a-50dab502fb90
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: prescription_flag
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column feedback_rating
+		dataType: double
+		lineageTag: aebfcb16-57c3-46db-aebc-2aaf4d7e96c0
+		sourceLineageTag: 5721c106-3c47-4a8b-8a2a-86bc666aa4c0
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: feedback_rating
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column visit_status
+		dataType: string
+		lineageTag: 953fbb2d-612e-4ed4-b885-09586375b81b
+		sourceLineageTag: 439869e6-469b-47dd-a325-10754f2b5c61
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: visit_status
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column referral_reason
+		dataType: string
+		lineageTag: 31c178f3-7c2f-4fde-8e14-4c8aabfe8a79
+		sourceLineageTag: 30914112-c2da-4017-a28c-a310253070f5
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: referral_reason
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column visit_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d918e4fb-40fd-4822-89ad-9807caeac4ba
+		sourceLineageTag: 3a70e331-1a13-4f62-8ba5-ee28598e7d6a
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: visit_date
+
+		variation Variation
+			isDefault
+			relationship: 33c346d2-d1ff-47b7-a5f7-48680f316db1
+			defaultHierarchy: LocalDateTable_2eb9ebf6-8455-421f-afb7-3d32a4dc17e1.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition fact_visits = entity
+		mode: directQuery
+		source
+			entityName: fact_visits
+			expressionSource: 'DirectQuery to AS - FinPro'
+

@@ -1,0 +1,84 @@
+table fact_beds
+	lineageTag: b4a92d8a-842d-445f-81cb-87ab069216c7
+	sourceLineageTag: 61decd2c-c5ec-4159-8b31-1b98145b4e94
+
+	column bed_id
+		dataType: string
+		lineageTag: 22311fca-efa7-4473-bfc2-d2f5c6dd03cd
+		sourceLineageTag: eb79381f-a917-4100-99fe-323e1c699218
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: bed_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column bed_number
+		dataType: string
+		lineageTag: aaf40035-f7d3-4557-b766-d5f7868a5219
+		sourceLineageTag: 5be67e0e-9e53-492d-93b8-7da4fc651889
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: bed_number
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column bed_type
+		dataType: string
+		lineageTag: a090bca7-1c2a-49a4-9d96-6677b2076434
+		sourceLineageTag: 0e578a9a-4565-4c1d-bfaf-8835f993e597
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: bed_type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column availability_status
+		dataType: string
+		lineageTag: 7b9030ba-e3c4-4ddc-bf7b-5b10acb77c45
+		sourceLineageTag: fb3b2026-6db7-4894-8dd9-d3fd54c5365c
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: availability_status
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column hospital_key
+		dataType: int64
+		formatString: 0
+		lineageTag: dcd22b20-c699-4556-81da-e2b9b6565c64
+		sourceLineageTag: 98295596-5d98-402a-92ec-781ee1808cf7
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: hospital_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column department_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 440df0b9-898e-46eb-835c-6946b2851bdc
+		sourceLineageTag: 30689bcb-b250-4f60-a195-544b3159b7df
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: department_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition fact_beds = entity
+		mode: directQuery
+		source
+			entityName: fact_beds
+			expressionSource: 'DirectQuery to AS - FinPro'
+

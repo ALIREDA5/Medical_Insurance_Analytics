@@ -1,0 +1,211 @@
+table fact_claims
+	lineageTag: 4af95fc7-a3aa-47cd-a43c-6768594c7707
+	sourceLineageTag: 30369bc6-1084-4c9d-88b3-b1f588f1e01d
+
+	column claim_id
+		dataType: string
+		isNullable: false
+		lineageTag: 787bebd3-9376-401d-a127-3fd3dd21fb28
+		sourceLineageTag: d4425e90-eb8d-4159-9ab8-450ef0f1ed03
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: claim_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column visit_id
+		dataType: string
+		lineageTag: c6d66589-792e-4b00-8387-5928c651e421
+		sourceLineageTag: b620497d-2296-4706-84eb-5d2cd6908cf1
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: visit_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 1ba7234d-b26a-4851-8c3d-4010b2fba2ae
+		sourceLineageTag: 23e7c9ab-788c-4e3c-becd-5bd7f97d7d53
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: date_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column claim_amount
+		dataType: double
+		lineageTag: a65c7911-48cd-4654-919b-91bc9c11f21b
+		sourceLineageTag: a1dda714-d8cb-40bf-854f-00bcfdea29d2
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: claim_amount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column approved_amount
+		dataType: double
+		lineageTag: 5396fc11-0f87-485e-8714-401a62ce6e91
+		sourceLineageTag: 7ac0f3c4-368f-444c-9e90-5b3f971e7253
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: approved_amount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column approval_gap
+		dataType: double
+		lineageTag: 9d6a83a0-9c69-434c-9505-ba5c29a7f5d3
+		sourceLineageTag: abe8cd23-9faa-44e2-b531-06a7f2fa2d84
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: approval_gap
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column days_to_decision
+		dataType: int64
+		formatString: 0
+		lineageTag: 0d8428ec-4eeb-4af1-93d3-2c4b9c5cf00a
+		sourceLineageTag: b9b14ec5-3b08-4295-9435-f3773923ccf7
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: days_to_decision
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column reviewed_by
+		dataType: string
+		lineageTag: 459e9c70-8d86-48f2-a67b-1e250fd793c5
+		sourceLineageTag: 45c94e9e-10b6-47ae-ae44-f60343cc6c7d
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: reviewed_by
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column patient_id
+		dataType: string
+		lineageTag: 173eed9c-e5fe-4dc1-8e1f-a901e9f0cc04
+		sourceLineageTag: 58c7a673-9be8-44eb-9548-4c19f5743949
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: patient_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column hospital_id
+		dataType: string
+		lineageTag: 79982b17-8864-4d7b-8cca-c4df0f750f59
+		sourceLineageTag: c1b9d5c2-74dc-4971-ab1e-556b3e850bdc
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: hospital_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column claim_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: cd273bac-8ba8-47e6-9eb2-3f903356a991
+		sourceLineageTag: 9ef8fcf8-b73c-453d-bfd8-bc6face4bafb
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: claim_date
+
+		variation Variation
+			isDefault
+			relationship: 2e813983-8197-4fd5-a9ce-36b4974346e6
+			defaultHierarchy: LocalDateTable_b3c857c1-381e-40b1-af19-ba7fc86db320.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column approval_id
+		dataType: string
+		lineageTag: 82102376-3d3f-416c-8875-a23f2d6adef1
+		sourceLineageTag: 736c1567-5788-4fba-8595-30f7c66532a1
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: approval_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column approval_status
+		dataType: string
+		lineageTag: a5abbd7b-fb58-47b4-b1e2-7646c534f2e3
+		sourceLineageTag: 3fd8f5b6-dc8c-4570-ba63-382c7a90ded3
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: approval_status
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column approval_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1d44d1d6-feee-4095-9a35-3085f6467bcc
+		sourceLineageTag: 7c238ac7-9347-45c3-9d69-6edfdfe6c8ea
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: approval_date
+
+		variation Variation
+			isDefault
+			relationship: 2ea4b931-10cf-4d3f-82c0-2339a7cb5121
+			defaultHierarchy: LocalDateTable_e71612ab-c9d8-472e-a9c8-04bc44533611.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column rejection_reason
+		dataType: string
+		lineageTag: 08489609-4380-4ab6-bc44-005446449cea
+		sourceLineageTag: c7084900-374c-4fb5-ab1e-4f6d86920f08
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: rejection_reason
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition fact_claims = entity
+		mode: directQuery
+		source
+			entityName: fact_claims
+			expressionSource: 'DirectQuery to AS - FinPro'
+

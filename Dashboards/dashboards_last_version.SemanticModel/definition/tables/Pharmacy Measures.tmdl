@@ -1,0 +1,202 @@
+table 'Pharmacy Measures'
+	lineageTag: d18c3133-e30a-4637-9b3a-c1b94084b9ac
+	sourceLineageTag: 74cc2fbc-be82-459f-8fd8-1401aea6ddf9
+
+	/// Total dispensing transactions
+	measure 'Dispensing Count' = CALCULATE(COUNTROWS(fact_pharmacy), fact_pharmacy[transaction_type] = "Dispensing")
+		formatString: #,0
+		displayFolder: Volume
+		lineageTag: 7df2742f-a5c0-4622-8776-21182b9df658
+
+		changedProperty = IsHidden
+
+	/// Total value of dispensed drugs to patients only
+	measure 'Dispensing Value' = CALCULATE(SUM(fact_pharmacy[total_value]), fact_pharmacy[transaction_type] = "Dispensing")
+		formatString: #,0.00
+		displayFolder: Financials
+		lineageTag: d2886165-51d2-43a3-9c85-e7e8de20527c
+
+		changedProperty = IsHidden
+
+	/// Units dispensed (Dispensing transactions only)
+	measure 'Dispensed Units' = CALCULATE(SUM(fact_pharmacy[quantity]), fact_pharmacy[transaction_type] = "Dispensing")
+		formatString: #,0
+		displayFolder: Volume
+		lineageTag: 852ab0fd-4475-402f-8148-a11feea0ef76
+
+		changedProperty = IsHidden
+
+	/// Total units across all transaction types
+	measure 'Total Units' = SUM(fact_pharmacy[quantity])
+		formatString: #,0
+		displayFolder: Volume
+		lineageTag: f93f7627-2efe-4176-8acc-2f7cf4c4f879
+
+		changedProperty = IsHidden
+
+	/// Transactions flagged as no-prescription
+	measure 'No-Prescription Dispensing Count' = CALCULATE(COUNTROWS(fact_pharmacy), fact_pharmacy[no_prescription_flag] = 1)
+		formatString: #,0
+		displayFolder: Risk
+		lineageTag: 401027ed-93f5-429e-a1f2-e08f861df734
+
+		changedProperty = IsHidden
+
+	/// No-prescription transactions / total dispensing transactions
+	measure 'No-Prescription Rate' = DIVIDE([No-Prescription Dispensing Count], [Dispensing Count])
+		formatString: 0.00%
+		displayFolder: Risk
+		lineageTag: abe376fa-4838-4bcc-b811-26f4fd485912
+
+		changedProperty = IsHidden
+
+	/// Value dispensed without a prescription
+	measure 'No-Prescription Dispensing Value' = CALCULATE(SUM(fact_pharmacy[total_value]), fact_pharmacy[no_prescription_flag] = 1)
+		formatString: #,0.00
+		displayFolder: Risk
+		lineageTag: 07875480-c4e8-4e42-9416-4b233c468c0d
+
+		changedProperty = IsHidden
+
+	/// Transactions with stockout flag
+	measure 'Stockout Count' = CALCULATE(COUNTROWS(fact_pharmacy), fact_pharmacy[stockout_flag] = 1)
+		formatString: #,0
+		displayFolder: Risk
+		lineageTag: 47491ca5-4341-4a06-913c-680a9777d571
+
+		changedProperty = IsHidden
+
+	/// Stockout transactions / total transactions
+	measure 'Stockout Rate' = DIVIDE([Stockout Count], COUNTROWS(fact_pharmacy))
+		formatString: 0.00%
+		displayFolder: Risk
+		lineageTag: 566722a7-c412-48d1-a104-19bb3c1641f7
+
+		changedProperty = IsHidden
+
+	/// Transactions with near-expiry flag
+	measure 'Near Expiry Count' = CALCULATE(COUNTROWS(fact_pharmacy), fact_pharmacy[near_expiry_flag] = 1)
+		formatString: #,0
+		displayFolder: Risk
+		lineageTag: fed89785-f547-4233-8ac8-a119273f66f4
+
+		changedProperty = IsHidden
+
+	/// Near-expiry transactions / total transactions
+	measure 'Near Expiry Rate' = DIVIDE([Near Expiry Count], COUNTROWS(fact_pharmacy))
+		formatString: 0.00%
+		displayFolder: Risk
+		lineageTag: de66b594-c32f-42ec-b5c9-14c9e9e9e5f0
+
+		changedProperty = IsHidden
+
+	/// Value in near-expiry or stockout transactions
+	measure 'At-Risk Stock Value' = CALCULATE(SUM(fact_pharmacy[total_value]), fact_pharmacy[near_expiry_flag] = 1 || fact_pharmacy[stockout_flag] = 1)
+		formatString: #,0.00
+		displayFolder: Risk
+		lineageTag: 009ca0c2-fa0b-4452-a4db-0eef018515c5
+
+		changedProperty = IsHidden
+
+	/// Value of near-expiry transactions (potential write-off)
+	measure 'Near Expiry Value' = CALCULATE(SUM(fact_pharmacy[total_value]), fact_pharmacy[near_expiry_flag] = 1)
+		formatString: #,0.00
+		displayFolder: Risk
+		lineageTag: 08de8019-8c0f-4793-8a0c-887b01b867bf
+
+		changedProperty = IsHidden
+
+	/// Distinct drugs dispensed in context
+	measure 'Distinct Drug Count' = DISTINCTCOUNT(fact_pharmacy[drug_key])
+		formatString: #,0
+		displayFolder: Volume
+		lineageTag: 15f989eb-15af-43b8-bd1a-6ed5f345a76f
+
+		changedProperty = IsHidden
+
+	/// Average quantity dispensed per dispensing transaction
+	measure 'Avg Units per Dispensing' = DIVIDE([Dispensed Units], [Dispensing Count])
+		formatString: 0.0
+		displayFolder: Efficiency
+		lineageTag: 6710849d-a7d6-4805-ab39-a6c12f7ddf0c
+
+		changedProperty = IsHidden
+
+	/// Average value per dispensing transaction
+	measure 'Avg Dispensing Value' = DIVIDE([Dispensing Value], [Dispensing Count])
+		formatString: #,0.00
+		displayFolder: Efficiency
+		lineageTag: 1feb717e-a5fb-4013-94ad-452bf14ac084
+
+		changedProperty = IsHidden
+
+	/// Dispensing value divided by completed visits
+	measure 'Avg Dispensing per Visit' = DIVIDE([Dispensing Value], [Completed Visit Count])
+		formatString: #,0.00
+		displayFolder: Efficiency
+		lineageTag: bbcbaed8-434c-4363-b197-562c5e2c78b9
+
+		changedProperty = IsHidden
+
+	/// Stock health 0-100: 100 minus weighted risk penalties, clamped to [0,100]
+	measure 'Stock Health Score' =
+			VAR _noRx = [No-Prescription Rate]
+			VAR _stockout = [Stockout Rate]
+			VAR _expiry = [Near Expiry Rate]
+			VAR _raw = 100 - ((_noRx * 40) + (_stockout * 35) + (_expiry * 25)) * 100
+			RETURN ROUND(MAX(MIN(_raw, 100), 0), 1)
+		formatString: 0.0
+		displayFolder: Efficiency
+		lineageTag: 32a0819e-6c1f-4c15-a51c-4805b906feb1
+
+		changedProperty = IsHidden
+
+	/// Total drug procurement spend (Purchase transactions)
+	measure 'Purchase Value' = CALCULATE(SUM(fact_pharmacy[total_value]), fact_pharmacy[transaction_type] = "Purchase")
+		formatString: #,0.00
+		displayFolder: Financials
+		lineageTag: 50bfcc07-e6d0-49ed-9eaa-2eed6c81c490
+
+	/// Value of returned drugs
+	measure 'Return Value' = CALCULATE(SUM(fact_pharmacy[total_value]), fact_pharmacy[transaction_type] = "Return")
+		formatString: #,0.00
+		displayFolder: Financials
+		lineageTag: 8e967b9b-774e-43c1-8c1f-3c9cdd7329ea
+
+	/// Value of wasted/written-off drugs
+	measure 'Wastage Value' = CALCULATE(SUM(fact_pharmacy[total_value]), fact_pharmacy[transaction_type] = "Wastage")
+		formatString: #,0.00
+		displayFolder: Financials
+		lineageTag: 85652009-879a-4f82-ac94-be5efe67d065
+
+	/// Net pharmacy value: Dispensing + Purchase - Returns - Wastage
+	measure 'Net Drug Value' =
+			VAR _dispensing = CALCULATE(SUM(fact_pharmacy[total_value]), fact_pharmacy[transaction_type] = "Dispensing")
+			VAR _purchase  = CALCULATE(SUM(fact_pharmacy[total_value]), fact_pharmacy[transaction_type] = "Purchase")
+			VAR _returns   = CALCULATE(SUM(fact_pharmacy[total_value]), fact_pharmacy[transaction_type] = "Return")
+			VAR _wastage   = CALCULATE(SUM(fact_pharmacy[total_value]), fact_pharmacy[transaction_type] = "Wastage")
+			RETURN _dispensing + _purchase - _returns - _wastage
+		formatString: #,0.00
+		displayFolder: Financials
+		lineageTag: d22a52fe-487e-4a7c-9107-8fdd811bc9cd
+
+	column Value
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9042c5b3-b25c-4005-ad70-c3ccca758d2f
+		sourceLineageTag: 4c9905b9-9ff5-4ff7-acde-7b1d18892154
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: Value
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition 'Pharmacy Measures' = entity
+		mode: directQuery
+		source
+			entityName: Pharmacy Measures
+			expressionSource: 'DirectQuery to AS - FinPro'
+

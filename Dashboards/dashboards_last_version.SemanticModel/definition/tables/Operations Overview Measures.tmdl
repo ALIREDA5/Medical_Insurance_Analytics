@@ -1,0 +1,106 @@
+table 'Operations Overview Measures'
+	lineageTag: 94c7487c-c8d2-409f-8ad1-38a059982e83
+	sourceLineageTag: a1559c5f-bad2-4698-8408-83e377998a50
+
+	/// Total number of visit records
+	measure 'Visit Count' = COUNTROWS(fact_visits)
+		formatString: #,0
+		displayFolder: Volume
+		lineageTag: af3217b9-0f4d-44bb-8cc4-790e806d21dc
+
+		changedProperty = IsHidden
+
+	/// Visits with status = Completed
+	measure 'Completed Visit Count' = CALCULATE(COUNTROWS(fact_visits), fact_visits[visit_status] = "Completed")
+		formatString: #,0
+		displayFolder: Volume
+		lineageTag: 3a2747bf-dbed-4959-8a09-038df787d7a9
+
+		changedProperty = IsHidden
+
+	/// Visits with status = No Show
+	measure 'No-Show Count' = CALCULATE(COUNTROWS(fact_visits), fact_visits[visit_status] = "No Show")
+		formatString: #,0
+		displayFolder: Volume
+		lineageTag: 734ce00c-8af7-41a1-a637-5ee16ebd177d
+
+		changedProperty = IsHidden
+
+	/// Visits with status = Cancelled
+	measure 'Cancelled Count' = CALCULATE(COUNTROWS(fact_visits), fact_visits[visit_status] = "Cancelled")
+		formatString: #,0
+		displayFolder: Volume
+		lineageTag: 4f44ceae-cced-4d3e-835d-53a86eb92c21
+
+		changedProperty = IsHidden
+
+	/// No-show visits / total visits
+	measure 'No-Show Rate' = DIVIDE([No-Show Count], [Visit Count])
+		formatString: 0.00%
+		displayFolder: Rates
+		lineageTag: 72870f27-a486-480d-9cb7-6a96344e4635
+
+		changedProperty = IsHidden
+
+	/// Cancelled visits / total visits
+	measure 'Cancellation Rate' = DIVIDE([Cancelled Count], [Visit Count])
+		formatString: 0.00%
+		displayFolder: Rates
+		lineageTag: c7971a03-e27a-41f1-9284-423b6a743004
+
+		changedProperty = IsHidden
+
+	/// Completed visits / total visits
+	measure 'Completion Rate' = DIVIDE([Completed Visit Count], [Visit Count])
+		formatString: 0.00%
+		displayFolder: Rates
+		lineageTag: 3eb0e762-dc7f-42e3-aaa8-1554bd2f1649
+
+		changedProperty = IsHidden
+
+	/// Average waiting time in minutes across all visits
+	measure 'Avg Wait Time (min)' = AVERAGE(fact_visits[waiting_time])
+		formatString: #,0.0
+		displayFolder: Quality
+		lineageTag: 93de9681-9af0-4c93-a4bc-99bae327f137
+
+		changedProperty = IsHidden
+
+	/// Share of completed visits with a prescription issued
+	measure 'Prescription Rate' = DIVIDE(CALCULATE(COUNTROWS(fact_visits), fact_visits[prescription_flag] = 1), [Completed Visit Count])
+		formatString: 0.00%
+		displayFolder: Quality
+		lineageTag: 61a7a824-3805-4543-b852-ce6fcf3ea07c
+
+		changedProperty = IsHidden
+
+	/// Average patient feedback rating, excludes blank/zero
+	measure 'Avg Patient Rating' = CALCULATE(AVERAGE(fact_visits[feedback_rating]), fact_visits[feedback_rating] <> BLANK() && fact_visits[feedback_rating] > 0)
+		formatString: 0.0
+		displayFolder: Quality
+		lineageTag: 16cfc869-9b8c-4ccf-a964-2fd4a6de8cce
+
+		changedProperty = IsHidden
+
+	/// % of rated visits with rating <= 2
+	measure 'Low Rating Rate' = DIVIDE(CALCULATE(COUNTROWS(fact_visits), fact_visits[feedback_rating] > 0, fact_visits[feedback_rating] <= 2), CALCULATE(COUNTROWS(fact_visits), fact_visits[feedback_rating] > 0))
+		formatString: 0.00%
+		displayFolder: Quality
+		lineageTag: c64eb312-409c-4a04-81ff-a2b99476fddf
+
+		changedProperty = IsHidden
+
+	/// Average visits per distinct doctor in filter context
+	measure 'Avg Visits per Doctor' = DIVIDE([Visit Count], DISTINCTCOUNT(fact_visits[doctor_key]))
+		formatString: #,0.0
+		displayFolder: Volume
+		lineageTag: 5206c87a-558c-423c-bb10-040e481956bd
+
+		changedProperty = IsHidden
+
+	partition 'Operations Overview Measures' = entity
+		mode: directQuery
+		source
+			entityName: Operations Overview Measures
+			expressionSource: 'DirectQuery to AS - FinPro'
+

@@ -1,0 +1,10 @@
+table 'Claims Deep Dive  Measures'
+	lineageTag: 7ae78c00-61b7-4195-b1ab-4d61ff338583
+	sourceLineageTag: 9e8ceff9-8995-4fe4-bd74-b759a574cb6c
+
+	partition 'Claims Deep Dive  Measures' = entity
+		mode: directQuery
+		source
+			entityName: Claims Deep Dive  Measures
+			expressionSource: 'DirectQuery to AS - FinPro'
+

@@ -1,0 +1,10 @@
+table 'Doctor & Department Performance Measures'
+	lineageTag: 840077dc-a7b6-4630-9e26-6786fe8ae74f
+	sourceLineageTag: 647f7c99-6027-4470-863c-ddda2c15e449
+
+	partition 'Doctor & Department Performance Measures' = entity
+		mode: directQuery
+		source
+			entityName: Doctor & Department Performance Measures
+			expressionSource: 'DirectQuery to AS - FinPro'
+

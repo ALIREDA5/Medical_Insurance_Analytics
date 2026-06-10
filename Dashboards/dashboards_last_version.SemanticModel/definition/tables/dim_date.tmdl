@@ -1,0 +1,170 @@
+table dim_date
+	lineageTag: e710f676-2077-40ec-863e-9bd824fbe723
+	sourceLineageTag: 4fbc4202-3b35-48ad-a5bb-56d649893afb
+
+	column date_key
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		lineageTag: 74217211-f501-46e0-adbf-6ccd5aa8a89d
+		sourceLineageTag: 871cf298-fcbe-44ca-9ee8-32845af8a855
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: date_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column full_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d089ebc6-a678-4fe1-9b16-4cb04cfc1a72
+		sourceLineageTag: 300b82b5-80dc-482c-b345-d37a32c7fbf8
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: full_date
+
+		variation Variation
+			isDefault
+			relationship: f66007d0-6d09-4d54-aa98-b151085e9313
+			defaultHierarchy: LocalDateTable_dd135528-d4e3-4007-9ad9-26b37ec2bc0c.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: 3821ba0b-2172-44e0-8bf0-10212ba775b2
+		sourceLineageTag: 1d848470-6bb4-4944-9431-f14074073db7
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: year
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c7208b4-942f-4005-a000-a9a58ba191fc
+		sourceLineageTag: d93c570e-ec41-474e-ac0e-b76475955ad0
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: quarter
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column month
+		dataType: int64
+		formatString: 0
+		lineageTag: d0cfbf3c-06f1-493c-ba0c-ed5add7c9011
+		sourceLineageTag: 0ddbbd3e-4880-4c05-a1be-a5de9b439bd2
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: month
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column month_name
+		dataType: string
+		lineageTag: 40211904-83ca-471c-8279-7b8fbfa2e3d5
+		sourceLineageTag: dda0cdca-35c9-4d08-9f98-3ae8990e1bb4
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: month_name
+		sortByColumn: month
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column week
+		dataType: int64
+		formatString: 0
+		lineageTag: ff40a9ba-d8b7-4e9b-a4ba-83cf43cac5e7
+		sourceLineageTag: 5bc20c77-55e1-42ba-95b1-49ecce6f40e3
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: week
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column day_of_month
+		dataType: int64
+		formatString: 0
+		lineageTag: 4f5007f6-2aa0-4434-a372-5ebde198c0f0
+		sourceLineageTag: 05b0d27f-c7f0-4921-9649-145bba41834e
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: day_of_month
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column day_of_week
+		dataType: int64
+		formatString: 0
+		lineageTag: 2ada5662-f1c2-4aa6-af1e-d8bed2f4f036
+		sourceLineageTag: b6fa33b8-a43b-4ebf-9827-74421306abee
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: day_of_week
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column day_name
+		dataType: string
+		lineageTag: bb729d29-6f42-4414-ad25-f7d92bb51185
+		sourceLineageTag: dd907d0f-9f34-4435-ba8d-19aaacaefba9
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: day_name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column is_weekend
+		dataType: int64
+		formatString: 0
+		lineageTag: 26a2e0fc-0044-4c34-b509-d23f3cae82ce
+		sourceLineageTag: 09b0105d-6cec-4e4b-9141-425da91b0d95
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: is_weekend
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column season
+		dataType: string
+		lineageTag: abcd78f8-a4f3-4192-a43e-2002c7a032e8
+		sourceLineageTag: 62c159fd-6f4a-439c-b8ae-517aae55ce4d
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: season
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition dim_date = entity
+		mode: directQuery
+		source
+			entityName: dim_date
+			expressionSource: 'DirectQuery to AS - FinPro'
+

@@ -1,0 +1,59 @@
+table dim_claim_status
+	lineageTag: b81d6562-3087-44f3-901d-5b2bfdd385df
+	sourceLineageTag: ed1bee86-4518-40ce-82a5-e870d737f921
+
+	column claim_status_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 344d1d1c-be7a-482c-baf4-33130a00dd7a
+		sourceLineageTag: 2717b781-52f3-4917-97f0-3872843e108e
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: claim_status_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column claim_status
+		dataType: string
+		lineageTag: b5428d36-bf1d-4019-9bf7-5c7579d0ad38
+		sourceLineageTag: e602b663-4619-405d-b80d-b0dfd4612af0
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: claim_status
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column rejection_reason
+		dataType: string
+		lineageTag: f83faa88-6b77-484a-8d75-794f3d244aa8
+		sourceLineageTag: 5b70096a-a9b7-45f2-a013-9bd312c59196
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: rejection_reason
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column reviewed_by
+		dataType: string
+		lineageTag: 1c7eb6cd-687d-4dc4-954a-a9b06f1052b4
+		sourceLineageTag: 906eef2e-b498-4d4d-aca8-5968d9d90015
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: reviewed_by
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition dim_claim_status = entity
+		mode: directQuery
+		source
+			entityName: dim_claim_status
+			expressionSource: 'DirectQuery to AS - FinPro'
+
