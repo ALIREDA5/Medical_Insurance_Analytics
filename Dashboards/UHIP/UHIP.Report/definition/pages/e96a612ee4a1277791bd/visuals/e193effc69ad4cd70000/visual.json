@@ -2,18 +2,17 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "e193effc69ad4cd70000",
   "position": {
-    "x": 5.4411894079352505,
-    "y": 282.00688345887954,
+    "x": 5.43840845585795,
+    "y": 317.33063179891252,
     "z": 4000,
-    "height": 207,
-    "width": 596.46318289786223,
-    "tabOrder": 0
+    "height": 232.92850151990356,
+    "width": 596.15833493114849
   },
   "visual": {
-    "visualType": "pivotTable",
+    "visualType": "hundredPercentStackedBarChart",
     "query": {
       "queryState": {
-        "Rows": {
+        "Series": {
           "projections": [
             {
               "field": {
@@ -27,55 +26,70 @@
                 }
               },
               "queryRef": "dim_hospital.hospital_type",
-              "nativeQueryRef": "hospital_type",
-              "active": true
+              "nativeQueryRef": "hospital_type"
             }
           ]
         },
-        "Values": {
+        "Y": {
           "projections": [
             {
               "field": {
-                "Measure": {
+                "Aggregation": {
                   "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Measures"
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_visits"
+                        }
+                      },
+                      "Property": "total_cost"
                     }
                   },
-                  "Property": "Total Visits"
+                  "Function": 0
                 }
               },
-              "queryRef": "Operations Overview Measures.Total Visits",
-              "nativeQueryRef": "Total Visits"
+              "queryRef": "Sum(fact_visits.total_cost)",
+              "nativeQueryRef": "Sum of total_cost"
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "fact_visits"
+                      }
+                    },
+                    "Property": "total_cost"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
       }
     },
     "objects": {
-      "grid": [
+      "labels": [
         {
           "properties": {
-            "gridHorizontal": {
+            "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
-                }
-              }
-            },
-            "rowPadding": {
-              "expr": {
-                "Literal": {
-                  "Value": "1D"
+                  "Value": "true"
                 }
               }
             }
           }
-        }
-      ],
-      "total": [
-        {
-          "properties": {}
         }
       ]
     },

@@ -1,13 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "a5dcc7e2752000eea548",
   "position": {
     "x": 0,
     "y": 0,
     "z": 4500,
-    "height": 69.414593729477758,
-    "width": 1237,
-    "tabOrder": 3000
+    "height": 77.720880110147945,
+    "width": 1236.3677783547464
   },
   "visual": {
     "visualType": "cardVisual",
@@ -20,56 +19,56 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Patient Analytics Measures"
+                      "Entity": "_Measures"
                     }
                   },
                   "Property": "Total Patients"
                 }
               },
-              "queryRef": "Patient Analytics Measures.Total Patients",
-              "nativeQueryRef": "Total Patients"
+              "queryRef": "_Measures.Total Patients",
+              "nativeQueryRef": "Total Patients1"
             },
             {
               "field": {
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Patient Analytics Measures"
-                    }
-                  },
-                  "Property": "Avg Visits Per Patient"
-                }
-              },
-              "queryRef": "Patient Analytics Measures.Avg Visits Per Patient",
-              "nativeQueryRef": "Avg Visits Per Patient"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Patient Demographics & Population Health Measures"
-                    }
-                  },
-                  "Property": "Male Patients"
-                }
-              },
-              "queryRef": "Patient Demographics & Population Health Measures.Male Patients",
-              "nativeQueryRef": "Male Patients"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Patient Demographics & Population Health Measures"
+                      "Entity": "_Measures"
                     }
                   },
                   "Property": "Female Patients"
                 }
               },
-              "queryRef": "Patient Demographics & Population Health Measures.Female Patients",
-              "nativeQueryRef": "Female Patients"
+              "queryRef": "_Measures.Female Patients",
+              "nativeQueryRef": "Female Patients1"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Male Patients"
+                }
+              },
+              "queryRef": "_Measures.Male Patients",
+              "nativeQueryRef": "Male Patients1"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Avg Visits Per Patient"
+                }
+              },
+              "queryRef": "_Measures.Avg Visits Per Patient",
+              "nativeQueryRef": "Avg Visits Per Patient1"
             }
           ]
         }
@@ -81,7 +80,7 @@
               "Measure": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Patient Analytics Measures"
+                    "Entity": "_Measures"
                   }
                 },
                 "Property": "Total Patients"

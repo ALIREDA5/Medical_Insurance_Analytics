@@ -1,13 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "bd6a33b33435d8258add",
   "position": {
     "x": 0,
     "y": 0,
     "z": 4500,
-    "height": 69.414593729477758,
-    "width": 1237,
-    "tabOrder": 3000
+    "height": 77.922231958160268,
+    "width": 1236.3698753666706
   },
   "visual": {
     "visualType": "cardVisual",
@@ -20,28 +19,42 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Disease Burden & Diagnosis Measures"
+                      "Entity": "_Measures"
                     }
                   },
                   "Property": "Total Diagnoses"
                 }
               },
-              "queryRef": "Disease Burden & Diagnosis Measures.Total Diagnoses",
-              "nativeQueryRef": "Total Diagnoses"
+              "queryRef": "_Measures.Total Diagnoses",
+              "nativeQueryRef": "Total Diagnoses1"
             },
             {
               "field": {
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Disease Burden & Diagnosis Measures"
+                      "Entity": "_Measures"
                     }
                   },
                   "Property": "Unique Diagnosis Types"
                 }
               },
-              "queryRef": "Disease Burden & Diagnosis Measures.Unique Diagnosis Types",
-              "nativeQueryRef": "Unique Diagnosis Types"
+              "queryRef": "_Measures.Unique Diagnosis Types",
+              "nativeQueryRef": "Unique Diagnosis Types1"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Total Visits"
+                }
+              },
+              "queryRef": "_Measures.Total Visits",
+              "nativeQueryRef": "Total Visits"
             }
           ]
         }
@@ -53,7 +66,7 @@
               "Measure": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Disease Burden & Diagnosis Measures"
+                    "Entity": "_Measures"
                   }
                 },
                 "Property": "Total Diagnoses"

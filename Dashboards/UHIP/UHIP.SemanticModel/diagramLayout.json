@@ -4,8 +4,8 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 868.814055636896,
-        "y": 0
+        "x": 1433.206462720477,
+        "y": 250.95180920808832
       },
       "nodes": [
         {
@@ -332,6 +332,18 @@
             "width": 234
           },
           "zIndex": 22
+        },
+        {
+          "location": {
+            "x": 2745.6708917363421,
+            "y": 1014.0557623559653
+          },
+          "nodeIndex": "PatientVisitDistribution",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "All tables",

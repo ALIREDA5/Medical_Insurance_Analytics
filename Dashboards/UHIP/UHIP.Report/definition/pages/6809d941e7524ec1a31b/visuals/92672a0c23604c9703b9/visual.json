@@ -2,15 +2,14 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "92672a0c23604c9703b9",
   "position": {
-    "x": 632.5,
-    "y": 282.00291381580968,
+    "x": 632.17673387985212,
+    "y": 315.74793538096282,
     "z": 3000,
-    "height": 206.99708618419032,
-    "width": 596.46318289786223,
-    "tabOrder": 0
+    "height": 231.76676335770952,
+    "width": 596.15833493114849
   },
   "visual": {
-    "visualType": "areaChart",
+    "visualType": "clusteredBarChart",
     "query": {
       "queryState": {
         "Category": {
@@ -20,18 +19,54 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dim_date"
+                      "Entity": "dim_hospital"
                     }
                   },
-                  "Property": "month_name"
+                  "Property": "hospital_type"
                 }
               },
-              "queryRef": "dim_date.month_name",
-              "nativeQueryRef": "Count of month_name",
+              "queryRef": "dim_hospital.hospital_type",
+              "nativeQueryRef": "hospital_type",
               "active": true
             }
           ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Total Visits"
+                }
+              },
+              "queryRef": "_Measures.Total Visits",
+              "nativeQueryRef": "Total Visits"
+            }
+          ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Measures"
+                  }
+                },
+                "Property": "Total Visits"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
       }
     },
     "objects": {

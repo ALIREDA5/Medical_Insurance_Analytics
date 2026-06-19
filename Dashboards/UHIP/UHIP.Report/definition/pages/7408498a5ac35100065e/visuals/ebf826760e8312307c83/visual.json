@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "ebf826760e8312307c83",
   "position": {
-    "x": 314,
+    "x": 326,
     "y": 0,
-    "z": 0,
+    "z": 2000,
     "height": 68,
     "width": 746,
-    "tabOrder": 1000
+    "tabOrder": 3000
   },
   "visual": {
     "visualType": "shape",
@@ -68,7 +68,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Patient Demographics & Population Health'"
+                  "Value": "'Patient Population Profile'"
                 }
               }
             },
@@ -180,6 +180,5 @@
     },
     "drillFilterOtherVisuals": true
   },
-  "parentGroupName": "d38535103bd36379e1a5",
   "howCreated": "InsertVisualButton"
 }

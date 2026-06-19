@@ -1,13 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "393bcdf33cde52bb3697",
   "position": {
     "x": 0,
     "y": 0,
     "z": 4500,
-    "height": 69.414593729477758,
-    "width": 1237,
-    "tabOrder": 3000
+    "height": 77.331301763731176,
+    "width": 1236.3677783547464
   },
   "visual": {
     "visualType": "cardVisual",
@@ -20,28 +19,28 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Patient Analytics Measures"
+                      "Entity": "_Measures"
                     }
                   },
-                  "Property": "Total Patients"
+                  "Property": "Total Doctors"
                 }
               },
-              "queryRef": "Patient Analytics Measures.Total Patients",
-              "nativeQueryRef": "Total Patients"
+              "queryRef": "_Measures.Total Doctors",
+              "nativeQueryRef": "Total Doctors"
             },
             {
               "field": {
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Claims Overview Measures"
+                      "Entity": "_Measures"
                     }
                   },
-                  "Property": "Approval Rate %"
+                  "Property": "Total Referrals"
                 }
               },
-              "queryRef": "Claims Overview Measures.Approval Rate %",
-              "nativeQueryRef": "Approval Rate %"
+              "queryRef": "_Measures.Total Referrals",
+              "nativeQueryRef": "Total Referrals"
             },
             {
               "field": {
@@ -62,28 +61,14 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Healthcare Cost & Financial Impact Measures"
+                      "Entity": "_Measures"
                     }
                   },
-                  "Property": "Total Healthcare Cost"
+                  "Property": "Approval Rate %"
                 }
               },
-              "queryRef": "Healthcare Cost & Financial Impact Measures.Total Healthcare Cost",
-              "nativeQueryRef": "Total Healthcare Cost"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Claims Overview Measures"
-                    }
-                  },
-                  "Property": "Total Claims Count"
-                }
-              },
-              "queryRef": "Claims Overview Measures.Total Claims Count",
-              "nativeQueryRef": "Total Claims Count"
+              "queryRef": "_Measures.Approval Rate %",
+              "nativeQueryRef": "Approval Rate %"
             }
           ]
         }
@@ -95,10 +80,10 @@
               "Measure": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Patient Analytics Measures"
+                    "Entity": "_Measures"
                   }
                 },
-                "Property": "Total Patients"
+                "Property": "Total Doctors"
               }
             },
             "direction": "Descending"

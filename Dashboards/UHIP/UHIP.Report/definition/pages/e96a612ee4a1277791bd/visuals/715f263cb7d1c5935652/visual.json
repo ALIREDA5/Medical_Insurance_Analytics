@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "715f263cb7d1c5935652",
   "position": {
-    "x": 438,
+    "x": 450,
     "y": 0,
-    "z": 0,
+    "z": 1000,
     "height": 68,
     "width": 506,
-    "tabOrder": 17
+    "tabOrder": 4000
   },
   "visual": {
     "visualType": "shape",
@@ -68,14 +68,14 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Government Decision Support'"
+                  "Value": "'Hospital-Type & Resource Allocation'"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "25D"
+                  "Value": "21D"
                 }
               }
             },
@@ -180,6 +180,5 @@
     },
     "drillFilterOtherVisuals": true
   },
-  "parentGroupName": "4e8e3c9fd09c040c0328",
   "howCreated": "InsertVisualButton"
 }

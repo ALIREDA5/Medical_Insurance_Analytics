@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "cf2a79580de17ae41c51",
   "position": {
-    "x": 348,
+    "x": 360,
     "y": 0,
-    "z": 0,
+    "z": 1000,
     "height": 68,
     "width": 688,
-    "tabOrder": 17
+    "tabOrder": 4000
   },
   "visual": {
     "visualType": "shape",
@@ -68,7 +68,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'National Healthcare Performance Scorecard'"
+                  "Value": "'Network Decision Support (Port Said)'"
                 }
               }
             },
@@ -180,6 +180,5 @@
     },
     "drillFilterOtherVisuals": true
   },
-  "parentGroupName": "f50974bf41050e6a0224",
   "howCreated": "InsertVisualButton"
 }

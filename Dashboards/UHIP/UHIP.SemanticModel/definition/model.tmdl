@@ -48,6 +48,7 @@ ref table ModelRelationships
 ref table ModelTables
 ref table ModelColumns
 ref table LocalDateTable_86bf0818-92df-43d8-b010-bae28901b86b
+ref table PatientVisitDistribution
 
 ref cultureInfo en-US
 

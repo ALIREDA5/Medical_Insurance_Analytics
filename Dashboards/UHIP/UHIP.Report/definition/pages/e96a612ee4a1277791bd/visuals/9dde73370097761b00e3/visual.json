@@ -5,9 +5,8 @@
     "x": 0,
     "y": 0,
     "z": 4500,
-    "height": 69.415570851157881,
-    "width": 1237,
-    "tabOrder": 4000
+    "height": 78.110458456564743,
+    "width": 1236.3677783547464
   },
   "visual": {
     "visualType": "cardVisual",
@@ -23,11 +22,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Avg Waiting Time - All"
+                  "Property": "Total Visits"
                 }
               },
-              "queryRef": "Operations Overview Measures.Avg Waiting Time - All",
-              "nativeQueryRef": "Avg Waiting Time - All"
+              "queryRef": "_Measures.Total Visits",
+              "nativeQueryRef": "Total Visits"
             },
             {
               "field": {
@@ -65,11 +64,25 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Avg Feedback Rating"
+                  "Property": "Total Doctors"
                 }
               },
-              "queryRef": "_Measures.Avg Feedback Rating",
-              "nativeQueryRef": "Avg Feedback Rating1"
+              "queryRef": "_Measures.Total Doctors",
+              "nativeQueryRef": "Total Doctors"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Total Departments"
+                }
+              },
+              "queryRef": "_Measures.Total Departments",
+              "nativeQueryRef": "Total Departments"
             }
           ]
         }
@@ -84,7 +97,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Avg Waiting Time - All"
+                "Property": "Total Visits"
               }
             },
             "direction": "Descending"

@@ -1,16 +1,74 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "08faf9b006cbcbe77116",
   "position": {
-    "x": 633.33333333333337,
-    "y": 67.776823710336089,
+    "x": 633.00964130261877,
+    "y": 75.506744696330927,
     "z": 2000,
-    "height": 207.77485301365317,
-    "width": 596.66666666666663,
-    "tabOrder": 2000
+    "height": 231.47149603629308,
+    "width": 596.36171470088811
   },
   "visual": {
     "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_hospital"
+                    }
+                  },
+                  "Property": "hospital_name"
+                }
+              },
+              "queryRef": "dim_hospital.hospital_name",
+              "nativeQueryRef": "hospital_name",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Total Healthcare Cost"
+                }
+              },
+              "queryRef": "_Measures.Total Healthcare Cost",
+              "nativeQueryRef": "Total Healthcare Cost"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Measures"
+                  }
+                },
+                "Property": "Total Healthcare Cost"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
     "objects": {
       "dataPoint": [
         {

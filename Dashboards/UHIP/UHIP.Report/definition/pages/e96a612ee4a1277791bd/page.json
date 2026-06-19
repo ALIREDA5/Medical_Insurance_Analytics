@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
   "name": "e96a612ee4a1277791bd",
-  "displayName": "Government Decision Support",
+  "displayName": "Hospital-Type & Resource Allocation",
   "displayOption": "FitToPage",
   "height": 720,
   "width": 1280

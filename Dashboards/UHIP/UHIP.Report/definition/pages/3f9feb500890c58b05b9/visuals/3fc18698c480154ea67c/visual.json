@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "3fc18698c480154ea67c",
   "position": {
-    "x": 2,
+    "x": 10,
     "y": 152,
     "z": 0,
     "height": 65,
     "width": 1256,
-    "tabOrder": 3000
+    "tabOrder": 7000
   },
   "visualGroup": {
     "displayName": "Filter",
@@ -27,6 +27,5 @@
         }
       ]
     }
-  },
-  "parentGroupName": "456c5dd07b86a5099e58"
+  }
 }

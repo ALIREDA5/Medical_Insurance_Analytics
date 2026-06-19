@@ -1,13 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "8706c1f0e040045845d2",
   "position": {
-    "x": 632,
-    "y": 67.77682371033606,
+    "x": 631.67698942619222,
+    "y": 75.8871313194862,
     "z": 2000,
-    "height": 207.77485301365317,
-    "width": 596.66666666666663,
-    "tabOrder": 2000
+    "height": 232.63759929088391,
+    "width": 596.36171470088811
   },
   "visual": {
     "visualType": "donutChart",
@@ -57,6 +56,26 @@
         }
       },
       "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "fact_claims"
+                      }
+                    },
+                    "Property": "claim_id"
+                  }
+                },
+                "Function": 5
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
         "isDefaultSort": true
       }
     },

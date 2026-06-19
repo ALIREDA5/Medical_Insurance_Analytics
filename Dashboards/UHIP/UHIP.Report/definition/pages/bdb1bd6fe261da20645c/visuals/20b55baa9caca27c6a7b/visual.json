@@ -1,38 +1,18 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "20b55baa9caca27c6a7b",
   "position": {
-    "x": 632,
-    "y": 67.776823710336089,
+    "x": 12.413928889493015,
+    "y": 83.302018326609627,
     "z": 2000,
-    "height": 207.77485301365317,
-    "width": 596.66666666666663,
-    "tabOrder": 2000
+    "height": 463.80944404428885,
+    "width": 591.42565202097194
   },
   "visual": {
-    "visualType": "clusteredColumnChart",
+    "visualType": "treemap",
     "query": {
       "queryState": {
-        "Category": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "dim_diagnosis"
-                    }
-                  },
-                  "Property": "diagnosis_category"
-                }
-              },
-              "queryRef": "dim_diagnosis.diagnosis_category",
-              "nativeQueryRef": "diagnosis_category",
-              "active": true
-            }
-          ]
-        },
-        "Series": {
+        "Group": {
           "projections": [
             {
               "field": {
@@ -46,11 +26,27 @@
                 }
               },
               "queryRef": "dim_diagnosis.severity_level",
-              "nativeQueryRef": "severity_level"
+              "nativeQueryRef": "severity_level",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_diagnosis"
+                    }
+                  },
+                  "Property": "diagnosis_category"
+                }
+              },
+              "queryRef": "dim_diagnosis.diagnosis_category",
+              "nativeQueryRef": "diagnosis_category",
+              "active": false
             }
           ]
         },
-        "Y": {
+        "Values": {
           "projections": [
             {
               "field": {
@@ -63,7 +59,7 @@
                   "Property": "Total Visits"
                 }
               },
-              "queryRef": "Operations Overview Measures.Total Visits",
+              "queryRef": "_Measures.Total Visits",
               "nativeQueryRef": "Total Visits"
             }
           ]
@@ -329,5 +325,51 @@
     },
     "drillFilterOtherVisuals": true
   },
-  "parentGroupName": "77279b86969459381456"
+  "parentGroupName": "77279b86969459381456",
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "2c92e14540c772066c59",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_diagnosis"
+              }
+            },
+            "Property": "diagnosis_category"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "9c069b0f464dcaa56849",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Total Visits"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "7330188c07cb48c071b2",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_diagnosis"
+              }
+            },
+            "Property": "severity_level"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
 }

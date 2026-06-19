@@ -5,9 +5,8 @@
     "x": 0,
     "y": 0,
     "z": 4500,
-    "height": 69.414593729477758,
-    "width": 1237,
-    "tabOrder": 3000
+    "height": 77.720880110147945,
+    "width": 1236.3677783547464
   },
   "visual": {
     "visualType": "cardVisual",
@@ -37,11 +36,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Total Doctors"
+                  "Property": "Total Patients"
                 }
               },
-              "queryRef": "_Measures.Total Doctors",
-              "nativeQueryRef": "Total Doctors1"
+              "queryRef": "_Measures.Total Patients",
+              "nativeQueryRef": "Total Patients1"
             },
             {
               "field": {
@@ -51,11 +50,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Total Patients"
+                  "Property": "Approval Rate %"
                 }
               },
-              "queryRef": "_Measures.Total Patients",
-              "nativeQueryRef": "Total Patients1"
+              "queryRef": "_Measures.Approval Rate %",
+              "nativeQueryRef": "Approval Rate %"
             },
             {
               "field": {

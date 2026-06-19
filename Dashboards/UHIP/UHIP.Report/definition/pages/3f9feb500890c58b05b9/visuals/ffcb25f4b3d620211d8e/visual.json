@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "ffcb25f4b3d620211d8e",
   "position": {
-    "x": 0,
+    "x": 8,
     "y": 80,
-    "z": 2000,
+    "z": 7000,
     "height": 40,
     "width": 1263,
-    "tabOrder": 2000
+    "tabOrder": 5000
   },
   "visualGroup": {
     "displayName": "Category Navigator",
@@ -39,6 +39,5 @@
         }
       ]
     }
-  },
-  "parentGroupName": "456c5dd07b86a5099e58"
+  }
 }

@@ -2,12 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "2f31430fbaa4126603b0",
   "position": {
-    "x": 5.4411894079352505,
-    "y": 67,
+    "x": 5.43840845585795,
+    "y": 75.392316917070232,
     "z": 1000,
-    "height": 207.95858925658553,
-    "width": 596.898478050497,
-    "tabOrder": 3000
+    "height": 234.00716219193035,
+    "width": 596.59340760761711
   },
   "visual": {
     "visualType": "lineChart",
@@ -33,7 +32,27 @@
               },
               "queryRef": "dim_date.Date Hierarchy.year",
               "nativeQueryRef": "Date Hierarchy year",
-              "active": true
+              "active": false
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_date"
+                        }
+                      },
+                      "Hierarchy": "Date Hierarchy"
+                    }
+                  },
+                  "Level": "quarter"
+                }
+              },
+              "queryRef": "dim_date.Date Hierarchy.quarter",
+              "nativeQueryRef": "Date Hierarchy quarter",
+              "active": false
             },
             {
               "field": {
@@ -54,6 +73,26 @@
               "queryRef": "dim_date.Date Hierarchy.month_name",
               "nativeQueryRef": "Date Hierarchy month_name",
               "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_date"
+                        }
+                      },
+                      "Hierarchy": "Date Hierarchy"
+                    }
+                  },
+                  "Level": "day_name"
+                }
+              },
+              "queryRef": "dim_date.Date Hierarchy.day_name",
+              "nativeQueryRef": "Date Hierarchy day_name",
+              "active": false
             }
           ]
         },
@@ -61,22 +100,17 @@
           "projections": [
             {
               "field": {
-                "Aggregation": {
+                "Measure": {
                   "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "fact_visits"
-                        }
-                      },
-                      "Property": "total_cost"
+                    "SourceRef": {
+                      "Entity": "_Measures"
                     }
                   },
-                  "Function": 0
+                  "Property": "Total Visits"
                 }
               },
-              "queryRef": "Sum(fact_visits.total_cost)",
-              "nativeQueryRef": "Sum of total_cost"
+              "queryRef": "_Measures.Total Visits",
+              "nativeQueryRef": "Total Visits"
             }
           ]
         }
@@ -372,5 +406,99 @@
     },
     "drillFilterOtherVisuals": true
   },
-  "parentGroupName": "3d825ce991d8bca7d97a"
+  "parentGroupName": "3d825ce991d8bca7d97a",
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "65cdd78d176d0c310860",
+        "field": {
+          "HierarchyLevel": {
+            "Expression": {
+              "Hierarchy": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "dim_date"
+                  }
+                },
+                "Hierarchy": "Date Hierarchy"
+              }
+            },
+            "Level": "year"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "24b540927878ccc30801",
+        "field": {
+          "HierarchyLevel": {
+            "Expression": {
+              "Hierarchy": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "dim_date"
+                  }
+                },
+                "Hierarchy": "Date Hierarchy"
+              }
+            },
+            "Level": "quarter"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "6467f2313ea798d23531",
+        "field": {
+          "HierarchyLevel": {
+            "Expression": {
+              "Hierarchy": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "dim_date"
+                  }
+                },
+                "Hierarchy": "Date Hierarchy"
+              }
+            },
+            "Level": "month_name"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "f0f183694e61117b2368",
+        "field": {
+          "HierarchyLevel": {
+            "Expression": {
+              "Hierarchy": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "dim_date"
+                  }
+                },
+                "Hierarchy": "Date Hierarchy"
+              }
+            },
+            "Level": "day_name"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "6a00153fe43709ecc0a5",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Total Visits"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
 }

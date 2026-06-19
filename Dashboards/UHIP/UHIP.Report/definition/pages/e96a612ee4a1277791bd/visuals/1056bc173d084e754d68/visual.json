@@ -2,18 +2,17 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "1056bc173d084e754d68",
   "position": {
-    "x": 632.5,
-    "y": 282.00688345887954,
+    "x": 632.17673387985212,
+    "y": 317.33063179891252,
     "z": 3000,
-    "height": 207,
-    "width": 596.46318289786223,
-    "tabOrder": 1000
+    "height": 232.92850151990356,
+    "width": 596.15833493114849
   },
   "visual": {
-    "visualType": "treemap",
+    "visualType": "scatterChart",
     "query": {
       "queryState": {
-        "Group": {
+        "Series": {
           "projections": [
             {
               "field": {
@@ -23,16 +22,15 @@
                       "Entity": "dim_hospital"
                     }
                   },
-                  "Property": "hospital_type"
+                  "Property": "hospital_name"
                 }
               },
-              "queryRef": "dim_hospital.hospital_type",
-              "nativeQueryRef": "hospital_type",
-              "active": true
+              "queryRef": "dim_hospital.hospital_name",
+              "nativeQueryRef": "hospital_name"
             }
           ]
         },
-        "Values": {
+        "Size": {
           "projections": [
             {
               "field": {
@@ -42,11 +40,48 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Avg Waiting Time - All"
+                  "Property": "Total Visits"
                 }
               },
-              "queryRef": "Operations Overview Measures.Avg Waiting Time - All",
-              "nativeQueryRef": "Avg Waiting Time - All"
+              "queryRef": "_Measures.Total Visits",
+              "nativeQueryRef": "Total Visits"
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Total beds"
+                }
+              },
+              "queryRef": "_Measures.Total beds",
+              "nativeQueryRef": "Total beds",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Total Doctors"
+                }
+              },
+              "queryRef": "_Measures.Total Doctors",
+              "nativeQueryRef": "Total Doctors"
             }
           ]
         }
@@ -84,19 +119,6 @@
                       "Percent": -0.25
                     }
                   }
-                }
-              }
-            }
-          }
-        }
-      ],
-      "labels": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
                 }
               }
             }

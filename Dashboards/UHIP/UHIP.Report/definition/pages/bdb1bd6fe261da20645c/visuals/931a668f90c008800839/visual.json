@@ -1,16 +1,15 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "931a668f90c008800839",
   "position": {
-    "x": 4,
-    "y": 282.00291381580968,
+    "x": 618.93397110125545,
+    "y": 84.674235616681486,
     "z": 4000,
-    "height": 206.99708618419029,
-    "width": 596.46318289786223,
-    "tabOrder": 4000
+    "height": 461.06500946414513,
+    "width": 610.63669408197791
   },
   "visual": {
-    "visualType": "clusteredColumnChart",
+    "visualType": "clusteredBarChart",
     "query": {
       "queryState": {
         "Category": {
@@ -45,7 +44,7 @@
                   "Property": "Total Visits"
                 }
               },
-              "queryRef": "Operations Overview Measures.Total Visits",
+              "queryRef": "_Measures.Total Visits",
               "nativeQueryRef": "Total Visits"
             }
           ]
@@ -165,5 +164,124 @@
     },
     "drillFilterOtherVisuals": true
   },
-  "parentGroupName": "77279b86969459381456"
+  "parentGroupName": "77279b86969459381456",
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "b18d9f1f0458eee926cb",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_diagnosis"
+              }
+            },
+            "Property": "diagnosis_name"
+          }
+        },
+        "type": "TopN",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "subquery",
+              "Expression": {
+                "Subquery": {
+                  "Query": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "d",
+                        "Entity": "dim_diagnosis",
+                        "Type": 0
+                      },
+                      {
+                        "Name": "_",
+                        "Entity": "_Measures",
+                        "Type": 0
+                      }
+                    ],
+                    "Select": [
+                      {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "d"
+                            }
+                          },
+                          "Property": "diagnosis_name"
+                        },
+                        "Name": "field"
+                      }
+                    ],
+                    "OrderBy": [
+                      {
+                        "Direction": 2,
+                        "Expression": {
+                          "Measure": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "_"
+                              }
+                            },
+                            "Property": "Total Visits"
+                          }
+                        }
+                      }
+                    ],
+                    "Top": 10
+                  }
+                }
+              },
+              "Type": 2
+            },
+            {
+              "Name": "d",
+              "Entity": "dim_diagnosis",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "d"
+                          }
+                        },
+                        "Property": "diagnosis_name"
+                      }
+                    }
+                  ],
+                  "Table": {
+                    "SourceRef": {
+                      "Source": "subquery"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "88d293230e67583ab722",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Total Visits"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
 }

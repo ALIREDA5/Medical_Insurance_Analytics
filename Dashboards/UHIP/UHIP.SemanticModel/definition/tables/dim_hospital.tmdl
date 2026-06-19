@@ -63,20 +63,20 @@ table dim_hospital
 	column latitude
 		dataType: double
 		lineageTag: 224aae1e-c7eb-4131-89a3-c0999f57c620
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: latitude
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column longitude
 		dataType: double
 		lineageTag: 7f30579c-35f8-4887-8a3c-7055f9d8bd82
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: longitude
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 

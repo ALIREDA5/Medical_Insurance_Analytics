@@ -2,12 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "37eefaea7d7060ddcadd",
   "position": {
-    "x": 5.4411894079352505,
-    "y": 282.00291381580968,
+    "x": 5.4384084558579495,
+    "y": 315.74793538096282,
     "z": 4000,
-    "height": 206.99708618419032,
-    "width": 596.46318289786223,
-    "tabOrder": 4000
+    "height": 231.76676335770952,
+    "width": 596.15833493114849
   },
   "visual": {
     "visualType": "pivotTable",
@@ -61,6 +60,20 @@
               },
               "queryRef": "Operations Overview Measures.Avg Waiting Time - All",
               "nativeQueryRef": "Avg Waiting Time - All"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Avg Feedback Rating"
+                }
+              },
+              "queryRef": "_Measures.Avg Feedback Rating",
+              "nativeQueryRef": "Avg Feedback Rating"
             }
           ]
         }

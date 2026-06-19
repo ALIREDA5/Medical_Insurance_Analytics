@@ -1,0 +1,47 @@
+table PatientVisitDistribution
+	lineageTag: 9c87e2cc-306a-4639-8d02-f304b7657607
+
+	column patient_key
+		formatString: 0
+		lineageTag: baec630e-4931-411c-b466-cabc4f32e2ac
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: fact_visits[patient_key]
+
+		annotation SummarizationSetBy = Automatic
+
+	column VisitCount
+		formatString: 0
+		lineageTag: d435d410-4c46-4ef8-a22b-3bafa7cfc1d5
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [VisitCount]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Visit Group' =
+			
+			SWITCH(
+			    TRUE(),
+			    PatientVisitDistribution[VisitCount] = 1, "1",
+			    PatientVisitDistribution[VisitCount] = 2, "2",
+			    PatientVisitDistribution[VisitCount] = 3, "3",
+			    PatientVisitDistribution[VisitCount] >= 4, "4+"
+			)
+		lineageTag: c478f04f-fe7d-4580-a2d7-b980a9041433
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition PatientVisitDistribution = calculated
+		mode: import
+		source =
+				
+				SUMMARIZE(
+				    fact_visits,
+				    fact_visits[patient_key],
+				    "VisitCount", COUNT(fact_visits[visit_id])
+				)
+
+	annotation PBI_Id = f9f5da3ff835417e9ab56059defe5d33
+
