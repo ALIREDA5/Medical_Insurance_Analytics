@@ -1,0 +1,91 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "19ea75b82077655153e8",
+  "position": {
+    "x": 4,
+    "y": 67,
+    "z": 4250,
+    "height": 207,
+    "width": 596,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "barChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_hospital"
+                    }
+                  },
+                  "Property": "hospital_name"
+                }
+              },
+              "queryRef": "dim_hospital.hospital_name",
+              "nativeQueryRef": "hospital_name",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Healthcare Cost & Financial Impact Measures"
+                    }
+                  },
+                  "Property": "Total Healthcare Cost"
+                }
+              },
+              "queryRef": "Healthcare Cost & Financial Impact Measures.Total Healthcare Cost",
+              "nativeQueryRef": "Total Healthcare Cost"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Healthcare Cost & Financial Impact Measures"
+                  }
+                },
+                "Property": "Total Healthcare Cost"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "visualContainerObjects": {
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "5D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "9555a2bf5609cc0c1906"
+}

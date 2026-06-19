@@ -1,0 +1,141 @@
+relationship 19a269d1-1c52-4d13-bfe8-d54c43e4c374
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_patient.birth_date
+	toColumn: LocalDateTable_88088965-c040-4725-89b4-d3eb98ed9bfc.Date
+
+relationship 38063d6b-5c69-4e4c-a438-defd79813260
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_pharmacy.transaction_date
+	toColumn: LocalDateTable_d341ef68-90ef-46e3-991f-6d6a6130fd06.Date
+
+relationship 54ab50b2-953c-437b-a516-83be27924b51
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_visits.visit_date
+	toColumn: LocalDateTable_2eb9ebf6-8455-421f-afb7-3d32a4dc17e1.Date
+
+relationship AutoDetected_076058ea-a078-4296-aaf3-45c875b2d9ca
+	fromColumn: fact_claims.date_key
+	toColumn: dim_date.date_key
+
+relationship AutoDetected_d9223cae-cef8-4e4c-9b13-27f73f40d18e
+	fromColumn: fact_pharmacy.date_key
+	toColumn: dim_date.date_key
+
+relationship AutoDetected_cb9e28b2-507c-4b10-95b2-8d93282bc857
+	fromColumn: fact_visits.date_key
+	toColumn: dim_date.date_key
+
+relationship AutoDetected_16ea3dab-545e-496a-8196-fea0c1d87997
+	fromColumn: fact_visits.department_key
+	toColumn: dim_department.department_key
+
+relationship AutoDetected_ac6661c3-d2ad-45c1-9531-9cf6da0bbe86
+	fromColumn: dim_department.hospital_key
+	toColumn: dim_hospital.hospital_key
+
+relationship AutoDetected_c17511ce-1d83-4bd8-b63d-81d5c9d26307
+	isActive: false
+	fromColumn: dim_doctor.hospital_key
+	toColumn: dim_hospital.hospital_key
+
+relationship AutoDetected_c5a6f56b-b275-4304-a8f9-3c469b09d2ba
+	fromColumn: fact_pharmacy.hospital_key
+	toColumn: dim_hospital.hospital_key
+
+relationship AutoDetected_97daaaf2-1dc6-45e8-9491-466de346306c
+	isActive: false
+	fromColumn: fact_visits.hospital_key
+	toColumn: dim_hospital.hospital_key
+
+relationship AutoDetected_1ef589ff-79c3-4074-b012-6f3f7de4d728
+	fromColumn: fact_visits.diagnosis_key
+	toColumn: dim_diagnosis.diagnosis_key
+
+relationship AutoDetected_ef0a9e45-65f4-451f-be56-5d8dfb3c95f6
+	fromColumn: fact_visits.doctor_key
+	toColumn: dim_doctor.doctor_key
+
+relationship AutoDetected_02c09741-abce-4798-b0f0-357d25c5254f
+	fromColumn: fact_pharmacy.drug_key
+	toColumn: dim_drug.drug_key
+
+relationship AutoDetected_9541d9d8-69e6-41b9-b000-3544f3b43614
+	fromColumn: fact_visits.patient_key
+	toColumn: dim_patient.patient_key
+
+relationship AutoDetected_5253ae9d-c4c5-4abe-acba-594373a5f2ab
+	isActive: false
+	fromColumn: fact_claims.visit_id
+	toColumn: fact_visits.visit_id
+
+relationship 4a741854-2b7f-45b8-be41-50da363dd396
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_claims.claim_date
+	toColumn: LocalDateTable_b3c857c1-381e-40b1-af19-ba7fc86db320.Date
+
+relationship 9883c5b1-fc2d-40cf-9de3-041adcddff82
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_claims.approval_date
+	toColumn: LocalDateTable_e71612ab-c9d8-472e-a9c8-04bc44533611.Date
+
+relationship AutoDetected_fd8a1e94-b8f3-49cc-a644-9e5d4c96b831
+	fromColumn: fact_claims.hospital_id
+	toColumn: dim_hospital.hospital_id
+
+relationship AutoDetected_6e69b35c-6e0c-498b-acef-d3a2bb30905c
+	fromColumn: fact_claims.patient_id
+	toColumn: dim_patient.patient_id
+
+relationship 99a5afa3-18e7-4470-9a03-77fe8221f493
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_claim_items.dwh_updated_at
+	toColumn: LocalDateTable_a3485b8b-6598-4c00-a1b3-93f9939e2fa2.Date
+
+relationship AutoDetected_0d01b162-d0e9-4de2-9a36-ae9d5e0e8a54
+	fromColumn: fact_claim_items.drug_key
+	toColumn: dim_drug.drug_key
+
+relationship AutoDetected_946f1c75-98a4-4c00-8b47-efaf6104a88d
+	fromColumn: fact_claim_items.procedure_key
+	toColumn: dim_procedure.procedure_key
+
+relationship AutoDetected_2279c8e5-03d6-476e-98e5-a780d4cefd81
+	fromColumn: fact_claim_items.claim_id
+	toColumn: fact_claims.claim_id
+
+relationship 09a2745f-8382-430d-b209-4917c5fad855
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_referrals.referral_date
+	toColumn: LocalDateTable_33032808-0cd0-456c-9b75-a88e134d4760.Date
+
+relationship AutoDetected_9f98e814-a382-48a7-9b04-f53e85ddfe1e
+	fromColumn: fact_referrals.date_key
+	toColumn: dim_date.date_key
+
+relationship AutoDetected_11d6eb61-399b-499e-b9ff-d6448a65afd1
+	fromColumn: fact_referrals.patient_key
+	toColumn: dim_patient.patient_key
+
+relationship 3039b016-057e-94e0-c12c-ab4d42aa187c
+	fromColumn: fact_referrals.from_hospital_key
+	toColumn: dim_hospital.hospital_key
+
+relationship 5ba5a33c-6f5b-3008-01b2-f9b24cfcf4ab
+	isActive: false
+	fromColumn: fact_referrals.to_hospital_key
+	toColumn: dim_hospital.hospital_key
+
+relationship AutoDetected_4a372e8e-0918-485d-852d-33705def08f8
+	fromColumn: fact_beds.department_key
+	toColumn: dim_department.department_key
+
+relationship AutoDetected_b338e300-238b-40dc-a010-274426bfa3a5
+	isActive: false
+	fromColumn: fact_beds.hospital_key
+	toColumn: dim_hospital.hospital_key
+
+relationship 4b924882-d8d5-4294-a7a0-8d992fcd7bf3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_drug.effective_time
+	toColumn: LocalDateTable_86bf0818-92df-43d8-b010-bae28901b86b.Date
+

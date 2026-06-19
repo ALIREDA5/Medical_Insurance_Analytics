@@ -1,0 +1,111 @@
+table fact_claim_items
+	lineageTag: 42129789-1391-47e4-b104-201b044397e4
+
+	column claim_item_id
+		dataType: string
+		lineageTag: 1743201e-5b12-49bb-bf43-b1e0327f3305
+		summarizeBy: none
+		sourceColumn: claim_item_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column claim_id
+		dataType: string
+		lineageTag: 9079dccc-3d9b-4a97-8c07-b1f714d49520
+		summarizeBy: none
+		sourceColumn: claim_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column procedure_code
+		dataType: string
+		lineageTag: d93e2c5f-edeb-4ab8-ba59-685f84963f44
+		summarizeBy: none
+		sourceColumn: procedure_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column drug_id
+		dataType: string
+		lineageTag: 2cc0d462-a7ce-45c0-bbda-519dc834c8ee
+		summarizeBy: none
+		sourceColumn: drug_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column drug_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 83728636-be54-43b2-9d22-ebcecde3a827
+		summarizeBy: none
+		sourceColumn: drug_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column procedure_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 12a87330-766a-45e5-8e88-2bdfd89acd01
+		summarizeBy: none
+		sourceColumn: procedure_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column item_amount
+		dataType: double
+		lineageTag: b45b605f-37f1-493a-8d34-d3330dded651
+		summarizeBy: sum
+		sourceColumn: item_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column item_quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 6a9c9bfe-1247-4c7a-89f8-dbbbd6103d7f
+		summarizeBy: sum
+		sourceColumn: item_quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column item_type
+		dataType: string
+		lineageTag: 58e620e9-731f-4192-ba24-dd7462ec9516
+		summarizeBy: none
+		sourceColumn: item_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column dwh_updated_at
+		dataType: dateTime
+		isHidden
+		formatString: General Date
+		lineageTag: 9c1a18e7-7ee3-42e0-af9c-371dc0686ee5
+		summarizeBy: none
+		sourceColumn: dwh_updated_at
+
+		variation Variation
+			isDefault
+			relationship: 99a5afa3-18e7-4470-9a03-77fe8221f493
+			defaultHierarchy: LocalDateTable_a3485b8b-6598-4c00-a1b3-93f9939e2fa2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_claim_items = m
+		mode: import
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-687798f3-72ec.cloud.databricks.com", "/sql/1.0/warehouses/2eaa154934f93343", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation=null]),
+				    medical_insurance_Database = Source{[Name="medical_insurance",Kind="Database"]}[Data],
+				    gold_Schema = medical_insurance_Database{[Name="gold",Kind="Schema"]}[Data],
+				    fact_visits_incremental_Table = gold_Schema{[Name="fact_claim_items_incremental",Kind="Table"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(fact_visits_incremental_Table,{"dwh_loaded_at"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

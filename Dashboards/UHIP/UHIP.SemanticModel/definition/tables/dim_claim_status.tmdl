@@ -1,0 +1,53 @@
+table dim_claim_status
+	lineageTag: ed1bee86-4518-40ce-82a5-e870d737f921
+
+	column claim_status_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2717b781-52f3-4917-97f0-3872843e108e
+		summarizeBy: sum
+		sourceColumn: claim_status_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column claim_status
+		dataType: string
+		lineageTag: e602b663-4619-405d-b80d-b0dfd4612af0
+		summarizeBy: none
+		sourceColumn: claim_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column rejection_reason
+		dataType: string
+		lineageTag: 5b70096a-a9b7-45f2-a013-9bd312c59196
+		summarizeBy: none
+		sourceColumn: rejection_reason
+
+		annotation SummarizationSetBy = Automatic
+
+	column reviewed_by
+		dataType: string
+		lineageTag: 906eef2e-b498-4d4d-aca8-5968d9d90015
+		summarizeBy: none
+		sourceColumn: reviewed_by
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_claim_status = m
+		mode: import
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-687798f3-72ec.cloud.databricks.com", "/sql/1.0/warehouses/2eaa154934f93343", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation=null]),
+				    medical_insurance_Database = Source{[Name="medical_insurance",Kind="Database"]}[Data],
+				    gold_Schema = medical_insurance_Database{[Name="gold",Kind="Schema"]}[Data],
+				    dim_claim_status_scd1_Table = gold_Schema{[Name="dim_claim_status_scd1",Kind="Table"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(dim_claim_status_scd1_Table,{"dwh_created_at", "dwh_updated_at"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

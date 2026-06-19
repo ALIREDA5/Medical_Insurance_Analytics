@@ -1,0 +1,190 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "e2d685c657757de100c6",
+  "position": {
+    "x": 4,
+    "y": 282.00291381580968,
+    "z": 4000,
+    "height": 206.99708618419029,
+    "width": 596.46318289786223,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_procedure"
+                    }
+                  },
+                  "Property": "procedure_name"
+                }
+              },
+              "queryRef": "dim_procedure.procedure_name",
+              "nativeQueryRef": "procedure_name"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Claims Overview Measures"
+                    }
+                  },
+                  "Property": "Total Claimed Amount"
+                }
+              },
+              "queryRef": "Claims Overview Measures.Total Claimed Amount",
+              "nativeQueryRef": "Total Claimed Amount"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_claims"
+                        }
+                      },
+                      "Property": "claim_amount"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(fact_claims.claim_amount)",
+              "nativeQueryRef": "Sum of claim_amount"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fraud Proxy Measures"
+                    }
+                  },
+                  "Property": "Claim vs Expected Ratio"
+                }
+              },
+              "queryRef": "Fraud Proxy Measures.Claim vs Expected Ratio",
+              "nativeQueryRef": "Claim vs Expected Ratio"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_procedure"
+                    }
+                  },
+                  "Property": "expected_amount"
+                }
+              },
+              "queryRef": "dim_procedure.expected_amount",
+              "nativeQueryRef": "expected_amount"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "dim_procedure"
+                  }
+                },
+                "Property": "procedure_name"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#C6D3EC'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "5D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "d7a72027c80251035004"
+}

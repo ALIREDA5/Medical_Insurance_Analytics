@@ -1,0 +1,61 @@
+table dim_diagnosis
+	lineageTag: 195b537a-21a5-4969-9dc4-0201a0a88c3e
+
+	column diagnosis_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1942df33-c621-48f2-a32a-077e1eea9271
+		summarizeBy: none
+		sourceColumn: diagnosis_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column diagnosis_code
+		dataType: string
+		lineageTag: f1247c4d-958c-4907-8588-4741c0dd0153
+		summarizeBy: none
+		sourceColumn: diagnosis_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column diagnosis_name
+		dataType: string
+		lineageTag: 0974f05e-610e-4259-8e4c-6b74dda8b577
+		summarizeBy: none
+		sourceColumn: diagnosis_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column diagnosis_category
+		dataType: string
+		lineageTag: b37ac4b1-0057-458d-b5ad-7030d2d46c84
+		summarizeBy: none
+		sourceColumn: diagnosis_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column severity_level
+		dataType: string
+		lineageTag: a50b52b4-93ea-4bc6-b14b-5981b3b82432
+		summarizeBy: none
+		sourceColumn: severity_level
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_diagnosis = m
+		mode: import
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-687798f3-72ec.cloud.databricks.com", "/sql/1.0/warehouses/2eaa154934f93343", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation=null]),
+				    medical_insurance_Database = Source{[Name="medical_insurance",Kind="Database"]}[Data],
+				    gold_Schema = medical_insurance_Database{[Name="gold",Kind="Schema"]}[Data],
+				    dim_diagnosis_scd1_Table = gold_Schema{[Name="dim_diagnosis_scd1",Kind="Table"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(dim_diagnosis_scd1_Table,{"dwh_created_at", "dwh_updated_at"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

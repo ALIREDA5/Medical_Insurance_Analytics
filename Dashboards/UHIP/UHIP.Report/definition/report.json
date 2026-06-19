@@ -1,0 +1,123 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.3.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "CY26SU05",
+      "reportVersionAtImport": {
+        "visual": "2.9.0",
+        "report": "3.3.0",
+        "page": "2.3.1"
+      },
+      "type": "SharedResources"
+    },
+    "customTheme": {
+      "name": "UHIP___Healthcare_Intelligence880098570167609.json",
+      "reportVersionAtImport": {
+        "visual": "2.10.0",
+        "report": "3.4.0",
+        "page": "2.3.1"
+      },
+      "type": "RegisteredResources"
+    }
+  },
+  "objects": {
+    "section": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Top'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "resourcePackages": [
+    {
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "CY26SU05",
+          "path": "BaseThemes/CY26SU05.json",
+          "type": "BaseTheme"
+        }
+      ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "filter1269620450395308.png",
+          "path": "filter1269620450395308.png",
+          "type": "Image"
+        },
+        {
+          "name": "icon_financial_gray5947004072271829.png",
+          "path": "icon_financial_gray5947004072271829.png",
+          "type": "Image"
+        },
+        {
+          "name": "icon_fraud_gray16180887389508136.png",
+          "path": "icon_fraud_gray16180887389508136.png",
+          "type": "Image"
+        },
+        {
+          "name": "icon_operations_gray6478524195559494.png",
+          "path": "icon_operations_gray6478524195559494.png",
+          "type": "Image"
+        },
+        {
+          "name": "icon_overview6878807669128866.png",
+          "path": "icon_overview6878807669128866.png",
+          "type": "Image"
+        },
+        {
+          "name": "icon_patients_gray41132013007581114.png",
+          "path": "icon_patients_gray41132013007581114.png",
+          "type": "Image"
+        },
+        {
+          "name": "icon_pharmacy_gray8102858752738016.png",
+          "path": "icon_pharmacy_gray8102858752738016.png",
+          "type": "Image"
+        },
+        {
+          "name": "UHIP___Healthcare_Intelligence880098570167609.json",
+          "path": "UHIP___Healthcare_Intelligence880098570167609.json",
+          "type": "CustomTheme"
+        },
+        {
+          "name": "UHIP_logo_badge17469483891124538.png",
+          "path": "UHIP_logo_badge17469483891124538.png",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "exportDataMode": "AllowSummarized",
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": true,
+    "useDefaultAggregateDisplayName": true
+  }
+}

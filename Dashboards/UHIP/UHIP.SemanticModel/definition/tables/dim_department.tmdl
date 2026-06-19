@@ -1,0 +1,64 @@
+table dim_department
+	lineageTag: 190f21d0-9f4f-45cb-8ba1-e281c0811992
+
+	column department_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e5ce8671-b1df-4efd-ab9c-6c707c5f5447
+		summarizeBy: none
+		sourceColumn: department_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_id
+		dataType: string
+		lineageTag: df5b210d-fd27-4143-8472-343176d9ed1e
+		summarizeBy: none
+		sourceColumn: department_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_name
+		dataType: string
+		lineageTag: b59121c9-5446-4d64-ab95-48075c04aca7
+		summarizeBy: none
+		sourceColumn: department_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column floor_number
+		dataType: int64
+		formatString: 0
+		lineageTag: af746c9b-1ed8-4caf-a4ad-bbf91036f34c
+		summarizeBy: sum
+		sourceColumn: floor_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column hospital_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 8f2c1907-bd64-4f2a-95b9-5cab91abf79b
+		summarizeBy: none
+		sourceColumn: hospital_key
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_department = m
+		mode: import
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-687798f3-72ec.cloud.databricks.com", "/sql/1.0/warehouses/2eaa154934f93343", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation=null]),
+				    medical_insurance_Database = Source{[Name="medical_insurance",Kind="Database"]}[Data],
+				    gold_Schema = medical_insurance_Database{[Name="gold",Kind="Schema"]}[Data],
+				    dim_department_scd2_Table = gold_Schema{[Name="dim_department_scd2",Kind="Table"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(dim_department_scd2_Table,{"dwh_created_at", "dwh_updated_at", "scd_start_date", "scd_end_date", "scd_is_current", "scd_version"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

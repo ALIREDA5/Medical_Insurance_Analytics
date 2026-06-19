@@ -1,0 +1,91 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "c725d9735cd0a33c7e36",
+  "position": {
+    "x": 4,
+    "y": 67,
+    "z": 4250,
+    "height": 207,
+    "width": 596,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "barChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_doctor"
+                    }
+                  },
+                  "Property": "specialty"
+                }
+              },
+              "queryRef": "dim_doctor.specialty",
+              "nativeQueryRef": "specialty",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Doctor & Department Performance Measures"
+                    }
+                  },
+                  "Property": "Avg Feedback Rating"
+                }
+              },
+              "queryRef": "Doctor & Department Performance Measures.Avg Feedback Rating",
+              "nativeQueryRef": "Avg Feedback Rating"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Doctor & Department Performance Measures"
+                  }
+                },
+                "Property": "Avg Feedback Rating"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "visualContainerObjects": {
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "5D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "a16d3978c71b2506ba0a"
+}

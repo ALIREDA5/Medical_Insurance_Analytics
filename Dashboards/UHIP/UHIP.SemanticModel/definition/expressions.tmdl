@@ -1,0 +1,71 @@
+expression fda_drug_enrichment =
+		let
+		    Source =
+		        (drug as text) =>
+		        let
+		            Response =
+		                try Json.Document(
+		                    Web.Contents(
+		                        "https://api.fda.gov/drug/label.json",
+		                        [
+		                            Query =
+		                            [
+		                                search = "openfda.generic_name:" & drug,
+		                                limit = "1"
+		                            ]
+		                        ]
+		                    )
+		                )
+		                otherwise null,
+		
+		            Result = try Response[results]{0} otherwise null,
+		
+		Output =
+		    if Result = null then
+		        null
+		    else
+		        [
+		            generic_name = drug,
+		            brand_name = try Text.Combine(Result[openfda][brand_name], ", ") otherwise null,
+		            manufacturer_name = try Text.Combine(Result[openfda][manufacturer_name], ", ") otherwise null,
+		
+		            indications_and_usage =
+		                try Text.Combine(Result[indications_and_usage], " ")
+		                otherwise null,
+		
+		            warnings_and_cautions =
+		                try Text.Combine(Result[warnings_and_cautions], " ")
+		                otherwise null,
+		
+		            contraindications =
+		                try Text.Combine(Result[contraindications], " ")
+		                otherwise null,
+		
+		            adverse_reactions =
+		                try Text.Combine(Result[adverse_reactions], " ")
+		                otherwise null,
+		
+		            drug_interactions =
+		                try Text.Combine(Result[drug_interactions], " ")
+		                otherwise null,
+		
+		            mechanism_of_action =
+		                try Text.Combine(Result[mechanism_of_action], " ")
+		                otherwise null,
+		
+		            use_in_specific_populations =
+		                try Text.Combine(Result[use_in_specific_populations], " ")
+		                otherwise null,
+		
+		            effective_time =
+		                try Text.From(Result[effective_time])
+		                otherwise null
+		        ]
+		        in
+		            Output
+		in
+		    Source
+	lineageTag: 314d93c0-cfe6-47ac-a849-ca167745996c
+
+	annotation PBI_ResultType = Function
+

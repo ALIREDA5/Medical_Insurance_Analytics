@@ -1,0 +1,91 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "4babc8d24ee625701952",
+  "position": {
+    "x": 4,
+    "y": 67,
+    "z": 4250,
+    "height": 207,
+    "width": 596,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "hundredPercentStackedBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_procedure"
+                    }
+                  },
+                  "Property": "procedure_category"
+                }
+              },
+              "queryRef": "dim_procedure.procedure_category",
+              "nativeQueryRef": "procedure_category",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fraud Proxy Measures"
+                    }
+                  },
+                  "Property": "Claim vs Expected Ratio"
+                }
+              },
+              "queryRef": "Fraud Proxy Measures.Claim vs Expected Ratio",
+              "nativeQueryRef": "Claim vs Expected Ratio"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Fraud Proxy Measures"
+                  }
+                },
+                "Property": "Claim vs Expected Ratio"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "visualContainerObjects": {
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "5D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "d7a72027c80251035004"
+}

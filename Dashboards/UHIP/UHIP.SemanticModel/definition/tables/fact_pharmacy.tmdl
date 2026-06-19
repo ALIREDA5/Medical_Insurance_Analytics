@@ -1,0 +1,145 @@
+table fact_pharmacy
+	lineageTag: 612e2c23-eee7-4d98-903d-963052fde6fe
+
+	column transaction_id
+		dataType: string
+		lineageTag: 7d688b1e-4644-41db-b73d-61bfa347387f
+		summarizeBy: none
+		sourceColumn: transaction_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column transaction_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 09310c37-43b3-4692-b0e4-4cec9190f69d
+		summarizeBy: none
+		sourceColumn: transaction_date
+
+		variation Variation
+			isDefault
+			relationship: 38063d6b-5c69-4e4c-a438-defd79813260
+			defaultHierarchy: LocalDateTable_d341ef68-90ef-46e3-991f-6d6a6130fd06.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 570d18c9-e8e1-4e32-b3e8-71acda444ef2
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column drug_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 475fb275-51aa-4d09-8e84-3582dba1a6e8
+		summarizeBy: none
+		sourceColumn: drug_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column hospital_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b65c3ea9-455e-4970-9b3d-27ecd57ac5e4
+		summarizeBy: none
+		sourceColumn: hospital_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column transaction_type
+		dataType: string
+		lineageTag: cce6cd09-4e7d-4d02-8024-afed2e219264
+		summarizeBy: none
+		sourceColumn: transaction_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 44102630-7a1e-42f5-a2e9-ae34bb2217b8
+		summarizeBy: sum
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_amount
+		dataType: double
+		lineageTag: 092405dd-24f6-4fda-8bb8-ec90b3148f70
+		summarizeBy: sum
+		sourceColumn: unit_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_value
+		dataType: double
+		lineageTag: 642866a7-7ac1-4973-a8a5-fd7f9a30c65d
+		summarizeBy: sum
+		sourceColumn: total_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column stockout_flag
+		dataType: int64
+		formatString: 0
+		lineageTag: a30f6c58-107c-4af4-9a6c-72da4bd27c56
+		summarizeBy: sum
+		sourceColumn: stockout_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column near_expiry_flag
+		dataType: int64
+		formatString: 0
+		lineageTag: ba3aa882-ecef-4701-94eb-18f0ab13d82b
+		summarizeBy: sum
+		sourceColumn: near_expiry_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column no_prescription_flag
+		dataType: int64
+		formatString: 0
+		lineageTag: d05fa07c-a63e-419f-991f-cf3c866a443b
+		summarizeBy: sum
+		sourceColumn: no_prescription_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column performed_by
+		dataType: string
+		lineageTag: f6bfb518-79f1-4ff4-bc81-1fd4b2cd6793
+		summarizeBy: none
+		sourceColumn: performed_by
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_pharmacy = m
+		mode: import
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-687798f3-72ec.cloud.databricks.com", "/sql/1.0/warehouses/2eaa154934f93343", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation=null]),
+				    medical_insurance_Database = Source{[Name="medical_insurance",Kind="Database"]}[Data],
+				    gold_Schema = medical_insurance_Database{[Name="gold",Kind="Schema"]}[Data],
+				    fact_pharmacy_incremental_Table = gold_Schema{[Name="fact_pharmacy_incremental",Kind="Table"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(fact_pharmacy_incremental_Table,{"dwh_loaded_at"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,69 @@
+table fact_beds
+	lineageTag: 61decd2c-c5ec-4159-8b31-1b98145b4e94
+
+	column bed_id
+		dataType: string
+		lineageTag: eb79381f-a917-4100-99fe-323e1c699218
+		summarizeBy: none
+		sourceColumn: bed_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column bed_number
+		dataType: string
+		lineageTag: 5be67e0e-9e53-492d-93b8-7da4fc651889
+		summarizeBy: none
+		sourceColumn: bed_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column bed_type
+		dataType: string
+		lineageTag: 0e578a9a-4565-4c1d-bfaf-8835f993e597
+		summarizeBy: none
+		sourceColumn: bed_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column availability_status
+		dataType: string
+		lineageTag: fb3b2026-6db7-4894-8dd9-d3fd54c5365c
+		summarizeBy: none
+		sourceColumn: availability_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column hospital_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 98295596-5d98-402a-92ec-781ee1808cf7
+		summarizeBy: sum
+		sourceColumn: hospital_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 30689bcb-b250-4f60-a195-544b3159b7df
+		summarizeBy: none
+		sourceColumn: department_key
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_beds = m
+		mode: import
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-687798f3-72ec.cloud.databricks.com", "/sql/1.0/warehouses/2eaa154934f93343", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation=null]),
+				    medical_insurance_Database = Source{[Name="medical_insurance",Kind="Database"]}[Data],
+				    gold_Schema = medical_insurance_Database{[Name="gold",Kind="Schema"]}[Data],
+				    fact_visits_incremental_Table = gold_Schema{[Name="fact_beds",Kind="Table"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(fact_visits_incremental_Table,{"dwh_loaded_at","dwh_updated_at"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

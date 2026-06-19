@@ -1,0 +1,1269 @@
+table _Measures
+	lineageTag: a1559c5f-bad2-4698-8408-83e377998a50
+
+	measure 'Total Visits' =
+			
+			COUNTROWS(fact_visits)
+		formatString: #,0
+		displayFolder: Overview
+		lineageTag: 42cdbad1-13d4-4ea0-8fa4-6eee3c886709
+
+	measure 'No-Show Rate %' =
+			
+			DIVIDE(
+			    CALCULATE(COUNTROWS(fact_visits), fact_visits[visit_status] = "No Show"),
+			    [Total Visits]
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Operations & Service
+		lineageTag: d5746222-62fc-402f-82a7-5f650c9df8d3
+
+	measure 'Cancellation Rate %' =
+			
+			DIVIDE(
+			    CALCULATE(COUNTROWS(fact_visits), fact_visits[visit_status] = "Cancelled"),
+			    [Total Visits]
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Operations & Service
+		lineageTag: 23477654-0367-4098-8ef3-b8be3dd99f62
+
+	measure 'Avg Waiting Time - Completed' =
+			
+			CALCULATE(
+			    AVERAGE(fact_visits[waiting_time]),
+			    fact_visits[visit_status] = "Completed",
+			    fact_visits[waiting_time] > 0
+			)
+		formatString: 0 "min"
+		displayFolder: Operations & Service
+		lineageTag: b21eb394-01ad-4e9d-85f3-2484d483a11d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Prescription Rate %' =
+			
+			DIVIDE(
+			    CALCULATE(COUNTROWS(fact_visits), fact_visits[prescription_flag] = 1),
+			    [Total Visits]
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Operations & Service
+		lineageTag: 6a8ea9b5-025f-4b4b-881c-a4527dbad5a8
+
+	measure 'Avg Waiting Time - All' =
+			
+			AVERAGE(fact_visits[waiting_time])
+		formatString: 0 "min"
+		displayFolder: Operations & Service
+		lineageTag: c176404f-90f8-4285-8340-9c0ddc18ba77
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'No Prescription Share of Pharmacy Transactions %' =
+			
+			DIVIDE([No Prescription Transactions], [Pharmacy Transactions])
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Pharmacy
+		lineageTag: 8c94346b-16cc-4b0b-ac5c-ff716bff145b
+
+	measure 'Visits Last Month' = CALCULATE ( [Total Visits], DATEADD ( dim_date[full_date], -1, MONTH ) )
+		formatString: #,0
+		displayFolder: Operations & Service\Trends
+		lineageTag: 652225d0-ce5a-4e62-bced-899ca553c944
+
+	measure 'Visits MoM %' =
+			VAR Prev = [Visits Last Month]
+			RETURN DIVIDE ( [Total Visits] - Prev, Prev )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Operations & Service\Trends
+		lineageTag: f42c80c3-13dd-4dac-9676-8cc0e48c8433
+
+	measure 'High Satisfaction %' =
+			DIVIDE (
+			    CALCULATE ( COUNTROWS ( fact_visits ), fact_visits[feedback_rating] >= 4 ),
+			    CALCULATE ( COUNTROWS ( fact_visits ), NOT ISBLANK ( fact_visits[feedback_rating] ) )
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Operations & Service
+		lineageTag: 8e851284-3641-46c5-aae2-33cd80354b4d
+
+	measure 'Avg Feedback Rating' =
+			
+			AVERAGE(fact_visits[feedback_rating])
+		displayFolder: Operations & Service
+		lineageTag: 14993722-9bf9-49c9-92d2-2b90bd5c85dc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Visits Per Doctor' =
+			
+			DIVIDE(
+			    COUNTROWS(fact_visits),
+			    DISTINCTCOUNT(fact_visits[doctor_key])
+			)
+		formatString: #,0
+		displayFolder: Doctors & Departments
+		lineageTag: 4b45428f-8754-4c38-a35e-c0fbc9c00149
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Low Rating Visits %' =
+			
+			DIVIDE(
+			    CALCULATE(
+			        COUNTROWS(fact_visits),
+			        fact_visits[feedback_rating] <= 2
+			    ),
+			    CALCULATE(
+			        COUNTROWS(fact_visits),
+			        fact_visits[feedback_rating] <> BLANK()
+			    )
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Operations & Service
+		lineageTag: 496fb61f-9b8b-4356-a75b-acb6d672af62
+
+	measure 'Total Patients' =
+			
+			DISTINCTCOUNT(fact_visits[patient_key])
+		formatString: #,0
+		displayFolder: Overview
+		lineageTag: 344af192-ebb9-4bff-874d-a407ecdf89bf
+
+	measure 'Avg Visits Per Patient' =
+			
+			DIVIDE(
+			    COUNTROWS(fact_visits),
+			    DISTINCTCOUNT(fact_visits[patient_key])
+			)
+		displayFolder: Patients
+		lineageTag: 056fec2b-3a3f-45ac-90ba-013be03a1167
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Returning Patients %' =
+			
+			VAR Returning =
+			    COUNTROWS ( FILTER ( VALUES ( fact_visits[patient_key] ), CALCULATE ( COUNTROWS ( fact_visits ) ) > 1 ) )
+			RETURN
+			DIVIDE ( Returning, [Total Patients] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Patients
+		lineageTag: 1c123d52-d64b-4235-9566-175aea8c1596
+
+	measure 'Avg Patient Age' =
+			
+			AVERAGE(dim_patient[Age])
+		formatString: 0
+		displayFolder: Patients
+		lineageTag: 56d7fe8b-80bb-43a2-b9da-f94d71bcf097
+
+	measure 'Total Revenue' =
+			
+			SUM(fact_visits[total_cost])
+		formatString: #,0 "EGP";-#,0 "EGP";0 "EGP"
+		displayFolder: Financial
+		lineageTag: d28106b7-4a90-45ab-b53e-778cdd1df6e1
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Avg Revenue Per Visit' =
+			
+			AVERAGE(fact_visits[total_cost])
+		formatString: #,0 "EGP";-#,0 "EGP";0 "EGP"
+		displayFolder: Financial
+		lineageTag: 3e013e75-882f-42ea-91a5-1fb35fe9f858
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Revenue Per Completed Visit' =
+			
+			CALCULATE(
+			    AVERAGE(fact_visits[total_cost]),
+			    fact_visits[visit_status] = "Completed"
+			)
+		formatString: #,0 "EGP";-#,0 "EGP";0 "EGP"
+		displayFolder: Financial
+		lineageTag: 124abe38-e7d7-4a51-bbda-7d0ba9a83ff4
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Estimated Lost Revenue' =
+			
+			VAR AvgCompletedVisitCost =
+			    CALCULATE(
+			        AVERAGE(fact_visits[total_cost]),
+			        fact_visits[visit_status] = "Completed"
+			    )
+			VAR MissedVisits =
+			    CALCULATE(
+			        COUNTROWS(fact_visits),
+			        fact_visits[visit_status] IN {"No Show", "Cancelled"}
+			    )
+			RETURN
+			    AvgCompletedVisitCost * MissedVisits
+		formatString: #,0 "EGP";-#,0 "EGP";0 "EGP"
+		displayFolder: Financial
+		lineageTag: bccd7e9d-12ed-4001-bf27-ee61032c5a27
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Revenue Last Month' = CALCULATE ( [Total Revenue], DATEADD ( dim_date[full_date], -1, MONTH ) )
+		formatString: #,0 "EGP";-#,0 "EGP";0 "EGP"
+		displayFolder: Financial\Trends
+		lineageTag: 2f308a50-b732-425e-b016-589af901eaf2
+
+	measure 'Revenue MoM %' =
+			VAR Prev = [Revenue Last Month]
+			RETURN DIVIDE ( [Total Revenue] - Prev, Prev )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Financial\Trends
+		lineageTag: 1e299934-3706-4a72-8083-cfc1410dae50
+
+	measure 'Total Claims Count' =
+			
+			DISTINCTCOUNT(fact_claims[claim_id])
+		formatString: #,0
+		displayFolder: Overview
+		lineageTag: d934bdce-f1b1-4fbb-a0ab-65c5b9d2098b
+
+	measure 'Total Claimed Amount' = SUM(fact_claims[claim_amount])
+		formatString: #,0 "EGP";-#,0 "EGP";0 "EGP"
+		displayFolder: Claims
+		lineageTag: da4371fb-6e5b-4bdd-a28e-5ea90cbd9e41
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Total Approved Amount' = SUM(fact_claims[approved_amount])
+		formatString: #,0 "EGP";-#,0 "EGP";0 "EGP"
+		displayFolder: Claims
+		lineageTag: cf265ee9-8e3a-49e4-93a6-325e9bff960a
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Approval Rate %' =
+			
+			DIVIDE([Approved Claims], [Total Claims Count])
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Claims
+		lineageTag: 636d8440-ed48-4898-8ef9-14afa24acbc7
+
+	measure 'Avg Claim Amount' = AVERAGE(fact_claims[claim_amount])
+		formatString: #,0 "EGP";-#,0 "EGP";0 "EGP"
+		displayFolder: Claims
+		lineageTag: f91c7067-4584-491f-9c4c-1b005aa2b279
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Approval Gap Rate %' =
+			
+			DIVIDE([Approval Gap], [Total Claimed Amount])
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Claims
+		lineageTag: 673cf4c8-8032-418c-a6a2-0e649a8cfd40
+
+	measure 'Approved Claims' =
+			
+			CALCULATE([Total Claims Count], fact_claims[approval_status] = "Approved")
+		formatString: 0
+		displayFolder: Claims
+		lineageTag: 1f758af2-bb61-4324-8f19-9250c8ac403a
+
+	measure 'Partially Approved Claims' =
+			
+			CALCULATE([Total Claims Count], fact_claims[approval_status] = "Partially Approved")
+		formatString: 0
+		displayFolder: Claims
+		lineageTag: 8dc73114-6d99-48bd-8337-153224643048
+
+	measure 'Rejected Claims' =
+			
+			CALCULATE([Total Claims Count], fact_claims[approval_status] = "Rejected")
+		formatString: 0
+		displayFolder: Claims
+		lineageTag: c22b8a4b-d899-4e0a-aa9a-16bc7eaf6887
+
+	measure 'Pending Claims' =
+			
+			CALCULATE([Total Claims Count], fact_claims[approval_status] = "Pending Review")
+		formatString: 0
+		displayFolder: Claims
+		lineageTag: 25e45586-d6e4-49cf-90b6-44419651833f
+
+	measure 'Decided Claims' =
+			
+			[Total Claims Count] - [Pending Claims]
+		formatString: 0
+		displayFolder: Claims
+		lineageTag: 18e0ae0a-858d-4bd9-ad6a-6a52f8c5e25e
+
+	measure 'Accepted Claims Rate %' =
+			
+			DIVIDE([Approved Claims] + [Partially Approved Claims], [Total Claims Count])
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Claims
+		lineageTag: d07a3ce0-4b4f-4be3-bd63-237cd3e63048
+
+	measure 'Claims Last Month' = CALCULATE ( [Total Claims Count], DATEADD ( dim_date[full_date], -1, MONTH ) )
+		formatString: #,0
+		displayFolder: Claims\Trends
+		lineageTag: 983e7984-c2d1-4930-a7a0-6701bb5db930
+
+	measure 'Claims MoM %' =
+			VAR Prev = [Claims Last Month]
+			RETURN DIVIDE ( [Total Claims Count] - Prev, Prev )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Claims\Trends
+		lineageTag: c70c8f90-bf3e-453b-91c7-030d3b93c05d
+
+	measure 'Approved Amount %' = DIVIDE ( [Total Approved Amount], [Total Claimed Amount] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Claims
+		lineageTag: 509ba339-ebff-4e16-82c7-dc4be0ed121f
+
+	measure 'Approval Gap' =
+			
+			SUM(fact_claims[claim_amount]) - SUM(fact_claims[approved_amount])
+		formatString: #,0 "EGP";-#,0 "EGP";0 "EGP"
+		displayFolder: Claims
+		lineageTag: d8be471c-ba56-4e77-b47c-1504e1ea1d03
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Rejection Rate %' =
+			
+			DIVIDE([Rejected Claims], [Total Claims Count])
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Claims
+		lineageTag: 129c5699-4f39-4fd3-9f1c-5b8c205f76ca
+
+	measure 'Avg Days to Decision' =
+			
+			CALCULATE(
+			    AVERAGE(fact_claims[days_to_decision]),
+			    fact_claims[approval_status] <> "Pending Review",
+			    NOT ISBLANK(fact_claims[days_to_decision])
+			)
+		displayFolder: Claims
+		lineageTag: 687d7847-ecb9-4ce9-81f8-16338d420076
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Decision Approval Rate %' =
+			
+			DIVIDE([Approved Claims] + [Partially Approved Claims], [Decided Claims])
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Claims
+		lineageTag: 46adaefa-b939-4b12-9b14-d1dd24783545
+
+	measure 'Decision Rejection Rate %' =
+			
+			DIVIDE([Rejected Claims], [Decided Claims])
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Claims
+		lineageTag: f712543b-8dcc-4ec7-b00a-40d2569d6924
+
+	measure 'Pharmacy Transactions' =
+			
+			DISTINCTCOUNT(fact_pharmacy[transaction_id])
+		formatString: 0
+		displayFolder: Pharmacy
+		lineageTag: 4b320537-bcd0-48e2-a49b-39e33ce3a836
+
+	measure 'Pharmacy Value' =
+			
+			SUM(fact_pharmacy[total_value])
+		formatString: #,0 "EGP";-#,0 "EGP";0 "EGP"
+		displayFolder: Pharmacy
+		lineageTag: feead7bc-a1ca-46b6-88f0-6f6e18692fc7
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Total Quantity' =
+			
+			SUM(fact_pharmacy[quantity])
+		formatString: #,0
+		displayFolder: Pharmacy
+		lineageTag: 2702f28d-4ada-44b0-bbef-f5321d944202
+
+	measure 'Dispensed Quantity' =
+			
+			CALCULATE(
+			    [Total Quantity],
+			    fact_pharmacy[transaction_type] = "Dispensing"
+			)
+		formatString: 0
+		displayFolder: Pharmacy
+		lineageTag: 6a8908cc-3bef-4bde-8f3a-b37c4eb3b60f
+
+	measure 'No Prescription Transactions' =
+			
+			SUM(fact_pharmacy[no_prescription_flag])
+		formatString: 0
+		displayFolder: Pharmacy
+		lineageTag: 5e264be6-607f-460b-8bae-790a6004b516
+
+	measure 'No Prescription Rate' =
+			
+			DIVIDE([No Prescription Transactions], [Pharmacy Transactions])
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Pharmacy
+		lineageTag: 173a183a-d4e8-4409-be8a-ef1dd467e51d
+
+	measure 'Stockout Transactions' =
+			
+			SUM(fact_pharmacy[stockout_flag])
+		formatString: 0
+		displayFolder: Pharmacy
+		lineageTag: 028d9b0a-d223-42db-86b9-5aaa4650cead
+
+	measure 'Stockout Rate' =
+			
+			DIVIDE([Stockout Transactions], [Pharmacy Transactions])
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Pharmacy
+		lineageTag: b8f0cf0b-9dd9-4240-b195-993f5612966b
+
+	measure 'Near Expiry Transactions' =
+			
+			CALCULATE(
+			    COUNT(fact_pharmacy[transaction_id]),
+			    fact_pharmacy[near_expiry_flag] = 1
+			)
+		formatString: 0
+		displayFolder: Pharmacy
+		lineageTag: 28148434-6655-4687-b2f8-074fb223fc6e
+
+	measure 'Near Expiry Rate' =
+			
+			DIVIDE([Near Expiry Transactions], [Pharmacy Transactions])
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Pharmacy
+		lineageTag: 1c0d6e0c-d064-4a1f-8038-d450fef21062
+
+	measure 'Total Drug Items' = COUNTROWS(dim_drug)
+		formatString: #,0
+		displayFolder: Pharmacy
+		lineageTag: 4efba8a6-dba0-4239-ada1-447bf705c744
+
+	measure 'Stock Value at Risk' =
+			
+			CALCULATE(
+			    SUMX(fact_pharmacy, fact_pharmacy[quantity] * fact_pharmacy[unit_amount]),
+			    fact_pharmacy[stockout_flag] = 1
+			)
+		formatString: #,0 "EGP";-#,0 "EGP";0 "EGP"
+		displayFolder: Pharmacy
+		lineageTag: 13943f83-e8a4-4dc5-aac2-55c4814dd854
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Expiry Loss Value' =
+			
+			CALCULATE(
+			    SUMX(fact_pharmacy, fact_pharmacy[quantity] * fact_pharmacy[unit_amount]),
+			    fact_pharmacy[near_expiry_flag] = 1
+			)
+		formatString: #,0 "EGP";-#,0 "EGP";0 "EGP"
+		displayFolder: Pharmacy
+		lineageTag: a2f79f72-2c49-4df9-8ac4-36cb97c5dca2
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Avg Dispensing per Transaction' =
+			
+			DIVIDE(
+			    [Dispensed Quantity],
+			    [Pharmacy Transactions],
+			    0
+			)
+		displayFolder: Pharmacy
+		lineageTag: aaaf225e-bf9d-4796-9fbf-0cc15cadf568
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'No Prescription Loss Value' =
+			
+			CALCULATE(
+			    SUMX(fact_pharmacy, fact_pharmacy[quantity] * fact_pharmacy[unit_amount]),
+			    fact_pharmacy[no_prescription_flag] = 1
+			)
+		formatString: #,0
+		displayFolder: Pharmacy
+		lineageTag: c11dfbcc-21f9-40bb-b2b2-e988b8eb434b
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Stock Health Score' =
+			
+			VAR StockoutPenalty = [Stockout Rate] * 50
+			VAR ExpiryPenalty = [Near Expiry Rate] * 30
+			VAR NoPrescPenalty = [No Prescription Rate] * 20
+			RETURN
+			    100 - StockoutPenalty - ExpiryPenalty - NoPrescPenalty
+		displayFolder: Pharmacy
+		lineageTag: 9df87595-1b3d-446c-a644-ee3d89523d3c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Quantity MoM Change' =
+			
+			VAR CurrentMonth = [Dispensed Quantity]
+			VAR PrevMonth = CALCULATE(
+			    [Dispensed Quantity],
+			    DATEADD(dim_date[full_date], -1, MONTH)
+			)
+			RETURN
+			DIVIDE(CurrentMonth - PrevMonth, PrevMonth, 0)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Pharmacy
+		lineageTag: bdf90bdd-c508-44b7-9f0c-9cfc167ca31d
+
+	measure 'Avg Transaction Value' =
+			
+			DIVIDE(
+			    [Pharmacy Value],
+			    [Pharmacy Transactions],
+			    0
+			)
+		formatString: #,0 "EGP";-#,0 "EGP";0 "EGP"
+		displayFolder: Pharmacy
+		lineageTag: c2c848be-e562-4dc2-9a5c-20b0e2c63912
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Top Drug Category' =
+			
+			CALCULATE(
+			    FIRSTNONBLANK(dim_drug[drug_category], 1),
+			    TOPN(1, ALL(dim_drug[drug_category]),
+			    [Dispensed Quantity], DESC)
+			)
+		displayFolder: Pharmacy
+		lineageTag: 69409b52-48d5-491a-b5df-e635f06a3fce
+
+	measure 'Prescription-Backed Dispensing %' =
+			
+			1 - DIVIDE ( [No Prescription Transactions], [Dispensing Transactions] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Pharmacy
+		lineageTag: 503d2f22-cfdd-4f41-a23a-35baf903d8b6
+
+	measure 'Avg Drug Cost per Visit' =
+			
+			DIVIDE(
+			    [Pharmacy Value],
+			    DISTINCTCOUNT(fact_visits[visit_id]),
+			    0
+			)
+		formatString: #,0
+		displayFolder: Pharmacy
+		lineageTag: a62133cc-1a40-4332-a57b-1d8d775d2955
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'No Prescription Rate Among Dispensing %' =
+			
+			DIVIDE([No Prescription Transactions], [Dispensing Transactions])
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Pharmacy
+		lineageTag: d9d13623-48e0-4e74-b0b1-080c21d652e3
+
+	measure 'Dispensing Transactions' =
+			
+			CALCULATE([Pharmacy Transactions], fact_pharmacy[transaction_type] = "Dispensing")
+		formatString: 0
+		displayFolder: Pharmacy
+		lineageTag: 96c3e00c-16c6-49ec-813a-c3a14904538a
+
+	measure 'Dispensed Quantity by Region' =
+			
+			[Dispensed Quantity]
+		formatString: 0
+		displayFolder: Pharmacy
+		lineageTag: 7bcb0590-f929-45c6-830b-e6a2cdb7892f
+
+	measure 'Slow Decision Claims' =
+			
+			CALCULATE(
+			    [Total Claims Count],
+			    fact_claims[days_to_decision] > 20
+			)
+		formatString: 0
+		displayFolder: Fraud & Risk
+		lineageTag: 0ea0e8e9-dc07-4a75-98ff-7ad9b60785be
+
+	measure 'Slow Decision Rate %' =
+			
+			DIVIDE([Slow Decision Claims], [Total Claims Count])
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Fraud & Risk
+		lineageTag: 1f016b83-f575-4a18-b8d8-f6f2812780ce
+
+	measure 'High Item Claims' =
+			
+			CALCULATE(
+			    [Total Claims Count],
+			    fact_claim_items[item_quantity] >= 5
+			)
+		formatString: 0
+		displayFolder: Fraud & Risk
+		lineageTag: 7175af51-ac83-47aa-95be-4c3790e241fe
+
+	measure 'High Item Claim Rate %' =
+			
+			DIVIDE([High Item Claims], [Total Claims Count])
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Fraud & Risk
+		lineageTag: 51b26bd4-4641-4ead-bf33-70ab65056669
+
+	measure 'Claim Risk Score' =
+			
+			VAR GapRaw =
+			    COALESCE([Approval Gap Rate %], 0)
+			VAR RejectionRaw =
+			    COALESCE([Rejection Rate %], 0)
+			VAR SlowRaw =
+			    COALESCE([Slow Decision Rate %], 0)
+			VAR ItemRaw =
+			    COALESCE([High Item Claim Rate %], 0)
+			
+			VAR GapRisk =
+			    IF(GapRaw > 1, GapRaw / 100, GapRaw)
+			VAR RejectionRisk =
+			    IF(RejectionRaw > 1, RejectionRaw / 100, RejectionRaw)
+			VAR SlowRisk =
+			    IF(SlowRaw > 1, SlowRaw / 100, SlowRaw)
+			VAR ItemRisk =
+			    IF(ItemRaw > 1, ItemRaw / 100, ItemRaw)
+			
+			VAR Score =
+			    100 * (
+			        0.35 * GapRisk +
+			        0.25 * RejectionRisk +
+			        0.20 * SlowRisk +
+			        0.20 * ItemRisk
+			    )
+			RETURN
+			MIN(
+			    100,
+			    Score
+			)
+		formatString: 0.0
+		displayFolder: Fraud & Risk
+		lineageTag: 16386ade-2521-4329-9265-a407c2b41afe
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Pharmacy Risk Score' =
+			
+			VAR NoPrescriptionRisk = [No Prescription Rate]
+			VAR StockoutRisk = [Stockout Rate]
+			VAR ExpiryRisk = [Near Expiry Rate]
+			RETURN
+			MIN(
+			    100,
+			    100 * (
+			        0.50 * NoPrescriptionRisk +
+			        0.30 * StockoutRisk +
+			        0.20 * ExpiryRisk
+			    )
+			)
+		formatString: 0.0
+		displayFolder: Fraud & Risk
+		lineageTag: 4b4045ae-602c-487d-b119-1ccc261877f3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Overall Risk Score' =
+			
+			DIVIDE([Claim Risk Score] + [Pharmacy Risk Score], 2)
+		formatString: 0.0
+		displayFolder: Fraud & Risk
+		lineageTag: 9b5467fe-ed0a-4ef7-8772-1f0d21fa8575
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Risk Flag Count' =
+			
+			CALCULATE(
+			    COUNT(fact_pharmacy[transaction_id]),
+			    fact_pharmacy[no_prescription_flag] = 1
+			        || fact_pharmacy[stockout_flag] = 1
+			        || fact_pharmacy[near_expiry_flag] = 1
+			)
+		formatString: 0
+		displayFolder: Fraud & Risk
+		lineageTag: 9fc538a8-77d3-469c-b79e-5a47d2835af6
+
+	measure 'High Risk Hospitals' =
+			
+			COUNTROWS (
+			    FILTER ( VALUES ( dim_hospital[hospital_name] ), [Pharmacy Risk Score] >= 70 )
+			)
+		formatString: 0
+		displayFolder: Fraud & Risk
+		lineageTag: 6a55f9bb-e296-424a-86cd-c0bf4973a280
+
+	measure 'Expected Procedure Amount' =
+			
+			VAR ComparableItems =
+			    FILTER ( fact_claim_items, NOT ISBLANK ( RELATED ( dim_procedure[expected_amount] ) ) )
+			RETURN
+			SUMX ( ComparableItems, RELATED ( dim_procedure[expected_amount] ) * fact_claim_items[item_quantity] )
+		formatString: #,0 "EGP";-#,0 "EGP";0 "EGP"
+		displayFolder: Fraud & Risk
+		lineageTag: a19ccc97-be39-46be-a63a-5992c7e309ba
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Claim vs Expected Ratio' =
+			
+			VAR ComparableItems =
+			    FILTER ( fact_claim_items, NOT ISBLANK ( RELATED ( dim_procedure[expected_amount] ) ) )
+			VAR Actual = SUMX ( ComparableItems, fact_claim_items[item_amount] )
+			VAR Expected = SUMX ( ComparableItems, RELATED ( dim_procedure[expected_amount] ) * fact_claim_items[item_quantity] )
+			RETURN
+			DIVIDE ( Actual, Expected )
+		formatString: 0.00
+		displayFolder: Fraud & Risk
+		lineageTag: 7f1a2ec1-017e-4f60-87a0-72270c7ff7f5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Estimated Over Expected Amount' =
+			
+			SUMX (
+			    FILTER ( fact_claim_items, NOT ISBLANK ( RELATED ( dim_procedure[expected_amount] ) ) ),
+			    VAR ExpectedAmount = RELATED ( dim_procedure[expected_amount] ) * fact_claim_items[item_quantity]
+			    VAR Difference = fact_claim_items[item_amount] - ExpectedAmount
+			    RETURN IF ( Difference > 0, Difference, 0 )
+			)
+		formatString: #,0 "EGP";-#,0 "EGP";0 "EGP"
+		displayFolder: Fraud & Risk
+		lineageTag: 18fa37c3-6865-4352-b782-2ab2530f5521
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Operations Risk Score' =
+			
+			VAR NoShowRaw =
+			    COALESCE([No-Show Rate %], 0)
+			VAR CancelRaw =
+			    COALESCE([Cancellation Rate %], 0)
+			VAR LowRatingRaw =
+			    COALESCE([Low Rating Visits %], 0)
+			
+			VAR NoShowRisk =
+			    IF(NoShowRaw > 1, NoShowRaw / 100, NoShowRaw)
+			VAR CancelRisk =
+			    IF(CancelRaw > 1, CancelRaw / 100, CancelRaw)
+			VAR LowRatingRisk =
+			    IF(LowRatingRaw > 1, LowRatingRaw / 100, LowRatingRaw)
+			
+			VAR WaitingRisk =
+			    MIN(
+			        1,
+			        DIVIDE([Avg Waiting Time - Completed], 120)
+			    )
+			
+			VAR Score =
+			    100 * (
+			        0.35 * WaitingRisk +
+			        0.25 * NoShowRisk +
+			        0.20 * CancelRisk +
+			        0.20 * LowRatingRisk
+			    )
+			RETURN
+			MIN(
+			    100,
+			    Score
+			)
+		displayFolder: Fraud & Risk
+		lineageTag: 23e276a0-1eeb-491a-bfb3-d5d1eb3736a0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Estimated Fraud Proxy Loss' =
+			
+			[Estimated Over Expected Amount] +
+			[No Prescription Loss Value] +
+			[Expiry Loss Value]
+		formatString: #,0
+		displayFolder: Fraud & Risk
+		lineageTag: ce45869d-db4c-4326-9503-42d82da22aa1
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Claim Items Amount' =
+			
+			SUMX(fact_claim_items, fact_claim_items[item_amount])
+		formatString: #,0 "EGP";-#,0 "EGP";0 "EGP"
+		displayFolder: Fraud & Risk
+		lineageTag: 66f8c84e-a18f-4216-b622-73076e2ce140
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Overbilled Items' =
+			COUNTROWS (
+			    FILTER ( fact_claim_items,
+			        VAR Expected = RELATED ( dim_procedure[expected_amount] ) * fact_claim_items[item_quantity]
+			        RETURN Expected > 0 && fact_claim_items[item_amount] > 1.5 * Expected ) )
+		formatString: #,0
+		displayFolder: Fraud & Risk
+		lineageTag: 71a2e024-f465-4729-8da3-5b04aac13d8f
+
+	measure 'Overbilled Excess Amount' =
+			SUMX (
+			    FILTER ( fact_claim_items,
+			        VAR Expected = RELATED ( dim_procedure[expected_amount] ) * fact_claim_items[item_quantity]
+			        RETURN Expected > 0 && fact_claim_items[item_amount] > 1.5 * Expected ),
+			    fact_claim_items[item_amount] - ( RELATED ( dim_procedure[expected_amount] ) * fact_claim_items[item_quantity] ) )
+		formatString: #,0 "EGP";-#,0 "EGP";0 "EGP"
+		displayFolder: Fraud & Risk
+		lineageTag: d88075c3-8b29-4cff-ae7e-5476184eaf4c
+
+	measure 'Total Doctors' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(dim_doctor[doctor_key]),
+			    USERELATIONSHIP(dim_hospital[hospital_key],dim_doctor[hospital_key])
+			)
+		formatString: #,0
+		displayFolder: Doctors & Departments
+		lineageTag: 3a665991-0488-451c-a153-1963ddb2d46d
+
+	measure 'Total Referrals' =
+			
+			COUNT(fact_referrals[referral_id])
+		formatString: #,0
+		displayFolder: Hospitals & Referrals
+		lineageTag: b83c4af5-e4a5-492d-a460-0dc09c7028ad
+
+	measure 'Total Departments' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(dim_department[department_name]),
+			    USERELATIONSHIP(dim_hospital[hospital_key],dim_department[hospital_key])
+			    )
+		formatString: #,0
+		displayFolder: Doctors & Departments
+		lineageTag: 6db163d4-8f74-4d3d-8175-b94e70fe6b5f
+
+	measure 'Cancelled Referrals' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fact_referrals[referral_id]),
+			    fact_referrals[referral_status] = "Cancelled"
+			)
+		formatString: 0
+		displayFolder: Hospitals & Referrals
+		lineageTag: 84c09a4b-ed9e-4ac8-93aa-32e54ec6cee1
+
+	measure 'Completed Referrals' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fact_referrals[referral_id]),
+			    fact_referrals[referral_status] = "Completed"
+			)
+		formatString: 0
+		displayFolder: Hospitals & Referrals
+		lineageTag: 51e073a4-4d2e-477f-8b6e-43fe112eeed6
+
+	measure 'Pending Referrals' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fact_referrals[referral_id]),
+			    fact_referrals[referral_status] = "Pending"
+			)
+		formatString: 0
+		displayFolder: Hospitals & Referrals
+		lineageTag: b5985f77-1e3d-4345-ae8b-27c0cd68ffaf
+
+	measure 'Cancelled Referral %' =
+			
+			DIVIDE(
+			    [Cancelled Referrals],
+			    CALCULATE(
+			        DISTINCTCOUNT(fact_referrals[referral_id]),
+			        ALL(fact_referrals[referral_status])
+			    ),
+			    0
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Hospitals & Referrals
+		lineageTag: 20d9405a-6319-4a48-aab8-93006b8172e0
+
+	measure 'Completed Referral %' =
+			
+			DIVIDE(
+			    [Completed Referrals],
+			    CALCULATE(
+			        DISTINCTCOUNT(fact_referrals[referral_id]),
+			        ALL(fact_referrals[referral_status])
+			    ),
+			    0
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Hospitals & Referrals
+		lineageTag: 8a416b26-0852-4606-861d-e0a4279010fb
+
+	measure 'Pending Referral %' =
+			
+			DIVIDE(
+			    [Pending Referrals],
+			    CALCULATE(
+			        DISTINCTCOUNT(fact_referrals[referral_id]),
+			        ALL(fact_referrals[referral_status])
+			    ),
+			    0
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Hospitals & Referrals
+		lineageTag: 7ad9c309-22b5-4dc2-a6bc-bc88949a3e36
+
+	measure 'Total beds' =
+			
+			DISTINCTCOUNT(fact_beds[bed_id])
+		formatString: #,0
+		displayFolder: Hospitals & Referrals
+		lineageTag: 920f8b63-fde9-43d7-a7c3-dd143567df36
+
+	measure 'Total Hospitals' =
+			
+			DISTINCTCOUNT(dim_hospital[hospital_id])
+		formatString: 0
+		displayFolder: Hospitals & Referrals
+		lineageTag: 88fd91dd-80f4-4007-a856-2760d49672df
+
+	measure 'Doctors per Hospital' =
+			
+			DIVIDE(
+			    [Total Doctors],
+			    [Total Hospitals]
+			)
+		displayFolder: Doctors & Departments
+		lineageTag: 37d38177-d03d-43a6-be01-dc2bdeffa58e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sent Referrals' =
+			
+			DISTINCTCOUNT(fact_referrals[referral_id])
+		formatString: 0
+		displayFolder: Hospitals & Referrals
+		lineageTag: de9fbe55-cb0b-454e-90b2-1bf63e04cd08
+
+	measure 'Received Referrals' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fact_referrals[referral_id]),
+			    USERELATIONSHIP(
+			        fact_referrals[to_hospital_key],
+			        dim_hospital[hospital_key]
+			    )
+			)
+		formatString: 0
+		displayFolder: Hospitals & Referrals
+		lineageTag: 01db6f9b-98f2-4ab2-bec1-6d718e775452
+
+	measure 'Net Referrals' =
+			
+			[Received Referrals] - [Sent Referrals]
+		formatString: 0
+		displayFolder: Hospitals & Referrals
+		lineageTag: 0a2bcd37-536f-4636-b5de-039b7054816b
+
+	measure 'Active Doctors' =
+			
+			CALCULATE(
+			    [Total Doctors],
+			    dim_doctor[employment_status] = "Active"
+			)
+		formatString: 0
+		displayFolder: Doctors & Departments
+		lineageTag: 41b4fc13-3690-4793-9f55-d083c8fef19f
+
+	measure 'Avg Years Experience' =
+			
+			AVERAGE(dim_doctor[years_experience])
+		displayFolder: Doctors & Departments
+		lineageTag: 0bba0cce-dfca-44d1-9775-de281c63cb95
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'On Leave Doctors' =
+			
+			CALCULATE(
+			    [Total Doctors],
+			    dim_doctor[employment_status] = "On Leave"
+			)
+		formatString: 0
+		displayFolder: Doctors & Departments
+		lineageTag: 1f197592-264e-4209-a358-ce76b06f36a4
+
+	measure 'Occupied Beds' = CALCULATE ( COUNTROWS ( fact_beds ), fact_beds[availability_status] = "Occupied" )
+		formatString: #,0
+		displayFolder: Hospitals & Referrals\Capacity
+		lineageTag: b3616ac1-6b3d-4f66-8e32-186ef4cf1b11
+
+	measure 'Available Beds' = CALCULATE ( COUNTROWS ( fact_beds ), fact_beds[availability_status] = "Available" )
+		formatString: #,0
+		displayFolder: Hospitals & Referrals\Capacity
+		lineageTag: 79abb322-80ee-4b4c-b785-0567568ddc67
+
+	measure 'Bed Occupancy Rate %' = DIVIDE ( [Occupied Beds], [Total beds] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Hospitals & Referrals\Capacity
+		lineageTag: ada385f7-873a-4d75-a79e-ba5036ce0478
+
+	measure 'Female Patients' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(dim_patient[patient_id]),
+			    dim_patient[gender]="Female"
+			)
+		formatString: 0
+		displayFolder: Patients
+		lineageTag: 0d012103-43b4-4983-a3e0-7856ff3f7f3b
+
+	measure 'Male Patients' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(dim_patient[patient_id]),
+			    dim_patient[gender]="Male"
+			)
+		formatString: 0
+		displayFolder: Patients
+		lineageTag: 7bc59521-af83-43bc-83fe-8dc9f5da07e1
+
+	measure 'Total Diagnoses' =
+			
+			COUNTROWS(fact_visits)
+		formatString: #,0
+		displayFolder: Clinical & Diagnosis
+		lineageTag: c3bc43cc-e601-4555-87bd-bbb34782fef0
+
+	measure 'Unique Diagnosis Types' =
+			
+			DISTINCTCOUNT(dim_diagnosis[diagnosis_name])
+		formatString: 0
+		displayFolder: Clinical & Diagnosis
+		lineageTag: e48202e6-d767-4d73-a74c-e49b4522078e
+
+	measure 'Total Healthcare Cost' = SUM ( fact_claims[approved_amount] )
+		formatString: #,0 "EGP";-#,0 "EGP";0 "EGP"
+		displayFolder: Financial
+		lineageTag: c99ed326-fbd9-4819-b483-39392f151d5e
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Avg Cost Per Visit' =
+			
+			DIVIDE(
+			    [Total Healthcare Cost],
+			    [Total Visits]
+			)
+		formatString: #,0 "EGP";-#,0 "EGP";0 "EGP"
+		displayFolder: Financial
+		lineageTag: 236cd95a-4ed4-493d-9b9e-26ea59c00309
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Cost Per Patient' =
+			
+			DIVIDE(
+			    [Total Healthcare Cost],
+			    [Total Patients]
+			)
+		formatString: #,0 "EGP";-#,0 "EGP";0 "EGP"
+		displayFolder: Financial
+		lineageTag: 2eddcea0-a7b9-42ee-ae57-5a4c47fb902a
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Reimbursement Rate %' = DIVIDE ( [Total Healthcare Cost], [Total Revenue] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Financial
+		lineageTag: 589601dc-e612-49df-a588-ac3bbfd3c999
+
+	measure 'Forecasted Visits' =
+			
+			VAR LastDate_ =
+			    MAX(dim_date[full_date])
+			
+			VAR Last3MonthsDates =
+			    DATESINPERIOD(
+			        dim_date[full_date],
+			        LastDate_,
+			        -3,
+			        MONTH
+			    )
+			
+			VAR MonthlyVisitsTable =
+			    CALCULATETABLE(
+			        SUMMARIZE(
+			            dim_date,
+			            dim_date[year],
+			            dim_date[month],
+			            "MonthlyVisits", [Total Visits]
+			        ),
+			        Last3MonthsDates
+			    )
+			
+			RETURN
+			AVERAGEX(
+			    MonthlyVisitsTable,
+			    [MonthlyVisits]
+			)
+		displayFolder: Forecast & Early Warning
+		lineageTag: b04fac9e-8389-41f1-abef-499258dee2e0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Forecasted Claims' =
+			
+			VAR LastDate_ =
+			    MAX(dim_date[full_date])
+			
+			VAR Last3MonthsDates =
+			    DATESINPERIOD(
+			        dim_date[full_date],
+			        LastDate_,
+			        -3,
+			        MONTH
+			    )
+			
+			VAR MonthlyClaimsTable =
+			    CALCULATETABLE(
+			        SUMMARIZE(
+			            dim_date,
+			            dim_date[year],
+			            dim_date[month],
+			            "MonthlyClaims", [Total Claims Count]
+			        ),
+			        Last3MonthsDates
+			    )
+			
+			RETURN
+			AVERAGEX(
+			    MonthlyClaimsTable,
+			    [MonthlyClaims]
+			)
+		displayFolder: Forecast & Early Warning
+		lineageTag: 9fa5da7c-77f0-4ee4-92ee-667d80fb7b07
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Forecasted Pharmacy Demand' =
+			
+			VAR LastDate_ =
+			    MAX(dim_date[full_date])
+			
+			VAR Last3MonthsDates =
+			    DATESINPERIOD(
+			        dim_date[full_date],
+			        LastDate_,
+			        -3,
+			        MONTH
+			    )
+			
+			VAR MonthlyPharmacyTable =
+			    CALCULATETABLE(
+			        SUMMARIZE(
+			            dim_date,
+			            dim_date[year],
+			            dim_date[month],
+			            "MonthlyQuantity", [Total Quantity]
+			        ),
+			        Last3MonthsDates
+			    )
+			
+			RETURN
+			AVERAGEX(
+			    MonthlyPharmacyTable,
+			    [MonthlyQuantity]
+			)
+		displayFolder: Forecast & Early Warning
+		lineageTag: 63c3ac53-3aa9-4b65-90a2-7fb60827e7d0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Expected Stockout Risk' =
+			
+			[Stockout Rate]
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Forecast & Early Warning
+		lineageTag: e66a6ab0-fa14-4d56-89a9-5a5390a649a7
+
+	measure 'Hospital Load Index' =
+			
+			DIVIDE(
+			    [Total Visits],
+			    [Total beds]
+			)
+		displayFolder: Forecast & Early Warning
+		lineageTag: 48f9cb90-57bc-4e16-9111-d92c8e76a6e4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Healthcare Pressure Score' =
+			
+			VAR WaitingScore = MIN(100, DIVIDE([Avg Waiting Time - Completed], 120) * 100)
+			VAR LoadScore = MIN(100, [Hospital Load Index] * 100)
+			VAR NoShowScore = COALESCE([No-Show Rate %], 0) -- keep as 0-100 if your old measure multiplies by 100
+			RETURN 0.50 * WaitingScore + 0.30 * LoadScore + 0.20 * NoShowScore
+		displayFolder: Forecast & Early Warning
+		lineageTag: e8208c88-6813-403c-9605-7836d3316c13
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Expected Hospital Pressure' =
+			
+			[Healthcare Pressure Score]
+		displayFolder: Forecast & Early Warning
+		lineageTag: 44724fb7-f8d0-431e-9cea-e44bb3929ca1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Early Warning Score' =
+			
+			VAR RiskScore =
+			    COALESCE([Overall Risk Score], 0)
+			
+			VAR PressureScore =
+			    COALESCE([Expected Hospital Pressure], 0)
+			
+			VAR StockRiskScore =
+			    COALESCE([Expected Stockout Risk], 0) * 100
+			
+			VAR Score =
+			    0.40 * RiskScore +
+			    0.35 * PressureScore +
+			    0.25 * StockRiskScore
+			
+			RETURN
+			MIN(
+			    100,
+			    Score
+			)
+		displayFolder: Forecast & Early Warning
+		lineageTag: 4b498fd7-a4ba-4d41-8b16-7d24d9fd3a0e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition _Measures = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

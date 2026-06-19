@@ -1,0 +1,53 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["dim_claim_status","dim_date","dim_department","dim_diagnosis","dim_doctor","dim_drug","dim_hospital","dim_patient","dim_procedure","fact_claims","fact_pharmacy","fact_visits","Doctor & Department Performance Measures","Patient Analytics Measures","Revenue & Cost Analysis Measures","_Measures","Claims Overview Measures","Claims Deep Dive  Measures","fact_claim_items","fact_referrals","fact_beds","fda_drug_enrichment"]
+
+annotation PBI_ProTooling = ["WebModelingEdit","MCP-PBIModeling","DevMode"]
+
+annotation __LastRPTime = 134263429471299849
+
+ref table dim_claim_status
+ref table DateTableTemplate_2e7ada97-9d9f-4d3f-af4f-3138b0521133
+ref table dim_date
+ref table dim_department
+ref table dim_diagnosis
+ref table dim_doctor
+ref table dim_drug
+ref table dim_hospital
+ref table dim_patient
+ref table LocalDateTable_88088965-c040-4725-89b4-d3eb98ed9bfc
+ref table dim_procedure
+ref table fact_claims
+ref table fact_pharmacy
+ref table LocalDateTable_d341ef68-90ef-46e3-991f-6d6a6130fd06
+ref table fact_visits
+ref table LocalDateTable_2eb9ebf6-8455-421f-afb7-3d32a4dc17e1
+ref table 'Doctor & Department Performance Measures'
+ref table 'Patient Analytics Measures'
+ref table 'Revenue & Cost Analysis Measures'
+ref table _Measures
+ref table 'Claims Overview Measures'
+ref table 'Claims Deep Dive  Measures'
+ref table LocalDateTable_b3c857c1-381e-40b1-af19-ba7fc86db320
+ref table LocalDateTable_e71612ab-c9d8-472e-a9c8-04bc44533611
+ref table fact_claim_items
+ref table LocalDateTable_a3485b8b-6598-4c00-a1b3-93f9939e2fa2
+ref table fact_referrals
+ref table LocalDateTable_33032808-0cd0-456c-9b75-a88e134d4760
+ref table fact_beds
+ref table ModelMeasures
+ref table ModelRelationships
+ref table ModelTables
+ref table ModelColumns
+ref table LocalDateTable_86bf0818-92df-43d8-b010-bae28901b86b
+
+ref cultureInfo en-US
+

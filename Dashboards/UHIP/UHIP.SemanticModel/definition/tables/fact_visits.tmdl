@@ -1,0 +1,174 @@
+table fact_visits
+	lineageTag: 81db7e0e-4643-4de0-8a21-7685161d5849
+
+	column visit_id
+		dataType: string
+		lineageTag: 10dbe37e-3109-4789-978a-5eacc16b1685
+		summarizeBy: none
+		sourceColumn: visit_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 18a13b81-3e5c-4c7d-b8e8-7e3c888cebea
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column patient_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 40f52f16-51dd-4661-9859-ede2ee70c0fa
+		summarizeBy: none
+		sourceColumn: patient_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column hospital_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 230f9ccd-cfde-40f1-98f6-9ba80d5310fe
+		summarizeBy: sum
+		sourceColumn: hospital_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column doctor_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 84ba0a82-3cf1-4b28-9a50-9ee173292165
+		summarizeBy: none
+		sourceColumn: doctor_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 14d38045-d7ae-4f5f-914a-53b5e34b86d1
+		summarizeBy: none
+		sourceColumn: department_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column diagnosis_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a560490d-d24c-4c43-aeb5-0e39a8c115b7
+		summarizeBy: none
+		sourceColumn: diagnosis_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column visit_type
+		dataType: string
+		lineageTag: f328356c-4c4b-41df-aaf4-636d6fc1297a
+		summarizeBy: none
+		sourceColumn: visit_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_cost
+		dataType: double
+		lineageTag: d33fe5c3-2e54-48fa-95a7-94dc894e7875
+		summarizeBy: sum
+		sourceColumn: total_cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column waiting_time
+		dataType: int64
+		formatString: 0
+		lineageTag: 164eb2a5-0afe-46ca-bec8-7d6d944aed7f
+		summarizeBy: sum
+		sourceColumn: waiting_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column procedure_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 6eee1461-4d3b-4ef8-b6d5-cc1bf160eb83
+		summarizeBy: sum
+		sourceColumn: procedure_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column prescription_flag
+		dataType: int64
+		formatString: 0
+		lineageTag: e93bede8-f950-4f26-a83a-50dab502fb90
+		summarizeBy: sum
+		sourceColumn: prescription_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column feedback_rating
+		dataType: double
+		lineageTag: 5721c106-3c47-4a8b-8a2a-86bc666aa4c0
+		summarizeBy: sum
+		sourceColumn: feedback_rating
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column visit_status
+		dataType: string
+		lineageTag: 439869e6-469b-47dd-a325-10754f2b5c61
+		summarizeBy: none
+		sourceColumn: visit_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column referral_reason
+		dataType: string
+		lineageTag: 30914112-c2da-4017-a28c-a310253070f5
+		summarizeBy: none
+		sourceColumn: referral_reason
+
+		annotation SummarizationSetBy = Automatic
+
+	column visit_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3a70e331-1a13-4f62-8ba5-ee28598e7d6a
+		summarizeBy: none
+		sourceColumn: visit_date
+
+		variation Variation
+			isDefault
+			relationship: 54ab50b2-953c-437b-a516-83be27924b51
+			defaultHierarchy: LocalDateTable_2eb9ebf6-8455-421f-afb7-3d32a4dc17e1.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition fact_visits = m
+		mode: import
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-687798f3-72ec.cloud.databricks.com", "/sql/1.0/warehouses/2eaa154934f93343", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation=null]),
+				    medical_insurance_Database = Source{[Name="medical_insurance",Kind="Database"]}[Data],
+				    gold_Schema = medical_insurance_Database{[Name="gold",Kind="Schema"]}[Data],
+				    fact_visits_incremental_Table = gold_Schema{[Name="fact_visits_incremental",Kind="Table"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(fact_visits_incremental_Table,{"dwh_loaded_at"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

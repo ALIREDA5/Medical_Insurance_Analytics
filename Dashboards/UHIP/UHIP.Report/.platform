@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "UHIP"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "5110b636-9e75-4a9a-b3e4-edde982d32ea"
+  }
+}

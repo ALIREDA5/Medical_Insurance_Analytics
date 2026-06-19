@@ -1,0 +1,170 @@
+table dim_drug
+	lineageTag: 24a566a9-72b5-403f-925d-aaf9732e75d8
+
+	column drug_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 520420fd-ba2c-4e0d-acd3-e36eb46fa3ec
+		summarizeBy: none
+		sourceColumn: drug_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column drug_id
+		dataType: string
+		lineageTag: 970a41f7-29d6-49b4-8c90-c4ce4d29f7cc
+		summarizeBy: none
+		sourceColumn: drug_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column drug_name
+		dataType: string
+		lineageTag: e35c8edf-bb16-4382-870f-ed7ae51cfae6
+		summarizeBy: none
+		sourceColumn: drug_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column generic_name
+		dataType: string
+		lineageTag: 49405465-32bf-4b7e-8a77-8263e6b033fd
+		summarizeBy: none
+		sourceColumn: generic_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column manufacturer
+		dataType: string
+		lineageTag: c3c67bef-324d-49f2-86d7-174d14782058
+		summarizeBy: none
+		sourceColumn: manufacturer
+
+		annotation SummarizationSetBy = Automatic
+
+	column drug_category
+		dataType: string
+		lineageTag: dd84e911-acd1-4637-a8a5-14446205e638
+		summarizeBy: none
+		sourceColumn: drug_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_price
+		dataType: double
+		lineageTag: 5b587aac-c8c2-480a-9b28-e34640e43398
+		summarizeBy: sum
+		sourceColumn: unit_price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column brand_name
+		dataType: string
+		lineageTag: 5c68f0c3-1312-4c73-9c57-997536d0854d
+		summarizeBy: none
+		sourceColumn: brand_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column manufacturer_name
+		dataType: string
+		lineageTag: 30536bd5-0a0c-4640-912b-e5b6d4243e18
+		summarizeBy: none
+		sourceColumn: manufacturer_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column indications_and_usage
+		dataType: string
+		lineageTag: f76681a6-3b13-4de4-b51e-2964c0508381
+		summarizeBy: none
+		sourceColumn: indications_and_usage
+
+		annotation SummarizationSetBy = Automatic
+
+	column warnings_and_cautions
+		dataType: string
+		lineageTag: 38ad7e13-c531-4c53-bbb2-2961bdf0f04d
+		summarizeBy: none
+		sourceColumn: warnings_and_cautions
+
+		annotation SummarizationSetBy = Automatic
+
+	column contraindications
+		dataType: string
+		lineageTag: 2a1036ab-eb2e-4203-bab1-94f6b19754fe
+		summarizeBy: none
+		sourceColumn: contraindications
+
+		annotation SummarizationSetBy = Automatic
+
+	column adverse_reactions
+		dataType: string
+		lineageTag: 3a4e94cc-ce3d-4bf3-ab93-50ff9d435f6d
+		summarizeBy: none
+		sourceColumn: adverse_reactions
+
+		annotation SummarizationSetBy = Automatic
+
+	column drug_interactions
+		dataType: string
+		lineageTag: 4a8ddd29-89fe-43e0-9828-575184b06baa
+		summarizeBy: none
+		sourceColumn: drug_interactions
+
+		annotation SummarizationSetBy = Automatic
+
+	column mechanism_of_action
+		dataType: string
+		lineageTag: 7ec52b7c-c0f2-4979-9314-093273dd8bae
+		summarizeBy: none
+		sourceColumn: mechanism_of_action
+
+		annotation SummarizationSetBy = Automatic
+
+	column use_in_specific_populations
+		dataType: string
+		lineageTag: 0840c343-dcbe-47c5-84e5-e713bb4884c6
+		summarizeBy: none
+		sourceColumn: use_in_specific_populations
+
+		annotation SummarizationSetBy = Automatic
+
+	column effective_time
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ba1509f8-240b-4d14-9140-09fb71ec3996
+		summarizeBy: none
+		sourceColumn: effective_time
+
+		variation Variation
+			isDefault
+			relationship: 4b924882-d8d5-4294-a7a0-8d992fcd7bf3
+			defaultHierarchy: LocalDateTable_86bf0818-92df-43d8-b010-bae28901b86b.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition dim_drug = m
+		mode: import
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-687798f3-72ec.cloud.databricks.com", "/sql/1.0/warehouses/2eaa154934f93343", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation=null]),
+				    medical_insurance_Database = Source{[Name="medical_insurance",Kind="Database"]}[Data],
+				    gold_Schema = medical_insurance_Database{[Name="gold",Kind="Schema"]}[Data],
+				    dim_drug_scd2_Table = gold_Schema{[Name="dim_drug_scd2",Kind="Table"]}[Data],
+				  #"Removed columns 1" = Table.RemoveColumns(dim_drug_scd2_Table, {"scd_start_date", "scd_end_date", "scd_is_current", "scd_version", "dwh_created_at", "dwh_updated_at"}),
+				  #"Add Column" = Table.AddColumn(#"Removed columns 1", "FDA", each fda_drug_enrichment([generic_name])),
+				  #"Expanded FDA" = Table.ExpandRecordColumn(#"Add Column", "FDA", {"brand_name", "manufacturer_name", "indications_and_usage", "warnings_and_cautions", "contraindications", "adverse_reactions", "drug_interactions", "mechanism_of_action", "use_in_specific_populations", "effective_time"}, {"brand_name", "manufacturer_name", "indications_and_usage", "warnings_and_cautions", "contraindications", "adverse_reactions", "drug_interactions", "mechanism_of_action", "use_in_specific_populations", "effective_time"}),
+				  #"Changed column type" = Table.TransformColumnTypes(#"Expanded FDA", {{"effective_time", type date}})
+				in
+				  #"Changed column type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

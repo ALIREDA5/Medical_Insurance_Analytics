@@ -1,0 +1,166 @@
+table fact_claims
+	lineageTag: 30369bc6-1084-4c9d-88b3-b1f588f1e01d
+
+	column claim_id
+		dataType: string
+		lineageTag: d4425e90-eb8d-4159-9ab8-450ef0f1ed03
+		summarizeBy: none
+		sourceColumn: claim_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column visit_id
+		dataType: string
+		lineageTag: b620497d-2296-4706-84eb-5d2cd6908cf1
+		summarizeBy: none
+		sourceColumn: visit_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 23e7c9ab-788c-4e3c-becd-5bd7f97d7d53
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column claim_amount
+		dataType: double
+		lineageTag: a1dda714-d8cb-40bf-854f-00bcfdea29d2
+		summarizeBy: sum
+		sourceColumn: claim_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column approved_amount
+		dataType: double
+		lineageTag: 7ac0f3c4-368f-444c-9e90-5b3f971e7253
+		summarizeBy: sum
+		sourceColumn: approved_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column approval_gap
+		dataType: double
+		isHidden
+		lineageTag: abe8cd23-9faa-44e2-b531-06a7f2fa2d84
+		summarizeBy: sum
+		sourceColumn: approval_gap
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column days_to_decision
+		dataType: int64
+		formatString: 0
+		lineageTag: b9b14ec5-3b08-4295-9435-f3773923ccf7
+		summarizeBy: sum
+		sourceColumn: days_to_decision
+
+		annotation SummarizationSetBy = Automatic
+
+	column reviewed_by
+		dataType: string
+		lineageTag: 45c94e9e-10b6-47ae-ae44-f60343cc6c7d
+		summarizeBy: none
+		sourceColumn: reviewed_by
+
+		annotation SummarizationSetBy = Automatic
+
+	column patient_id
+		dataType: string
+		lineageTag: 58c7a673-9be8-44eb-9548-4c19f5743949
+		summarizeBy: none
+		sourceColumn: patient_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column hospital_id
+		dataType: string
+		isHidden
+		lineageTag: c1b9d5c2-74dc-4971-ab1e-556b3e850bdc
+		summarizeBy: none
+		sourceColumn: hospital_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column claim_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 9ef8fcf8-b73c-453d-bfd8-bc6face4bafb
+		summarizeBy: none
+		sourceColumn: claim_date
+
+		variation Variation
+			isDefault
+			relationship: 4a741854-2b7f-45b8-be41-50da363dd396
+			defaultHierarchy: LocalDateTable_b3c857c1-381e-40b1-af19-ba7fc86db320.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column approval_id
+		dataType: string
+		lineageTag: 736c1567-5788-4fba-8595-30f7c66532a1
+		summarizeBy: none
+		sourceColumn: approval_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column approval_status
+		dataType: string
+		lineageTag: 3fd8f5b6-dc8c-4570-ba63-382c7a90ded3
+		summarizeBy: none
+		sourceColumn: approval_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column approval_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7c238ac7-9347-45c3-9d69-6edfdfe6c8ea
+		summarizeBy: none
+		sourceColumn: approval_date
+
+		variation Variation
+			isDefault
+			relationship: 9883c5b1-fc2d-40cf-9de3-041adcddff82
+			defaultHierarchy: LocalDateTable_e71612ab-c9d8-472e-a9c8-04bc44533611.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column rejection_reason
+		dataType: string
+		lineageTag: c7084900-374c-4fb5-ab1e-4f6d86920f08
+		summarizeBy: none
+		sourceColumn: rejection_reason
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_claims = m
+		mode: import
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-687798f3-72ec.cloud.databricks.com", "/sql/1.0/warehouses/2eaa154934f93343", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation=null]),
+				    medical_insurance_Database = Source{[Name="medical_insurance",Kind="Database"]}[Data],
+				    gold_Schema = medical_insurance_Database{[Name="gold",Kind="Schema"]}[Data],
+				    fact_claims_incremental_Table = gold_Schema{[Name="fact_claims_incremental",Kind="Table"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(fact_claims_incremental_Table,{"dwh_loaded_at", "dwh_updated_at"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

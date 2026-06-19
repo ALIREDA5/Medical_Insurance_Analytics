@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "8f97a7a369cc49393a88",
+  "displayName": "Hospital Overview",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280
+}

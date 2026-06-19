@@ -1,0 +1,124 @@
+table dim_hospital
+	lineageTag: 15c44ad7-1a08-4bbe-a749-4a2d7ec98413
+
+	column hospital_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f336cec1-e5e1-4d87-aeb1-dffcf462e956
+		summarizeBy: none
+		sourceColumn: hospital_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column hospital_id
+		dataType: string
+		isHidden
+		lineageTag: 3048bbb7-f8f2-48d5-b04f-355917d19c4a
+		summarizeBy: none
+		sourceColumn: hospital_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column hospital_name
+		dataType: string
+		lineageTag: 5322f72d-6f1a-4425-95c3-0fb6b3d20403
+		summarizeBy: none
+		sourceColumn: hospital_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column hospital_type
+		dataType: string
+		lineageTag: 2bfa057e-eff8-4d54-904a-9fd049099048
+		summarizeBy: none
+		sourceColumn: hospital_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column governorate
+		dataType: string
+		lineageTag: 981b0854-f5b7-4414-ac5e-17d63b46c267
+		summarizeBy: none
+		sourceColumn: governorate
+
+		annotation SummarizationSetBy = Automatic
+
+	column district
+		dataType: string
+		lineageTag: b3a94a03-3fe1-47f2-bb00-85bffee3e92e
+		summarizeBy: none
+		sourceColumn: district
+
+		annotation SummarizationSetBy = Automatic
+
+	column hospital_phone
+		dataType: string
+		lineageTag: 8bd9864f-2e7a-4cd3-966b-d6f58bfe2880
+		summarizeBy: none
+		sourceColumn: hospital_phone
+
+		annotation SummarizationSetBy = Automatic
+
+	column latitude
+		dataType: double
+		lineageTag: 224aae1e-c7eb-4131-89a3-c0999f57c620
+		summarizeBy: sum
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column longitude
+		dataType: double
+		lineageTag: 7f30579c-35f8-4887-8a3c-7055f9d8bd82
+		summarizeBy: sum
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column manager_name
+		dataType: string
+		lineageTag: ad9e3b2f-68bd-4299-a352-d5f2fa18a5bc
+		summarizeBy: none
+		sourceColumn: manager_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column manager_email
+		dataType: string
+		lineageTag: 00786bc5-cce8-41cf-b00d-883e70762a0c
+		summarizeBy: none
+		sourceColumn: manager_email
+
+		annotation SummarizationSetBy = Automatic
+
+	column manager_phone
+		dataType: string
+		lineageTag: 6ca65fd4-8e9b-4406-bed9-b4df9dbb4fa3
+		summarizeBy: none
+		sourceColumn: manager_phone
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_hospital = m
+		mode: import
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-687798f3-72ec.cloud.databricks.com", "/sql/1.0/warehouses/2eaa154934f93343", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation=null]),
+				    medical_insurance_Database = Source{[Name="medical_insurance",Kind="Database"]}[Data],
+				    gold_Schema = medical_insurance_Database{[Name="gold",Kind="Schema"]}[Data],
+				    dim_hospital_scd2_Table = gold_Schema{[Name="dim_hospital_scd2",Kind="Table"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(dim_hospital_scd2_Table,{"scd_start_date", "scd_end_date", "scd_is_current", "scd_version", "dwh_created_at", "dwh_updated_at","total_beds","icu_capacity"})
+				
+				
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

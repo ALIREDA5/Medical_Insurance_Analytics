@@ -1,0 +1,114 @@
+table fact_referrals
+	lineageTag: 71583545-6b28-4479-9b23-500bbefde26a
+
+	column referral_id
+		dataType: string
+		lineageTag: 92b9b1db-e73f-445f-9591-a48636704be4
+		summarizeBy: none
+		sourceColumn: referral_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column referral_reason
+		dataType: string
+		lineageTag: a2b7be27-48a2-49c9-be74-abac953bfc22
+		summarizeBy: none
+		sourceColumn: referral_reason
+
+		annotation SummarizationSetBy = Automatic
+
+	column referral_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2072cead-5414-4640-92f0-9598ec9accfc
+		summarizeBy: none
+		sourceColumn: referral_date
+
+		variation Variation
+			isDefault
+			relationship: 09a2745f-8382-430d-b209-4917c5fad855
+			defaultHierarchy: LocalDateTable_33032808-0cd0-456c-9b75-a88e134d4760.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 417545e1-bb7d-40d2-bd40-664534f82b8d
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column referral_status
+		dataType: string
+		lineageTag: 42654a54-807d-47f4-964f-dc0020be6edc
+		summarizeBy: none
+		sourceColumn: referral_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column patient_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: bfa3c922-e1a5-44f3-bd76-be33ed3745fc
+		summarizeBy: none
+		sourceColumn: patient_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column from_hospital_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ef163c0c-5ba4-492a-b05d-5fa2f674a3d5
+		summarizeBy: none
+		sourceColumn: from_hospital_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column to_hospital_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0bf2ebce-7cc5-4fa5-adb6-e4cb3dd7e32b
+		summarizeBy: sum
+		sourceColumn: to_hospital_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column from_hospital_name
+		dataType: string
+		lineageTag: 3ffad6d4-5194-403a-bfdc-0a59c724da30
+		summarizeBy: none
+		sourceColumn: from_hospital_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column to_hospital_name
+		dataType: string
+		lineageTag: 79724cd9-4461-4f92-b19a-25a92c6cff0e
+		summarizeBy: none
+		sourceColumn: to_hospital_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_referrals = m
+		mode: import
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-687798f3-72ec.cloud.databricks.com", "/sql/1.0/warehouses/2eaa154934f93343", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation=null]),
+				    medical_insurance_Database = Source{[Name="medical_insurance",Kind="Database"]}[Data],
+				    gold_Schema = medical_insurance_Database{[Name="gold",Kind="Schema"]}[Data],
+				    fact_visits_incremental_Table = gold_Schema{[Name="fact_referrals",Kind="Table"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(fact_visits_incremental_Table,{"dwh_loaded_at","dwh_updated_at"})
+				
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

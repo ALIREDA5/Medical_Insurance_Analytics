@@ -1,0 +1,72 @@
+table dim_procedure
+	lineageTag: f36d28a9-6ac0-407d-b8df-c093f7fcd36d
+
+	column procedure_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c0631b3c-0e3f-4f11-bf5b-f6c09a8b791a
+		summarizeBy: none
+		sourceColumn: procedure_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column procedure_code
+		dataType: string
+		lineageTag: 05b858ac-0021-47e7-bc36-8098445305ae
+		summarizeBy: none
+		sourceColumn: procedure_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column procedure_name
+		dataType: string
+		lineageTag: 50fd49d2-1a3a-450c-8eac-882a77000932
+		summarizeBy: none
+		sourceColumn: procedure_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column procedure_category
+		dataType: string
+		lineageTag: d19d009a-24f8-46b3-8694-932d8ffe1117
+		summarizeBy: none
+		sourceColumn: procedure_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column expected_amount
+		dataType: double
+		lineageTag: 35bc1316-939f-4a79-9875-994288054438
+		summarizeBy: none
+		sourceColumn: expected_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column complexity_score
+		dataType: int64
+		formatString: 0
+		lineageTag: 20f11d28-7515-4caa-a84b-1c25679cafea
+		summarizeBy: none
+		sourceColumn: complexity_score
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_procedure = m
+		mode: import
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-687798f3-72ec.cloud.databricks.com", "/sql/1.0/warehouses/2eaa154934f93343", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation=null]),
+				    medical_insurance_Database = Source{[Name="medical_insurance",Kind="Database"]}[Data],
+				    gold_Schema = medical_insurance_Database{[Name="gold",Kind="Schema"]}[Data],
+				    dim_procedure_scd1_Table = gold_Schema{[Name="dim_procedure_scd1",Kind="Table"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(dim_procedure_scd1_Table,{"dwh_created_at", "dwh_updated_at"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

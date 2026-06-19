@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "UHIP"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "aadc368f-8603-44a7-bf40-894216865949"
+  }
+}
