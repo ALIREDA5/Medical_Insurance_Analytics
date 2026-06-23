@@ -50,7 +50,6 @@
   </PropertyGroup>
   <ItemGroup>
     <DataSource Include="DataSource1.rds" />
-    <DataSource Include="uhip_db.rds" />
   </ItemGroup>
   <ItemGroup>
     <Report Include="AllHospitalCapacityReport.rdl" />

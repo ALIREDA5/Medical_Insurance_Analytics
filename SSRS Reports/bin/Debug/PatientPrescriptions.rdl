@@ -7,27 +7,23 @@
     </am:CreatedBy>
     <am:UpdatedBy>
       <am:Name>SSDTRS</am:Name>
-      <am:Version>18.2.11415.280</am:Version>
+      <am:Version>18.6.11819.183</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-06-07T08:17:31.5936873Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-05-25T10:07:26.4876627Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="uhip_db">
-      <ConnectionProperties>
-        <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=LAPTOP-HB8EKSCV;Initial Catalog=uhip_db</ConnectString>
-        <Prompt>Specify a user name and password for data source uhip_db:</Prompt>
-      </ConnectionProperties>
-      <rd:SecurityType>DataBase</rd:SecurityType>
-      <rd:DataSourceID>f88ee538-ed00-498c-bf37-3d4ef38e693e</rd:DataSourceID>
+    <DataSource Name="DataSource1">
+      <DataSourceReference>DataSource1</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>06b2b368-986d-4ee4-8164-99da4e175bb9</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="dsPatientPrescriptions">
       <Query>
-        <DataSourceName>uhip_db</DataSourceName>
+        <DataSourceName>DataSource1</DataSourceName>
         <QueryParameters>
           <QueryParameter Name="@PatientID">
             <Value>=Parameters!PatientID.Value</Value>
@@ -482,7 +478,7 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>dsPatientPrescriptions</DataSetName>
-            <Top>0.65833in</Top>
+            <Top>0.50833in</Top>
             <Height>0.625in</Height>
             <Width>7.43628in</Width>
             <Style>
@@ -514,7 +510,7 @@
             <rd:DefaultName>Textbox12</rd:DefaultName>
             <Top>0.20278in</Top>
             <Left>2.37167in</Left>
-            <Height>0.31667in</Height>
+            <Height>0.25in</Height>
             <Width>2.99167in</Width>
             <ZIndex>1</ZIndex>
             <Style>
@@ -529,7 +525,7 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>1.44999in</Height>
+        <Height>1.26666in</Height>
         <Style />
       </Body>
       <Width>18.88816cm</Width>
