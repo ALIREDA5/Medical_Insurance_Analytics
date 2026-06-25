@@ -2,7 +2,7 @@
 
 > One platform pulling visits, claims, inventory, and finance out of fragmented systems into a single source of truth.
 
-![Banner](assets/banner.png)
+![Banner](Docs/banner.png)
 
 ## 📌 Overview
 
@@ -39,8 +39,8 @@ UHIP addresses these challenges through centralized data integration and analyti
 
 ---
 
-# 🏗️ System Architecture
-
+# 🏗️ System Architecture.
+![Architecture](lakehouse/Data Architecture.png)
 ## Architecture Layers
 
 ### Data Sources
