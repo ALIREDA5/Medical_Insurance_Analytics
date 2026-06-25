@@ -13,18 +13,6 @@ The platform integrates healthcare operations, patient activities, insurance cla
 Built as a graduation project in the **ITI – Power BI Developer Track**.
 
 ---
-
-# 🎯 Project Objectives
-
-- Create a unified patient healthcare view
-- Enable healthcare monitoring and resource allocation
-- Improve operational efficiency
-- Support government and executive decision-making
-- Provide AI-powered healthcare assistance
-- Deliver real-time reporting and analytics
-
----
-
 # 🚨 Problem Statement
 
 Healthcare data is often distributed across multiple disconnected systems, causing:
@@ -38,7 +26,38 @@ Healthcare data is often distributed across multiple disconnected systems, causi
 UHIP addresses these challenges through centralized data integration and analytics.
 
 ---
+# 🎯 Project Objectives
 
+- Create a unified patient healthcare view
+- Enable healthcare monitoring and resource allocation
+- Improve operational efficiency
+- Support government and executive decision-making
+- Provide AI-powered healthcare assistance
+- Deliver real-time reporting and analytics
+
+---
+# 🗄️ Database Design.
+![ERD](Database/Conceptual-Design/System-ERD.png)
+## Core Entities
+
+- Patients
+- Visits
+- Claims
+- Hospitals
+- Doctors
+- Departments
+- Referrals
+- Prescriptions
+- Drugs
+
+## Database Quality Assurance
+
+✔ Primary Key Integrity  
+✔ Foreign Key Validation  
+✔ Referential Integrity  
+✔ Relationship Cardinality Verification  
+
+---
 # 🏗️ System Architecture.
 ![Architecture](lakehouse/Data-Architecture.png)
 ## Architecture Layers
@@ -65,28 +84,7 @@ UHIP addresses these challenges through centralized data integration and analyti
 
 ---
 
-# 🗄️ Database Design.
-![ERD](Database/Conceptual-Design/System-ERD.png)
-## Core Entities
 
-- Patients
-- Visits
-- Claims
-- Hospitals
-- Doctors
-- Departments
-- Referrals
-- Prescriptions
-- Drugs
-
-## Database Quality Assurance
-
-✔ Primary Key Integrity  
-✔ Foreign Key Validation  
-✔ Referential Integrity  
-✔ Relationship Cardinality Verification  
-
----
 
 # ⚙️ Data Engineering Pipeline
 
@@ -126,7 +124,7 @@ Implemented data preparation processes including:
 # 🏛️ Data Warehouse Design
 
 Implemented a **Galaxy Schema** to support analytical reporting and scalable business intelligence.
-
+![DWH](lakehouse/DWH-Design.png)
 ---
 
 # 📊 Dashboard Modules
@@ -167,20 +165,6 @@ Implemented a **Galaxy Schema** to support analytical reporting and scalable bus
 - Claims Reports
 
 ---
-
-# 🤖 AI Features
-
-## UHIP SQL Agent (RAG System)
-
-Natural language interface allowing users to:
-
-- Ask healthcare questions
-- Generate SQL queries automatically
-- Retrieve business insights
-- Interact through Telegram
-
----
-
 # 📱 Data Entry Application
 
 Built using:
@@ -197,18 +181,29 @@ Features:
 - Search & Edit
 - Automated Validation
 
----
-
-# 📅 Reservation Workflow
-
-Healthcare appointment booking system with:
-
-- Appointment confirmation
-- Hospital selection
-- Department scheduling
-- Notification workflow
 
 ---
+
+# 🤖 AI Features
+
+## 📅 Reservation Workflow
+
+- Telegram chatbot is used for scheduling, rescheduling, canceling appointments, and collecting feedback
+  ![DWH](lakehouse/DWH-Design.png)
+---
+
+## UHIP SQL Agent (RAG System)
+
+Natural language interface allowing users to:
+
+- Ask healthcare questions
+- Generate SQL queries automatically
+- Retrieve business insights
+- Interact through Telegram
+
+
+---
+
 
 # 📈 Key Insights
 
