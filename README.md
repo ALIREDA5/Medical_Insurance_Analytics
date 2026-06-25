@@ -189,7 +189,7 @@ Features:
 ## 📅 Reservation Workflow
 
 - Telegram chatbot is used for scheduling, rescheduling, canceling appointments, and collecting feedback
-  ![DWH](lakehouse/DWH-Design.png)
+  ![n8n](AI-Agents/workflow.png)
 ---
 
 ## UHIP SQL Agent (RAG System)
@@ -236,46 +236,29 @@ Patient retention is strong, while waiting time and missed appointments remain m
 # 🚀 Future Work
 
 - Real-time streaming analytics
-- Predictive healthcare forecasting
-- Patient risk prediction models
-- Cloud deployment automation
-- Role-based access control
+- Enhanced Fraud Detection
 - Mobile application
-- Advanced AI healthcare assistant
 - Multi-language chatbot support
 
 ---
 
 # 👥 Team
 
-Add team members here.
-
 | Name | Role |
 |------|------|
-| Member 1 | Data Engineer |
-| Member 2 | BI Developer |
-| Member 3 | AI Engineer |
+| Ali Reda , Moamen Sabry | Data Engineer |
+| Saifallah Tharwat, Basma Zakaria, Mayar Ashraf  | BI Developer |
+| Ali Reda | AI Engineer |
 
 ---
 
-# 📷 Screenshots
-
-Add screenshots for:
-
-- Architecture
-- Power BI Dashboards
-- Data Entry Application
-- Telegram Bot
-- SQL Agent
-
----
 
 # 📬 Contact
 
 For inquiries or collaboration:
 
-- LinkedIn: [Your Profile]
-- Email: your_email@example.com
+- LinkedIn: www.linkedin.com/in/ali-reda
+- Email: alireda.elec@gmail.com
 
 ---
 
