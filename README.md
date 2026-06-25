@@ -1,105 +1,287 @@
-# Medical Insurance Analytics
+# 🏥 Unified Healthcare Intelligence Platform (UHIP)
 
-This repository contains analysis and tooling for exploring, cleaning, and analyzing medical insurance claims, costs, and related datasets. It includes T-SQL scripts for working with relational data, Python notebooks and scripts for data processing and modeling, and simple HTML/JavaScript artifacts for reporting and visualization.
+> One platform pulling visits, claims, inventory, and finance out of fragmented systems into a single source of truth.
 
-## Table of contents
+![Banner](assets/banner.png)
 
-- [Project summary](#project-summary)
-- [Technologies](#technologies)
-- [Repository structure](#repository-structure)
-- [Getting started](#getting-started)
-- [Data](#data)
-- [Analysis & notebooks](#analysis--notebooks)
-- [Running SQL scripts](#running-sql-scripts)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+## 📌 Overview
 
-## Project summary
+Unified Healthcare Intelligence Platform (UHIP) is an end-to-end healthcare analytics and intelligence solution designed to unify fragmented healthcare data and transform it into actionable insights.
 
-This project aims to provide a reproducible set of analyses for medical insurance data. Typical workflows in this repository include:
+The platform integrates healthcare operations, patient activities, insurance claims, pharmacy transactions, and financial data into a centralized analytical environment.
 
-- Ingesting and transforming claims and enrollment data using T-SQL.
-- Exploratory data analysis, visualization, and modeling with Python (Jupyter notebooks).
-- Lightweight HTML/JS reports or dashboards for sharing results.
+Built as a graduation project in the **ITI – Power BI Developer Track**.
 
-Use this README as a starting point — update sections below with repository-specific details as you refine the project.
+---
 
-## Technologies
+# 🎯 Project Objectives
 
-The repo language composition (approx.):
+- Create a unified patient healthcare view
+- Enable healthcare monitoring and resource allocation
+- Improve operational efficiency
+- Support government and executive decision-making
+- Provide AI-powered healthcare assistance
+- Deliver real-time reporting and analytics
 
-- T-SQL: 59.5%
-- Python: 22.7%
-- HTML: 12.7%
-- JavaScript: 5.1%
+---
 
-Primary tools you may interact with:
+# 🚨 Problem Statement
 
-- Microsoft SQL Server / Azure SQL Database (for T-SQL scripts)
-- Python 3.8+ (pandas, numpy, scikit-learn, matplotlib/seaborn, jupyter)
-- Jupyter Notebook / JupyterLab
+Healthcare data is often distributed across multiple disconnected systems, causing:
 
-## Repository structure (suggested)
+- Fragmented patient records
+- Limited healthcare visibility
+- Inefficient resource utilization
+- Delayed decision-making
+- Difficulty tracking claims and operational performance
 
-The repository may contain directories similar to the following. If your repo uses different names, update this section.
+UHIP addresses these challenges through centralized data integration and analytics.
 
-- sql/              - T-SQL scripts for table creation, ETL, and analysis
-- notebooks/        - Jupyter notebooks for EDA and modeling
-- src/              - Python modules and scripts
-- data/             - Metadata describing data; DO NOT store sensitive/raw data here
-- web/              - HTML/JS report artifacts
-- docs/             - Documentation and reports
+---
 
-## Getting started
+# 🏗️ System Architecture
 
-1. Clone the repository:
+## Architecture Layers
 
-   git clone https://github.com/ALIREDA5/Medical_Insurance_Analytics.git
-   cd Medical_Insurance_Analytics
+### Data Sources
+- Azure SQL Database
 
-2. (Python) Create a virtual environment and install dependencies:
+### Data Engineering
+- Databricks
+- PySpark
+- ELT Pipelines
 
-   python -m venv .venv
-   source .venv/bin/activate   # Linux/macOS
-   .venv\Scripts\activate    # Windows (PowerShell)
+### Data Storage
+- Medallion Architecture
+  - Bronze Layer → Raw Data
+  - Silver Layer → Cleaned Data
+  - Gold Layer → Business Analytics
 
-   pip install -r requirements.txt  # if a requirements file exists
+### Data Consumption
+- Power BI Dashboards
+- SSRS Reports
+- AI SQL Agent
+- Telegram Chatbot
 
-3. (Jupyter) Start JupyterLab or Notebook to explore notebooks:
+---
 
-   jupyter lab
+# 🗄️ Database Design
 
-## Data
+## Core Entities
 
-- Sensitive or PHI-protected data should NOT be committed to this repository. Add sanitized or synthetic sample data for examples and testing.
-- Document expected data schema and sources in `data/README.md` or `docs/`.
+- Patients
+- Visits
+- Claims
+- Hospitals
+- Doctors
+- Departments
+- Referrals
+- Prescriptions
+- Drugs
 
-## Analysis & notebooks
+## Database Quality Assurance
 
-- Open notebooks in `notebooks/` with Jupyter. Notebooks should contain clear narrative steps and reproducible code cells.
-- If notebooks require large datasets, include a small sample dataset or instructions to obtain the data.
+✔ Primary Key Integrity  
+✔ Foreign Key Validation  
+✔ Referential Integrity  
+✔ Relationship Cardinality Verification  
 
-## Running SQL scripts
+---
 
-- SQL scripts in `sql/` are written for T-SQL (Microsoft SQL Server). Use SSMS, Azure Data Studio, or `sqlcmd` to run them:
+# ⚙️ Data Engineering Pipeline
 
-  sqlcmd -S <server> -d <database> -i sql/your_script.sql -U <user> -P <password>
+## ELT Workflow
 
-- Review scripts for data-destructive operations before running on production systems.
+1. Data Ingestion from Azure SQL Database
+2. Data Validation
+3. Data Quality Checks
+4. Transformations in Databricks
+5. Data Warehouse Loading
+6. Dashboard & Reporting Layer
 
-## Contributing
+---
 
-- Create issues for bugs or new feature requests.
-- Use feature branches and open pull requests for review.
-- Add unit tests and update documentation when adding features.
+# 🧹 Data Quality & Transformations
 
-## License
+Implemented data preparation processes including:
 
-If this repository should be licensed, add a LICENSE file at the repo root. If you are unsure, consider the MIT License or consult your organization.
+### Quality Checks
+- Data type validation
+- NULL detection
+- Duplicate detection
+- String cleaning
+- Outlier checks
+- Standardization rules
 
-## Contact
+### Transformations
+- Duplicate removal
+- String trimming
+- Data cleansing
+- Aggregations
+- Data integration
+- Data modeling
 
-Maintainer: ALIREDA5
+---
 
-For questions about the analyses or how to run the code, open an issue or contact the maintainer directly.
+# 🏛️ Data Warehouse Design
+
+Implemented a **Galaxy Schema** to support analytical reporting and scalable business intelligence.
+
+---
+
+# 📊 Dashboard Modules
+
+## Executive Overview
+- Healthcare KPIs
+- Resource Allocation
+- Decision Support
+
+## Financial Analytics
+- Cost Analysis
+- Revenue Tracking
+- Claims Performance
+
+## Patient Analytics
+- Population Profile
+- Patient Behavior
+- Disease Analysis
+
+## Operations Analytics
+- Waiting Time
+- Capacity Monitoring
+- Doctor Performance
+
+## Fraud & Pharmacy Analytics
+- Overbilling Detection
+- Risk Scorecards
+- Inventory Monitoring
+
+---
+
+# 📑 Reporting
+
+## SSRS Reports
+- Executive Dashboard
+- High-Risk Patient Report
+- Fraud Signals Report
+- Claims Reports
+
+---
+
+# 🤖 AI Features
+
+## UHIP SQL Agent (RAG System)
+
+Natural language interface allowing users to:
+
+- Ask healthcare questions
+- Generate SQL queries automatically
+- Retrieve business insights
+- Interact through Telegram
+
+---
+
+# 📱 Data Entry Application
+
+Built using:
+
+- Google Apps Script
+- Google Sheets
+
+Features:
+
+- Dynamic Forms
+- Patient Management
+- Claims Entry
+- Pharmacy Records
+- Search & Edit
+- Automated Validation
+
+---
+
+# 📅 Reservation Workflow
+
+Healthcare appointment booking system with:
+
+- Appointment confirmation
+- Hospital selection
+- Department scheduling
+- Notification workflow
+
+---
+
+# 📈 Key Insights
+
+- 75K+ patients generated 510K+ visits
+- Returning patient rate reached **90.9%**
+- Average waiting time reached **76 minutes**
+- No-show rate reached **8%**
+- Cancellation rate reached **7%**
+
+### Key Finding
+
+Patient retention is strong, while waiting time and missed appointments remain major operational challenges.
+
+---
+
+# 🛠️ Technologies Used
+
+| Category | Tools |
+|----------|-------|
+| Database | SQL Server, Azure SQL |
+| Data Engineering | Databricks, PySpark |
+| Data Warehouse | Delta Lake |
+| BI | Power BI, SSRS |
+| Automation | Google Apps Script |
+| AI | SQL Agent, RAG |
+| Communication | Telegram Bot |
+
+---
+
+# 🚀 Future Work
+
+- Real-time streaming analytics
+- Predictive healthcare forecasting
+- Patient risk prediction models
+- Cloud deployment automation
+- Role-based access control
+- Mobile application
+- Advanced AI healthcare assistant
+- Multi-language chatbot support
+
+---
+
+# 👥 Team
+
+Add team members here.
+
+| Name | Role |
+|------|------|
+| Member 1 | Data Engineer |
+| Member 2 | BI Developer |
+| Member 3 | AI Engineer |
+
+---
+
+# 📷 Screenshots
+
+Add screenshots for:
+
+- Architecture
+- Power BI Dashboards
+- Data Entry Application
+- Telegram Bot
+- SQL Agent
+
+---
+
+# 📬 Contact
+
+For inquiries or collaboration:
+
+- LinkedIn: [Your Profile]
+- Email: your_email@example.com
+
+---
+
+### ITI Intensive Training — Power BI Developer Track — Graduation Project
