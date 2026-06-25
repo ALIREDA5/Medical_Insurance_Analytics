@@ -40,7 +40,7 @@ UHIP addresses these challenges through centralized data integration and analyti
 ---
 
 # 🏗️ System Architecture.
-![Architecture](lakehouse/Data Architecture.png)
+![Architecture](lakehouse/Data-Architecture.png)
 ## Architecture Layers
 
 ### Data Sources
@@ -65,8 +65,8 @@ UHIP addresses these challenges through centralized data integration and analyti
 
 ---
 
-# 🗄️ Database Design
-
+# 🗄️ Database Design.
+![ERD](Database/Conceptual-Design/System-ERD.png)
 ## Core Entities
 
 - Patients
