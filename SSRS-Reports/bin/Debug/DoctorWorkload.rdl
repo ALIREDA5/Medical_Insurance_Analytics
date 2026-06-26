@@ -9,7 +9,7 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>18.6.11822.322</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-06-23T13:49:55.2424152Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-06-26T18:20:47.2550862Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -620,7 +620,7 @@
                     </TextRun>
                   </TextRuns>
                   <Style>
-                    <TextAlign>Center</TextAlign>
+                    <TextAlign>Left</TextAlign>
                   </Style>
                 </Paragraph>
               </Paragraphs>

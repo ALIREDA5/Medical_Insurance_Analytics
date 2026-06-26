@@ -1,46 +1,46 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\",
+  "WorkspaceRootPath": "D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\ReferralFlowSummaryReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
-      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:ReferralFlowSummaryReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\AllHospitalCapacityReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:AllHospitalCapacityReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\InventoryHealthReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
-      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:InventoryHealthReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\ICUAlertHospitalsReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
-      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:ICUAlertHospitalsReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\High-Risk Patient Report.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
-      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:High-Risk Patient Report.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\PatientFullHistory.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
-      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:PatientFullHistory.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\FraudSignalsReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
-      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:FraudSignalsReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\ExecutiveDashboard.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
-      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:ExecutiveDashboard.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\ClaimsPerformanceReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\ClaimsPerformanceReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
       "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:ClaimsPerformanceReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\DoctorWorkload.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\DoctorWorkload.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
       "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:DoctorWorkload.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\AllHospitalCapacityReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
-      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:AllHospitalCapacityReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\ExecutiveDashboard.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:ExecutiveDashboard.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\FraudSignalsReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:FraudSignalsReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\ReferralFlowSummaryReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:ReferralFlowSummaryReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\PatientFullHistory.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:PatientFullHistory.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\InventoryHealthReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:InventoryHealthReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\ICUAlertHospitalsReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:ICUAlertHospitalsReport.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\High-Risk Patient Report.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{B9699E13-7D15-37D5-A613-FA11F15E7433}|UHIP Reports.rptproj|solutionrelative:High-Risk Patient Report.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -62,71 +62,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ReferralFlowSummaryReport.rdl [Design]",
-              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\ReferralFlowSummaryReport.rdl",
-              "RelativeDocumentMoniker": "ReferralFlowSummaryReport.rdl",
-              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\ReferralFlowSummaryReport.rdl [Design]",
-              "RelativeToolTip": "ReferralFlowSummaryReport.rdl [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-06-23T13:50:10.586Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "InventoryHealthReport.rdl [Design]",
-              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\InventoryHealthReport.rdl",
-              "RelativeDocumentMoniker": "InventoryHealthReport.rdl",
-              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\InventoryHealthReport.rdl [Design]",
-              "RelativeToolTip": "InventoryHealthReport.rdl [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-06-23T13:50:02.506Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ICUAlertHospitalsReport.rdl [Design]",
-              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\ICUAlertHospitalsReport.rdl",
-              "RelativeDocumentMoniker": "ICUAlertHospitalsReport.rdl",
-              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\ICUAlertHospitalsReport.rdl [Design]",
-              "RelativeToolTip": "ICUAlertHospitalsReport.rdl [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-06-23T13:50:00.972Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "High-Risk Patient Report.rdl [Design]",
-              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\High-Risk Patient Report.rdl",
-              "RelativeDocumentMoniker": "High-Risk Patient Report.rdl",
-              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\High-Risk Patient Report.rdl [Design]",
-              "RelativeToolTip": "High-Risk Patient Report.rdl [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-06-23T13:49:59.655Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "PatientFullHistory.rdl [Design]",
-              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\PatientFullHistory.rdl",
-              "RelativeDocumentMoniker": "PatientFullHistory.rdl",
-              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\PatientFullHistory.rdl [Design]",
-              "RelativeToolTip": "PatientFullHistory.rdl [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-06-23T13:50:04.004Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "FraudSignalsReport.rdl [Design]",
-              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\FraudSignalsReport.rdl",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\FraudSignalsReport.rdl",
               "RelativeDocumentMoniker": "FraudSignalsReport.rdl",
-              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\FraudSignalsReport.rdl [Design]",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\FraudSignalsReport.rdl [Design]",
               "RelativeToolTip": "FraudSignalsReport.rdl [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2026-06-23T13:49:57.643Z",
@@ -134,11 +74,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "ExecutiveDashboard.rdl [Design]",
-              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\ExecutiveDashboard.rdl",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\ExecutiveDashboard.rdl",
               "RelativeDocumentMoniker": "ExecutiveDashboard.rdl",
-              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\ExecutiveDashboard.rdl [Design]",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\ExecutiveDashboard.rdl [Design]",
               "RelativeToolTip": "ExecutiveDashboard.rdl [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2026-06-23T13:49:56.636Z",
@@ -146,23 +86,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ClaimsPerformanceReport.rdl [Design]",
-              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\ClaimsPerformanceReport.rdl",
-              "RelativeDocumentMoniker": "ClaimsPerformanceReport.rdl",
-              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\ClaimsPerformanceReport.rdl [Design]",
-              "RelativeToolTip": "ClaimsPerformanceReport.rdl [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-06-23T13:49:54.095Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 2,
               "Title": "DoctorWorkload.rdl [Design]",
-              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\DoctorWorkload.rdl",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\DoctorWorkload.rdl",
               "RelativeDocumentMoniker": "DoctorWorkload.rdl",
-              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\DoctorWorkload.rdl [Design]",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\DoctorWorkload.rdl [Design]",
               "RelativeToolTip": "DoctorWorkload.rdl [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2026-06-23T13:49:55.28Z",
@@ -170,14 +98,86 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 1,
+              "Title": "ClaimsPerformanceReport.rdl [Design]",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\ClaimsPerformanceReport.rdl",
+              "RelativeDocumentMoniker": "ClaimsPerformanceReport.rdl",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\ClaimsPerformanceReport.rdl [Design]",
+              "RelativeToolTip": "ClaimsPerformanceReport.rdl [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-06-23T13:49:54.095Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "AllHospitalCapacityReport.rdl [Design]",
-              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\AllHospitalCapacityReport.rdl",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\AllHospitalCapacityReport.rdl",
               "RelativeDocumentMoniker": "AllHospitalCapacityReport.rdl",
-              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\reports\\Medical_Insurance_Analytics\\SSRS Reports\\AllHospitalCapacityReport.rdl [Design]",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\AllHospitalCapacityReport.rdl [Design]",
               "RelativeToolTip": "AllHospitalCapacityReport.rdl [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2026-06-23T13:49:52.301Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ReferralFlowSummaryReport.rdl [Design]",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\ReferralFlowSummaryReport.rdl",
+              "RelativeDocumentMoniker": "ReferralFlowSummaryReport.rdl",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\ReferralFlowSummaryReport.rdl [Design]",
+              "RelativeToolTip": "ReferralFlowSummaryReport.rdl [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-06-23T13:50:10.586Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PatientFullHistory.rdl [Design]",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\PatientFullHistory.rdl",
+              "RelativeDocumentMoniker": "PatientFullHistory.rdl",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\PatientFullHistory.rdl [Design]",
+              "RelativeToolTip": "PatientFullHistory.rdl [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-06-23T13:50:04.004Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "InventoryHealthReport.rdl [Design]",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\InventoryHealthReport.rdl",
+              "RelativeDocumentMoniker": "InventoryHealthReport.rdl",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\InventoryHealthReport.rdl [Design]",
+              "RelativeToolTip": "InventoryHealthReport.rdl [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-06-23T13:50:02.506Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ICUAlertHospitalsReport.rdl [Design]",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\ICUAlertHospitalsReport.rdl",
+              "RelativeDocumentMoniker": "ICUAlertHospitalsReport.rdl",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\ICUAlertHospitalsReport.rdl [Design]",
+              "RelativeToolTip": "ICUAlertHospitalsReport.rdl [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-06-23T13:50:00.972Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "High-Risk Patient Report.rdl [Design]",
+              "DocumentMoniker": "D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\High-Risk Patient Report.rdl",
+              "RelativeDocumentMoniker": "High-Risk Patient Report.rdl",
+              "ToolTip": "D:\\ITI\\Final Project\\healthcare\\github\\Medical_Insurance_Analytics\\SSRS Reports\\High-Risk Patient Report.rdl [Design]",
+              "RelativeToolTip": "High-Risk Patient Report.rdl [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-06-23T13:49:59.655Z",
               "EditorCaption": " [Design]"
             }
           ]
