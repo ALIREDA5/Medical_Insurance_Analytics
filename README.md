@@ -207,7 +207,8 @@ Built on SQL Server covering all business operations:
 
 #### 🗂️ Overview (3 Dashboards)
 
-![Executive Overview](Dashboards/Dashboards Screenshots/Overview Dashboards/Excutive Overview.png)
+![Executive Overview]
+<img Dashboards/Dashboards Screenshots/Overview Dashboards/Excutive Overview.png />
 
 <details>
 <summary><strong>📂 View All Overview Dashboards (2 more)</strong></summary>
