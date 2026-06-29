@@ -646,44 +646,6 @@ Natural language interface allowing users to:
 | Visual Studio | 2019+ | SSRS development |
 | Python | 3.10+ | AI Agent backend |
 
-### Setup Steps
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/YOUR_USERNAME/UHIP.git
-
-# 2. Restore the SQL Server database
-# Open SSMS → Right-click Databases → Restore Database
-# Select: UHIP_Database.bak
-
-# 3. Run Stored Procedures
-# Open UHIP_StoredProcedures.sql in SSMS → Execute
-
-# 4. Configure Databricks
-# Upload notebooks from /lakehouse/Notebooks/
-# Update JDBC connection string to your SQL Server
-
-# 5. Run ELT Pipeline
-# Execute notebooks in order: 01 → 02 → 03
-
-# 6. Open Power BI Dashboard
-# Open UHIP_Dashboards.pbix in Power BI Desktop
-# Update data source to your Databricks Gold Layer
-
-# 7. Deploy SSRS Reports
-# Open .rdl files in Visual Studio
-# Deploy to your Report Server
-
-# 8. Configure AI Agent
-cp .env.example .env
-# Fill in: SQL Server connection, Telegram Bot Token, API keys
-
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-python sql_agent.py
-```
-
 ---
 
 ## 👥 Team
