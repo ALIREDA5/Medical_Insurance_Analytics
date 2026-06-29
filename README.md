@@ -32,6 +32,7 @@
 
 The platform integrates healthcare operations, patient activities, insurance claims, pharmacy transactions, and fraud detection into a centralized analytical environment — built on a modern **Lakehouse Architecture** using **Databricks**, **SQL Server**, **Power BI**, and **SSRS**.
 
+🔗 **Live Cloud Platform Demo**:[https://finalprojectapp-ai-grggdybadqfugya3.austriaeast-01.azurewebsites.net/](https://uhip-graduation-project.vercel.app/)
 > 🎓 Built as a Graduation Project — **ITI Power BI Developer Track**
 
 ---
@@ -205,88 +206,113 @@ Built on SQL Server covering all business operations:
 
 ---
 
-#### 🗂️ Overview (3 Dashboards)
+## 🗂️ Overview (3 Dashboards)
 
-![Executive Overview]
+### Executive Overview
 <img src="Dashboards/Dashboards Screenshots/Overview Dashboards/Excutive Overview.png" />
 
 <details>
 <summary><strong>📂 View All Overview Dashboards (2 more)</strong></summary>
 
-![Hospital-Type & Resource Allocation](Dashboards/Dashboards Screenshots/Overview Dashboards/Hospitals types.png)
-![Network Decision Support](Dashboards/Dashboards Screenshots/Overview Dashboards/Network Decission Support.png)
+### Hospital-Type & Resource Allocation
+<img src="Dashboards/Dashboards Screenshots/Overview Dashboards/Hospitals types.png" />
+
+### Network Decision Support
+<img src="Dashboards/Dashboards Screenshots/Overview Dashboards/Network Decission Support.png" />
 
 </details>
 
 ---
 
-#### 👤 Patients (4 Dashboards)
+## 👤 Patients (4 Dashboards)
 
-![Patient Behavior & Retention](Dashboards/Dashboards Screenshots/Patients Dashboards/2.png)
+### Patient Behavior & Retention
+<img src="Dashboards/Dashboards Screenshots/Patients Dashboards/2.png" />
 
 <details>
 <summary><strong>📂 View All Patient Dashboards (3 more)</strong></summary>
 
-![Patient Population Profile](Dashboards/Dashboards Screenshots/Patients Dashboards/1.png)
-![Disease Burden & Diagnosis Analysis](Dashboards/Dashboards Screenshots/Patients Dashboards/3.png)
-![Chronic & High-Risk Population Health](Dashboards/Dashboards Screenshots/Patients Dashboards/4.png)
+### Patient Population Profile
+<img src="Dashboards/Dashboards Screenshots/Patients Dashboards/1.png" />
+
+### Disease Burden & Diagnosis Analysis
+<img src= "Dashboards/Dashboards Screenshots/Patients Dashboards/3.png" />
+
+### Chronic & High-Risk Population Health
+<img src="Dashboards/Dashboards Screenshots/Patients Dashboards/4.png" />
 
 </details>
 
 ---
 
-#### ⚙️ Operations (4 Dashboards)
+## ⚙️ Operations (4 Dashboards)
 
-![Operations & Access](Dashboards/Dashboards Screenshots/Operationas Dashboards/1.png)
+### Operations & Access
+<img src="Dashboards/Dashboards Screenshots/Operationas Dashboards/1.png" />
 
 <details>
 <summary><strong>📂 View All Operations Dashboards (3 more)</strong></summary>
 
-![Doctor & Department Performance](Dashboards/Dashboards Screenshots/Operationas Dashboards/2.png)
-![Hospital Capacity & Bed Utilization](Dashboards/Dashboards Screenshots/Operationas Dashboards/3.png)
-![Patient Satisfaction & Service Quality](Dashboards/Dashboards Screenshots/Operationas Dashboards/4.png)
+### Doctor & Department Performance
+<img src="Dashboards/Dashboards Screenshots/Operationas Dashboards/2.png" />
+
+### Hospital Capacity & Bed Utilization
+<img src="Dashboards/Dashboards Screenshots/Operationas Dashboards/3.png" />
+
+### Patient Satisfaction & Service Quality
+<img src="Dashboards/Dashboards Screenshots/Operationas Dashboards/4.png" />
 
 </details>
 
 ---
 
-#### 💰 Financial (4 Dashboards)
+## 💰 Financial (4 Dashboards)
 
-![Revenue & Leakage Analysis](Dashboards/Dashboards Screenshots/Financial Dashoards/2.png)
+### Revenue & Leakage Analysis
+<img src="Dashboards/Dashboards Screenshots/Financial Dashoards/2.png" />
 
 <details>
 <summary><strong>📂 View All Financial Dashboards (3 more)</strong></summary>
 
-![Healthcare Cost & Financial Impact](Dashboards/Dashboards Screenshots/Financial Dashoards/1.png)
-![Claims Performance & Approval Funnel](Dashboards/Dashboards Screenshots/Financial Dashoards/3.png)
-![Claims Deep Dive — Procedures & Drugs](Dashboards/Dashboards Screenshots/Financial Dashoards/4.png)
+### Healthcare Cost & Financial Impact
+<img src="Dashboards/Dashboards Screenshots/Financial Dashoards/1.png" />
+### Claims Performance & Approval Funnel
+<img src="Dashboards/Dashboards Screenshots/Financial Dashoards/3.png" />
+### Claims Deep Dive — Procedures & Drugs
+<img src="Dashboards/Dashboards Screenshots/Financial Dashoards/4.png" />
 
 </details>
 
 ---
 
-#### 🛡️ Fraud Detection (3 Dashboards)
+## 🛡️ Fraud Detection (3 Dashboards)
 
-![Overbilling & Upcoding Signals](Dashboards/Dashboards Screenshots/Fraud Dashboards/1.png)
+### Overbilling & Upcoding Signals
+<img src= "Dashboards/Dashboards Screenshots/Fraud Dashboards/1.png" />
 
 <details>
 <summary><strong>📂 View All Fraud Dashboards (2 more)</strong></summary>
 
-![Fraud & Risk Scorecard](Dashboards/Dashboards Screenshots/Fraud Dashboards/2.png)
-![Pharmacy Risk & Dispensing Integrity](Dashboards/Dashboards Screenshots/Fraud Dashboards/3.png)
+### Fraud & Risk Scorecard
+<img src="Dashboards/Dashboards Screenshots/Fraud Dashboards/2.png" />
+
+### Pharmacy Risk & Dispensing Integrity
+<img src="Dashboards/Dashboards Screenshots/Fraud Dashboards/3.png" />
 
 </details>
 
 ---
 
-#### 💊 Pharmacy (2 Dashboards)
+## 💊 Pharmacy (2 Dashboards)
 
-![Pharmacy Stock & Inventory Health](Dashboards/Dashboards Screenshots/Pharmacy Dashbaords/1.png)
+### Pharmacy Stock & Inventory Health
+<img src="Dashboards/Dashboards Screenshots/Pharmacy Dashbaords/1.png" />
 
 <details>
 <summary><strong>📂 View All Pharmacy Dashboards (1 more)</strong></summary>
 
-![Referrals & Patient Flow Network](Dashboards/Dashboards Screenshots/Pharmacy Dashbaords/2.png)
+### Referrals & Patient Flow Network
+<img src= "Dashboards/Dashboards Screenshots/Pharmacy Dashbaords/2.png" />
 
 </details>
 ## 📑 SSRS Reports
