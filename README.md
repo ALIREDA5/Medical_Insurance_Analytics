@@ -690,30 +690,33 @@ python sql_agent.py
 
 <table>
 <tr>
-<td align="center" width="25%">
-<h4>BI Developer</h4>
-<img src="https://img.shields.io/badge/Role-BI%20Developer-F2C811?style=flat-square&logo=powerbi" alt="BI Developer"/>
-</td>
-<td align="center" width="25%">
-<h4>BI Developer</h4>
-<img src="https://img.shields.io/badge/Role-BI%20Developer-F2C811?style=flat-square&logo=powerbi" alt="BI Developer"/>
-</td>
-<td align="center" width="25%">
-<h4>BI Developer</h4>
-<img src="https://img.shields.io/badge/Role-BI%20Developer-F2C811?style=flat-square&logo=powerbi" alt="BI Developer"/>
-</td>
-<td align="center" width="25%">
-<h4>Data Engineer / AI</h4>
+<td align="center" width="20%">
+<h4>Ali Reda</h4>
 <img src="https://img.shields.io/badge/Role-Data%20Engineer-FF3621?style=flat-square&logo=databricks" alt="Data Engineer"/>
+<a href="https://github.com/ALIREDA5"><img src="https://img.shields.io/badge/GitHub-ALIREDA5-181717?style=flat-square&logo=github" alt="GitHub"/></a>
 </td>
-</tr>
-<tr>
-<td align="center">Basma Zakaria</td>
-<td align="center">Saifallah Tharwat</td>
-<td align="center">Mayar Ashraf</td>
-<td align="center">Ali Reda</td>
+<td align="center" width="20%">
+<h4>Basma Zakaria</h4>
+<img src="https://img.shields.io/badge/Role-BI%20Developer-F2C811?style=flat-square&logo=powerbi" alt="BI Developer"/>
+<a href="https://github.com/basmazakaria"><img src="https://img.shields.io/badge/GitHub-basmazakaria-181717?style=flat-square&logo=github" alt="GitHub"/></a>
+</td>
+<td align="center" width="20%">
+<h4>Mayar Ashraf</h4>
+<img src="https://img.shields.io/badge/Role-BI%20Developer-F2C811?style=flat-square&logo=powerbi" alt="BI Developer"/>
+<img src="https://img.shields.io/badge/Team-Member-1e3a5f?style=flat-square" alt="Team"/>
+<td align="center" width="20%">
+<h4>Moamen Sabry</h4>
+<img src="https://img.shields.io/badge/Role-Data%20Engineer-FF3621?style=flat-square&logo=databricks" alt="Data Engineer"/>
+<a href="https://github.com/MomenSabry"><img src="https://img.shields.io/badge/GitHub-MomenSabry-181717?style=flat-square&logo=github" alt="GitHub"/></a>
+</td>
+<td align="center" width="20%">
+<h4>Seif-Allah Tharwat</h4>
+<img src="https://img.shields.io/badge/Role-BI%20Developer-F2C811?style=flat-square&logo=powerbi" alt="BI Developer"/>
+<img src="https://img.shields.io/badge/Team-Member-1e3a5f?style=flat-square" alt="Team"/>
+</td>
 </tr>
 </table>
+
 
 <p align="center">
   <strong>🎓 ITI — Information Technology Institute</strong><br/>
