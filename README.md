@@ -682,7 +682,7 @@ Natural language interface allowing users to:
 
 <p align="center">
   <strong>🎓 ITI — Information Technology Institute</strong><br/>
-  <em>Power BI Developer Track — Graduation Project 2025</em>
+  <em>Power BI Developer Track — Graduation Project 2026</em>
 </p>
 
 ---
