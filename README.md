@@ -315,6 +315,7 @@ Built on SQL Server covering all business operations:
 <img src= "Dashboards/Dashboards Screenshots/Pharmacy Dashbaords/2.png" />
 
 </details>
+
 ## 📑 SSRS Reports
 
 8 operational reports built with SSRS, covering fraud, capacity, claims, inventory, and patient analytics — all with conditional formatting, drill-down support, and automated scheduling.
